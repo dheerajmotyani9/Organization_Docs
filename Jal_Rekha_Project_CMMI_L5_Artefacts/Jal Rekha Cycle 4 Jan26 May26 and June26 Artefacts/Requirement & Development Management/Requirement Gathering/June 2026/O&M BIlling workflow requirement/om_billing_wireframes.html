@@ -1,0 +1,303 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1rem 0;display:flex;flex-direction:column;gap:28px}
+.screen-label{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.screen{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.topbar{background:#002060;color:#fff;padding:8px 14px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:8px}
+.topbar span{opacity:.65;font-size:11px;margin-left:auto}
+.sidebar-layout{display:flex;min-height:280px}
+.sidebar{width:130px;background:var(--color-background-secondary);border-right:0.5px solid var(--color-border-tertiary);padding:10px 0;flex-shrink:0}
+.sitem{padding:7px 14px;font-size:12px;color:var(--color-text-secondary);cursor:pointer}
+.sitem.active{background:var(--color-background-info);color:var(--color-text-info);font-weight:500;border-left:2.5px solid var(--color-border-info)}
+.sitem.sub{padding-left:22px;font-size:11px}
+.main{flex:1;padding:14px;overflow:hidden}
+.section-title{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.tabs{display:flex;gap:0;margin-bottom:12px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.tab{padding:6px 14px;font-size:11px;color:var(--color-text-secondary);cursor:pointer;border-bottom:2px solid transparent}
+.tab.active{color:var(--color-text-info);border-bottom-color:var(--color-border-info);font-weight:500}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.field{display:flex;flex-direction:column;gap:3px}
+.flabel{font-size:10px;color:var(--color-text-secondary)}
+.finput{height:28px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);padding:0 8px;font-size:11px;color:var(--color-text-primary)}
+.fselect{height:28px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);padding:0 8px;font-size:11px;color:var(--color-text-secondary);display:flex;align-items:center;justify-content:space-between}
+.btn{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-primary)}
+.btn.primary{background:#002060;color:#fff;border-color:#002060}
+.btn.gold{background:#C9A227;color:#fff;border-color:#C9A227}
+.btn-row{display:flex;gap:8px;margin-top:10px}
+.doc-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:11px}
+.doc-icon{width:20px;height:20px;border:0.5px solid var(--color-border-tertiary);border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--color-text-tertiary)}
+.doc-name{flex:1;color:var(--color-text-primary)}
+.doc-actions{display:flex;gap:4px}
+.doc-btn{padding:2px 7px;font-size:10px;border:0.5px solid var(--color-border-secondary);border-radius:4px;background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer}
+.doc-btn.upload{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info)}
+.table{width:100%;border-collapse:collapse;font-size:11px}
+.table th{padding:5px 8px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);font-weight:500;font-size:10px;color:var(--color-text-secondary);text-align:left}
+.table td{padding:5px 8px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:500}
+.badge.pending{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge.done{background:var(--color-background-success);color:var(--color-text-success)}
+.badge.review{background:var(--color-background-info);color:var(--color-text-info)}
+.summary-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.scard{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.scard-v{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.scard-l{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.wf-steps{display:flex;align-items:center;gap:0;margin-bottom:12px;overflow:hidden}
+.wf-step{padding:5px 10px;font-size:10px;background:var(--color-background-secondary);color:var(--color-text-secondary);border:0.5px solid var(--color-border-tertiary);position:relative;flex:1;text-align:center}
+.wf-step.done{background:var(--color-background-success);color:var(--color-text-success)}
+.wf-step.active{background:#002060;color:#fff;font-weight:500}
+</style>
+<div class="wrap">
+
+<!-- ① CONTRACTOR / FIRM LOGIN -->
+<div>
+<div class="screen-label">① Contractor / Firm login</div>
+<div class="screen">
+  <div class="topbar"><i class="ti ti-droplet" aria-hidden="true"></i> Jal Rekha – O&M Billing <span>Firm: ABC Water Infra</span></div>
+  <div class="sidebar-layout">
+    <div class="sidebar">
+      <div class="sitem">Dashboard</div>
+      <div class="sitem active">O&M</div>
+      <div class="sitem sub active">View pending bills</div>
+      <div class="sitem sub">Manage bill</div>
+    </div>
+    <div class="main">
+      <div class="tabs">
+        <div class="tab active">Summary</div>
+        <div class="tab">Bill workflow</div>
+      </div>
+      <div class="summary-cards">
+        <div class="scard"><div class="scard-v">3</div><div class="scard-l">Bills generated</div></div>
+        <div class="scard"><div class="scard-v">1</div><div class="scard-l">Pending forwarding</div></div>
+        <div class="scard"><div class="scard-v">2</div><div class="scard-l">Under review</div></div>
+      </div>
+      <div class="section-title">Bills – Manage &amp; Forward</div>
+      <table class="table">
+        <thead><tr><th>Bill no.</th><th>Scheme</th><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>OM/2026/041</td><td>Bagh MVS</td><td>Apr 2026</td><td>₹14.2L</td>
+            <td><span class="badge pending">Pending</span></td>
+            <td><button class="btn gold" style="padding:3px 10px;font-size:10px">Forward to GM (PIU) ↗</button></td>
+          </tr>
+          <tr>
+            <td>OM/2026/033</td><td>Rajond MVS</td><td>Mar 2026</td><td>₹11.8L</td>
+            <td><span class="badge review">At TL (CSC)</span></td>
+            <td><button class="btn" style="padding:3px 10px;font-size:10px">View</button></td>
+          </tr>
+          <tr>
+            <td>OM/2026/021</td><td>Punjapura</td><td>Feb 2026</td><td>₹9.4L</td>
+            <td><span class="badge done">Approved</span></td>
+            <td><button class="btn" style="padding:3px 10px;font-size:10px">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="section-title" style="margin-top:12px">Bill – Complete entry (OM/2026/041)</div>
+      <div class="form-row">
+        <div class="field"><div class="flabel">Scheme name</div><div class="finput" style="display:flex;align-items:center">Bagh MVS</div></div>
+        <div class="field"><div class="flabel">Billing month</div><div class="finput" style="display:flex;align-items:center">April 2026</div></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><div class="flabel">RA Bill no.</div><div class="finput" style="display:flex;align-items:center">RA-09 (auto-generated)</div></div>
+        <div class="field"><div class="flabel">Total bill amount (₹)</div><div class="finput" style="display:flex;align-items:center">14,20,000</div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn">Save draft</button>
+        <button class="btn gold">Submit &amp; Forward to GM (PIU) ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ② GM (PIU) LOGIN -->
+<div>
+<div class="screen-label">② GM (PIU) login</div>
+<div class="screen">
+  <div class="topbar"><i class="ti ti-droplet" aria-hidden="true"></i> Jal Rekha – O&M Billing <span>GM (PIU): Indore</span></div>
+  <div class="sidebar-layout">
+    <div class="sidebar">
+      <div class="sitem">Dashboard</div>
+      <div class="sitem active">O&M</div>
+      <div class="sitem sub active">View pending bills</div>
+      <div class="sitem sub">Manage bill</div>
+    </div>
+    <div class="main">
+      <div class="section-title">Pending bills – GM (PIU) actions</div>
+      <div class="wf-steps">
+        <div class="wf-step done">Firm</div>
+        <div class="wf-step active">GM (PIU) ✓</div>
+        <div class="wf-step">TL (CSC)</div>
+        <div class="wf-step">GM PIU upload</div>
+        <div class="wf-step">GM (O&M) →MD</div>
+      </div>
+      <table class="table" style="margin-bottom:12px">
+        <thead><tr><th>Bill no.</th><th>Scheme</th><th>Firm</th><th>Amount</th><th>Days pending</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>OM/2026/041</td><td>Bagh MVS</td><td>ABC Water</td><td>₹14.2L</td><td>2 days</td>
+            <td><button class="btn primary" style="padding:3px 10px;font-size:10px">Forward to TL (CSC) ↗</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="section-title">Document upload – OM/2026/041 (GM PIU section)</div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Firm submission letter <span style="font-size:10px;color:var(--color-text-secondary)">(uploaded by Firm)</span></div>
+        <div class="doc-actions"><span class="doc-btn">Download</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Signed MB (measurement book)</div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">Download</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Signed abstract</div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">Download</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Signed monthly bill sheet (duly signed by GM PIU)</div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Signed Form 27A</div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Relaxation letter (if applicable) + Any other documents</div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn">Remark / hold</button>
+        <button class="btn primary">Confirm upload &amp; lock details ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ③ TL (CSC/SQC) LOGIN -->
+<div>
+<div class="screen-label">③ TL (CSC / SQC) login</div>
+<div class="screen">
+  <div class="topbar"><i class="ti ti-droplet" aria-hidden="true"></i> Jal Rekha – O&M Billing <span>TL (CSC): Indore Zone</span></div>
+  <div class="sidebar-layout">
+    <div class="sidebar">
+      <div class="sitem">Dashboard</div>
+      <div class="sitem active">O&M</div>
+      <div class="sitem sub active">Bills pending</div>
+      <div class="sitem sub">Manage</div>
+    </div>
+    <div class="main">
+      <div class="section-title">Bills pending – TL (CSC) review (Edit / Add each data field)</div>
+      <div class="form-row-3">
+        <div class="field"><div class="flabel">Scheme</div><div class="finput" style="display:flex;align-items:center">Bagh MVS</div></div>
+        <div class="field"><div class="flabel">PIU</div><div class="finput" style="display:flex;align-items:center">Indore</div></div>
+        <div class="field"><div class="flabel">Billing month</div><div class="finput" style="display:flex;align-items:center">Apr 2026</div></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><div class="flabel">Base O&M amount (₹)</div><div class="finput" style="display:flex;align-items:center;border-color:var(--color-border-info)">12,80,000</div></div>
+        <div class="field"><div class="flabel">CPWI adjustment</div><div class="finput" style="display:flex;align-items:center">1,40,000</div></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><div class="flabel">Deductions (penalty, etc.)</div><div class="finput" style="display:flex;align-items:center;border-color:var(--color-border-info)">0</div></div>
+        <div class="field"><div class="flabel">Net payable (₹)</div><div class="finput" style="display:flex;align-items:center">14,20,000</div></div>
+      </div>
+      <div class="section-title" style="margin-top:8px">TL (CSC) – Recommendation letter upload</div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-certificate" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">SQC/TL recommendation letter <span style="color:var(--color-text-danger);font-size:10px">*mandatory</span></div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Third party water quality test report (multiple copies)</div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn">Save &amp; hold</button>
+        <button class="btn primary">Forward to GM (PIU) ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ④ GM (O&M) / DGM (O&M) / MD LOGIN -->
+<div>
+<div class="screen-label">④ GM (O&M) → DGM (O&M) → CGM → CA → CFO → P.D. → MD</div>
+<div class="screen">
+  <div class="topbar"><i class="ti ti-droplet" aria-hidden="true"></i> Jal Rekha – O&M Billing <span>GM (O&M) / HO Approvals</span></div>
+  <div class="sidebar-layout">
+    <div class="sidebar">
+      <div class="sitem">Dashboard</div>
+      <div class="sitem active">O&M</div>
+      <div class="sitem sub active">View pending bills</div>
+      <div class="sitem sub">Manage bill</div>
+    </div>
+    <div class="main">
+      <div class="section-title">Full approval workflow status – OM/2026/041</div>
+      <div class="wf-steps">
+        <div class="wf-step done">Firm</div>
+        <div class="wf-step done">GM PIU</div>
+        <div class="wf-step done">TL CSC</div>
+        <div class="wf-step done">GM PIU ✓</div>
+        <div class="wf-step active">GM O&M</div>
+        <div class="wf-step">TL PMC</div>
+        <div class="wf-step">DGM</div>
+        <div class="wf-step">CGM</div>
+        <div class="wf-step">CA</div>
+        <div class="wf-step">CFO</div>
+        <div class="wf-step">PD</div>
+        <div class="wf-step">MD</div>
+      </div>
+      <table class="table" style="margin-bottom:12px">
+        <thead><tr><th>Bill no.</th><th>Scheme</th><th>Amount</th><th>At stage</th><th>Days</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>OM/2026/041</td><td>Bagh MVS</td><td>₹14.2L</td>
+            <td><span class="badge active" style="background:var(--color-background-info);color:var(--color-text-info)">GM (O&M)</span></td>
+            <td>1</td>
+            <td>
+              <button class="btn primary" style="padding:3px 9px;font-size:10px">Forward to TL (PMC) ↗</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="section-title">Document hub – all stage uploads visible</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">Firm submission letter</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">SQC recommendation letter</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">PIU recommendation letter</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">Signed abstract</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">Signed monthly bill sheet</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">Tax invoice</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">Signed Form 27A</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+        <div class="doc-row"><div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div><div class="doc-name">Signed scanned MB</div><div class="doc-actions"><span class="doc-btn">View PDF</span></div></div>
+      </div>
+      <div class="section-title" style="margin-top:10px">GM (O&M) – Pass order upload (after DGM approval)</div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-certificate" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Pass order copy (signed by DGM O&M) <span style="color:var(--color-text-danger);font-size:10px">*mandatory</span></div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="doc-row">
+        <div class="doc-icon"><i class="ti ti-file-text" aria-hidden="true" style="font-size:12px"></i></div>
+        <div class="doc-name">Signed letter from HO <span style="color:var(--color-text-danger);font-size:10px">*mandatory</span></div>
+        <div class="doc-actions"><span class="doc-btn upload">Upload</span><span class="doc-btn">View PDF</span></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn">Remark &amp; hold</button>
+        <button class="btn primary">Forward to CGM ↗</button>
+        <button class="btn gold" style="margin-left:auto">MD – Final approve ↗</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>

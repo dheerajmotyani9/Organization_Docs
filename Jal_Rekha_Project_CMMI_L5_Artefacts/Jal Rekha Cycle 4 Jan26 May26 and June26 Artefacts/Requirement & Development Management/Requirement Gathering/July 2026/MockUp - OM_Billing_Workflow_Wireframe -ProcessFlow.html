@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jal Rekha – O&M Billing Workflow Wireframe</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --navy:   #0F2A4A;
+    --blue:   #1565C0;
+    --teal:   #00838F;
+    --amber:  #E65100;
+    --green:  #2E7D32;
+    --purple: #4527A0;
+    --red:    #C62828;
+    --grey50: #FAFAFA;
+    --grey100:#F5F5F5;
+    --grey200:#EEEEEE;
+    --grey300:#E0E0E0;
+    --grey500:#9E9E9E;
+    --grey700:#616161;
+    --grey900:#212121;
+
+    --firm-c:   #FFF3E0;
+    --firm-b:   #E65100;
+    --piu-c:    #E3F2FD;
+    --piu-b:    #1565C0;
+    --sqc-c:    #E8F5E9;
+    --sqc-b:    #2E7D32;
+    --om-c:     #EDE7F6;
+    --om-b:     #4527A0;
+    --ho-c:     #FCE4EC;
+    --ho-b:     #880E4F;
+    --md-c:     #E0F7FA;
+    --md-b:     #00838F;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #EEF2F7; color: var(--grey900); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  .app-header {
+    background: linear-gradient(135deg, var(--navy) 0%, #1A3A6B 100%);
+    color: #fff;
+    padding: 16px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .app-header .logo { display: flex; align-items: center; gap: 12px; }
+  .app-header .logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg,#00838F,#1565C0);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: #fff;
+  }
+  .app-header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.3px; }
+  .app-header .sub { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  .lang-badge {
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
+  }
+
+  /* ── WORKFLOW PROGRESS ── */
+  .progress-section {
+    background: var(--navy); padding: 20px 32px;
+    border-bottom: 3px solid var(--teal);
+  }
+  .progress-label { color: rgba(255,255,255,0.6); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .progress-track {
+    display: flex; align-items: center; overflow-x: auto;
+    scrollbar-width: none; gap: 0;
+  }
+  .progress-track::-webkit-scrollbar { display: none; }
+  .stage-step {
+    display: flex; flex-direction: column; align-items: center;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .stage-connector {
+    flex: 1; min-width: 24px; height: 3px;
+    background: rgba(255,255,255,0.2);
+    margin-top: -20px; flex-shrink: 0;
+  }
+  .stage-connector.done { background: var(--teal); }
+  .stage-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6);
+    transition: all 0.25s; position: relative; z-index: 1;
+  }
+  .stage-circle.active {
+    background: var(--teal); border-color: var(--teal);
+    color: #fff; transform: scale(1.15);
+    box-shadow: 0 0 0 4px rgba(0,131,143,0.3);
+  }
+  .stage-circle.done {
+    background: #1565C0; border-color: #1565C0; color: #fff;
+  }
+  .stage-label {
+    color: rgba(255,255,255,0.5); font-size: 9px; text-align: center;
+    max-width: 58px; margin-top: 6px; line-height: 1.3;
+    font-weight: 500;
+  }
+  .stage-label.active { color: var(--teal); font-weight: 700; }
+  .stage-label.done { color: rgba(255,255,255,0.75); }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; min-height: calc(100vh - 160px); }
+  .sidebar {
+    width: 220px; flex-shrink: 0;
+    background: var(--navy); padding: 20px 0;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .sidebar-section { padding: 8px 16px 4px; color: rgba(255,255,255,0.35); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .sidebar-item {
+    padding: 10px 20px; display: flex; align-items: center; gap: 10px;
+    cursor: pointer; transition: all 0.18s; color: rgba(255,255,255,0.65);
+    font-size: 13px; border-left: 3px solid transparent;
+  }
+  .sidebar-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+  .sidebar-item.active { background: rgba(0,131,143,0.2); color: var(--teal); border-left-color: var(--teal); font-weight: 600; }
+  .sidebar-icon { width: 18px; text-align: center; font-size: 15px; }
+  .badge { background: var(--amber); color: #fff; border-radius: 10px; padding: 2px 7px; font-size: 10px; font-weight: 700; margin-left: auto; }
+
+  .main { flex: 1; overflow: auto; }
+
+  /* ── PANEL ── */
+  .panel { display: none; padding: 28px 32px; }
+  .panel.visible { display: block; }
+
+  .panel-title {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .role-chip {
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.5px; text-transform: uppercase;
+  }
+  .panel-title h2 { font-size: 22px; font-weight: 700; color: var(--navy); }
+  .panel-title .scheme-info { margin-left: auto; text-align: right; }
+  .panel-title .scheme-info span { font-size: 12px; color: var(--grey700); display: block; }
+  .panel-title .scheme-info strong { font-size: 13px; color: var(--navy); }
+
+  /* ── CARD ── */
+  .card {
+    background: #fff; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+    margin-bottom: 20px; overflow: hidden;
+  }
+  .card-header {
+    padding: 14px 20px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--grey200); background: var(--grey50);
+  }
+  .card-header h3 { font-size: 14px; font-weight: 600; color: var(--grey900); flex: 1; }
+  .card-body { padding: 20px; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; border-bottom: 2px solid var(--grey200);
+    margin-bottom: 20px; gap: 0; background: #fff;
+    border-radius: 10px 10px 0 0; overflow: hidden;
+  }
+  .tab-btn {
+    padding: 12px 20px; font-size: 13px; font-weight: 500;
+    cursor: pointer; border: none; background: none; color: var(--grey700);
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: all 0.18s; white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tab-btn:hover { background: var(--grey100); }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 600; background: #fff; }
+  .tab-btn .tab-badge { background: var(--amber); color: #fff; border-radius: 10px; padding: 1px 6px; font-size: 10px; }
+  .tab-content { display: none; }
+  .tab-content.visible { display: block; }
+
+  /* ── FORM ROW ── */
+  .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+  .form-grid.cols2 { grid-template-columns: repeat(2, 1fr); }
+  .form-group label { display: block; font-size: 11px; font-weight: 600; color: var(--grey700); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-control {
+    width: 100%; padding: 9px 12px; border: 1.5px solid var(--grey300);
+    border-radius: 8px; font-size: 13px; color: var(--grey900);
+    background: #fff; transition: border-color 0.18s;
+    font-family: 'Inter', sans-serif;
+  }
+  .form-control:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
+  .form-control.readonly { background: var(--grey100); color: var(--grey700); cursor: not-allowed; }
+  .form-control.auto { background: #EEF7EE; border-color: var(--green); color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  /* ── BILL TABLE ── */
+  .bill-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .bill-table th { background: var(--navy); color: #fff; padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+  .bill-table td { padding: 11px 14px; border-bottom: 1px solid var(--grey200); vertical-align: middle; }
+  .bill-table tr:hover td { background: var(--grey50); }
+  .bill-table tr:last-child td { border-bottom: none; }
+
+  .status-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;
+  }
+  .s-pending { background: #FFF8E1; color: #F57F17; border: 1px solid #FFE082; }
+  .s-review  { background: #E3F2FD; color: #1565C0; border: 1px solid #90CAF9; }
+  .s-approved{ background: #E8F5E9; color: #2E7D32; border: 1px solid #A5D6A7; }
+  .s-rejected { background: #FFEBEE; color: #C62828; border: 1px solid #EF9A9A; }
+  .s-draft   { background: var(--grey200); color: var(--grey700); border: 1px solid var(--grey300); }
+
+  /* ── DOC UPLOAD GRID ── */
+  .doc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .doc-card {
+    border: 1.5px dashed var(--grey300); border-radius: 10px; padding: 16px;
+    background: var(--grey50); transition: all 0.2s;
+  }
+  .doc-card:hover { border-color: var(--blue); background: #F0F6FF; }
+  .doc-card.mandatory { border-color: #FF8F00; background: #FFF8E1; }
+  .doc-card.uploaded { border-style: solid; border-color: var(--green); background: #F0FFF0; }
+  .doc-title { font-size: 12px; font-weight: 600; color: var(--grey900); margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+  .doc-title .req { color: var(--amber); font-size: 14px; line-height: 1; }
+  .doc-type { font-size: 10px; color: var(--grey500); margin-bottom: 10px; }
+  .doc-note { font-size: 10px; color: var(--blue); margin-bottom: 8px; font-style: italic; }
+  .doc-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .doc-btn {
+    padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+    cursor: pointer; border: 1.5px solid; transition: all 0.15s; display: flex; align-items: center; gap: 4px;
+  }
+  .db-upload { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .db-upload:hover { background: #0D47A1; }
+  .db-download { background: #fff; color: var(--grey700); border-color: var(--grey300); }
+  .db-view { background: var(--teal); color: #fff; border-color: var(--teal); font-size: 10px; }
+  .remark-input { width: 100%; margin-top: 8px; padding: 6px 8px; border: 1px solid var(--grey300); border-radius: 6px; font-size: 11px; resize: none; height: 42px; }
+
+  /* ── ACTION BAR ── */
+  .action-bar {
+    background: #fff; border-top: 1px solid var(--grey200); padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+    border-radius: 0 0 12px 12px;
+    position: sticky; bottom: 0; box-shadow: 0 -4px 12px rgba(0,0,0,0.07);
+  }
+  .action-bar .info { font-size: 12px; color: var(--grey700); flex: 1; }
+  .btn {
+    padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.18s; display: flex; align-items: center; gap: 6px;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: #0D47A1; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(21,101,192,0.3); }
+  .btn-success { background: var(--green); color: #fff; }
+  .btn-success:hover { background: #1B5E20; }
+  .btn-amber { background: var(--amber); color: #fff; }
+  .btn-amber:hover { background: #BF360C; }
+  .btn-teal { background: var(--teal); color: #fff; }
+  .btn-teal:hover { background: #006064; }
+  .btn-ghost { background: transparent; color: var(--grey700); border: 1.5px solid var(--grey300); }
+  .btn-ghost:hover { background: var(--grey100); }
+  .btn-danger { background: var(--red); color: #fff; }
+  .btn-danger:hover { background: #8B0000; }
+
+  /* ── WORKFLOW MINI MAP ── */
+  .workflow-map {
+    display: flex; align-items: center; gap: 6px;
+    overflow-x: auto; padding: 12px 16px;
+    background: var(--grey50); border-radius: 8px;
+    border: 1px solid var(--grey200);
+  }
+  .wf-node {
+    flex-shrink: 0; padding: 7px 12px; border-radius: 8px;
+    font-size: 11px; font-weight: 600; text-align: center;
+    min-width: 72px; cursor: pointer; transition: all 0.18s;
+    border: 2px solid transparent;
+  }
+  .wf-node:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+  .wf-arrow { color: var(--grey500); font-size: 16px; flex-shrink: 0; }
+  .wf-node.wn-firm    { background: var(--firm-c); color: var(--firm-b); border-color: var(--firm-b); }
+  .wf-node.wn-piu     { background: var(--piu-c);  color: var(--piu-b);  border-color: var(--piu-b); }
+  .wf-node.wn-sqc     { background: var(--sqc-c);  color: var(--sqc-b);  border-color: var(--sqc-b); }
+  .wf-node.wn-om      { background: var(--om-c);   color: var(--om-b);   border-color: var(--om-b); }
+  .wf-node.wn-ho      { background: var(--ho-c);   color: var(--ho-b);   border-color: var(--ho-b); }
+  .wf-node.wn-md      { background: var(--md-c);   color: var(--md-b);   border-color: var(--md-b); }
+  .wf-node.active-node { transform: scale(1.12) translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.2); }
+
+  /* ── BILL SUMMARY SUMMARY ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+  .sum-card { background: #fff; border-radius: 10px; padding: 16px; border: 1px solid var(--grey200); text-align: center; }
+  .sum-val { font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .sum-lbl { font-size: 11px; color: var(--grey500); }
+
+  /* ── ALERT BANNER ── */
+  .alert { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .alert-info    { background: #E3F2FD; color: #1565C0; border-left: 4px solid #1565C0; }
+  .alert-success { background: #E8F5E9; color: #2E7D32; border-left: 4px solid #2E7D32; }
+  .alert-warn    { background: #FFF3E0; color: #E65100; border-left: 4px solid #E65100; }
+  .alert-danger  { background: #FFEBEE; color: #C62828; border-left: 4px solid #C62828; }
+
+  /* ── SECTION DIVIDER ── */
+  .sec-divider { display: flex; align-items: center; gap: 10px; margin: 20px 0 14px; }
+  .sec-divider span { font-size: 12px; font-weight: 700; color: var(--grey700); text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap; }
+  .sec-divider::before, .sec-divider::after { content:''; flex:1; height: 1px; background: var(--grey200); }
+
+  /* ── O&M Bill breakdown ── */
+  .bill-breakdown { border: 1px solid var(--grey200); border-radius: 10px; overflow: hidden; }
+  .breakdown-row { display: flex; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--grey200); }
+  .breakdown-row:last-child { border-bottom: none; }
+  .breakdown-row.total { background: var(--navy); color: #fff; }
+  .breakdown-row.total .bl { color: rgba(255,255,255,0.8); }
+  .breakdown-row.total .bv { color: #fff; font-size: 16px; }
+  .bl { flex: 1; font-size: 13px; color: var(--grey700); }
+  .bv { font-size: 14px; font-weight: 700; color: var(--navy); font-family: 'JetBrains Mono', monospace; }
+  .deduction .bv { color: var(--red); }
+
+  /* ── REMARK THREAD ── */
+  .remark-thread { border: 1px solid var(--grey200); border-radius: 10px; overflow: hidden; }
+  .remark-item { padding: 12px 16px; border-bottom: 1px solid var(--grey200); }
+  .remark-item:last-child { border-bottom: none; }
+  .rem-role { font-size: 11px; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+  .rem-text { font-size: 13px; color: var(--grey900); }
+  .rem-date { font-size: 10px; color: var(--grey500); margin-top: 3px; }
+
+  /* ── POWER CONSUMPTION ── */
+  .power-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .power-table th { background: #37474F; color: #fff; padding: 8px 10px; font-size: 10px; text-align: center; }
+  .power-table td { padding: 8px 10px; border-bottom: 1px solid var(--grey200); text-align: center; }
+  .power-table tr:hover td { background: var(--grey50); }
+
+  .chip { padding: 3px 9px; border-radius: 10px; font-size: 10px; font-weight: 600; display: inline-block; }
+  .chip-navy { background: var(--navy); color: #fff; }
+  .chip-teal { background: var(--teal); color: #fff; }
+  .chip-amber{ background: var(--amber); color: #fff; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--grey300); border-radius: 3px; }
+
+  /* ── LOGIN SWITCHER ── */
+  .login-switcher {
+    background: #1A3A6B; padding: 10px 32px;
+    display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  }
+  .login-lbl { color: rgba(255,255,255,0.5); font-size: 11px; margin-right: 6px; }
+  .login-btn {
+    padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.18s;
+    opacity: 0.6;
+  }
+  .login-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .login-btn.lb-active { opacity: 1; transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.25); }
+  .lb-firm  { background: var(--amber);  color: #fff; }
+  .lb-piu   { background: var(--blue);   color: #fff; }
+  .lb-sqc   { background: var(--green);  color: #fff; }
+  .lb-om    { background: #512DA8;       color: #fff; }
+  .lb-dgm   { background: #880E4F;       color: #fff; }
+  .lb-tl    { background: var(--teal);   color: #fff; }
+  .lb-cgm   { background: #37474F;       color: #fff; }
+  .lb-pfd   { background: #4E342E;       color: #fff; }
+  .lb-ca    { background: #1B5E20;       color: #fff; }
+  .lb-cfo   { background: #283593;       color: #fff; }
+  .lb-md    { background: var(--red);    color: #fff; }
+
+  /* ── SCROLLABLE AREA ── */
+  .scrollable { max-height: calc(100vh - 280px); overflow-y: auto; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .icon { display: inline-block; width: 20px; text-align: center; }
+  .mt8 { margin-top: 8px; }
+  .mb16 { margin-bottom: 16px; }
+  .tr { text-align: right; }
+
+  @media (max-width: 900px) {
+    .doc-grid { grid-template-columns: repeat(2, 1fr); }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="app-header">
+  <div class="logo">
+    <div class="logo-icon">JR</div>
+    <div>
+      <div class="sub">MADHYA PRADESH JAL NIGAM DEPARTMENT</div>
+      <h1>Jal Rekha – O&amp;M Billing Workflow</h1>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <span style="font-size:12px;color:rgba(255,255,255,0.5)">PIU: <strong style="color:#fff">Umaria</strong> &nbsp;|&nbsp; Scheme: <strong style="color:#fff">Gohparu</strong></span>
+    <span class="lang-badge">English ▾</span>
+  </div>
+</div>
+
+<!-- ══════════ LOGIN SWITCHER ══════════ -->
+<div class="login-switcher">
+  <span class="login-lbl">🔑 Switch Login View:</span>
+  <button class="login-btn lb-firm lb-active"  onclick="switchLogin('firm')">① Contractor / Firm</button>
+  <button class="login-btn lb-piu"             onclick="switchLogin('gmpiu')">② GM (PIU)</button>
+  <button class="login-btn lb-sqc"             onclick="switchLogin('sqc')">③ TL / SQC</button>
+  <button class="login-btn lb-piu"             onclick="switchLogin('gmpiu2')">④ GM (PIU) — Upload Docs</button>
+  <button class="login-btn lb-om"              onclick="switchLogin('gnom')">⑤ GM (O&amp;M)</button>
+  <button class="login-btn lb-dgm"             onclick="switchLogin('dgm')">⑥ DGM (O&amp;M)</button>
+  <button class="login-btn lb-tl"              onclick="switchLogin('tlpmc')">⑦ TL (PMC)</button>
+  <button class="login-btn lb-om"              onclick="switchLogin('gnom2')">⑧ GM (O&amp;M) — Pass Order</button>
+  <button class="login-btn lb-cgm"             onclick="switchLogin('cgm')">⑨ CGM</button>
+  <button class="login-btn lb-pfd"             onclick="switchLogin('pd')">⑩ PD</button>
+  <button class="login-btn lb-ca"              onclick="switchLogin('ca')">⑪ CA</button>
+  <button class="login-btn lb-cfo"             onclick="switchLogin('cfo')">⑫ CFO</button>
+  <button class="login-btn lb-md"              onclick="switchLogin('md')">⑬ MD — Final</button>
+</div>
+
+<!-- ══════════ PROGRESS BAR ══════════ -->
+<div class="progress-section">
+  <div class="progress-label">📋 Workflow Stage Tracker</div>
+  <div class="progress-track" id="progressTrack">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
+<!-- ══════════ LAYOUT ══════════ -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-section">Navigation</div>
+    <div class="sidebar-item"><span class="sidebar-icon">🏠</span>Dashboard</div>
+    <div class="sidebar-item active" id="sb-om"><span class="sidebar-icon">📋</span>O&amp;M Billing</div>
+    <div class="sidebar-item"><span class="sidebar-icon">👁️</span>View Pending Bills <span class="badge" id="pendingCount">3</span></div>
+    <div class="sidebar-item"><span class="sidebar-icon">⚙️</span>Manage Bills</div>
+    <div class="sidebar-section" style="margin-top:10px">Reports</div>
+    <div class="sidebar-item"><span class="sidebar-icon">📊</span>RA Bill Summary</div>
+    <div class="sidebar-item"><span class="sidebar-icon">📈</span>Power Consumption</div>
+    <div class="sidebar-item"><span class="sidebar-icon">📄</span>Complaint Sheet</div>
+    <div class="sidebar-item"><span class="sidebar-icon">💧</span>Residual Pressure</div>
+    <div class="sidebar-section" style="margin-top:10px">Account</div>
+    <div class="sidebar-item"><span class="sidebar-icon">🔔</span>Notifications <span class="badge">2</span></div>
+    <div class="sidebar-item"><span class="sidebar-icon">🚪</span>Logout</div>
+  </div>
+
+  <!-- MAIN PANELS -->
+  <div class="main">
+
+    <!-- ───────────────────────────────────────────
+         PANEL 1: CONTRACTOR / FIRM
+    ─────────────────────────────────────────────── -->
+    <div class="panel visible" id="panel-firm">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--firm-c);color:var(--firm-b)">Contractor / Firm</span>
+        <h2>O&amp;M Billing</h2>
+        <div class="scheme-info">
+          <span>PIU Name: Ujjain &nbsp;|&nbsp; Scheme Name: Arniya Bahadur</span>
+          <strong>O&amp;M Aakalan → Generate Bill</strong>
+        </div>
+      </div>
+
+      <div class="alert alert-info">ℹ️ After generating the Abstract Bill, please upload all required documents below and forward to GM (PIU). Fields marked <strong>*</strong> are mandatory.</div>
+
+      <!-- TAB BAR matching live screenshot -->
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('firm','bill')">📋 O&amp;M Bill</button>
+        <button class="tab-btn" onclick="switchTab('firm','pressure')">💧 Residual Pressure</button>
+        <button class="tab-btn" onclick="switchTab('firm','complaint')">📞 Complaint Redressal Sheet</button>
+        <button class="tab-btn" onclick="switchTab('firm','additional')">🏗️ Additional Facilities</button>
+        <button class="tab-btn" onclick="switchTab('firm','power')">⚡ Power Consumption Sheet</button>
+        <button class="tab-btn" onclick="switchTab('firm','summary')">📊 Summary</button>
+        <button class="tab-btn" onclick="switchTab('firm','docs')" style="background:#FFF3E0;color:var(--amber);font-weight:700;border-left:2px solid var(--amber)">📎 Supporting Documents <span class="tab-badge">8</span></button>
+        <button class="tab-btn" onclick="switchTab('firm','workflow')">🔄 Bill Workflow</button>
+      </div>
+
+      <!-- TAB: O&M BILL -->
+      <div class="tab-content visible" id="firm-bill">
+        <div class="card">
+          <div class="card-header">
+            <span>📋</span>
+            <h3>Generate O&amp;M Bill</h3>
+            <span class="chip chip-amber">Draft</span>
+          </div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>RA Bill Duration *</label>
+                <select class="form-control"><option>Q1 (Apr–Jun)</option><option>Q2</option><option>Q3</option><option>Q4</option><option>Monthly</option></select>
+              </div>
+              <div class="form-group">
+                <label>Financial Year *</label>
+                <select class="form-control"><option>2025-26</option><option>2026-27</option></select>
+              </div>
+              <div class="form-group">
+                <label>Select Month *</label>
+                <select class="form-control"><option>Apr-2025</option><option>May-2025</option><option>Jun-2025</option></select>
+              </div>
+              <div class="form-group">
+                <label>O&amp;M RA Bill No. (Auto)</label>
+                <input class="form-control auto" readonly value="RA/19/50/2025-26/Q1/1">
+              </div>
+              <div class="form-group">
+                <label>Scheme Name</label>
+                <input class="form-control readonly" readonly value="Arniya Bahadur">
+              </div>
+              <div class="form-group">
+                <label>PIU Name</label>
+                <input class="form-control readonly" readonly value="Ujjain">
+              </div>
+            </div>
+            <div class="sec-divider"><span>Bill Summary</span></div>
+            <div class="bill-breakdown">
+              <div class="breakdown-row"><span class="bl">Bulk User Charges</span><span class="bv">₹ 4,82,000.00</span></div>
+              <div class="breakdown-row"><span class="bl">Gross O&amp;M Bill Amount</span><span class="bv">₹ 12,35,400.00</span></div>
+              <div class="breakdown-row deduction"><span class="bl">Deductions as per Agreement Norms</span><span class="bv">– ₹ 2,44,000.00</span></div>
+              <div class="breakdown-row total"><span class="bl">Net Payable Bill</span><span class="bv">₹ 9,91,400.00</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: SUPPORTING DOCUMENTS -->
+      <div class="tab-content" id="firm-docs">
+        <div class="card">
+          <div class="card-header" style="background:#FFF8E1;border-bottom:2px solid var(--amber)">
+            <span>📎</span>
+            <h3>Supporting Documents — to be Attached with Summary Abstract</h3>
+            <span class="chip chip-amber">8 Required</span>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-warn">⚠️ Upload all <strong>*mandatory</strong> documents before forwarding to GM (PIU). Use single PDF per document unless noted as "Multiple".</div>
+
+            <div class="sec-divider"><span>Contractor / Firm Documents</span></div>
+            <div class="doc-grid">
+              <div class="doc-card mandatory uploaded">
+                <div class="doc-title"><span>📄</span> Firm Submission Letter <span class="req">*</span></div>
+                <div class="doc-type">Single PDF only</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card mandatory uploaded">
+                <div class="doc-title"><span>🧾</span> Tax Invoice <span class="req">*</span></div>
+                <div class="doc-type">Single PDF only</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card">
+                <div class="doc-title"><span>📂</span> Any Other Documents</div>
+                <div class="doc-type">Multiple files allowed &nbsp;|&nbsp; Not mandatory</div>
+                <div class="doc-note">Name each document before uploading. Reason not required.</div>
+                <input class="form-control" placeholder="Document Name" style="margin-bottom:8px;font-size:12px">
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload Document</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+                <textarea class="remark-input" placeholder="Remark (optional)"></textarea>
+              </div>
+            </div>
+
+            <div class="sec-divider"><span>TL / SQC Documents</span></div>
+            <div class="doc-grid">
+              <div class="doc-card">
+                <div class="doc-title"><span>📋</span> SQC Recommendation Letter</div>
+                <div class="doc-type">Single PDF — Edit only</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card">
+                <div class="doc-title"><span>🧪</span> Third-Party Water Quality Test Report</div>
+                <div class="doc-type">Multiple copies allowed</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload (Multiple)</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+                <textarea class="remark-input" placeholder="Remark"></textarea>
+              </div>
+              <div class="doc-card">
+                <div class="doc-title"><span>📂</span> Any Other Documents</div>
+                <div class="doc-type">Multiple files allowed</div>
+                <input class="form-control" placeholder="Document Name" style="margin-bottom:8px;font-size:12px">
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload Document</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+                <textarea class="remark-input" placeholder="Remark (optional)"></textarea>
+              </div>
+            </div>
+
+            <div class="sec-divider"><span>GM (PIU) Documents</span></div>
+            <div class="doc-grid">
+              <div class="doc-card mandatory">
+                <div class="doc-title"><span>📬</span> PIU Recommendation Letter <span class="req">*</span></div>
+                <div class="doc-type">Single PDF</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card mandatory">
+                <div class="doc-title"><span>📝</span> Signed Form 27A <span class="req">*</span></div>
+                <div class="doc-type">Single PDF</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card mandatory">
+                <div class="doc-title"><span>📖</span> Signed Scanned MB (Measurement Book) <span class="req">*</span></div>
+                <div class="doc-type">Single PDF</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card mandatory">
+                <div class="doc-title"><span>📜</span> Signed Abstract <span class="req">*</span></div>
+                <div class="doc-type">Single PDF</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card mandatory">
+                <div class="doc-title"><span>📃</span> Signed Monthly Bill Sheet <span class="req">*</span></div>
+                <div class="doc-type">Multiple copies — signed by GM (PIU)</div>
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload (Multiple)</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+              </div>
+              <div class="doc-card">
+                <div class="doc-title"><span>📂</span> Any Other Documents</div>
+                <div class="doc-type">Multiple files allowed</div>
+                <input class="form-control" placeholder="Document Name" style="margin-bottom:8px;font-size:12px">
+                <div class="doc-actions">
+                  <button class="doc-btn db-upload">⬆ Upload Document</button>
+                  <button class="doc-btn db-download">⬇ Download</button>
+                  <button class="doc-btn db-view">👁 View PDF</button>
+                </div>
+                <textarea class="remark-input" placeholder="Remark (optional)"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <span class="info">ℹ️ Ensure all mandatory documents (*) are uploaded before submitting.</span>
+          <button class="btn btn-ghost">💾 Save as Draft</button>
+          <button class="btn btn-success" onclick="alert('✅ Bill saved and submitted to GM (PIU) successfully!\n\nNext: GM (PIU) will review and forward to TL/SQC.')">✅ Save and Submit → Forward to GM (PIU)</button>
+        </div>
+      </div>
+
+      <!-- TAB: SUMMARY -->
+      <div class="tab-content" id="firm-summary">
+        <div class="card">
+          <div class="card-header"><span>📊</span><h3>Bill Summary</h3></div>
+          <div class="card-body">
+            <div class="summary-grid">
+              <div class="sum-card"><div class="sum-val">₹9.91L</div><div class="sum-lbl">Net Payable</div></div>
+              <div class="sum-card"><div class="sum-val">₹2.44L</div><div class="sum-lbl">Total Deductions</div></div>
+              <div class="sum-card"><div class="sum-val">Q1</div><div class="sum-lbl">Bill Duration</div></div>
+              <div class="sum-card"><div class="sum-val">8/8</div><div class="sum-lbl">Docs Uploaded</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: POWER CONSUMPTION -->
+      <div class="tab-content" id="firm-power">
+        <div class="card">
+          <div class="card-header"><span>⚡</span><h3>Power Consumption Sheet</h3></div>
+          <div class="card-body" style="overflow-x:auto">
+            <table class="power-table">
+              <tr>
+                <th>S.No</th><th>Month</th><th>Intermediate Raw Water Demand (MLD)</th>
+                <th>Approved Power Guarantee Variable (KWH/day)</th>
+                <th>Actual Monthly Raw Water Drawn (ML)</th>
+                <th>Monthly KWH (Variable)</th><th>Monthly KWH (Fixed)</th>
+                <th>Total Monthly KWH</th><th>Excess Consumption (KWH)</th>
+                <th>Deduction for Excess Units (Rs.)</th><th>Total Deductions (Rs.)</th>
+              </tr>
+              <tr>
+                <td>1</td><td>Apr-2025</td><td>5.1300</td><td>4641.25</td>
+                <td>108.34</td><td>0.00</td><td>7567.00</td>
+                <td>7567.00</td><td>69008.00</td><td>5,22,183,536.00</td><td>5,22,191,380.00</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: COMPLAINT -->
+      <div class="tab-content" id="firm-complaint">
+        <div class="card">
+          <div class="card-header"><span>📞</span><h3>Complaint Redressal Sheet</h3></div>
+          <div class="card-body" style="overflow-x:auto">
+            <table class="bill-table">
+              <tr><th>S.No</th><th>District</th><th>Block</th><th>Village</th><th>Consumer Name</th><th>Complaint ID</th><th>Complaint Date</th><th>Resolved Date</th><th>Events &gt;48 hrs</th><th>Penalty Relaxation</th></tr>
+              <tr><td>1</td><td>Shahdol</td><td>Gohparu</td><td>Kathoutiya</td><td>test</td><td>3444</td><td>10-Apr-2025</td><td>17-Jun-2026</td><td>208</td><td><span class="status-chip s-approved">No</span></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PRESSURE -->
+      <div class="tab-content" id="firm-pressure">
+        <div class="card">
+          <div class="card-header"><span>💧</span><h3>Residual Pressure Report</h3></div>
+          <div class="card-body" style="overflow-x:auto">
+            <table class="bill-table">
+              <tr><th>S.No</th><th>Village</th><th>Consumer Name</th><th>Measured Pressure (m)</th><th>Affected HSCs</th><th>Days Problem Exists</th><th>HSCs × Days</th><th>Remark</th></tr>
+              <tr><td>1</td><td>Kathoutiya</td><td>rt yrty</td><td>5.00</td><td>55</td><td>65</td><td>3,640</td><td>fgh hfgh</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: WORKFLOW -->
+      <div class="tab-content" id="firm-workflow">
+        <div class="card">
+          <div class="card-header"><span>🔄</span><h3>Bill Workflow Status</h3></div>
+          <div class="card-body">
+            <div class="workflow-map">
+              <div class="wf-node wn-firm active-node" onclick="switchLogin('firm')">① Firm<br><small>You are here</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-piu" onclick="switchLogin('gmpiu')">② GM PIU<br><small>Review</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-sqc" onclick="switchLogin('sqc')">③ TL/SQC<br><small>Verify</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-piu" onclick="switchLogin('gmpiu2')">④ GM PIU<br><small>Upload Docs</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-om" onclick="switchLogin('gnom')">⑤ GM O&amp;M<br><small>Review</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-ho" onclick="switchLogin('dgm')">⑥ DGM O&amp;M<br><small>Dept Review</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-ho" onclick="switchLogin('tlpmc')">⑦ TL PMC<br><small>Recommend</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-om" onclick="switchLogin('gnom2')">⑧ GM O&amp;M<br><small>Pass Order</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-ho" onclick="switchLogin('cgm')">⑨ CGM<br><small>Regional</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-ho" onclick="switchLogin('pd')">⑩ PD<br><small>Review</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-ho" onclick="switchLogin('ca')">⑪ CA<br><small>Accounts</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-ho" onclick="switchLogin('cfo')">⑫ CFO<br><small>Financial</small></div>
+              <div class="wf-arrow">→</div>
+              <div class="wf-node wn-md" onclick="switchLogin('md')">⑬ MD<br><small>Final ✓</small></div>
+            </div>
+            <div class="alert alert-info mt8">ℹ️ Click any workflow node above to jump to that login view.</div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <span class="info">Status: <strong>Draft</strong> — Bill ready for submission</span>
+          <button class="btn btn-ghost">💾 Save as Draft</button>
+          <button class="btn btn-success" onclick="switchLogin('gmpiu');alert('✅ Bill forwarded to GM (PIU)!\n\nGM PIU will now review and forward to TL/SQC.')">📤 Forward to GM (PIU)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 2: GM (PIU) — First Review
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-gmpiu">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--piu-c);color:var(--piu-b)">GM (PIU)</span>
+        <h2>O&amp;M Billing — Pending Bills Review</h2>
+      </div>
+      <div class="alert alert-info">ℹ️ Review the submitted bill from Contractor/Firm. You may return to firm or forward to TL (SQC) for verification.</div>
+      <div class="card">
+        <div class="card-header"><span>📋</span><h3>Pending Bills Queue</h3><span class="badge">3</span></div>
+        <div class="card-body" style="overflow-x:auto">
+          <table class="bill-table">
+            <tr><th>#</th><th>RA Bill No.</th><th>Scheme</th><th>Month</th><th>Amount</th><th>Contractor</th><th>Submitted On</th><th>Status</th><th>Action</th></tr>
+            <tr>
+              <td>1</td><td style="font-family:monospace;font-size:12px">RA/19/50/2025-26/Q1/1</td>
+              <td>Arniya Bahadur</td><td>Apr-2025</td><td>₹9.91L</td><td>M/s Jal Seva Ltd</td><td>02-Jun-2026</td>
+              <td><span class="status-chip s-pending">⏳ Pending Review</span></td>
+              <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px" onclick="switchLogin('gmpiu')">Open →</button></td>
+            </tr>
+            <tr>
+              <td>2</td><td style="font-family:monospace;font-size:12px">RA/19/51/2025-26/Q1/2</td>
+              <td>Gohparu</td><td>Apr-2025</td><td>₹7.34L</td><td>M/s Neer Solutions</td><td>01-Jun-2026</td>
+              <td><span class="status-chip s-review">🔵 Forwarded to SQC</span></td>
+              <td><button class="btn btn-ghost" style="padding:6px 12px;font-size:12px">View</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🔄</span><h3>GM (PIU) Actions — RA/19/50/2025-26/Q1/1</h3></div>
+        <div class="card-body">
+          <div class="sec-divider"><span>Forward Options</span></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+            <div class="sum-card" style="cursor:pointer;border:2px solid var(--green)" onclick="switchLogin('sqc');alert('✅ Forwarded to TL (SQC) for verification.')">
+              <div style="font-size:24px;margin-bottom:6px">📋</div>
+              <div style="font-weight:700;font-size:13px;color:var(--green)">Forward to TL (SQC)</div>
+              <div style="font-size:11px;color:var(--grey500);margin-top:4px">Send for SQC recommendation</div>
+            </div>
+            <div class="sum-card" style="cursor:pointer;border:2px solid var(--red)" onclick="alert('🔄 Bill returned to Contractor/Firm with your remark.')">
+              <div style="font-size:24px;margin-bottom:6px">↩️</div>
+              <div style="font-weight:700;font-size:13px;color:var(--red)">Return to Firm</div>
+              <div style="font-size:11px;color:var(--grey500);margin-top:4px">Send back for corrections</div>
+            </div>
+          </div>
+          <div class="sec-divider"><span>GM PIU Remark</span></div>
+          <textarea class="form-control" style="height:80px;resize:none" placeholder="Enter remark / observation (All officers must share a remark before forwarding)…"></textarea>
+        </div>
+        <div class="action-bar">
+          <span class="info">All officers must add a remark (Edit only).</span>
+          <button class="btn btn-danger">↩ Return to Firm</button>
+          <button class="btn btn-success" onclick="switchLogin('sqc');alert('✅ Forwarded to TL (SQC)!')">📤 Forward to TL (SQC) →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 3: TL / SQC
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-sqc">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--sqc-c);color:var(--sqc-b)">TL / SQC</span>
+        <h2>O&amp;M Billing — Data Verification &amp; Recommendation</h2>
+      </div>
+      <div class="alert alert-warn">📝 Add/Edit data for each entry. Upload SQC Recommendation Letter (Edit). Forward to GM (PIU) after verification.</div>
+      <div class="card">
+        <div class="card-header"><span>📋</span><h3>Bills Pending — TL Screen</h3><span class="badge">2</span></div>
+        <div class="card-body" style="overflow-x:auto">
+          <table class="bill-table">
+            <tr><th>#</th><th>RA Bill No.</th><th>Scheme</th><th>Base O&amp;M Amount</th><th>CPWI Adjustment</th><th>Deductions</th><th>Net Payable</th><th>Status</th><th>Action</th></tr>
+            <tr>
+              <td>1</td><td style="font-family:monospace;font-size:12px">RA/19/50/2025-26/Q1/1</td>
+              <td>Arniya Bahadur</td>
+              <td><input class="form-control" value="12,35,400" style="width:120px;font-size:12px"></td>
+              <td><input class="form-control" value="1,24,000" style="width:110px;font-size:12px"></td>
+              <td><input class="form-control" value="2,44,000" style="width:110px;font-size:12px"></td>
+              <td style="font-weight:700;color:var(--navy)">₹ 9,91,400</td>
+              <td><span class="status-chip s-review">🔵 Under Review</span></td>
+              <td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px">Edit</button></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>📋</span><h3>SQC / TL Documents Upload</h3></div>
+        <div class="card-body">
+          <div class="doc-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="doc-card mandatory uploaded">
+              <div class="doc-title"><span>📋</span> SQC Recommendation Letter <span class="req">*</span></div>
+              <div class="doc-type">Upload SQC Letter — Edit only</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+              <textarea class="remark-input" placeholder="SQC Recommendation Remark"></textarea>
+            </div>
+            <div class="doc-card">
+              <div class="doc-title"><span>🧪</span> Third-Party Water Quality Test Report</div>
+              <div class="doc-type">Multiple copies — Upload each separately</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload (Multiple)</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+              <textarea class="remark-input" placeholder="Remark"></textarea>
+            </div>
+          </div>
+          <div class="sec-divider"><span>SQC Recommendation</span></div>
+          <textarea class="form-control" style="height:80px;resize:none" placeholder="Enter recommendation / observation (mandatory before forwarding to GM PIU)…"></textarea>
+        </div>
+        <div class="action-bar">
+          <span class="info">After verification, forward back to GM (PIU) for document upload.</span>
+          <button class="btn btn-danger">↩ Return to GM PIU</button>
+          <button class="btn btn-success" onclick="switchLogin('gmpiu2');alert('✅ Forwarded to GM (PIU) for document upload!')">📤 Forward to GM (PIU) →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 4: GM (PIU) — Document Upload
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-gmpiu2">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--piu-c);color:var(--piu-b)">GM (PIU)</span>
+        <h2>O&amp;M Billing — Upload Signed Documents</h2>
+      </div>
+      <div class="alert alert-success">✅ TL/SQC verification complete. Upload all signed documents then forward to GM (O&amp;M).</div>
+      <div class="card">
+        <div class="card-header" style="background:#EBF5FF;border-bottom:2px solid var(--blue)"><span>📁</span><h3>GM (PIU) — Mandatory Document Upload</h3><span class="chip chip-navy">5 Required</span></div>
+        <div class="card-body">
+          <div class="doc-grid">
+            <div class="doc-card mandatory uploaded">
+              <div class="doc-title"><span>📬</span> PIU Recommendation Letter <span class="req">*</span></div>
+              <div class="doc-type">Single PDF + SMS notification</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card mandatory uploaded">
+              <div class="doc-title"><span>📝</span> Signed Form 27A <span class="req">*</span></div>
+              <div class="doc-type">Single PDF + SMS notification</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card mandatory">
+              <div class="doc-title"><span>📖</span> Signed Scanned MB <span class="req">*</span></div>
+              <div class="doc-type">Measurement Book — Single PDF + SMS</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card mandatory">
+              <div class="doc-title"><span>📜</span> Signed Abstract <span class="req">*</span></div>
+              <div class="doc-type">GM PIU will upload — signed by GM</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card mandatory">
+              <div class="doc-title"><span>📃</span> Signed Monthly Bill Sheet <span class="req">*</span></div>
+              <div class="doc-type">Multiple — Duly signed by GM (PIU)</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload (Multiple)</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-title"><span>📄</span> Signed Relaxation Letter (if applicable)</div>
+              <div class="doc-type">Upload only if applicable</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+          </div>
+          <div class="sec-divider"><span>GM PIU Remark</span></div>
+          <textarea class="form-control" style="height:70px;resize:none" placeholder="Add/Edit remark for GM (O&M)…"></textarea>
+        </div>
+        <div class="action-bar">
+          <span class="info">Lock details after all documents are uploaded. This cannot be undone.</span>
+          <button class="btn btn-ghost">🔒 Lock Details</button>
+          <button class="btn btn-success" onclick="switchLogin('gnom');alert('✅ Forwarded to GM (O&M)!')">📤 Forward to GM (O&M) →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 5: GM (O&M)
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-gnom">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--om-c);color:var(--om-b)">GM (O&amp;M)</span>
+        <h2>O&amp;M Billing — Manage Bills</h2>
+      </div>
+      <div class="alert alert-info">ℹ️ Review all submitted bills. Edit / Add data as required. Forward to DGM (O&M) after review.</div>
+      <div class="card">
+        <div class="card-header"><span>📋</span><h3>Pending Bills — GM (O&amp;M) Queue</h3><span class="badge">4</span></div>
+        <div class="card-body" style="overflow-x:auto">
+          <table class="bill-table">
+            <tr><th>#</th><th>RA Bill No.</th><th>Scheme</th><th>PIU</th><th>Net Amount</th><th>Stage</th><th>Action</th></tr>
+            <tr><td>1</td><td style="font-family:monospace;font-size:12px">RA/19/50/2025-26/Q1/1</td><td>Arniya Bahadur</td><td>Ujjain</td><td>₹9.91L</td><td><span class="status-chip s-review">⏳ GM O&M Review</span></td><td><button class="btn btn-primary" style="padding:6px 12px;font-size:12px">Edit / View</button></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>✏️</span><h3>Edit / Add — Bill Data</h3></div>
+        <div class="card-body">
+          <div class="form-grid cols2">
+            <div class="form-group"><label>Edit Remark</label><textarea class="form-control" style="height:60px;resize:none" placeholder="All officers must share a remark (Edit only)…"></textarea></div>
+            <div class="form-group"><label>Resolution (if any)</label><textarea class="form-control" style="height:60px;resize:none" placeholder="Resolution notes…"></textarea></div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <span class="info">GM O&M: Manage Bill → View Pending Bills → Edit / Add / Resolution</span>
+          <button class="btn btn-success" onclick="switchLogin('dgm');alert('✅ Forwarded to DGM (O&M)!')">📤 Forward to DGM (O&M) →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 6: DGM (O&M)
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-dgm">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--ho-c);color:var(--ho-b)">DGM (O&amp;M)</span>
+        <h2>O&amp;M Billing — Departmental Review</h2>
+      </div>
+      <div class="alert alert-info">ℹ️ Conduct departmental review and forward to TL (PMC) with recommendation.</div>
+      <div class="card">
+        <div class="card-header"><span>🔍</span><h3>DGM Review — RA/19/50/2025-26/Q1/1</h3></div>
+        <div class="card-body">
+          <div class="remark-thread">
+            <div class="remark-item"><div class="rem-role">GM PIU Remark</div><div class="rem-text">All documents verified. MB and Abstract signed and uploaded.</div><div class="rem-date">02-Jun-2026 14:32</div></div>
+            <div class="remark-item"><div class="rem-role">TL/SQC Remark</div><div class="rem-text">Water quality test report reviewed. Recommendation letter uploaded.</div><div class="rem-date">03-Jun-2026 10:15</div></div>
+            <div class="remark-item"><div class="rem-role">GM O&M Remark</div><div class="rem-text">Data verified. Bill amount as per agreement norms.</div><div class="rem-date">04-Jun-2026 09:45</div></div>
+          </div>
+          <div class="sec-divider"><span>DGM Remark</span></div>
+          <textarea class="form-control" style="height:70px;resize:none" placeholder="Enter DGM (O&M) remark / departmental review observation…"></textarea>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-danger">↩ Return to GM O&M</button>
+          <button class="btn btn-success" onclick="switchLogin('tlpmc');alert('✅ Forwarded to TL (PMC)!')">📤 Forward to TL (PMC) →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 7: TL (PMC)
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-tlpmc">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--md-c);color:var(--md-b)">TL (PMC)</span>
+        <h2>O&amp;M Billing — PMC Recommendation</h2>
+      </div>
+      <div class="alert alert-info">ℹ️ Review the bill and upload recommendation letter with supporting documents. Forward to GM (O&M) for pass order.</div>
+      <div class="card">
+        <div class="card-header"><span>📋</span><h3>TL (PMC) — Documents &amp; Recommendation</h3></div>
+        <div class="card-body">
+          <div class="doc-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="doc-card mandatory">
+              <div class="doc-title"><span>📋</span> TL PMC Recommendation Letter <span class="req">*</span></div>
+              <div class="doc-type">Upload recommendation with any supporting documents</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card">
+              <div class="doc-title"><span>📂</span> Supporting Documents</div>
+              <div class="doc-type">Any supporting documents for recommendation</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+          </div>
+          <div class="sec-divider"><span>PMC Recommendation</span></div>
+          <textarea class="form-control" style="height:80px;resize:none" placeholder="Enter PMC recommendation…"></textarea>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-danger">↩ Return to DGM</button>
+          <button class="btn btn-success" onclick="switchLogin('gnom2');alert('✅ Forwarded to GM (O&M) for Pass Order!')">📤 Forward to GM (O&M) — Pass Order →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 8: GM (O&M) — Pass Order
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-gnom2">
+      <div class="panel-title">
+        <span class="role-chip" style="background:var(--om-c);color:var(--om-b)">GM (O&amp;M)</span>
+        <h2>O&amp;M Billing — Upload Pass Order</h2>
+      </div>
+      <div class="alert alert-info">ℹ️ Upload pass order copy (signed by DGM O&M) and signed letter from HO. Then forward to CGM.</div>
+      <div class="card">
+        <div class="card-header"><span>📁</span><h3>GM (O&M) — Pass Order Documents</h3></div>
+        <div class="card-body">
+          <div class="doc-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="doc-card mandatory">
+              <div class="doc-title"><span>📋</span> Pass Order Copy <span class="req">*</span></div>
+              <div class="doc-type">Signed by DGM O&M — Upload</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+            <div class="doc-card mandatory">
+              <div class="doc-title"><span>📄</span> Signed Letter from HO <span class="req">*</span></div>
+              <div class="doc-type">Upload signed letter from Head Office</div>
+              <div class="doc-actions">
+                <button class="doc-btn db-upload">⬆ Upload</button>
+                <button class="doc-btn db-download">⬇ Download</button>
+                <button class="doc-btn db-view">👁 View PDF</button>
+              </div>
+            </div>
+          </div>
+          <div class="sec-divider"><span>Payment Done Confirmation</span></div>
+          <div class="alert alert-warn">⚠️ After payment is done: Upload Pass Order copy × 20 and upload letter (not mandatory). Add remark before forwarding to Deputy Manager (O&M).</div>
+          <textarea class="form-control" style="height:70px;resize:none" placeholder="Enter remark (mandatory)…"></textarea>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-success" onclick="switchLogin('cgm');alert('✅ Forwarded to CGM!')">📤 Forward to CGM →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 9: CGM
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-cgm">
+      <div class="panel-title">
+        <span class="role-chip" style="background:#ECEFF1;color:#37474F">CGM</span>
+        <h2>O&amp;M Billing — Regional Review</h2>
+      </div>
+      <div class="alert alert-info">ℹ️ CGM covers: Bhopal, Gwalior, Jabalpur, Rewa, Sagar, Indore, Ujjain zones. Review and forward to PD (Project Director).</div>
+      <div class="card">
+        <div class="card-header"><span>🏢</span><h3>CGM — Regional Approval</h3></div>
+        <div class="card-body">
+          <div class="form-grid cols2">
+            <div class="form-group"><label>CGM Zone</label><select class="form-control"><option>Bhopal</option><option>Gwalior</option><option>Jabalpur</option><option>Rewa</option><option>Sagar</option><option>Indore</option><option>Ujjain</option></select></div>
+            <div class="form-group"><label>CGM Remark</label><textarea class="form-control" style="height:60px;resize:none" placeholder="All officers must add a remark…"></textarea></div>
+          </div>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-danger">↩ Return</button>
+          <button class="btn btn-success" onclick="switchLogin('pd');alert('✅ Forwarded to PD (Project Director)!')">📤 Forward to PD →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 10: PD
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-pd">
+      <div class="panel-title">
+        <span class="role-chip" style="background:#EFEBE9;color:#4E342E">PD</span>
+        <h2>O&amp;M Billing — Project Director Review</h2>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🎯</span><h3>Project Director — Review &amp; Forward</h3></div>
+        <div class="card-body">
+          <textarea class="form-control" style="height:80px;resize:none" placeholder="PD review remark (mandatory)…"></textarea>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-danger">↩ Return</button>
+          <button class="btn btn-success" onclick="switchLogin('ca');alert('✅ Forwarded to CA!')">📤 Forward to CA →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 11: CA
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-ca">
+      <div class="panel-title">
+        <span class="role-chip" style="background:#E8F5E9;color:#1B5E20">CA</span>
+        <h2>O&amp;M Billing — Accounts Verification</h2>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>🧾</span><h3>CA — Accounts Verification</h3></div>
+        <div class="card-body">
+          <div class="bill-breakdown">
+            <div class="breakdown-row"><span class="bl">Gross O&M Bill</span><span class="bv">₹ 12,35,400.00</span></div>
+            <div class="breakdown-row deduction"><span class="bl">Total Deductions</span><span class="bv">– ₹ 2,44,000.00</span></div>
+            <div class="breakdown-row"><span class="bl">GST (@18%)</span><span class="bv">₹ 1,78,452.00</span></div>
+            <div class="breakdown-row total"><span class="bl">Net Payable (after GST)</span><span class="bv">₹ 11,69,852.00</span></div>
+          </div>
+          <div class="sec-divider"><span>CA Accounts Remark</span></div>
+          <textarea class="form-control" style="height:70px;resize:none" placeholder="CA accounts verification remark…"></textarea>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-danger">↩ Return</button>
+          <button class="btn btn-success" onclick="switchLogin('cfo');alert('✅ Forwarded to CFO!')">📤 Forward to CFO →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 12: CFO
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-cfo">
+      <div class="panel-title">
+        <span class="role-chip" style="background:#E8EAF6;color:#283593">CFO</span>
+        <h2>O&amp;M Billing — Financial Approval</h2>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>💰</span><h3>CFO — Financial Sanction Review</h3></div>
+        <div class="card-body">
+          <textarea class="form-control" style="height:80px;resize:none" placeholder="CFO financial approval remark (mandatory)…"></textarea>
+        </div>
+        <div class="action-bar">
+          <button class="btn btn-danger">↩ Return</button>
+          <button class="btn btn-success" onclick="switchLogin('md');alert('✅ Forwarded to MD for Final Approval!')">📤 Forward to MD — Final Approval →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────
+         PANEL 13: MD — FINAL
+    ──────────────────────────────────────────────── -->
+    <div class="panel" id="panel-md">
+      <div class="panel-title">
+        <span class="role-chip" style="background:#FFEBEE;color:#C62828">MD</span>
+        <h2>O&amp;M Billing — Final Approval</h2>
+      </div>
+      <div class="alert alert-warn">⚠️ This is the final approval stage. Once approved, payment will be processed and the bill will be marked as complete.</div>
+      <div class="card">
+        <div class="card-header"><span>✅</span><h3>MD — Final Approval Summary</h3></div>
+        <div class="card-body">
+          <div class="summary-grid">
+            <div class="sum-card"><div class="sum-val">₹11.7L</div><div class="sum-lbl">Net Payable</div></div>
+            <div class="sum-card"><div class="sum-val">13</div><div class="sum-lbl">Approval Stages</div></div>
+            <div class="sum-card"><div class="sum-val">Q1</div><div class="sum-lbl">Bill Duration</div></div>
+            <div class="sum-card"><div class="sum-val">8</div><div class="sum-lbl">Documents</div></div>
+          </div>
+          <div class="sec-divider"><span>Workflow Trail</span></div>
+          <div class="remark-thread">
+            <div class="remark-item"><div class="rem-role">① Contractor / Firm</div><div class="rem-text">Bill generated and submitted with all mandatory documents.</div><div class="rem-date">01-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">② GM (PIU) — Review</div><div class="rem-text">Reviewed and forwarded to TL (SQC).</div><div class="rem-date">02-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">③ TL / SQC</div><div class="rem-text">Data verified. SQC recommendation uploaded.</div><div class="rem-date">03-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">④ GM (PIU) — Doc Upload</div><div class="rem-text">Signed MB, Abstract, Form 27A, Bill Sheet uploaded.</div><div class="rem-date">04-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑤ GM (O&M)</div><div class="rem-text">Reviewed. No objections.</div><div class="rem-date">05-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑥ DGM (O&M)</div><div class="rem-text">Departmental review complete.</div><div class="rem-date">06-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑦ TL (PMC)</div><div class="rem-text">PMC recommendation uploaded.</div><div class="rem-date">07-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑧ GM (O&M) Pass Order</div><div class="rem-text">Pass order copy and HO signed letter uploaded.</div><div class="rem-date">08-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑨ CGM (Ujjain Zone)</div><div class="rem-text">Regional review complete. Forwarded to PD.</div><div class="rem-date">09-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑩ PD</div><div class="rem-text">Project Director review complete.</div><div class="rem-date">10-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑪ CA</div><div class="rem-text">Accounts verified. GST calculated.</div><div class="rem-date">11-Jun-2026</div></div>
+            <div class="remark-item"><div class="rem-role">⑫ CFO</div><div class="rem-text">Financial sanction recommended.</div><div class="rem-date">12-Jun-2026</div></div>
+          </div>
+          <div class="sec-divider"><span>MD Final Remark</span></div>
+          <textarea class="form-control" style="height:70px;resize:none" placeholder="MD final approval remark…"></textarea>
+        </div>
+        <div class="action-bar">
+          <span class="info">Approving will trigger payment processing for Net Payable ₹11,69,852.</span>
+          <button class="btn btn-danger">↩ Return to CFO</button>
+          <button class="btn btn-teal" onclick="alert('🎉 Bill APPROVED by MD!\n\nRA Bill No: RA/19/50/2025-26/Q1/1\nNet Payable: ₹11,69,852\nStatus: PAYMENT DONE\n\nNotification sent to all stakeholders.')">✅ MD Final Approve — Payment Done</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<script>
+// ── WORKFLOW STAGES CONFIG ────────────────────────────────────────────
+const stages = [
+  { id:'firm',  label:'Firm\n(Submit)', short:'Firm' },
+  { id:'gmpiu', label:'GM PIU\n(Forward)', short:'GM PIU' },
+  { id:'sqc',   label:'TL/SQC\n(Verify)', short:'TL/SQC' },
+  { id:'gmpiu2',label:'GM PIU\n(Upload)', short:'GM PIU②' },
+  { id:'gnom',  label:'GM O&M\n(Review)', short:'GM O&M' },
+  { id:'dgm',   label:'DGM O&M\n(Dept)', short:'DGM' },
+  { id:'tlpmc', label:'TL PMC\n(Recom.)', short:'TL PMC' },
+  { id:'gnom2', label:'GM O&M\n(Pass Order)', short:'GM O&M②' },
+  { id:'cgm',   label:'CGM\n(Regional)', short:'CGM' },
+  { id:'pd',    label:'PD\n(Review)', short:'PD' },
+  { id:'ca',    label:'CA\n(Accounts)', short:'CA' },
+  { id:'cfo',   label:'CFO\n(Finance)', short:'CFO' },
+  { id:'md',    label:'MD\n(Final ✓)', short:'MD' },
+];
+
+let currentStageIdx = 0;
+
+function buildProgress(activeId) {
+  const track = document.getElementById('progressTrack');
+  const idx = stages.findIndex(s => s.id === activeId);
+  track.innerHTML = '';
+  stages.forEach((s, i) => {
+    const step = document.createElement('div');
+    step.className = 'stage-step';
+    const circle = document.createElement('div');
+    circle.className = 'stage-circle' + (i === idx ? ' active' : i < idx ? ' done' : '');
+    circle.textContent = i + 1;
+    circle.onclick = () => switchLogin(s.id);
+    circle.style.cursor = 'pointer';
+    const label = document.createElement('div');
+    label.className = 'stage-label' + (i === idx ? ' active' : i < idx ? ' done' : '');
+    label.textContent = s.short;
+    step.appendChild(circle);
+    step.appendChild(label);
+    track.appendChild(step);
+    if (i < stages.length - 1) {
+      const conn = document.createElement('div');
+      conn.className = 'stage-connector' + (i < idx ? ' done' : '');
+      track.appendChild(conn);
+    }
+  });
+  currentStageIdx = idx;
+}
+
+function switchLogin(id) {
+  // Hide all panels
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+  // Show target panel
+  const p = document.getElementById('panel-' + id);
+  if (p) p.classList.add('visible');
+  // Update progress
+  buildProgress(id);
+  // Update login buttons
+  document.querySelectorAll('.login-btn').forEach(b => b.classList.remove('lb-active'));
+  const map = {firm:0,gmpiu:1,sqc:2,gmpiu2:3,gnom:4,dgm:5,tlpmc:6,gnom2:7,cgm:8,pd:9,ca:10,cfo:11,md:12};
+  const btns = document.querySelectorAll('.login-btn');
+  if (btns[map[id]] !== undefined) btns[map[id]].classList.add('lb-active');
+  // Update pending count in sidebar
+  const counts = {firm:'',gmpiu:'3',sqc:'2',gmpiu2:'1',gnom:'4',dgm:'2',tlpmc:'1',gnom2:'1',cgm:'1',pd:'1',ca:'1',cfo:'1',md:'1'};
+  document.getElementById('pendingCount').textContent = counts[id] || '3';
+  // Scroll to top
+  document.querySelector('.main').scrollTop = 0;
+}
+
+function switchTab(panel, tab) {
+  // hide all tab contents in this panel
+  const p = document.getElementById('panel-' + panel);
+  p.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('visible'));
+  p.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+  // show selected
+  const tc = document.getElementById(panel + '-' + tab);
+  if (tc) tc.classList.add('visible');
+  // find clicked btn — match by tab id pattern
+  const btns = p.querySelectorAll('.tab-btn');
+  const tabMap = {bill:0,pressure:1,complaint:2,additional:3,power:4,summary:5,docs:6,workflow:7};
+  if (btns[tabMap[tab]] !== undefined) btns[tabMap[tab]].classList.add('active');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────
+buildProgress('firm');
+</script>
+</body>
+</html>
