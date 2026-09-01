@@ -1,0 +1,13 @@
+@Department Name should be alphabatical order..
+
+@Team For Additions/Enhancements: 
+
+a) Provision to download a form, from the WEB. (enhancement for future)
+b) Super Admin cant see forms created by different departments, under ->  'View Form'  - (Should have)
+c) UI for the Mapping of Form Fileds for Report - WIP, Please lets chase this to closure
+e) Generation of MIS reports dynamically. - To discuss with Team  
+d) Notification Panel on Mobile and Web.   Was developed before... Please lets chase this to closure
+e) Dynamic Dashboard for each Department - @Aman, pls chase this to closure
+
+
+Please point me to the UAT .apk (or share the latest version) so that I can provide it to the Vidisha Collectorate for verification.

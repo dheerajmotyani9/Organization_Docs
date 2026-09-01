@@ -1,0 +1,268 @@
+
+<h2 class="sr-only">Material testing re-inspection cycle loop workflow showing FE→GM→Contractor→GM→SQC/TPIA→FE flow triggered after GM rejection, with image optional on second cycle</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wf{font-family:inherit;padding:0 0 8px}
+.phase-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);margin:0 0 6px;padding:0 4px}
+.row{display:flex;gap:8px;align-items:stretch;margin-bottom:6px}
+.node{border-radius:8px;border:0.5px solid var(--border-strong);background:var(--surface-2);padding:10px 12px;cursor:pointer;transition:border-color .15s,box-shadow .15s;flex:1;min-width:0;position:relative}
+.node:hover{border-color:var(--border-stronger);box-shadow:0 0 0 2px var(--bg-accent)}
+.node.active{border-color:var(--border-accent)!important;box-shadow:0 0 0 2px var(--bg-accent)}
+.node-role{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.node-title{font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:3px;line-height:1.3}
+.node-sub{font-size:11px;color:var(--text-secondary);line-height:1.4}
+.badge{display:inline-flex;align-items:center;gap:3px;border-radius:20px;padding:2px 7px;font-size:10px;font-weight:500;margin-top:5px}
+.badge-cycle1{background:var(--bg-success);color:var(--text-success)}
+.badge-cycle2{background:var(--bg-accent);color:var(--text-accent)}
+.badge-warn{background:var(--bg-warning);color:var(--text-warning)}
+.badge-danger{background:var(--bg-danger);color:var(--text-danger)}
+.arrow-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-width:28px;flex-shrink:0}
+.arrow-line{width:1px;background:var(--border-strong);flex:1;min-height:18px;position:relative}
+.arrow-line::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid var(--border-stronger)}
+.arrow-line.right{width:100%;height:1px;min-height:unset;flex:none}
+.arrow-line.right::after{right:-5px;bottom:auto;top:50%;left:auto;transform:translateY(-50%);border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid var(--border-stronger);border-right:none}
+.arrow-label{font-size:10px;color:var(--text-secondary);text-align:center;line-height:1.2;padding:0 2px;white-space:nowrap}
+.divider{height:1px;background:var(--border);margin:10px 0;position:relative}
+.divider-label{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--surface-1);padding:0 8px;font-size:10px;font-weight:500;color:var(--text-secondary);white-space:nowrap}
+.decision{border-radius:8px;border:2px solid var(--border-danger);background:var(--bg-danger);padding:10px 14px;text-align:center;flex:1;cursor:pointer;transition:box-shadow .15s}
+.decision:hover{box-shadow:0 0 0 2px var(--bg-danger)}
+.decision.active{box-shadow:0 0 0 3px var(--border-danger)}
+.decision-title{font-size:13px;font-weight:500;color:var(--text-danger)}
+.decision-sub{font-size:11px;color:var(--text-danger);margin-top:2px;opacity:.8}
+.loop-back{border:1.5px dashed var(--border-accent);border-radius:10px;padding:10px 14px;background:var(--bg-accent);flex:1;cursor:pointer}
+.loop-back:hover{box-shadow:0 0 0 2px var(--bg-accent)}
+.loop-back-title{font-size:13px;font-weight:500;color:var(--text-accent);margin-bottom:3px}
+.loop-back-sub{font-size:11px;color:var(--text-accent);opacity:.85;line-height:1.4}
+.info-panel{border-radius:8px;border:0.5px solid var(--border);background:var(--surface-1);padding:12px 14px;margin-top:10px;min-height:72px}
+.info-panel-title{font-size:12px;font-weight:500;color:var(--text-primary);margin-bottom:5px}
+.info-panel-body{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-secondary)}
+.leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.flag{display:inline-flex;align-items:center;gap:3px;border-radius:4px;padding:1px 5px;font-size:10px;font-weight:500;border:0.5px solid;margin-right:3px;margin-top:2px}
+.flag-img-req{background:var(--bg-danger);color:var(--text-danger);border-color:var(--border-danger)}
+.flag-img-opt{background:var(--bg-warning);color:var(--text-warning);border-color:var(--border-warning)}
+.flag-fe{background:var(--bg-success);color:var(--text-success);border-color:var(--border-success)}
+.cycle-header{display:flex;align-items:center;gap:8px;margin:12px 0 8px;font-size:12px;font-weight:500;color:var(--text-secondary)}
+.cycle-pill{border-radius:20px;padding:3px 10px;font-size:11px;font-weight:500}
+.c1-pill{background:var(--bg-success);color:var(--text-success)}
+.c2-pill{background:var(--bg-accent);color:var(--text-accent)}
+.section-title{font-size:14px;font-weight:500;color:var(--text-primary);margin:14px 0 8px}
+.edit-bar{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.edit-bar button{padding:5px 12px;border-radius:6px;border:0.5px solid var(--border-strong);background:var(--surface-2);color:var(--text-primary);font-size:12px;cursor:pointer;transition:background .12s}
+.edit-bar button:hover{background:var(--surface-1)}
+.edit-bar button.active-btn{background:var(--bg-accent);color:var(--text-accent);border-color:var(--border-accent)}
+.note-box{border-left:3px solid var(--border-accent);background:var(--bg-accent);border-radius:0 6px 6px 0;padding:8px 12px;margin:8px 0;font-size:12px;color:var(--text-accent);line-height:1.5}
+</style>
+
+<div class="wf">
+
+<div class="edit-bar">
+  <button onclick="setView('full')" id="btn-full" class="active-btn">Full workflow</button>
+  <button onclick="setView('cycle1')" id="btn-cycle1">Cycle 1 only</button>
+  <button onclick="setView('cycle2')" id="btn-cycle2">Cycle 2 (re-inspection)</button>
+  <button onclick="setView('fe-change')" id="btn-fe">FE change scenario</button>
+</div>
+
+<div id="view-full">
+
+<!-- CYCLE 1 -->
+<div class="cycle-header"><span class="cycle-pill c1-pill">Cycle 1 — First inspection</span><span style="color:var(--text-muted)">Image upload mandatory</span></div>
+
+<div class="row">
+  <div class="node" onclick="select(this,'Contractor submits material testing request — selects Component, Sub-Component, Structural Location, Grade of Concrete, uploads mandatory photos (geo-tagged). System generates Request ID. Image upload is MANDATORY in Cycle 1.')" id="n-con-submit">
+    <div class="node-role" style="color:#0F6E56">Contractor</div>
+    <div class="node-title">Submit RFI request</div>
+    <div class="node-sub">Component, sub-component, location, material details</div>
+    <span class="flag flag-img-req"><i class="ti ti-camera" aria-hidden="true"></i> Image mandatory</span>
+    <span class="badge badge-cycle1">Cycle 1</span>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">RFI raised</div></div>
+  <div class="node" onclick="select(this,'GM PIU receives RFI and assigns to a Field Engineer (FE). GM selects FE from the pool, sets inspection date. Notification sent to assigned FE.')" id="n-gm-assign">
+    <div class="node-role" style="color:#185FA5">GM PIU</div>
+    <div class="node-title">Assign FE for inspection</div>
+    <div class="node-sub">Select FE, set date, send notification</div>
+    <span class="badge badge-cycle1">Cycle 1</span>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Assigned</div></div>
+  <div class="node" onclick="select(this,'FE performs on-site material inspection. Captures geo-tagged photos, records test results (gradation, AIV, compressive strength, etc.), adds survey remark. Mandatory photo upload in Cycle 1. Submits inspection result to GM for review.')" id="n-fe-inspect">
+    <div class="node-role" style="color:#993C1D">FE</div>
+    <div class="node-title">Conduct inspection & submit</div>
+    <div class="node-sub">Geo-tagged photos, test results, remark</div>
+    <span class="flag flag-img-req"><i class="ti ti-camera" aria-hidden="true"></i> Image mandatory</span>
+    <span class="badge badge-cycle1">Cycle 1</span>
+  </div>
+</div>
+
+<div class="row" style="justify-content:flex-end">
+  <div style="flex:2.3"></div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Result submitted</div></div>
+  <div class="node" onclick="select(this,'GM PIU reviews FE inspection result. Two outcomes: ACCEPTED — all parameters satisfied, GM approves and marks Accepted. REJECTED — parameters not satisfied, GM rejects with rejection remark and triggers Cycle 2 re-inspection loop.')" id="n-gm-review" style="border-color:var(--border-stronger);flex:1.1">
+    <div class="node-role" style="color:#185FA5">GM PIU</div>
+    <div class="node-title">Review & decide</div>
+    <div class="node-sub">Accept or Reject with remark</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:5px">
+      <span class="badge" style="background:var(--bg-success);color:var(--text-success)"><i class="ti ti-check" aria-hidden="true"></i> Accept</span>
+      <span class="badge badge-danger"><i class="ti ti-x" aria-hidden="true"></i> Reject → Cycle 2</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"><span class="divider-label">↓ GM rejects — Cycle 2 loop triggered</span></div>
+
+<!-- CYCLE 2 -->
+<div class="cycle-header"><span class="cycle-pill c2-pill">Cycle 2 — Re-inspection loop</span><span style="color:var(--text-muted)">Image upload optional · same RFI · new inspection data</span></div>
+
+<div class="note-box"><i class="ti ti-info-circle" aria-hidden="true"></i> Same RFI ID is retained across Cycle 2. A DB flag (loop_iteration = 2) marks this as a re-inspection. Image/photo upload is <strong>optional</strong> (not mandatory) for this cycle. The loop re-runs with the same workflow structure but new inspection data entered by the FE.</div>
+
+<div class="row">
+  <div class="decision" onclick="select(this,'GM rejects FE inspection result and enters a mandatory rejection remark. The system sets loop_iteration = 2 and notifies Contractor to take corrective action before re-inspection.')" id="n-gm-reject">
+    <i class="ti ti-alert-triangle" style="font-size:18px;color:var(--text-danger);margin-bottom:4px" aria-hidden="true"></i>
+    <div class="decision-title">GM rejects result</div>
+    <div class="decision-sub">Rejection remark mandatory · Loop 2 triggered</div>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Notified</div></div>
+  <div class="node" onclick="select(this,'Contractor receives rejection notification. Takes corrective action on material/workmanship. Contractor confirms site is ready for re-inspection. This does NOT require a new RFI — same RFI continues with loop_iteration = 2.')" id="n-con-correct">
+    <div class="node-role" style="color:#0F6E56">Contractor</div>
+    <div class="node-title">Corrective action</div>
+    <div class="node-sub">Fix material/work. Confirm ready for re-inspection</div>
+    <span class="badge badge-cycle2">Cycle 2</span>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Ready</div></div>
+  <div class="node" onclick="select(this,'GM PIU re-assigns FE for re-inspection. If the original FE has left or is unavailable, GM assigns a NEW FE (see FE change scenario). The new FE is notified of the assignment with full inspection context from Cycle 1 visible.')" id="n-gm-reassign">
+    <div class="node-role" style="color:#185FA5">GM PIU</div>
+    <div class="node-title">Reassign FE</div>
+    <div class="node-sub">Same FE or new FE if original left</div>
+    <span class="flag flag-fe"><i class="ti ti-user-check" aria-hidden="true"></i> FE change possible</span>
+    <span class="badge badge-cycle2">Cycle 2</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="node" onclick="select(this,'Assigned FE (same or new) performs re-inspection on-site. Image upload is OPTIONAL in Cycle 2 — FE may skip photo upload without blocking submission. Records new test results and re-inspection remark. Submits to GM.')" id="n-fe-reinspect">
+    <div class="node-role" style="color:#993C1D">FE (same or new)</div>
+    <div class="node-title">Re-inspect & submit</div>
+    <div class="node-sub">New test results, re-inspection remark</div>
+    <span class="flag flag-img-opt"><i class="ti ti-camera" aria-hidden="true"></i> Image optional</span>
+    <span class="badge badge-cycle2">Cycle 2</span>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Result</div></div>
+  <div class="node" onclick="select(this,'GM PIU forwards re-inspection result to Contractor for review and acknowledgement before SQC/TPIA review stage.')" id="n-gm-forward">
+    <div class="node-role" style="color:#185FA5">GM PIU</div>
+    <div class="node-title">Forward to Contractor</div>
+    <div class="node-sub">GM forwards result for contractor review</div>
+    <span class="badge badge-cycle2">Cycle 2</span>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Forwarded</div></div>
+  <div class="node" onclick="select(this,'SQC (Site Quality Consultant) and/or TPIA (Third Party Inspection Agency) review the re-inspection result. They verify test parameters, view FE photos (if uploaded), and add their own remark. Forward to GM for final decision.')" id="n-sqc">
+    <div class="node-role" style="color:#534AB7">SQC / TPIA</div>
+    <div class="node-title">Independent review</div>
+    <div class="node-sub">Verify test results, add remark</div>
+    <span class="badge badge-cycle2">Cycle 2</span>
+  </div>
+</div>
+
+<div class="row">
+  <div style="flex:1"></div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Reviewed</div></div>
+  <div class="node" onclick="select(this,'GM PIU makes final decision after SQC/TPIA review.\n\nACCEPTED: All parameters satisfied in Cycle 2. GM marks Accepted. RFI closed.\n\nREJECTED AGAIN: Another loop may be triggered (same Cycle 2 structure repeats with new loop_iteration flag). GM adds remark. Loop continues until accepted or escalated.')" id="n-gm-final" style="flex:2;border-color:var(--border-stronger)">
+    <div class="node-role" style="color:#185FA5">GM PIU</div>
+    <div class="node-title">Final decision — Accept or Reject again</div>
+    <div class="node-sub">Post SQC/TPIA review — same Cycle 2 loop repeats if rejected again</div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:5px">
+      <span class="badge" style="background:var(--bg-success);color:var(--text-success)"><i class="ti ti-check" aria-hidden="true"></i> Accept — RFI closed</span>
+      <span class="badge badge-danger"><i class="ti ti-refresh" aria-hidden="true"></i> Reject — loop repeats</span>
+    </div>
+  </div>
+</div>
+
+<!-- FE CHANGE CALLOUT -->
+<div class="divider"><span class="divider-label">FE change scenario</span></div>
+
+<div class="row">
+  <div class="node" onclick="select(this,'If the original FE who did Cycle 1 inspection has left the project or is unavailable, GM PIU can assign a completely new FE for Cycle 2 re-inspection.\n\nThe new FE can see: full Cycle 1 inspection data, GM rejection remark, Contractor description, and all previously uploaded photos.\n\nNew FE proceeds with re-inspection — image upload still optional for Cycle 2.')" id="n-fe-change" style="border-color:var(--border-success);background:var(--bg-success)">
+    <div class="node-role" style="color:var(--text-success)">FE change</div>
+    <div class="node-title" style="color:var(--text-success)">Original FE left — new FE added</div>
+    <div class="node-sub" style="color:var(--text-success)">GM reassigns. New FE sees Cycle 1 data, GM remark, photos</div>
+    <span class="flag flag-fe"><i class="ti ti-user-plus" aria-hidden="true"></i> New FE onboarded</span>
+  </div>
+  <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label">Assigned</div></div>
+  <div class="loop-back" onclick="select(this,'New FE resumes Cycle 2 re-inspection from the FE Re-inspect step. All Cycle 1 data is read-only and visible for reference. New FE submits new inspection data and re-inspection remark. Image upload optional.')" id="n-fe-resume">
+    <div class="loop-back-title"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Resume Cycle 2</div>
+    <div class="loop-back-sub">New FE picks up from "Re-inspect and submit" step. Cycle 1 data visible (read-only). Image optional.</div>
+  </div>
+</div>
+
+<!-- DB FLAG NOTE -->
+<div class="note-box" style="border-color:var(--border-warning);background:var(--bg-warning);color:var(--text-warning)">
+  <i class="ti ti-database" aria-hidden="true"></i>
+  <strong>DB flag logic:</strong> <code style="font-size:11px;background:var(--surface-1);border-radius:3px;padding:1px 4px">loop_iteration</code> column increments per re-inspection cycle. Image mandatory only when <code style="font-size:11px;background:var(--surface-1);border-radius:3px;padding:1px 4px">loop_iteration = 1</code>. For all subsequent cycles (<code style="font-size:11px;background:var(--surface-1);border-radius:3px;padding:1px 4px">loop_iteration ≥ 2</code>), image upload is optional and does not block submission.
+</div>
+
+<!-- LEGEND -->
+<div class="legend" style="margin-top:10px">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--bg-success)"></div>Contractor</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--bg-accent)"></div>GM PIU</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--bg-danger)"></div>Rejection / decision point</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--bg-pro)"></div>SQC / TPIA</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--bg-warning);border:0.5px solid var(--border-warning)"></div>FE — Cycle 2 (re-inspection)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--bg-success);border:0.5px dashed var(--border-success)"></div>FE change scenario</div>
+</div>
+
+</div><!-- /view-full -->
+
+<!-- ── INFO PANEL ── -->
+<div class="info-panel" id="info-panel">
+  <div class="info-panel-title" id="info-title">Click any step to see details</div>
+  <div class="info-panel-body" id="info-body">Select a node above to read the business rules, DB behaviour, and acceptance criteria for that step.</div>
+</div>
+
+</div>
+
+<script>
+let activeNode = null;
+function select(el, text) {
+  if (activeNode) activeNode.classList.remove('active');
+  el.classList.add('active');
+  activeNode = el;
+  const titleEl = el.querySelector('.node-title, .decision-title, .loop-back-title');
+  const roleEl  = el.querySelector('.node-role');
+  document.getElementById('info-title').textContent = (roleEl ? roleEl.textContent + ' — ' : '') + (titleEl ? titleEl.textContent : 'Step details');
+  document.getElementById('info-body').textContent = text;
+}
+
+function setView(v) {
+  ['full','cycle1','cycle2','fe-change'].forEach(k => {
+    document.getElementById('btn-'+k).classList.remove('active-btn');
+  });
+  document.getElementById('btn-'+v).classList.add('active-btn');
+
+  const allNodes = document.querySelectorAll('.node, .decision, .loop-back');
+  const cycle1 = ['n-con-submit','n-gm-assign','n-fe-inspect','n-gm-review'];
+  const cycle2 = ['n-gm-reject','n-con-correct','n-gm-reassign','n-fe-reinspect','n-gm-forward','n-sqc','n-gm-final'];
+  const feChange = ['n-fe-change','n-fe-resume'];
+
+  allNodes.forEach(n => {
+    n.style.opacity = '1';
+    n.style.outline = 'none';
+  });
+
+  if (v === 'cycle1') {
+    allNodes.forEach(n => {
+      if (!cycle1.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid var(--border-success)';
+    });
+  } else if (v === 'cycle2') {
+    allNodes.forEach(n => {
+      if (!cycle2.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid var(--border-accent)';
+    });
+  } else if (v === 'fe-change') {
+    allNodes.forEach(n => {
+      if (!feChange.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid var(--border-success)';
+    });
+  }
+}
+</script>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jal Rekha — Sahbhagita Enhancement Wireframe v2</title>
+<style>
+  :root{
+    --navy:#1f3864; --blue:#2e75b6; --blue-light:#dce6f1; --sky:#eaf3fb;
+    --green:#2e7d32; --amber:#b36b00; --red:#c0392b; --grey:#f2f2f2; --border:#c9d6e3;
+    --text:#22303f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#eef2f6;color:var(--text);}
+  .topbar{background:linear-gradient(90deg,var(--navy),var(--blue));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px;}
+  .topbar .logo{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);font-size:18px;}
+  .topbar h1{font-size:20px;margin:0;}
+  .topbar p{margin:0;font-size:12px;opacity:.85;}
+  .badge-doc{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);padding:6px 12px;border-radius:20px;font-size:12px;}
+
+  .subnav{display:flex;gap:0;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+  .subnav button{flex:none;padding:14px 20px;background:none;border:none;cursor:pointer;font-size:14px;color:#5c6b7a;border-bottom:3px solid transparent;font-weight:600;}
+  .subnav button.active{color:var(--navy);border-bottom:3px solid var(--blue);background:var(--sky);}
+  .subnav button:hover{background:var(--sky);}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:26px 24px 60px;}
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  .section-title{font-size:20px;color:var(--navy);font-weight:800;margin:0 0 4px;}
+  .section-sub{color:#5c6b7a;font-size:13px;margin:0 0 20px;}
+
+  .card{background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 10px rgba(20,40,70,.06);margin-bottom:22px;overflow:hidden;}
+  .card-head{background:linear-gradient(90deg,var(--blue-light),#fff);padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+  .card-head h3{margin:0;font-size:15px;color:var(--navy);}
+  .card-body{padding:18px;}
+  .tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.3px;}
+  .tag-new{background:#e6f4ea;color:var(--green);border:1px solid #b6e2c0;}
+  .tag-changed{background:#fff3e0;color:var(--amber);border:1px solid #ffdca8;}
+  .tag-existing{background:var(--grey);color:#666;border:1px solid #ddd;}
+  .tag-fix{background:#fdeaea;color:var(--red);border:1px solid #f3c1c1;}
+
+  /* swimlanes */
+  .lanes{display:grid;grid-template-columns:150px 1fr;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .lane-label{background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;padding:14px;text-align:center;}
+  .lane-steps{display:flex;gap:14px;padding:18px;align-items:stretch;overflow-x:auto;background:#fbfcfe;}
+  .step{min-width:170px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px;position:relative;flex-shrink:0;}
+  .step .n{font-size:11px;color:#8798a8;font-weight:700;}
+  .step .t{font-size:13px;font-weight:700;color:var(--text);margin:2px 0 6px;}
+  .step .d{font-size:11.5px;color:#647082;line-height:1.4;}
+  .arrow{align-self:center;color:var(--blue);font-size:20px;flex-shrink:0;}
+  .step.enhanced{border:2px solid var(--amber);background:#fffaf1;}
+  .step.newstep{border:2px solid var(--green);background:#f3fbf4;}
+  .step.fixstep{border:2px solid var(--red);background:#fef6f6;}
+
+  /* form mock */
+  .form-mock{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .form-header{background:linear-gradient(90deg,var(--blue),#4a90d9);color:#fff;padding:14px 18px;}
+  .form-header .app{font-size:15px;font-weight:800;}
+  .form-header .dept{font-size:11px;opacity:.9;}
+  .form-title{background:var(--sky);padding:10px 18px;font-weight:700;color:var(--navy);font-size:14px;border-bottom:1px solid var(--border);}
+  .form-grid{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:#3a4757;margin-bottom:5px;}
+  .field label .req{color:var(--red);}
+  .field select, .field input, .field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;background:#fff;color:var(--text);}
+  .field select:disabled{background:#f2f4f7;color:#9aa7b4;}
+  .field select[multiple]{height:110px;}
+  .field.full{grid-column:1/-1;}
+  .hint{font-size:11px;color:#8798a8;margin-top:5px;}
+  .hint.rule{color:var(--amber);font-weight:600;}
+  .hint.fix{color:var(--red);font-weight:600;}
+  .form-actions{padding:14px 18px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;align-items:center;background:#fbfcfe;}
+  .btn{padding:9px 20px;border-radius:5px;border:none;font-size:13px;font-weight:700;cursor:pointer;}
+  .btn-save{background:#f0b400;color:#4a3600;}
+  .btn-cancel{background:#e15b64;color:#fff;}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-outline{background:#fff;color:var(--blue);border:1px solid var(--blue);}
+  .save-toast{display:none;font-size:12.5px;font-weight:700;color:var(--green);margin-right:auto;}
+  .save-toast.show{display:block;}
+
+  table.grid{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.grid th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;position:sticky;top:0;}
+  table.grid td{padding:8px 10px;border-bottom:1px solid var(--border);}
+  table.grid tr:nth-child(even) td{background:#f7f9fc;}
+  table.grid a.count-link{color:var(--blue);font-weight:700;text-decoration:underline;cursor:pointer;}
+  table.grid a.count-link:hover{color:var(--navy);}
+
+  .report-header{background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:16px;}
+  .report-header .row{display:flex;flex-wrap:wrap;gap:24px;}
+  .report-header .kv{min-width:220px;}
+  .report-header .kv .k{font-size:11px;color:#8798a8;font-weight:700;text-transform:uppercase;letter-spacing:.4px;}
+  .report-header .kv .v{font-size:14px;font-weight:700;color:var(--navy);margin-top:2px;}
+  .report-header .v.placeholder{color:#b7c1cc;font-weight:500;}
+
+  .toolbar{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px;}
+  .toolbar .field{min-width:180px;}
+  .empty-state{padding:40px 20px;text-align:center;color:#8798a8;}
+  .empty-state .icon{font-size:34px;margin-bottom:8px;}
+
+  .toggle-row{display:flex;gap:8px;margin-bottom:16px;}
+  .toggle-row button{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:#fff;font-size:12.5px;font-weight:700;cursor:pointer;color:#5c6b7a;}
+  .toggle-row button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .split .col h4{margin:0 0 8px;font-size:13px;color:#5c6b7a;}
+  .diff-good{color:var(--green);font-weight:700;}
+  .diff-bad{color:var(--red);font-weight:700;}
+
+  .modal-bg{position:fixed;inset:0;background:rgba(20,30,45,.55);display:none;align-items:center;justify-content:center;z-index:100;}
+  .modal-bg.show{display:flex;}
+  .modal{background:#fff;border-radius:10px;width:min(920px,92vw);max-height:80vh;overflow:auto;box-shadow:0 20px 50px rgba(0,0,0,.3);}
+  .modal-head{background:var(--navy);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;}
+  .modal-head h4{margin:0;font-size:15px;}
+  .modal-close{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;}
+  .modal-body{padding:16px 20px;}
+
+  .legend{display:flex;gap:18px;margin:10px 0 20px;font-size:12px;flex-wrap:wrap;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  .i-new{background:#f3fbf4;border:2px solid var(--green);}
+  .i-enh{background:#fffaf1;border:2px solid var(--amber);}
+  .i-fix{background:#fef6f6;border:2px solid var(--red);}
+  .i-ex{background:#fff;border:1px solid var(--border);}
+
+  .defect-card{border:1px solid #f3c1c1;background:#fffafa;border-radius:8px;padding:14px 16px;margin-bottom:12px;}
+  .defect-card .id{font-size:11px;font-weight:800;color:var(--red);letter-spacing:.4px;}
+  .defect-card .t{font-size:13.5px;font-weight:700;margin:2px 0 6px;}
+  .defect-card .d{font-size:12.5px;color:#5c6b7a;line-height:1.5;}
+
+  footer{text-align:center;padding:24px;color:#8798a8;font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">JR</div>
+  <div>
+    <h1>JAL REKHA — Sahbhagita Module</h1>
+    <p>Madhya Pradesh Jal Nigam Department · Enhancement Wireframe (editable click-through)</p>
+  </div>
+  <div class="badge-doc">CR: master_activity_updated_list.xlsx + UAT walkthrough defects (17-Jul-2026)</div>
+</div>
+
+<div class="subnav" id="subnav">
+  <button data-p="overview" class="active">1. Workflow Overview</button>
+  <button data-p="defects" class="active">2. Defects Observed</button>
+  <button data-p="upload">3. Upload Activity — To‑Be</button>
+  <button data-p="abstract">4. Abstract of RA Bill — To‑Be</button>
+  <button data-p="diff">5. As‑Is vs To‑Be</button>
+</div>
+
+<div class="wrap">
+
+  <!-- PANEL 1: OVERVIEW -->
+  <div class="panel active" id="p-overview">
+    <div class="section-title">End-to-end Workflow — ISA Manager &amp; CP Manager</div>
+    <p class="section-sub">Steps outlined in amber are changed by this change request; steps outlined in green are new; steps outlined in red are defect fixes raised during the UAT walkthrough. Everything else is unchanged As‑Is behaviour.</p>
+    <div class="legend">
+      <span><i class="i-ex"></i> Unchanged</span>
+      <span><i class="i-enh"></i> Enhanced (CR-02)</span>
+      <span><i class="i-new"></i> New capability (CR-01)</span>
+      <span><i class="i-fix"></i> Defect fix (CR-04)</span>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>ISA Manager Login</h3><span class="tag tag-existing">User Management &gt; Sahbhagita</span></div>
+      <div class="card-body">
+        <div class="lanes">
+          <div class="lane-label">ISA<br>Manager</div>
+          <div class="lane-steps">
+            <div class="step"><div class="n">01</div><div class="t">FE Mapping</div><div class="d">Map Field Engineers / Community Mobilizers to the ISA.</div></div>
+            <div class="arrow">→</div>
+            <div class="step fixstep"><div class="n">02</div><div class="t">Upload Activity</div><div class="d">District/Block/GP/Village dropdowns now populate live; Category drives GP→Village cascade; Activity list filters to the selected Village; Save persists and is visible immediately in the report.</div></div>
+            <div class="arrow">→</div>
+            <div class="step"><div class="n">03</div><div class="t">Sahbhagita Activity Report</div><div class="d">Search/track submissions.</div></div>
+            <div class="arrow">→</div>
+            <div class="step"><div class="n">04</div><div class="t">Activity Summary</div><div class="d">PIU/Scheme rollup of counts.</div></div>
+            <div class="arrow">→</div>
+            <div class="step"><div class="n">05</div><div class="t">Activity Approval</div><div class="d">Approve / reject each submission.</div></div>
+            <div class="arrow">→</div>
+            <div class="step fixstep"><div class="n">06</div><div class="t">Abstract of RA Bill</div><div class="d">PIU/MVS/ISA dropdowns now populate live; RA Bill and Activity are multi-select; "No data" defect fixed.</div></div>
+            <div class="arrow">→</div>
+            <div class="step newstep"><div class="n">07</div><div class="t">RA Bill Details drill-down</div><div class="d">Opened via a hyperlink on the "No. of Activities" column — new for this login, brought in line with CP Manager.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>CP Manager Login</h3><span class="tag tag-existing">User Management &gt; Sahbhagita</span></div>
+      <div class="card-body">
+        <div class="lanes">
+          <div class="lane-label">CP<br>Manager</div>
+          <div class="lane-steps">
+            <div class="step"><div class="n">01</div><div class="t">Sahbhagita Activity Report</div><div class="d">Cross-ISA view of submissions.</div></div>
+            <div class="arrow">→</div>
+            <div class="step enhanced"><div class="n">02</div><div class="t">Activity Summary</div><div class="d">Tolerate Scheme = "All" instead of "Data unavailable".</div></div>
+            <div class="arrow">→</div>
+            <div class="step"><div class="n">03</div><div class="t">Activity Approval</div><div class="d">Final approval authority across ISAs.</div></div>
+            <div class="arrow">→</div>
+            <div class="step fixstep"><div class="n">04</div><div class="t">Abstract of RA Bill</div><div class="d">Same dropdown-population fix and multi-select restore as ISA Manager; single source of truth.</div></div>
+            <div class="arrow">→</div>
+            <div class="step newstep"><div class="n">05</div><div class="t">RA Bill Details drill-down</div><div class="d">Already working — now opened specifically via the "No. of Activities" hyperlink (FR-21), the reference behaviour for FR-13.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Change Request Snapshot</h3></div>
+      <div class="card-body" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+        <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+          <div style="font-size:26px;font-weight:800;color:var(--navy);">30 → 52</div>
+          <div style="font-size:12px;color:#5c6b7a;">Active items in Activity master (+22 new)</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+          <div style="font-size:26px;font-weight:800;color:var(--navy);">4</div>
+          <div style="font-size:12px;color:#5c6b7a;">Report header fields redesigned (PIU, MVS, ISA, RA Bill No.)</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:8px;padding:14px;">
+          <div style="font-size:26px;font-weight:800;color:var(--navy);">2 logins</div>
+          <div style="font-size:12px;color:#5c6b7a;">ISA Manager + CP Manager both affected</div>
+        </div>
+        <div style="border:1px solid #f3c1c1;border-radius:8px;padding:14px;background:#fffafa;">
+          <div style="font-size:26px;font-weight:800;color:var(--red);">4</div>
+          <div style="font-size:12px;color:#5c6b7a;">Defects raised at UAT walkthrough (CR-04)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: DEFECTS OBSERVED -->
+  <div class="panel" id="p-defects">
+    <div class="section-title">Defects Observed During UAT Walkthrough <span class="tag tag-fix">CR-04</span></div>
+    <p class="section-sub">Raised against the build shown on 17-Jul-2026, screenshots from both the Upload Activity form and the Abstract of RA Bill screen. These are treated as defects (not new scope) except where marked as a genuine new enhancement.</p>
+
+    <div class="defect-card">
+      <div class="id">DEF-01 · Upload Activity</div>
+      <div class="t">District / Block / GP / Village dropdowns render empty</div>
+      <div class="d">Only the placeholder option ("-- Select District --" etc.) is shown; no master data loads into any of the four location dropdowns, so a user cannot progress past District. See screenshot 1.</div>
+    </div>
+    <div class="defect-card">
+      <div class="id">DEF-02 · Upload Activity</div>
+      <div class="t">Save button does not persist the record</div>
+      <div class="d">Clicking Save gives no confirmation and the entry does not subsequently appear on the Sahbhagita Activity Report or Approval screens.</div>
+    </div>
+    <div class="defect-card">
+      <div class="id">DEF-03 · Abstract of RA Bill</div>
+      <div class="t">Filter-panel dropdowns render empty</div>
+      <div class="d">Category, District, Block, Gram Panchayat and Village all show placeholder-only options with no selectable records, so the report cannot be filtered. See screenshot 2.</div>
+    </div>
+    <div class="defect-card">
+      <div class="id">DEF-04 · Abstract of RA Bill</div>
+      <div class="t">Category-driven location selection is too flat</div>
+      <div class="d">Today Category alone toggles Gram Panchayat/Village visibility, but the fields don't cascade — GP and Village don't populate from the District/Block already chosen, and the Activity list isn't narrowed to the selected Village. The corrected flow: Category = Village Wise → Gram Panchayat populates from District/Block → Village populates from Gram Panchayat → Activity list is filtered to activities specific to that Village.</div>
+    </div>
+
+    <div class="card" style="margin-top:6px;">
+      <div class="card-head"><h3>New enhancement confirmed alongside the fixes</h3><span class="tag tag-new">Not a defect</span></div>
+      <div class="card-body" style="font-size:13px;line-height:1.6;">
+        <b>ENH-01</b> — On the Abstract of RA Bill summary table, the <b>"No. of Activities"</b> column value itself becomes a hyperlink that opens the RA Bill Details drill-down (in addition to / instead of the whole row being clickable). Confirmed as a new enhancement, not a fix to existing behaviour.<br><br>
+        <b>ENH-02</b> — RA Bill No. and Activity on the Abstract of RA Bill filter panel are confirmed as <b>multi-select</b> controls (selecting more than one RA Bill and/or more than one Activity at a time), restoring the As-Is multi-select behaviour rather than replacing it with the single-select proposed earlier in this BRD.
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: UPLOAD ACTIVITY TO-BE -->
+  <div class="panel" id="p-upload">
+    <div class="section-title">Upload Activity — To‑Be <span class="tag tag-changed">CR-01</span> <span class="tag tag-fix">CR-04</span></div>
+    <p class="section-sub">Click through the fields. District and Block are always populated from live master data. Category determines whether Gram Panchayat and Village apply; when they do, Gram Panchayat cascades from District/Block, Village cascades from Gram Panchayat, and the Activity dropdown then filters to only the activities specific to that Village. Save now confirms and would be immediately visible on the Sahbhagita Activity Report.</p>
+
+    <div class="form-mock">
+      <div class="form-header">
+        <div class="app">JAL REKHA</div>
+        <div class="dept">Madhya Pradesh Jal Nigam Department</div>
+      </div>
+      <div class="form-title">Sahbhagita Activity Entry</div>
+      <div class="form-grid">
+        <div class="field"><label>PIU</label><select><option>Jhabua</option></select></div>
+        <div class="field"><label>Scheme (Name of MVS)</label><select><option>Mahi Mvs</option></select></div>
+        <div class="field"><label>Sahbhagita (ISA)<span class="req">*</span></label><select><option>-- Select Sahbhagita --</option><option>National Education Society and Social Welfare Organisation, New Delhi</option></select></div>
+        <div class="field"><label>Category<span class="req">*</span></label>
+          <select id="upCategory" onchange="onUpCategoryChange()">
+            <option value="Combined Activities">Combined Activities</option>
+            <option value="Village Wise">Village Wise</option>
+          </select>
+        </div>
+        <div class="field"><label>District<span class="req">*</span></label>
+          <select id="upDistrict" onchange="onUpDistrictChange()"></select>
+        </div>
+        <div class="field"><label>Block<span class="req">*</span></label>
+          <select id="upBlock" onchange="onUpBlockChange()"></select>
+        </div>
+        <div class="field" id="upGpField"><label>Gram Panchayat<span class="req">*</span></label>
+          <select id="upGP" onchange="onUpGPChange()"></select>
+        </div>
+        <div class="field" id="upVillageField"><label>Village<span class="req">*</span></label>
+          <select id="upVillage" onchange="onUpVillageChange()"></select>
+        </div>
+        <div class="field full">
+          <label>Activity<span class="req">*</span></label>
+          <select id="upActivity"></select>
+          <div class="hint rule" id="upRuleHint">BR-03: Category = Combined Activities → District and Block apply; Activity list shows all Combined Activities items.</div>
+        </div>
+        <div class="field"><label>Activity Date<span class="req">*</span></label><input type="text" placeholder="dd-mm-yyyy"></div>
+        <div class="field full"><label>Remark</label><textarea rows="2" placeholder="Optional remark"></textarea></div>
+
+        <div class="field"><label>Upload PDF (max 5MB)</label><input type="file"></div>
+        <div class="field"><label>Upload Video (max 10MB)</label><input type="file"></div>
+        <div class="field"><label>Upload Images (max 2MB)</label><input type="file"></div>
+      </div>
+      <div class="form-actions">
+        <span class="save-toast" id="upSaveToast">✓ Saved — record created and now visible on Sahbhagita Activity Report (DEF-02 fixed).</span>
+        <button class="btn btn-save" onclick="onUpSave()">Save</button>
+        <button class="btn btn-cancel" onclick="onUpReset()">Cancel</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-head"><h3>Business Rule applied live above</h3></div>
+      <div class="card-body" style="font-size:13px;line-height:1.6;">
+        <b>BR-03 (revised)</b> — District and Block are always visible and populated from live master data (DEF-01 fixed). Gram Panchayat and Village are shown only when Category = Village Wise: Gram Panchayat options are filtered by the selected District/Block, and Village options are filtered by the selected Gram Panchayat. Once a Village is selected, the Activity dropdown is filtered to show only activities specifically mapped to that Village. For Category = Combined Activities, Gram Panchayat and Village stay hidden and the Activity dropdown shows the full Combined Activities list.
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 4: ABSTRACT OF RA BILL TO-BE -->
+  <div class="panel" id="p-abstract">
+    <div class="section-title">Abstract of RA Bill — To‑Be <span class="tag tag-changed">CR-02</span> <span class="tag tag-fix">CR-04</span></div>
+    <p class="section-sub">Choose PIU → MVS → ISA below (now populated live — DEF-03 fixed). RA Bill No. and Activity are multi-select (ENH-02). Category drives the same District→Block→Gram Panchayat→Village cascade as Upload Activity (DEF-04 fixed). Click the <b>No. of Activities</b> hyperlink on any row to open the RA Bill Details drill-down (ENH-01, FR-13).</p>
+
+    <div class="card">
+      <div class="card-head"><h3>Report Selector</h3></div>
+      <div class="card-body">
+        <div class="toolbar">
+          <div class="field"><label>Name of PIU<span class="req">*</span></label>
+            <select id="selPIU" onchange="onPIUChange()">
+              <option value="">-- Select PIU --</option>
+              <option>Jhabua</option>
+              <option>Chhindwara</option>
+              <option>Guna</option>
+            </select>
+          </div>
+          <div class="field"><label>Name of MVS</label>
+            <select id="selMVS" onchange="updateAbstract()">
+              <option value="">-- Select MVS --</option>
+              <option data-piu="Jhabua">Mahi Mvs</option>
+              <option data-piu="Chhindwara">Machaghora MVS</option>
+              <option data-piu="Guna">Gopi Krishan</option>
+            </select>
+          </div>
+          <div class="field"><label>Name of ISA</label>
+            <select id="selISA" onchange="updateAbstract()">
+              <option value="">-- Select ISA --</option>
+              <option data-piu="Jhabua">National Education Society and Social Welfare Organisation, New Delhi</option>
+              <option data-piu="Chhindwara">Sahyogini Foundation, Jabalpur</option>
+              <option data-piu="Guna">Society for Entrepreneurship Integrated Development</option>
+            </select>
+          </div>
+          <div class="field"><label>RA Bill No. <span style="font-weight:400;color:#8798a8;">(multi-select)</span></label>
+            <select id="selRA" multiple onchange="updateAbstract()">
+              <option>RA1</option>
+              <option selected>RA5</option>
+              <option selected>RA7</option>
+            </select>
+            <div class="hint">Ctrl/Cmd + click to select more than one RA Bill.</div>
+          </div>
+        </div>
+        <div class="toolbar" style="margin-top:2px;">
+          <div class="field"><label>Category<span class="req">*</span></label>
+            <select id="selCategory" onchange="onAbCategoryChange()">
+              <option value="Combined Activities">Combined Activities</option>
+              <option value="Village Wise">Village Wise</option>
+            </select>
+          </div>
+          <div class="field"><label>District<span class="req">*</span></label>
+            <select id="abDistrict" onchange="onAbDistrictChange()"></select>
+          </div>
+          <div class="field"><label>Block<span class="req">*</span></label>
+            <select id="abBlock" onchange="onAbBlockChange()"></select>
+          </div>
+          <div class="field" id="abGpField"><label>Gram Panchayat<span class="req">*</span></label>
+            <select id="abGP" onchange="onAbGPChange()"></select>
+          </div>
+          <div class="field" id="abVillageField"><label>Village<span class="req">*</span></label>
+            <select id="abVillage" onchange="onAbVillageChange()"></select>
+          </div>
+        </div>
+        <div class="toolbar" style="margin-top:2px;">
+          <div class="field full" style="min-width:320px;flex:1;">
+            <label>Activity <span style="font-weight:400;color:#8798a8;">(multi-select — filtered by Village when Category = Village Wise)</span></label>
+            <select id="abActivity" multiple onchange="updateAbstract()"></select>
+          </div>
+          <button class="btn btn-primary" style="align-self:flex-end;" onclick="updateAbstract()">Search</button>
+          <button class="btn btn-outline" style="align-self:flex-end;" onclick="resetAbstract()">Reset</button>
+        </div>
+        <div class="hint rule" id="abstractRuleHint" style="margin-top:8px;"></div>
+      </div>
+    </div>
+
+    <div class="report-header" id="reportHeader">
+      <div class="row">
+        <div class="kv"><div class="k">Name of PIU</div><div class="v placeholder" id="hPIU">Not selected</div></div>
+        <div class="kv"><div class="k">Name of MVS</div><div class="v placeholder" id="hMVS">Not selected</div></div>
+        <div class="kv"><div class="k">Name of ISA</div><div class="v placeholder" id="hISA">Not selected</div></div>
+        <div class="kv"><div class="k">RA Bill No.</div><div class="v placeholder" id="hRA">Not selected</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Abstract of RA Bill — Summary</h3>
+        <button class="btn btn-outline" style="padding:5px 14px;font-size:12px;">Export to Excel</button>
+      </div>
+      <div class="card-body" id="abstractBody">
+        <div class="empty-state"><div class="icon">📄</div>Select a PIU above to generate the abstract.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 5: DIFF -->
+  <div class="panel" id="p-diff">
+    <div class="section-title">As‑Is vs To‑Be — Abstract of RA Bill &amp; Upload Activity</div>
+    <p class="section-sub">Side-by-side comparison of the current screen behaviour (captured across the original walkthrough and the 17-Jul-2026 UAT screenshots) against the redesigned target.</p>
+
+    <div class="split">
+      <div class="col">
+        <h4>AS-IS (current)</h4>
+        <div class="card">
+          <div class="card-body" style="font-size:12.5px;">
+            <ul style="padding-left:18px;line-height:1.8;">
+              <li>District, Block, Gram Panchayat and Village dropdowns render <span class="diff-bad">empty (placeholder only)</span> on both Upload Activity and Abstract of RA Bill (DEF-01, DEF-03).</li>
+              <li>Save on Upload Activity gives <span class="diff-bad">no confirmation and does not persist</span> the record (DEF-02).</li>
+              <li>Category toggles Gram Panchayat/Village visibility only — the fields <span class="diff-bad">don't cascade</span> from District/Block, and Activity is not narrowed to the selected Village (DEF-04).</li>
+              <li>Header fields (PIU, Scheme, ISA, Category, Activity, RA Bill) act only as query filters, not a printed report header.</li>
+              <li>Result table returns <span class="diff-bad">"No data available in table"</span> for tested PIU/ISA/RA Bill combinations, even where Approved activities exist.</li>
+              <li>RA Bill Details drill-down only confirmed working under <b>CP Manager</b> login, opened by clicking anywhere on the row.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <h4>TO-BE (this change request)</h4>
+        <div class="card">
+          <div class="card-body" style="font-size:12.5px;">
+            <ul style="padding-left:18px;line-height:1.8;">
+              <li>District and Block <span class="diff-good">always populated</span> from live master data; Gram Panchayat populates from District/Block and Village populates from Gram Panchayat, whenever Category = Village Wise (DEF-01/DEF-03/DEF-04 fixed).</li>
+              <li>Save <span class="diff-good">persists the record</span> and confirms on-screen; the entry is immediately visible on the Sahbhagita Activity Report (DEF-02 fixed).</li>
+              <li>Once Village is selected, the Activity dropdown is <span class="diff-good">filtered to activities specific to that Village</span> instead of showing the full master list.</li>
+              <li>PIU, MVS, ISA selections render as a <b>fixed report header</b>, matching the target workbook layout.</li>
+              <li>RA Bill No. and Activity are <b>multi-select</b>, allowing more than one RA Bill / Activity to be chosen together (ENH-02, restoring As-Is multi-select intent).</li>
+              <li>Summary query fixed so any combination with Approved activities <span class="diff-good">returns data</span> (FR-09); the <b>"No. of Activities"</b> value itself is a hyperlink that opens the RA Bill Details drill-down (ENH-01), available identically on both ISA Manager and CP Manager logins (FR-13).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Jal Rekha — Sahbhagita Module · Enhancement Wireframe · For stakeholder walkthrough only, not a system screenshot · v2.0</footer>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-head"><h4>Abstract of RA Bill Details</h4><button class="modal-close" onclick="closeModal()">✕</button></div>
+    <div class="modal-body">
+      <table class="grid" id="modalTable"></table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Nav ----
+document.querySelectorAll('#subnav button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#subnav button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('p-'+btn.dataset.p).classList.add('active');
+  });
+});
+
+// ---- Shared location + activity master data (illustrative sample for the wireframe) ----
+const LOCATION = {
+  "Jhabua": {
+    "Jhabua": { "Kalimati": ["Kalimati","Semalpada"], "Ranapur": ["Ranapur","Bhuragaon"] },
+    "Petlawad": { "Petlawad": ["Petlawad","Tandla"] }
+  },
+  "Chhindwara": {
+    "Chhindwara": { "Machaghora": ["Machaghora","Borgaon"] },
+    "Sausar": { "Sausar": ["Sausar","Khapa"] }
+  },
+  "Guna": {
+    "Guna": { "Gopi Krishan": ["Gopi Krishan","Todi"] }
+  }
+};
+const COMBINED_ACTIVITIES = ["Cluster Level Workshop","Block Level Workshop","Inception Report","Monthly Progress Report","Deliverables Update Report","Success Stories","Summary of PRA Reports"];
+const VILLAGE_WISE_ALL = ["Rally","Village and Water Sanitation Committee (VWSC)","Gram Sabha","VWSC Account Opening","VWSC Meetings","Gram Panchayat Resolution","Household Base Line Survey","Sample Stationary Distribution","VWSC Formation and Strengthening","Participatory Rural Appraisal (PRA) Report","Village wise Baseline Survey Reports"];
+const VILLAGE_ACTIVITIES = {
+  "Kalimati": ["Rally","Village and Water Sanitation Committee (VWSC)","Gram Sabha"],
+  "Semalpada": ["VWSC Account Opening","VWSC Meetings","Household Base Line Survey"],
+  "Ranapur": ["Gram Panchayat Resolution","Sample Stationary Distribution"],
+  "Bhuragaon": ["Rally","Village wise Baseline Survey Reports"],
+  "Petlawad": ["VWSC Formation and Strengthening","Participatory Rural Appraisal (PRA) Report"],
+  "Tandla": ["Gram Sabha","VWSC Meetings"],
+  "Machaghora": ["Village and Water Sanitation Committee (VWSC)","Household Base Line Survey"],
+  "Borgaon": ["Rally","VWSC Account Opening"],
+  "Sausar": ["Gram Sabha"],
+  "Khapa": ["Sample Stationary Distribution"],
+  "Gopi Krishan": ["VWSC Meetings","Rally"],
+  "Todi": ["Village wise Baseline Survey Reports"]
+};
+
+function fillSelect(sel, items, placeholder){
+  sel.innerHTML = '';
+  if(placeholder){ const o=document.createElement('option'); o.value=''; o.textContent=placeholder; sel.appendChild(o); }
+  items.forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o); });
+}
+function fillMultiSelect(sel, items){
+  sel.innerHTML = '';
+  items.forEach(v=>{ const o=document.createElement('option'); o.value=v; o.textContent=v; sel.appendChild(o); });
+}
+
+// =========================================================
+// UPLOAD ACTIVITY — cascading District > Block > GP > Village > Activity
+// =========================================================
+function initUpload(){
+  fillSelect(document.getElementById('upDistrict'), Object.keys(LOCATION), '-- Select District --');
+  document.getElementById('upBlock').innerHTML = '<option value="">-- Select Block --</option>';
+  document.getElementById('upGP').innerHTML = '<option value="">-- Select GP --</option>';
+  document.getElementById('upVillage').innerHTML = '<option value="">-- Select Village --</option>';
+  onUpCategoryChange();
+}
+function onUpCategoryChange(){
+  const cat = document.getElementById('upCategory').value;
+  const isVillageWise = cat === 'Village Wise';
+  document.getElementById('upGpField').style.display = isVillageWise ? '' : 'none';
+  document.getElementById('upVillageField').style.display = isVillageWise ? '' : 'none';
+  const actSel = document.getElementById('upActivity');
+  const hint = document.getElementById('upRuleHint');
+  if(isVillageWise){
+    actSel.disabled = true;
+    fillSelect(actSel, [], '-- Select Village first --');
+    hint.innerHTML = 'BR-03: Category = <b>Village Wise</b> → Gram Panchayat (from District/Block) and Village (from Gram Panchayat) apply; Activity list will be filtered to items specific to the selected Village.';
+  } else {
+    actSel.disabled = false;
+    fillSelect(actSel, COMBINED_ACTIVITIES, '-- Select Activity --');
+    hint.innerHTML = 'BR-03: Category = <b>Combined Activities</b> → only District and Block apply; Gram Panchayat and Village are hidden and not captured; Activity list shows all Combined Activities items.';
+  }
+}
+function onUpDistrictChange(){
+  const d = document.getElementById('upDistrict').value;
+  const blocks = d ? Object.keys(LOCATION[d]) : [];
+  fillSelect(document.getElementById('upBlock'), blocks, '-- Select Block --');
+  document.getElementById('upGP').innerHTML = '<option value="">-- Select GP --</option>';
+  document.getElementById('upVillage').innerHTML = '<option value="">-- Select Village --</option>';
+  onUpCategoryChange();
+}
+function onUpBlockChange(){
+  const d = document.getElementById('upDistrict').value;
+  const b = document.getElementById('upBlock').value;
+  const gps = (d && b) ? Object.keys(LOCATION[d][b]) : [];
+  fillSelect(document.getElementById('upGP'), gps, '-- Select GP --');
+  document.getElementById('upVillage').innerHTML = '<option value="">-- Select Village --</option>';
+}
+function onUpGPChange(){
+  const d = document.getElementById('upDistrict').value;
+  const b = document.getElementById('upBlock').value;
+  const g = document.getElementById('upGP').value;
+  const villages = (d && b && g) ? LOCATION[d][b][g] : [];
+  fillSelect(document.getElementById('upVillage'), villages, '-- Select Village --');
+}
+function onUpVillageChange(){
+  const v = document.getElementById('upVillage').value;
+  const actSel = document.getElementById('upActivity');
+  if(v && VILLAGE_ACTIVITIES[v]){
+    actSel.disabled = false;
+    fillSelect(actSel, VILLAGE_ACTIVITIES[v], '-- Select Activity --');
+    document.getElementById('upRuleHint').innerHTML = 'BR-03: Village = <b>'+v+'</b> selected → Activity list filtered to the '+VILLAGE_ACTIVITIES[v].length+' activities specific to this Village.';
+  } else {
+    actSel.disabled = true;
+    fillSelect(actSel, [], '-- Select Village first --');
+  }
+}
+function onUpSave(){
+  const toast = document.getElementById('upSaveToast');
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 4000);
+}
+function onUpReset(){
+  document.getElementById('upSaveToast').classList.remove('show');
+  document.getElementById('upCategory').value = 'Combined Activities';
+  initUpload();
+}
+initUpload();
+
+// =========================================================
+// ABSTRACT OF RA BILL — same cascade, plus multi-select Activity/RA Bill
+// =========================================================
+function initAbstract(){
+  fillSelect(document.getElementById('abDistrict'), Object.keys(LOCATION), '-- Select District --');
+  document.getElementById('abBlock').innerHTML = '<option value="">-- Select Block --</option>';
+  document.getElementById('abGP').innerHTML = '<option value="">-- Select GP --</option>';
+  document.getElementById('abVillage').innerHTML = '<option value="">-- Select Village --</option>';
+  onAbCategoryChange();
+}
+function onAbCategoryChange(){
+  const cat = document.getElementById('selCategory').value;
+  const isVillageWise = cat === 'Village Wise';
+  document.getElementById('abGpField').style.display = isVillageWise ? '' : 'none';
+  document.getElementById('abVillageField').style.display = isVillageWise ? '' : 'none';
+  document.getElementById('abstractRuleHint').innerHTML = isVillageWise
+    ? 'BR-03: Category = <b>Village Wise</b> → Gram Panchayat (from District/Block) and Village (from Gram Panchayat) apply; Activity list below filters to the selected Village.'
+    : 'BR-03: Category = <b>Combined Activities</b> → only District and Block apply; Gram Panchayat and Village are hidden; Activity list below shows all Combined Activities items.';
+  fillMultiSelect(document.getElementById('abActivity'), isVillageWise ? VILLAGE_WISE_ALL : COMBINED_ACTIVITIES);
+  updateAbstract();
+}
+function onAbDistrictChange(){
+  const d = document.getElementById('abDistrict').value;
+  const blocks = d ? Object.keys(LOCATION[d]) : [];
+  fillSelect(document.getElementById('abBlock'), blocks, '-- Select Block --');
+  document.getElementById('abGP').innerHTML = '<option value="">-- Select GP --</option>';
+  document.getElementById('abVillage').innerHTML = '<option value="">-- Select Village --</option>';
+  updateAbstract();
+}
+function onAbBlockChange(){
+  const d = document.getElementById('abDistrict').value;
+  const b = document.getElementById('abBlock').value;
+  const gps = (d && b) ? Object.keys(LOCATION[d][b]) : [];
+  fillSelect(document.getElementById('abGP'), gps, '-- Select GP --');
+  document.getElementById('abVillage').innerHTML = '<option value="">-- Select Village --</option>';
+  updateAbstract();
+}
+function onAbGPChange(){
+  const d = document.getElementById('abDistrict').value;
+  const b = document.getElementById('abBlock').value;
+  const g = document.getElementById('abGP').value;
+  const villages = (d && b && g) ? LOCATION[d][b][g] : [];
+  fillSelect(document.getElementById('abVillage'), villages, '-- Select Village --');
+  updateAbstract();
+}
+function onAbVillageChange(){
+  const v = document.getElementById('abVillage').value;
+  if(v && VILLAGE_ACTIVITIES[v]){
+    fillMultiSelect(document.getElementById('abActivity'), VILLAGE_ACTIVITIES[v]);
+  } else if(document.getElementById('selCategory').value === 'Village Wise'){
+    fillMultiSelect(document.getElementById('abActivity'), VILLAGE_WISE_ALL);
+  }
+  updateAbstract();
+}
+
+// ---- Abstract of RA Bill sample dataset ----
+const SAMPLE = {
+  "Jhabua|Mahi Mvs|National Education Society and Social Welfare Organisation, New Delhi": [
+    ["Office Opening", "Combined/Villages", 2],
+    ["Inception Report", "Combined/Villages", 1],
+    ["Cluster Level Workshop", "Combined/Villages", 1],
+    ["VWSC Account Opening", "Combined/Villages", 1],
+  ],
+  "Chhindwara|Machaghora MVS|Sahyogini Foundation, Jabalpur": [
+    ["Village and Water Sanitation Committee (VWSC)", "Combined/Villages", 7],
+    ["Household Base Line Survey", "Combined/Villages", 4],
+    ["Monthly Progress Report", "Combined/Villages", 2],
+  ],
+  "Guna|Gopi Krishan|Society for Entrepreneurship Integrated Development": [
+    ["Block Level Workshop", "Combined/Villages", 25],
+    ["District Level Workshop", "Combined/Villages", 4],
+    ["Summary of PRA Reports", "Combined/Villages", 5],
+    ["Deliverables Update Report", "Combined/Villages", 5],
+  ],
+};
+
+function filterOptGroup(fieldId, dependsOnId){
+  const dep = document.getElementById(dependsOnId).value;
+  const sel = document.getElementById(fieldId);
+  [...sel.options].forEach(o=>{
+    if(!o.value) { o.hidden=false; return; }
+    o.hidden = dep && o.dataset.piu && o.dataset.piu !== dep;
+  });
+}
+function onPIUChange(){
+  filterOptGroup('selMVS','selPIU');
+  filterOptGroup('selISA','selPIU');
+  updateAbstract();
+}
+
+function updateAbstract(){
+  const piu = document.getElementById('selPIU').value;
+  const mvs = document.getElementById('selMVS').value;
+  const isa = document.getElementById('selISA').value;
+  const raSelected = [...document.getElementById('selRA').selectedOptions].map(o=>o.value);
+
+  document.getElementById('hPIU').textContent = piu || 'Not selected';
+  document.getElementById('hMVS').textContent = mvs || 'Not selected';
+  document.getElementById('hISA').textContent = isa || 'Not selected';
+  document.getElementById('hRA').textContent  = raSelected.length ? raSelected.join(', ') : 'Not selected';
+  ['hPIU','hMVS','hISA','hRA'].forEach(id=>{
+    document.getElementById(id).classList.toggle('placeholder', document.getElementById(id).textContent==='Not selected');
+  });
+
+  const body = document.getElementById('abstractBody');
+  if(!piu){
+    body.innerHTML = '<div class="empty-state"><div class="icon">📄</div>Select a PIU above to generate the abstract.</div>';
+    return;
+  }
+  const key = piu+'|'+mvs+'|'+isa;
+  let rows = SAMPLE[key];
+  if(!rows){
+    body.innerHTML = '<div class="empty-state"><div class="icon">🔍</div>No Approved activities found for this PIU / MVS / ISA combination.<br><span style="font-size:11px;">(FR-09 fix: this now reflects an accurate empty state, not a query defect.)</span></div>';
+    return;
+  }
+  let html = '<table class="grid"><thead><tr><th>No.</th><th>Category</th><th>Activities</th><th>No. of Activities</th></tr></thead><tbody>';
+  rows.forEach((r,i)=>{
+    html += `<tr><td>${i+1}</td><td>${r[1]}</td><td>${r[0]}</td><td><a class="count-link" onclick='openModal(${JSON.stringify(r[0])})'>${r[2]}</a></td></tr>`;
+  });
+  html += '</tbody></table>';
+  body.innerHTML = html;
+}
+
+function resetAbstract(){
+  ['selPIU','selMVS','selISA'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('selRA').querySelectorAll('option').forEach(o=>o.selected=false);
+  document.getElementById('selCategory').value = 'Combined Activities';
+  initAbstract();
+}
+
+const DETAIL_ROWS = [
+  ["Doc-1","Bhopal","Hanota","Sironj","04-Jun-2026 11:22 AM","Nekan","Orakhedi","OLD Activity","RA5"],
+  ["Doc-1","Bhopal","Hanota","Sironj","04-Jun-2026 11:53 AM","Tarbaria","Fazalpur","OLD Activity","RA7"],
+  ["Doc-1","Bhopal","Hanota","Sironj","04-Jun-2026 01:42 PM","Chodakhedi","Kamaliya","OLD Activity","RA7"],
+];
+function openModal(activityName){
+  const t = document.getElementById('modalTable');
+  let html = '<thead><tr><th>Document</th><th>PIU Name</th><th>Scheme</th><th>Block</th><th>Date</th><th>Gram Panchayat</th><th>Village</th><th>Type</th><th>RA Bill</th></tr></thead><tbody>';
+  DETAIL_ROWS.forEach(r=>{ html += '<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>'; });
+  html += '</tbody>';
+  t.innerHTML = html;
+  document.querySelector('.modal-head h4').textContent = 'Abstract of RA Bill Details — ' + activityName;
+  document.getElementById('modalBg').classList.add('show');
+}
+function closeModal(){ document.getElementById('modalBg').classList.remove('show'); }
+document.getElementById('modalBg').addEventListener('click', e=>{ if(e.target.id==='modalBg') closeModal(); });
+
+initAbstract();
+</script>
+</body>
+</html>

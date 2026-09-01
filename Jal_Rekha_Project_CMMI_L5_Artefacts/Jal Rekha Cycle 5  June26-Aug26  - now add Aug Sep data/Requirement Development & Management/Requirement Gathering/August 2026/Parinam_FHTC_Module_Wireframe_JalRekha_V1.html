@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jal Rekha — Parinam FHTC Module — Dynamic Wireframe</title>
+<style>
+  :root{
+    --navy:#1f3864; --blue:#2e75b6; --blue-light:#dce6f1; --sky:#eaf3fb;
+    --green:#2e7d32; --green-bg:#e8f5e9; --amber:#b36b00; --amber-bg:#fff3e0;
+    --red:#c0392b; --red-bg:#fdeaea; --purple:#5b4fc4; --purple-bg:#eeecfb;
+    --grey:#f2f2f2; --border:#c9d6e3; --text:#22303f; --muted:#647082;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#eef2f6;color:var(--text);}
+  [contenteditable="true"]{outline:none;border-radius:4px;transition:background .15s;}
+  [contenteditable="true"]:hover{background:#fffde7;box-shadow:0 0 0 1px #f0d060;}
+  [contenteditable="true"]:focus{background:#fffde7;box-shadow:0 0 0 2px #f0b400;}
+
+  .topbar{background:linear-gradient(90deg,var(--navy),var(--blue));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px;}
+  .topbar .logo{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);font-size:18px;flex-shrink:0;}
+  .topbar h1{font-size:19px;margin:0;}
+  .topbar p{margin:0;font-size:12px;opacity:.85;}
+  .badge-doc{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);padding:6px 12px;border-radius:20px;font-size:11.5px;text-align:right;line-height:1.5;}
+
+  .subnav{display:flex;gap:0;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:30;box-shadow:0 2px 6px rgba(0,0,0,.05);flex-wrap:wrap;}
+  .subnav button{flex:none;padding:14px 20px;background:none;border:none;cursor:pointer;font-size:14px;color:#5c6b7a;border-bottom:3px solid transparent;font-weight:700;}
+  .subnav button.active{color:var(--navy);border-bottom:3px solid var(--blue);background:var(--sky);}
+  .subnav button:hover{background:var(--sky);}
+
+  .screenpills{display:flex;gap:8px;flex-wrap:wrap;padding:14px 24px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:49px;z-index:25;}
+  .screenpills button{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:#fbfcfe;font-size:12px;font-weight:700;cursor:pointer;color:#5c6b7a;white-space:nowrap;}
+  .screenpills button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .screenpills button .num{opacity:.6;margin-right:4px;}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:26px 24px 70px;}
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .2s ease;}
+  .screen{display:none;}
+  .screen.active{display:block;animation:fade .2s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  .section-title{font-size:20px;color:var(--navy);font-weight:800;margin:0 0 4px;}
+  .section-sub{color:#5c6b7a;font-size:13px;margin:0 0 18px;}
+  .edit-note{background:#fffaf1;border:1px dashed var(--amber);color:var(--amber);font-size:12px;font-weight:600;border-radius:8px;padding:8px 14px;margin-bottom:18px;}
+
+  .card{background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 10px rgba(20,40,70,.06);margin-bottom:22px;overflow:hidden;}
+  .card-head{background:linear-gradient(90deg,var(--blue-light),#fff);padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .card-head h3{margin:0;font-size:15px;color:var(--navy);}
+  .card-body{padding:18px;}
+  .tag{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.3px;white-space:nowrap;}
+  .tag-new{background:#e6f4ea;color:var(--green);border:1px solid #b6e2c0;}
+  .tag-c1{background:#e6f4ea;color:var(--green);border:1px solid #b6e2c0;}
+  .tag-c2{background:var(--blue-light);color:var(--blue);border:1px solid #a9c8e6;}
+  .tag-fix{background:#fdeaea;color:var(--red);border:1px solid #f3c1c1;}
+  .tag-req{background:#fdeaea;color:var(--red);border:1px solid #f3c1c1;}
+  .tag-opt{background:#fff3e0;color:var(--amber);border:1px solid #ffdca8;}
+  .tag-purple{background:var(--purple-bg);color:var(--purple);border:1px solid #cfc9f2;}
+  .tag-br{background:#eaf3fb;color:#185fa5;border:1px solid #aacdec;font-family:"Consolas",monospace;}
+  .tag-fr{background:#f3fbf4;color:#2e7d32;border:1px solid #b6e2c0;font-family:"Consolas",monospace;}
+  .tag-cr{background:#fff3e0;color:#b36b00;border:1px solid #ffdca8;font-family:"Consolas",monospace;}
+  .ref-strip{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;}
+  .ref-strip .tag{cursor:default;}
+  table.ref{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.ref th{background:var(--navy);color:#fff;padding:9px 12px;text-align:left;position:sticky;top:0;}
+  table.ref td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  table.ref tr:nth-child(even) td{background:#f7f9fc;}
+  table.ref td.idcol{font-family:"Consolas",monospace;font-weight:800;white-space:nowrap;}
+  .ref-anchor{scroll-margin-top:120px;}
+
+  /* ---- workflow diagram ---- */
+  .edit-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+  .edit-bar button{padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:12.5px;font-weight:700;cursor:pointer;}
+  .edit-bar button:hover{background:var(--sky);}
+  .edit-bar button.active-btn{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .cycle-header{display:flex;align-items:center;gap:10px;margin:16px 0 10px;font-size:12.5px;font-weight:700;color:var(--muted);}
+  .cycle-pill{border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:800;}
+  .c1-pill{background:#e6f4ea;color:var(--green);}
+  .c2-pill{background:var(--blue-light);color:var(--blue);}
+  .row{display:flex;gap:10px;align-items:stretch;margin-bottom:8px;flex-wrap:wrap;}
+  .node{border-radius:9px;border:1px solid var(--border);background:#fff;padding:12px 14px;cursor:pointer;transition:box-shadow .15s,border-color .15s;flex:1;min-width:180px;position:relative;}
+  .node:hover{box-shadow:0 0 0 2px var(--blue-light);}
+  .node.active{border-color:var(--blue)!important;box-shadow:0 0 0 3px var(--blue-light);}
+  .node-role{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  .node-title{font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.3;}
+  .node-sub{font-size:11.5px;color:var(--muted);line-height:1.4;}
+  .badge{display:inline-flex;align-items:center;gap:3px;border-radius:20px;padding:2px 8px;font-size:10.5px;font-weight:700;margin-top:6px;margin-right:4px;}
+  .arrow-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-width:26px;flex-shrink:0;}
+  .arrow-line{width:1.5px;background:#b7c1cc;flex:1;min-height:20px;position:relative;}
+  .arrow-line::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid #8798a8;}
+  .arrow-label{font-size:10px;color:var(--muted);text-align:center;line-height:1.2;padding:0 2px;white-space:nowrap;font-weight:600;}
+  .divider{height:1px;background:var(--border);margin:16px 0;position:relative;}
+  .divider-label{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#eef2f6;padding:0 10px;font-size:10.5px;font-weight:800;color:var(--muted);white-space:nowrap;}
+  .decision{border-radius:9px;border:2px solid var(--red);background:var(--red-bg);padding:12px 14px;text-align:center;flex:1;min-width:170px;cursor:pointer;}
+  .decision:hover{box-shadow:0 0 0 2px #f3c1c1;}
+  .decision.active{box-shadow:0 0 0 3px var(--red);}
+  .decision-title{font-size:13.5px;font-weight:800;color:var(--red);}
+  .decision-sub{font-size:11px;color:var(--red);margin-top:2px;opacity:.85;}
+  .stop-node{border-radius:9px;border:2px solid var(--navy);background:var(--navy);color:#fff;padding:12px 14px;text-align:center;flex:1;min-width:170px;cursor:pointer;}
+  .stop-node:hover{box-shadow:0 0 0 2px var(--blue-light);}
+  .stop-title{font-size:13.5px;font-weight:800;color:#fff;}
+  .stop-sub{font-size:11px;color:#dce6f1;margin-top:2px;}
+  .loop-back{border:1.5px dashed var(--green);border-radius:10px;padding:12px 14px;background:#f3fbf4;flex:1;min-width:180px;cursor:pointer;}
+  .loop-back:hover{box-shadow:0 0 0 2px #b6e2c0;}
+  .loop-back-title{font-size:13.5px;font-weight:700;color:var(--green);margin-bottom:3px;}
+  .loop-back-sub{font-size:11.5px;color:var(--green);opacity:.9;line-height:1.4;}
+  .info-panel{border-radius:9px;border:1px solid var(--border);background:#fbfcfe;padding:14px 16px;margin-top:14px;min-height:70px;}
+  .info-panel-title{font-size:12.5px;font-weight:800;color:var(--navy);margin-bottom:5px;}
+  .info-panel-body{font-size:12.5px;color:var(--muted);line-height:1.6;white-space:pre-line;}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:11.5px;color:var(--muted);}
+  .leg-item{display:flex;align-items:center;gap:6px;}
+  .leg-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0;}
+  .flag{display:inline-flex;align-items:center;gap:3px;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;border:1px solid;margin-right:4px;margin-top:4px;}
+  .flag-req{background:var(--red-bg);color:var(--red);border-color:#f3c1c1;}
+  .flag-opt{background:var(--amber-bg);color:var(--amber);border-color:#ffdca8;}
+  .note-box{border-left:4px solid var(--blue);background:var(--sky);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:12.5px;color:#1f3864;line-height:1.6;}
+  .warn-box{border-left:4px solid var(--amber);background:var(--amber-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0;font-size:12.5px;color:var(--amber);line-height:1.6;}
+  .fix-box{border-left:4px solid var(--red);background:var(--red-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0;font-size:12.5px;color:var(--red);line-height:1.6;font-weight:600;}
+
+  /* ---- form mock ---- */
+  .form-mock{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .form-header{background:linear-gradient(90deg,var(--blue),#4a90d9);color:#fff;padding:14px 18px;}
+  .form-header .app{font-size:15px;font-weight:800;}
+  .form-header .dept{font-size:11px;opacity:.9;}
+  .form-title{background:var(--sky);padding:10px 18px;font-weight:700;color:var(--navy);font-size:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+  .form-grid{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:#3a4757;margin-bottom:5px;}
+  .field label .req{color:var(--red);}
+  .field select, .field input, .field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;background:#fff;color:var(--text);font-family:inherit;}
+  .field select:disabled, .field input:disabled{background:#f2f4f7;color:#9aa7b4;}
+  .field.full{grid-column:1/-1;}
+  .hint{font-size:11px;color:#8798a8;margin-top:5px;}
+  .hint.rule{color:var(--blue);font-weight:600;}
+  .hint.fix{color:var(--red);font-weight:600;}
+  .form-actions{padding:14px 18px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;align-items:center;background:#fbfcfe;flex-wrap:wrap;}
+  .btn{padding:9px 20px;border-radius:5px;border:none;font-size:13px;font-weight:700;cursor:pointer;}
+  .btn-save{background:#2e7d32;color:#fff;}
+  .btn-cancel{background:#e15b64;color:#fff;}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-outline{background:#fff;color:var(--blue);border:1px solid var(--blue);}
+  .save-toast{display:none;font-size:12.5px;font-weight:700;color:var(--green);margin-right:auto;}
+  .save-toast.show{display:block;}
+
+  .photo-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+  .photo-box{width:92px;height:70px;border:1.5px dashed var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#b7c1cc;background:#fbfcfe;}
+  .photo-box.filled{border-style:solid;border-color:var(--blue);color:var(--blue);background:var(--sky);font-size:11px;font-weight:700;}
+
+  table.grid{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.grid th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;}
+  table.grid td{padding:8px 10px;border-bottom:1px solid var(--border);}
+  table.grid tr:nth-child(even) td{background:#f7f9fc;}
+  .status-pill{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;}
+  .st-pending{background:#fff3e0;color:var(--amber);}
+  .st-accept{background:#e6f4ea;color:var(--green);}
+  .st-reject{background:#fdeaea;color:var(--red);}
+  .st-progress{background:var(--blue-light);color:var(--blue);}
+
+  .stepper{display:flex;gap:0;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
+  .stepper .sp{display:flex;align-items:center;gap:8px;padding:8px 16px;border-bottom:3px solid var(--border);cursor:pointer;white-space:nowrap;font-size:12.5px;font-weight:700;color:#8798a8;}
+  .stepper .sp .dot{width:20px;height:20px;border-radius:50%;background:var(--border);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;}
+  .stepper .sp.done{color:var(--green);border-color:var(--green);}
+  .stepper .sp.done .dot{background:var(--green);}
+  .stepper .sp.now{color:var(--navy);border-color:var(--blue);}
+  .stepper .sp.now .dot{background:var(--blue);}
+
+  .timeline{border-left:2px solid var(--border);margin-left:10px;padding-left:20px;}
+  .t-item{position:relative;padding-bottom:18px;}
+  .t-item::before{content:'';position:absolute;left:-26px;top:2px;width:10px;height:10px;border-radius:50%;background:var(--blue);}
+  .t-item.rej::before{background:var(--red);}
+  .t-item.acc::before{background:var(--green);}
+  .t-item .role{font-size:10.5px;font-weight:800;color:var(--muted);text-transform:uppercase;}
+  .t-item .desc{font-size:13px;font-weight:700;margin:2px 0;}
+  .t-item .meta{font-size:11.5px;color:var(--muted);}
+
+  .kpi-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
+  .kpi{flex:1;min-width:140px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+  .kpi .v{font-size:22px;font-weight:800;color:var(--navy);}
+  .kpi .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  footer{text-align:center;padding:24px;color:#8798a8;font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">JR</div>
+  <div>
+    <h1>JAL REKHA — Parinam FHTC Module</h1>
+    <p>Madhya Pradesh Jal Nigam Department · Functional Household Tap Connection — Survey &amp; Re‑Inspection Workflow (click‑through, editable)</p>
+  </div>
+  <div class="badge-doc">✎ Built directly from your written workflow — 15‑Aug‑2026<br>Initial Survey (FE) → Accept→GM / Reject→Contractor → Re‑Inspection Loop: Contractor → GM → SQC → FE → GM</div>
+</div>
+
+<div class="subnav">
+  <button class="active" onclick="setPanel('wf')" id="tab-wf">Process Workflow</button>
+  <button onclick="setPanel('sc')" id="tab-sc">Wireframe Screens</button>
+  <button onclick="setPanel('req')" id="tab-req">BR / CR / FR Reference</button>
+</div>
+
+<!-- ============ WORKFLOW PANEL ============ -->
+<div class="panel active" id="panel-wf">
+<div class="wrap">
+  <div class="section-title">Parinam FHTC — Main Survey &amp; Re‑Inspection Workflow</div>
+  <div class="section-sub">Click any step to see its business rule. Every label below is editable — click text to type over it. The sequence below follows your written workflow exactly, in the order given (Initial Survey → FE decision → Re‑Inspection Loop → continuous loop → FE reassignment).</div>
+  <div class="edit-note">✎ This is a live wireframe: click on any title, description or badge text to edit it directly in the browser. Use the buttons below to isolate a stage. No screenshot was attached to your message — this diagram was built purely from your typed workflow description.</div>
+
+  <div class="edit-bar">
+    <button onclick="setView('full')" id="btn-full" class="active-btn">Full workflow</button>
+    <button onclick="setView('initial')" id="btn-initial">1 · Initial Survey</button>
+    <button onclick="setView('loop')" id="btn-loop">2‑5 · Re‑Inspection Loop</button>
+    <button onclick="setView('fe-change')" id="btn-fe">6 · FE Reassignment</button>
+  </div>
+
+  <!-- STAGE 1: INITIAL SURVEY -->
+  <div class="cycle-header"><span class="cycle-pill c1-pill">Stage 1 — Initial Survey</span><span>FE surveys using existing NIC data</span></div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'STEP 1a. The Field Engineer (FE) performs the initial field survey of the household tap connection using the available NIC survey data (pre‑loaded beneficiary/household record) and submits the survey in Parinam.\n\nNot specified in your text — assumed as reasonable defaults, please confirm:\n• Which NIC fields are pre‑filled vs. editable by the FE.\n• Whether geo‑tagged photo capture is mandatory at this step.')" id="n-fe-survey">
+      <div class="node-role" style="color:#993C1D" contenteditable="true">FE</div>
+      <div class="node-title" contenteditable="true">Initial Survey — Submit</div>
+      <div class="node-sub" contenteditable="true">Uses existing NIC survey data for the household; submits survey</div>
+      <span class="badge flag-opt" contenteditable="true">📷 Photo rule — not specified, assumed mandatory</span>
+      <span class="badge tag-c1" contenteditable="true">Stage 1</span>
+      <div class="ref-strip">
+        <span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-01')" title="View BR-FH-01">BR‑FH‑01</span>
+        <span class="tag tag-fr" onclick="event.stopPropagation();jumpToRef('FR-FH-01')" title="View FR-FH-01">FR‑FH‑01</span>
+      </div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Submitted</div></div>
+    <div class="decision" onclick="select(this,'STEP 1b. After completing the survey, the FE takes ONE of two actions on the same submission:\n\nACCEPT — FE finds the work satisfactory → survey goes straight to GM for final review and approval. If GM approves, the RFI/case is closed.\n\nREJECT — FE finds deficiencies/non‑compliance → survey is rejected and the case is sent straight back to the Contractor for rectification. The GM is explicitly NOT involved at this stage — this is different from every later cycle, where GM always sees the outcome.')" id="n-fe-decision" style="min-width:210px">
+      <div class="decision-title" contenteditable="true">FE Decision — Accept or Reject</div>
+      <div class="decision-sub" contenteditable="true">Accept → GM (final approval) · Reject → Contractor direct (GM skipped)</div>
+      <div class="ref-strip"><span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-01')" title="View BR-FH-01">BR‑FH‑01</span></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div style="flex:1;min-width:0"></div>
+    <div class="arrow-wrap"><div class="arrow-line" style="background:var(--green)"></div><div class="arrow-label" contenteditable="true" style="color:var(--green);font-weight:800">Accept</div></div>
+    <div class="node" onclick="select(this,'GM receives the FE‑accepted survey for final review. If GM approves, the RFI/case is closed as Accepted. This is the ONLY path in the entire workflow where the GM sees the survey without SQC or a re‑inspection cycle in between.')" id="n-gm-final" style="border-color:#8798a8">
+      <div class="node-role" style="color:#185FA5" contenteditable="true">GM</div>
+      <div class="node-title" contenteditable="true">Final Review &amp; Approve</div>
+      <div class="node-sub" contenteditable="true">Reviews FE‑accepted survey and approves</div>
+      <span class="badge tag-c1" contenteditable="true">Stage 1</span>
+      <div class="ref-strip"><span class="tag tag-fr" onclick="event.stopPropagation();jumpToRef('FR-FH-02')" title="View FR-FH-02">FR‑FH‑02</span></div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Approved</div></div>
+    <div class="stop-node" onclick="select(this,'GM approves the FE‑accepted survey. RFI/case is CLOSED. No further cycles — this branch ends here as stated in your workflow (\"If the GM approves, the RFI is closed\").')" id="n-closed-approved">
+      <div class="stop-title" contenteditable="true">🛑 RFI Closed — Approved</div>
+      <div class="stop-sub" contenteditable="true">Stage 1 · Accepted &amp; approved</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div style="flex:1;min-width:0"></div>
+    <div class="arrow-wrap"><div class="arrow-line" style="background:var(--red)"></div><div class="arrow-label" contenteditable="true" style="color:var(--red);font-weight:800">Reject</div></div>
+    <div class="loop-back" onclick="select(this,'FE finds deficiencies during the initial survey and rejects it. The case is sent DIRECTLY to the Contractor for rectification. Per your workflow: \"At this stage, the GM is not involved.\" This is the entry point into the Re‑Inspection Loop (Stage 2 onward).')" id="n-reject-direct" style="border-color:var(--red);background:var(--red-bg)">
+      <div class="loop-back-title" style="color:var(--red)" contenteditable="true">↩ Reject — straight to Contractor</div>
+      <div class="loop-back-sub" style="color:var(--red)" contenteditable="true">GM is NOT involved at this stage. Contractor must now rectify and raise a Re‑Inspection RFI.</div>
+      <div class="ref-strip"><span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-01')" title="View BR-FH-01">BR‑FH‑01</span></div>
+    </div>
+    <div style="flex:1;min-width:0"></div>
+  </div>
+
+  <div class="divider"><span class="divider-label" contenteditable="true">↓ FE Rejects initial survey — Re‑Inspection Loop begins</span></div>
+
+  <!-- STAGE 2-5: RE-INSPECTION LOOP -->
+  <div class="cycle-header"><span class="cycle-pill c2-pill">Stages 2‑5 — Re‑Inspection Loop</span><span>Same RFI/case · Contractor → GM → SQC → FE → GM, repeating until GM accepts</span></div>
+
+  <div class="fix-box">🔁 <strong>Continuous loop, as stated in your workflow:</strong> "Once the first Re‑Inspection RFI is raised, every subsequent cycle follows the same workflow: Contractor → GM → SQC → FE → GM." There is <strong>no stated maximum number of repeats</strong> — the loop runs until GM finally accepts the FE's survey, at which point the RFI is closed. This is intentionally different from the initial survey (Stage 1), where an FE Reject skips the GM entirely.
+    <div class="ref-strip">
+      <span class="tag tag-br" onclick="jumpToRef('BR-FH-02')" title="View BR-FH-02">BR‑FH‑02</span>
+      <span class="tag tag-br" onclick="jumpToRef('BR-FH-03')" title="View BR-FH-03">BR‑FH‑03</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'STEP 2. After receiving the rejected survey, the Contractor completes the required rectification work. Once corrections are done, the Contractor raises a Re‑Inspection RFI on the SAME case/RFI (no new record). This RFI is submitted to the GM.')" id="n-con-raise">
+      <div class="node-role" style="color:#0F6E56" contenteditable="true">CONTRACTOR</div>
+      <div class="node-title" contenteditable="true">① Rectify &amp; Raise Re‑Inspection RFI</div>
+      <div class="node-sub" contenteditable="true">Completes rectification, raises Re‑Inspection RFI on same case</div>
+      <span class="badge tag-c2" contenteditable="true">Step 1</span>
+      <div class="ref-strip">
+        <span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-07')" title="View BR-FH-07">BR‑FH‑07</span>
+        <span class="tag tag-fr" onclick="event.stopPropagation();jumpToRef('FR-FH-03')" title="View FR-FH-03">FR‑FH‑03</span>
+      </div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Raised</div></div>
+    <div class="node" onclick="select(this,'STEP 3. GM reviews the Re‑Inspection RFI request and assigns it to the SQC (Site Quality Consultant). This is a review + hand‑off step — GM does not accept/reject the survey result here, only routes the case onward.')" id="n-gm-review-assign">
+      <div class="node-role" style="color:#185FA5" contenteditable="true">GM</div>
+      <div class="node-title" contenteditable="true">② Review &amp; Assign to SQC</div>
+      <div class="node-sub" contenteditable="true">Reviews the request, assigns the case to SQC</div>
+      <span class="badge tag-c2" contenteditable="true">Step 2</span>
+      <div class="ref-strip"><span class="tag tag-fr" onclick="event.stopPropagation();jumpToRef('FR-FH-04')" title="View FR-FH-04">FR‑FH‑04</span></div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Assigned</div></div>
+    <div class="node" onclick="select(this,'STEP 4. SQC assigns the RFI to an FE for re‑inspection. Per your Step 6 (\"FE Reassignment Scenario\"): SQC may assign either the SAME FE who did the original/previous survey, or a DIFFERENT FE — reassignment is optional and depends on operational requirements.\n\nIf a new FE is assigned: only the new FE can view/act on the RFI; the previous FE loses update access; full history remains visible to the new FE.')" id="n-sqc-assign" style="border-color:#5b4fc4">
+      <div class="node-role" style="color:#5b4fc4" contenteditable="true">SQC</div>
+      <div class="node-title" contenteditable="true">③ Assign FE for Re‑Inspection</div>
+      <div class="node-sub" contenteditable="true">Assigns same FE or a different FE (optional, operational)</div>
+      <span class="badge tag-c2" contenteditable="true">Step 3</span>
+      <div class="ref-strip">
+        <span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-04')" title="View BR-FH-04">BR‑FH‑04</span>
+        <span class="tag tag-fr" onclick="event.stopPropagation();jumpToRef('FR-FH-05')" title="View FR-FH-05">FR‑FH‑05</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'STEP 5. The assigned FE performs the re‑inspection survey and submits the result.\n\nIMPORTANT — different from the Initial Survey decision routing (Stage 1): regardless of whether the FE is satisfied (accept) or still finds issues (reject) during re‑inspection, the survey is ALWAYS submitted to the GM for decision. The FE no longer has a direct \"send to Contractor\" path once inside the Re‑Inspection Loop — GM makes every decision from here on.')" id="n-fe-reinspect" style="flex:1.3">
+      <div class="node-role" style="color:#993C1D" contenteditable="true">FE (assigned)</div>
+      <div class="node-title" contenteditable="true">④ Perform Re‑Inspection &amp; Submit</div>
+      <div class="node-sub" contenteditable="true">Submits result to GM either way — satisfied or still finds issues</div>
+      <span class="badge tag-c2" contenteditable="true">Step 4</span>
+      <div class="ref-strip">
+        <span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-02')" title="View BR-FH-02">BR‑FH‑02</span>
+        <span class="tag tag-fr" onclick="event.stopPropagation();jumpToRef('FR-FH-06')" title="View FR-FH-06">FR‑FH‑06</span>
+      </div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Submitted either way</div></div>
+    <div class="decision" onclick="select(this,'STEP 6 (GM Decision During Re‑Inspection Loop). GM reviews the FE re‑inspection report:\n\nACCEPT — RFI is approved and closed.\n\nREJECT — RFI is sent back to the Contractor for further rectification; Contractor performs corrections and raises a NEW Re‑Inspection RFI on the same case; the loop repeats: Contractor → GM → SQC → FE → GM.\n\nThis loop is UNCAPPED per your description — it continues until GM finally accepts.')" id="n-gm-decision" style="min-width:200px">
+      <div class="decision-title" contenteditable="true">⑤ GM Decision</div>
+      <div class="decision-sub" contenteditable="true">Accept → Closed · Reject → back to Contractor (loop repeats)</div>
+      <div class="ref-strip"><span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-03')" title="View BR-FH-03">BR‑FH‑03</span></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div style="flex:1.6;min-width:0"></div>
+    <div class="arrow-wrap"><div class="arrow-line" style="background:var(--red)"></div><div class="arrow-label" contenteditable="true" style="color:var(--red);font-weight:800">Reject</div></div>
+    <div class="loop-back" onclick="select(this,'GM rejects the FE re‑inspection report. RFI is sent back to the Contractor for further rectification. Contractor performs the required corrections and raises a NEW Re‑Inspection RFI on the SAME case. Workflow returns to Step ① and repeats: Contractor → GM → SQC → FE → GM. Per your description, this \"loop continues until the GM finally accepts the FE'\''s survey.\" No maximum cycle count was stated — flagged as a point to confirm operationally (e.g. for escalation/SLA purposes).')" id="n-reject-loop" style="border-color:var(--red);background:var(--red-bg)">
+      <div class="loop-back-title" style="color:var(--red)" contenteditable="true">↩ GM Rejects — back to Contractor, loop repeats</div>
+      <div class="loop-back-sub" style="color:var(--red)" contenteditable="true">Loops back to Step ①. Continues indefinitely until GM accepts — no cap stated in your description; confirm if an SLA/escalation cap is wanted.</div>
+      <div class="ref-strip"><span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-03')" title="View BR-FH-03">BR‑FH‑03</span></div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line" style="background:var(--green)"></div><div class="arrow-label" contenteditable="true" style="color:var(--green);font-weight:800">Accept</div></div>
+    <div class="stop-node" onclick="select(this,'GM accepts the FE re‑inspection report. RFI is approved and CLOSED. Per your description: \"...this loop continues until the GM finally accepts the FE'\''s survey, after which the RFI is closed.\"')" id="n-completed">
+      <div class="stop-title" contenteditable="true">🛑 RFI Closed — Approved</div>
+      <div class="stop-sub" contenteditable="true">Re‑Inspection Loop · GM accepted</div>
+      <div class="ref-strip">
+        <span class="tag tag-fr" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.4)" onclick="event.stopPropagation();jumpToRef('FR-FH-07')" title="View FR-FH-07">FR‑FH‑07</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FE REASSIGNMENT CALLOUT -->
+  <div class="divider"><span class="divider-label" contenteditable="true">Stage 6 — FE Reassignment scenario (applies at Step ③ — SQC assigns FE)</span></div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'STEP 6 (FE Reassignment Scenario). During ANY Re‑Inspection cycle, the SQC may assign the RFI either to the SAME FE or to a DIFFERENT FE. Reassignment is optional and depends on operational requirements (e.g. original FE unavailable, transferred, workload).')" id="n-fe-change" style="border-color:#2e7d32;background:#f3fbf4">
+      <div class="node-role" style="color:#2e7d32" contenteditable="true">SQC</div>
+      <div class="node-title" style="color:#2e7d32" contenteditable="true">SQC assigns same FE or a new FE</div>
+      <div class="node-sub" style="color:#2e7d32" contenteditable="true">Optional reassignment at Step ③, decided by operational need</div>
+      <span class="badge" style="background:#e6f4ea;color:#2e7d32" contenteditable="true">👤 Same or different FE</span>
+      <div class="ref-strip"><span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-04')" title="View BR-FH-04">BR‑FH‑04</span></div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">If new FE</div></div>
+    <div class="loop-back" onclick="select(this,'If a NEW FE is assigned:\n\n• Only the newly assigned FE can view and act on the RFI.\n• The previous FE can no longer update that RFI.\n• The complete survey history, previous remarks and attachments remain visible to the new FE for reference and audit.\n\nRegardless of same‑FE or new‑FE, the workflow remains: Contractor → GM → SQC → Assigned FE → GM, repeating until GM approves and closes the RFI.')" id="n-fe-resume">
+      <div class="loop-back-title" contenteditable="true">↩ New FE — full history visible, exclusive access</div>
+      <div class="loop-back-sub" contenteditable="true">Previous FE loses update access. New FE sees all prior data, remarks &amp; attachments. Workflow continues: → GM.</div>
+      <div class="ref-strip">
+        <span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-04')" title="View BR-FH-04">BR‑FH‑04</span>
+        <span class="tag tag-br" onclick="event.stopPropagation();jumpToRef('BR-FH-05')" title="View BR-FH-05">BR‑FH‑05</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSING / AMBIGUOUS ITEMS CALLOUT -->
+  <div class="divider"><span class="divider-label" contenteditable="true">What your written workflow doesn't specify</span></div>
+  <div class="warn-box">
+    ⚠ <strong>Items not stated in your text — implemented here as reasonable assumptions, please confirm each before build:</strong>
+    <ol style="margin:8px 0 0;padding-left:20px;line-height:1.8">
+      <li contenteditable="true"><strong>FHTC survey data fields.</strong> Not specified. Assumed: Household ID, Beneficiary Name, Scheme/MVS, Habitation/Village, Connection Type, NIC Survey Reference, Tap Status. Confirm the actual Parinam/NIC field set.</li>
+      <li contenteditable="true"><strong>Geo‑tagged photo requirement.</strong> Not stated for the Initial Survey or the Re‑Inspection survey. Assumed mandatory on both, consistent with the Material Testing and Cube Testing modules — confirm if FHTC should differ.</li>
+      <li contenteditable="true"><strong>Maximum number of Re‑Inspection cycles / SLA cap.</strong> Your text states the loop continues "until the GM finally accepts" with no stated maximum. Implemented as uncapped — confirm whether an escalation path or cap should exist for cases stuck in repeated rejection.</li>
+      <li contenteditable="true"><strong>Mandatory remark on GM Reject.</strong> Not explicitly stated. Assumed mandatory (consistent with other Jal Rekha modules) so the Contractor knows what to rectify.</li>
+      <li contenteditable="true"><strong>Who can raise the very first Re‑Inspection RFI trigger.</strong> Your text implies it is automatic/system‑generated once FE rejects at Stage 1 (case status changes to "Pending Rectification"), and the Contractor then actively raises the RFI. Confirm if any system notification/SLA timer should apply here.</li>
+      <li contenteditable="true"><strong>SQC role scope.</strong> Your text says GM "assigns it to the SQC" and "SQC assigns the RFI to an FE" — it isn't stated whether SQC does any independent verification of its own (as in the Material Testing module) or purely acts as a routing/assignment step. Implemented here as routing‑only — confirm.</li>
+    </ol>
+  </div>
+
+  <!-- DB FLAG NOTE -->
+  <div class="note-box">🗄 <strong>DB / state logic:</strong> <code style="background:#fff;border-radius:3px;padding:1px 5px">loop_iteration</code> starts at 1 for the Initial Survey and increments by 1 each time the Contractor raises a new Re‑Inspection RFI on the same case. <code style="background:#fff;border-radius:3px;padding:1px 5px">assigned_fe_id</code> is overwritten (not appended) whenever SQC reassigns to a different FE, while <code style="background:#fff;border-radius:3px;padding:1px 5px">fe_history[]</code> retains every FE who has ever worked the case, for audit. Case status values: <em>Pending Survey → Pending GM Approval → Pending Rectification → Pending Re‑Inspection RFI → Pending SQC Assignment → Pending FE Re‑Inspection → Pending GM Decision → Closed (Approved)</em>.
+    <div class="ref-strip">
+      <span class="tag tag-br" onclick="jumpToRef('BR-FH-06')">BR‑FH‑06</span>
+      <span class="tag tag-br" onclick="jumpToRef('BR-FH-07')">BR‑FH‑07</span>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#e6f4ea"></div>Contractor</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#dce6f1"></div>GM</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#fdeaea"></div>Rejection / decision point</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#eeecfb"></div>SQC</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#f3fbf4;border:1px solid #2e7d32"></div>FE assign / re‑inspect / loop‑back</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#1f3864"></div>Closed (Approved branch)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#fff3e0;border:1px solid #b36b00"></div>⚠ Assumption — not stated in your workflow, needs confirmation</div>
+  </div>
+
+  <!-- INFO PANEL -->
+  <div class="info-panel" id="info-panel">
+    <div class="info-panel-title" id="info-title">Click any step to see details</div>
+    <div class="info-panel-body" id="info-body">Select a node above to read the business rule, DB behaviour and acceptance criteria for that step.</div>
+  </div>
+
+</div>
+</div><!-- /panel-wf -->
+
+<!-- ============ SCREENS PANEL ============ -->
+<div class="panel" id="panel-sc">
+<div class="screenpills">
+  <button class="active" data-s="s1" onclick="setScreen('s1')"><span class="num">1</span>Initial Survey (FE)</button>
+  <button data-s="s2" onclick="setScreen('s2')"><span class="num">2</span>GM Final Review</button>
+  <button data-s="s3" onclick="setScreen('s3')"><span class="num">3</span>Raise Re‑Inspection RFI</button>
+  <button data-s="s4" onclick="setScreen('s4')"><span class="num">4</span>GM Review &amp; Assign SQC</button>
+  <button data-s="s5" onclick="setScreen('s5')"><span class="num">5</span>SQC Assign FE</button>
+  <button data-s="s6" onclick="setScreen('s6')"><span class="num">6</span>FE Re‑Inspection</button>
+  <button data-s="s7" onclick="setScreen('s7')"><span class="num">7</span>GM Decision</button>
+  <button data-s="s8" onclick="setScreen('s8')"><span class="num">8</span>RFI Dashboard</button>
+</div>
+
+<div class="wrap">
+
+  <!-- SCREEN 1 -->
+  <div class="screen active" id="scr-s1">
+    <div class="section-title" contenteditable="true">Screen 1 · FE — Initial Survey</div>
+    <div class="section-sub">Stage 1 · uses existing NIC survey data</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Initial Household Survey</div></div>
+      <div class="form-title"><span contenteditable="true">Initial Survey — FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c1">Stage 1</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-01')">FR‑FH‑01</span><span class="tag tag-br" onclick="jumpToRef('BR-FH-01')">BR‑FH‑01</span></span></div>
+      <div class="form-grid">
+        <div class="field"><label>PIU <span class="req">*</span></label><select><option>Bhopal PIU</option><option>Indore PIU</option></select></div>
+        <div class="field"><label>Scheme / MVS <span class="req">*</span></label><select><option>Machaghora MVS</option></select></div>
+        <div class="field"><label>Habitation / Village <span class="req">*</span></label><input value="Village Nekan" disabled></div>
+        <div class="field"><label>Household / Beneficiary ID <span class="req">*</span></label><input value="HH‑2026‑10432 (from NIC data)" disabled></div>
+        <div class="field"><label>Beneficiary Name</label><input value="Ramesh Yadav" disabled></div>
+        <div class="field"><label>Connection Type</label><select><option>New FHTC</option><option>Retrofit</option></select></div>
+        <div class="field full"><label>FE Survey Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Tap fitted, pressure and flow verified at site.</textarea></div>
+        <div class="field full">
+          <label>Geo‑tagged Photos <span class="tag tag-opt" style="margin-left:6px">Assumed mandatory ⚠</span></label>
+          <div class="photo-strip">
+            <div class="photo-box filled">IMG_01</div>
+            <div class="photo-box filled">IMG_02</div>
+            <div class="photo-box">＋ Add</div>
+          </div>
+          <div class="hint rule">BR‑FH‑01: Photo requirement not stated in your workflow — carried over as an assumption from other Jal Rekha modules; confirm.</div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <span class="save-toast">✓ Draft saved</span>
+        <button class="btn btn-cancel">✕ Reject — send to Contractor (GM not involved)</button>
+        <button class="btn btn-save">✓ Accept — send to GM</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen" id="scr-s2">
+    <div class="section-title" contenteditable="true">Screen 2 · GM — Final Review &amp; Approve</div>
+    <div class="section-sub">Stage 1 · reached only when FE Accepted the initial survey</div>
+    <div class="stepper">
+      <div class="sp done"><div class="dot">✓</div>FE Survey</div>
+      <div class="sp done"><div class="dot">✓</div>FE Accept</div>
+      <div class="sp now"><div class="dot">2</div>GM Review</div>
+    </div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Final Approval</div></div>
+      <div class="form-title"><span>FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c1">Stage 1</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-02')">FR‑FH‑02</span></span></div>
+      <div class="card-body" style="padding:14px 18px 4px">
+        <div class="timeline">
+          <div class="t-item acc"><div class="role">FE — Rakesh Sharma</div><div class="desc">Initial survey submitted &amp; accepted</div><div class="meta">10‑Aug‑2026</div></div>
+        </div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>GM Approval Remark</label><textarea rows="2" contenteditable="true">Survey verified, connection functional. Approved.</textarea></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-save">✓ Approve — Close RFI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen" id="scr-s3">
+    <div class="section-title" contenteditable="true">Screen 3 · Contractor — Rectify &amp; Raise Re‑Inspection RFI <span class="tag tag-c2" style="margin-left:8px">Step ①</span></div>
+    <div class="section-sub">Reached when FE rejected the initial survey (GM not involved at this hand‑off)</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Corrective Action &amp; Re‑Inspection Request</div></div>
+      <div class="form-title"><span>FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c2">Step 1</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-03')">FR‑FH‑03</span><span class="tag tag-br" onclick="jumpToRef('BR-FH-07')">BR‑FH‑07</span></span></div>
+      <div class="card-body" style="padding:14px 18px 4px">
+        <div class="timeline">
+          <div class="t-item rej"><div class="role">FE — Rakesh Sharma</div><div class="desc">Initial survey rejected — tap leakage at joint</div><div class="meta">10‑Aug‑2026 · loop_iteration = 1</div></div>
+        </div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>Corrective Action Taken <span class="req">*</span></label><textarea rows="2" contenteditable="true">Joint re‑fitted and pressure tested; leakage resolved.</textarea></div>
+        <div class="field full"><label>Contractor Remark</label><input value="Ready for re‑inspection" contenteditable="true"></div>
+      </div>
+      <div class="hint rule" style="margin:0 18px 10px">BR‑FH‑07: Re‑Inspection RFI reuses the same case ID — no new RFI record is created for this cycle.</div>
+      <div class="form-actions">
+        <button class="btn btn-outline">Save Draft</button>
+        <button class="btn btn-primary">Raise Re‑Inspection RFI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 -->
+  <div class="screen" id="scr-s4">
+    <div class="section-title" contenteditable="true">Screen 4 · GM — Review &amp; Assign to SQC <span class="tag tag-c2" style="margin-left:8px">Step ②</span></div>
+    <div class="section-sub">GM reviews the Re‑Inspection RFI and routes it to SQC</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Re‑Inspection Request Review</div></div>
+      <div class="form-title"><span>FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c2">Step 2</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-04')">FR‑FH‑04</span></span></div>
+      <div class="form-grid">
+        <div class="field full"><label>RFI Summary</label><input value="HH‑2026‑10432 — Village Nekan — New FHTC — Re‑Inspection Requested" disabled></div>
+        <div class="field"><label>Assign to SQC <span class="req">*</span></label><select><option>Anjali Mehta (SQC)</option><option>Vikram Rao (SQC)</option></select></div>
+        <div class="field"><label>Target Date</label><input type="date" value="2026-08-14"></div>
+        <div class="field full"><label>GM Notes</label><textarea rows="2" contenteditable="true">Confirm corrective action before assigning FE.</textarea></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-outline">Save</button>
+        <button class="btn btn-primary">Assign to SQC</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 5 -->
+  <div class="screen" id="scr-s5">
+    <div class="section-title" contenteditable="true">Screen 5 · SQC — Assign FE for Re‑Inspection <span class="tag tag-c2" style="margin-left:8px">Step ③</span></div>
+    <div class="section-sub">SQC may assign the same FE or a different FE — reassignment is optional</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Assign Field Engineer</div></div>
+      <div class="form-title"><span>FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c2">Step 3</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-05')">FR‑FH‑05</span><span class="tag tag-br" onclick="jumpToRef('BR-FH-04')">BR‑FH‑04</span></span></div>
+      <div class="form-grid">
+        <div class="field full"><label>Previously Assigned FE</label><input value="Rakesh Sharma" disabled></div>
+        <div class="field"><label>Assign FE <span class="req">*</span></label><select><option>Rakesh Sharma (same FE)</option><option>Anita Verma (new FE)</option><option>Suresh Patel (new FE)</option></select></div>
+        <div class="field"><label>Reassignment Reason</label><input placeholder="Only required if a different FE is chosen" contenteditable="true"></div>
+        <div class="field full"><label>SQC Notes to FE</label><textarea rows="2" contenteditable="true">Verify joint repair and re‑test pressure at the tap.</textarea></div>
+      </div>
+      <div class="warn-box" style="margin:0 18px 14px">⚠ If a different FE is selected: the previous FE loses edit access to this RFI immediately, while the full survey history, remarks and photos remain visible to the newly assigned FE. See BR‑FH‑04.</div>
+      <div class="form-actions">
+        <button class="btn btn-outline">Save</button>
+        <button class="btn btn-primary">Assign &amp; Notify FE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 6 -->
+  <div class="screen" id="scr-s6">
+    <div class="section-title" contenteditable="true">Screen 6 · FE — Re‑Inspection Survey &amp; Submit <span class="tag tag-c2" style="margin-left:8px">Step ④</span></div>
+    <div class="section-sub">Submits to GM either way — satisfied or still finds issues</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Re‑Inspection Survey</div></div>
+      <div class="form-title"><span>FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c2">Step 4</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-06')">FR‑FH‑06</span><span class="tag tag-br" onclick="jumpToRef('BR-FH-02')">BR‑FH‑02</span></span></div>
+      <div class="card-body" style="padding:14px 18px 4px">
+        <div class="timeline">
+          <div class="t-item rej"><div class="role">FE — Rakesh Sharma</div><div class="desc">Initial survey rejected — tap leakage at joint</div><div class="meta">10‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">Contractor</div><div class="desc">① Rectification done, Re‑Inspection RFI raised</div><div class="meta">11‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">GM</div><div class="desc">② Reviewed, assigned to SQC — Anjali Mehta</div><div class="meta">12‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">SQC — Anjali Mehta</div><div class="desc">③ Assigned FE — Rakesh Sharma (same FE)</div><div class="meta">12‑Aug‑2026</div></div>
+        </div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>Re‑Inspection Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Joint repair verified, no leakage, pressure within range.</textarea></div>
+        <div class="field full">
+          <label>Photos <span class="tag tag-opt" style="margin-left:6px">Assumed mandatory ⚠</span></label>
+          <div class="photo-strip">
+            <div class="photo-box filled">IMG_01</div>
+            <div class="photo-box">＋ Add</div>
+          </div>
+        </div>
+      </div>
+      <div class="note-box" style="margin:0 18px 14px">ⓘ BR‑FH‑02: Whichever button the FE presses, the case is always routed to GM next — there is no direct FE→Contractor path once inside the Re‑Inspection Loop.</div>
+      <div class="form-actions">
+        <button class="btn btn-outline">✕ Still has issues — submit to GM</button>
+        <button class="btn btn-primary">✓ Satisfied — submit to GM</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 7 -->
+  <div class="screen" id="scr-s7">
+    <div class="section-title" contenteditable="true">Screen 7 · GM — Decision <span class="tag tag-c2" style="margin-left:8px">Step ⑤</span></div>
+    <div class="section-sub">Accept closes the RFI · Reject sends it back to Contractor and the loop repeats</div>
+    <div class="stepper">
+      <div class="sp done"><div class="dot">✓</div>Contractor</div>
+      <div class="sp done"><div class="dot">✓</div>GM Assign</div>
+      <div class="sp done"><div class="dot">✓</div>SQC</div>
+      <div class="sp done"><div class="dot">✓</div>FE</div>
+      <div class="sp now"><div class="dot">5</div>GM Decision</div>
+    </div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA — PARINAM</div><div class="dept">FHTC — Re‑Inspection Decision</div></div>
+      <div class="form-title"><span>FHTC‑2026‑00931</span><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-fr" onclick="jumpToRef('FR-FH-07')">FR‑FH‑07</span><span class="tag tag-br" onclick="jumpToRef('BR-FH-03')">BR‑FH‑03</span></span></div>
+      <div class="card-body" style="padding:14px 18px 4px">
+        <div class="timeline">
+          <div class="t-item"><div class="role">Contractor</div><div class="desc">① Rectification done, Re‑Inspection RFI raised</div><div class="meta">11‑Aug‑2026 · loop_iteration = 2</div></div>
+          <div class="t-item"><div class="role">GM</div><div class="desc">② Assigned to SQC — Anjali Mehta</div><div class="meta">12‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">SQC — Anjali Mehta</div><div class="desc">③ Assigned FE — Rakesh Sharma (same FE)</div><div class="meta">12‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">FE — Rakesh Sharma</div><div class="desc">④ Re‑inspection submitted — satisfied</div><div class="meta">13‑Aug‑2026</div></div>
+        </div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>GM Decision Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Re‑inspection confirms rectification. Approved and closed.</textarea></div>
+      </div>
+      <div class="warn-box" style="margin:0 18px 14px">⚠ Reject routes back to Screen 3 (Step ①, Contractor) and the loop runs again with no stated maximum. Confirm if an escalation/SLA cap should apply for repeated rejections.</div>
+      <div class="form-actions">
+        <button class="btn btn-cancel">↩ Reject — back to Contractor (loop)</button>
+        <button class="btn btn-save">✓ Accept — Close RFI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 8 -->
+  <div class="screen" id="scr-s8">
+    <div class="section-title" contenteditable="true">Screen 8 · RFI Tracking Dashboard</div>
+    <div class="section-sub">All Parinam FHTC cases · filter by PIU, status, cycle</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="v">2,146</div><div class="l">Total FHTC surveys — Parinam</div></div>
+      <div class="kpi"><div class="v">1,812</div><div class="l">Closed — Approved at Stage 1</div></div>
+      <div class="kpi"><div class="v">247</div><div class="l">In Re‑Inspection Loop</div></div>
+      <div class="kpi"><div class="v">87</div><div class="l">Closed — Approved after Re‑Inspection</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>FHTC Case Register</h3><span style="display:flex;gap:5px;flex-wrap:wrap"><span class="tag tag-c2">Live view</span><span class="tag tag-fr" onclick="jumpToRef('FR-FH-08')">FR‑FH‑08</span></span></div>
+      <div class="card-body" style="padding:0">
+        <table class="grid">
+          <tr><th>Case ID</th><th>Household</th><th>PIU</th><th>loop_iteration</th><th>Assigned FE</th><th>Current Step</th><th>Status</th></tr>
+          <tr><td>FHTC‑2026‑00931</td><td>HH‑2026‑10432 — Nekan</td><td>Bhopal</td><td>2</td><td>Rakesh Sharma</td><td>GM Decision</td><td><span class="status-pill st-accept">Approved</span></td></tr>
+          <tr><td>FHTC‑2026‑00935</td><td>HH‑2026‑10440 — Nekan</td><td>Bhopal</td><td>1</td><td>Rakesh Sharma</td><td>GM Final Review</td><td><span class="status-pill st-pending">Pending GM</span></td></tr>
+          <tr><td>FHTC‑2026‑00940</td><td>HH‑2026‑10455 — Machaghora</td><td>Indore</td><td>3</td><td>Anita Verma (new FE)</td><td>FE Re‑Inspection</td><td><span class="status-pill st-progress">In re‑inspection</span></td></tr>
+          <tr><td>FHTC‑2026‑00942</td><td>HH‑2026‑10460 — Machaghora</td><td>Indore</td><td>1</td><td>—</td><td>Closed</td><td><span class="status-pill st-reject">Rejected — Contractor rectifying</span></td></tr>
+          <tr><td>FHTC‑2026‑00945</td><td>HH‑2026‑10470 — Nekan</td><td>Bhopal</td><td>1</td><td>Suresh Patel</td><td>Closed</td><td><span class="status-pill st-accept">Approved</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="note-box">ⓘ <code>loop_iteration</code> column shows how many Re‑Inspection cycles a case has gone through — uncapped per your workflow description. Cases sitting above 2‑3 iterations may be worth a manual escalation review even though no formal cap is defined yet. See BR‑FH‑03 and BR‑FH‑06.
+      <div class="ref-strip"><span class="tag tag-br" onclick="jumpToRef('BR-FH-03')">BR‑FH‑03</span><span class="tag tag-br" onclick="jumpToRef('BR-FH-06')">BR‑FH‑06</span></div>
+    </div>
+  </div>
+
+</div>
+</div><!-- /panel-sc -->
+
+<!-- ============ REQUIREMENTS REFERENCE PANEL ============ -->
+<div class="panel" id="panel-req">
+<div class="wrap">
+  <div class="section-title">BR / CR / FR — Complete Reference</div>
+  <div class="section-sub">Every tag shown on the Workflow and Screens tabs links back to its full definition below. Click any tag anywhere in the document to jump here.</div>
+  <div class="edit-note">✎ These tables are also editable — click any cell to correct wording or add rows in your own copy.</div>
+
+  <div class="card ref-anchor" id="section-BR">
+    <div class="card-head"><h3>Business Rules (BR)</h3><span class="tag tag-br">7 rules</span></div>
+    <div class="card-body" style="padding:0">
+      <table class="ref">
+        <tr><th style="width:110px">ID</th><th style="width:220px">Rule</th><th>Description</th><th style="width:160px">Applies to</th></tr>
+        <tr id="BR-FH-01"><td class="idcol" contenteditable="true">BR‑FH‑01</td><td contenteditable="true">Initial Survey decision routing</td><td contenteditable="true">At the Initial Survey stage only: FE Accept routes to GM for final approval; FE Reject routes DIRECTLY to the Contractor with the GM not involved at all. This differs from every later cycle.</td><td contenteditable="true">Screens 1, 2, 3</td></tr>
+        <tr id="BR-FH-02"><td class="idcol" contenteditable="true">BR‑FH‑02</td><td contenteditable="true">Re‑Inspection always routes to GM</td><td contenteditable="true">From the first Re‑Inspection RFI onward, the FE's re‑inspection result — whether satisfied or not — is always submitted to GM for decision. There is no direct FE→Contractor path inside the loop.</td><td contenteditable="true">Screen 6, FE Re‑Inspection node</td></tr>
+        <tr id="BR-FH-03"><td class="idcol" contenteditable="true">BR‑FH‑03</td><td contenteditable="true">Uncapped continuous Re‑Inspection Loop</td><td contenteditable="true">If GM rejects the FE's re‑inspection report, the RFI returns to the Contractor and the cycle (Contractor → GM → SQC → FE → GM) repeats. No maximum number of cycles is stated — it continues until GM accepts.</td><td contenteditable="true">Screens 3‑7, GM Decision node</td></tr>
+        <tr id="BR-FH-04"><td class="idcol" contenteditable="true">BR‑FH‑04</td><td contenteditable="true">FE reassignment — SQC discretion</td><td contenteditable="true">During any Re‑Inspection cycle, SQC may assign the RFI to the same FE or a different FE. Reassignment is optional and operational. If reassigned, only the newly assigned FE may view/act on the RFI; the previous FE loses update access.</td><td contenteditable="true">Screen 5, FE Reassignment scenario</td></tr>
+        <tr id="BR-FH-05"><td class="idcol" contenteditable="true">BR‑FH‑05</td><td contenteditable="true">Full history visible to new FE</td><td contenteditable="true">When a new FE is assigned, the complete survey history, previous remarks and attachments remain visible to them for reference and audit, even though they cannot edit the previous FE's entries.</td><td contenteditable="true">Screen 5, Screen 6 timeline</td></tr>
+        <tr id="BR-FH-06"><td class="idcol" contenteditable="true">BR‑FH‑06</td><td contenteditable="true">loop_iteration counter</td><td contenteditable="true">A counter increments by 1 every time the Contractor raises a new Re‑Inspection RFI on the same case. Starts at 1 for the Initial Survey. Exposed on the RFI Dashboard for monitoring.</td><td contenteditable="true">Screen 8, all Re‑Inspection screens</td></tr>
+        <tr id="BR-FH-07"><td class="idcol" contenteditable="true">BR‑FH‑07</td><td contenteditable="true">Same case ID retained</td><td contenteditable="true">A Re‑Inspection RFI reuses the original case/RFI ID — no new record is created for any cycle of the loop.</td><td contenteditable="true">Screen 3, Re‑Inspection Loop flow</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card ref-anchor" id="section-CR">
+    <div class="card-head"><h3>Change Requests / Enhancements (CR)</h3><span class="tag tag-cr">2 items</span></div>
+    <div class="card-body" style="padding:0">
+      <table class="ref">
+        <tr><th style="width:110px">ID</th><th style="width:220px">Change</th><th>Description</th><th style="width:160px">Status</th></tr>
+        <tr id="CR-FH-01"><td class="idcol" contenteditable="true">CR‑FH‑01</td><td contenteditable="true">New module scoped — Parinam FHTC</td><td contenteditable="true">Parinam FHTC Main Survey &amp; Re‑Inspection workflow scoped and wireframed for the first time, following the same dynamic wireframe format as Material Testing and Cube Testing modules.</td><td contenteditable="true"><span class="tag tag-cr">Applied 15‑Aug‑2026</span></td></tr>
+        <tr id="CR-FH-02"><td class="idcol" contenteditable="true">CR‑FH‑02</td><td contenteditable="true">FE reassignment support added</td><td contenteditable="true">Added SQC‑driven FE reassignment at Step ③ with exclusive access for the newly assigned FE and read‑only history visibility, per the "FE Reassignment Scenario" section of the workflow.</td><td contenteditable="true"><span class="tag tag-cr">Applied 15‑Aug‑2026</span></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card ref-anchor" id="section-FR">
+    <div class="card-head"><h3>Functional Requirements (FR)</h3><span class="tag tag-fr">8 screens</span></div>
+    <div class="card-body" style="padding:0">
+      <table class="ref">
+        <tr><th style="width:110px">ID</th><th style="width:220px">Screen / Function</th><th>Description</th><th style="width:160px">Role</th></tr>
+        <tr id="FR-FH-01"><td class="idcol" contenteditable="true">FR‑FH‑01</td><td contenteditable="true">Initial Survey</td><td contenteditable="true">FE form pre‑filled from NIC survey data, capturing survey remark and photos, ending in an Accept/Reject decision.</td><td contenteditable="true">FE</td></tr>
+        <tr id="FR-FH-02"><td class="idcol" contenteditable="true">FR‑FH‑02</td><td contenteditable="true">Final Review &amp; Approve</td><td contenteditable="true">GM screen to approve an FE‑accepted initial survey and close the RFI.</td><td contenteditable="true">GM</td></tr>
+        <tr id="FR-FH-03"><td class="idcol" contenteditable="true">FR‑FH‑03</td><td contenteditable="true">Raise Re‑Inspection RFI</td><td contenteditable="true">Contractor screen to log corrective action and raise a Re‑Inspection RFI on the same case, after an FE rejection.</td><td contenteditable="true">Contractor</td></tr>
+        <tr id="FR-FH-04"><td class="idcol" contenteditable="true">FR‑FH‑04</td><td contenteditable="true">Review &amp; Assign to SQC</td><td contenteditable="true">GM screen to review the Re‑Inspection RFI and route it to an SQC.</td><td contenteditable="true">GM</td></tr>
+        <tr id="FR-FH-05"><td class="idcol" contenteditable="true">FR‑FH‑05</td><td contenteditable="true">Assign FE</td><td contenteditable="true">SQC screen to assign the RFI to the same FE or a different FE, with a reassignment‑reason field.</td><td contenteditable="true">SQC</td></tr>
+        <tr id="FR-FH-06"><td class="idcol" contenteditable="true">FR‑FH‑06</td><td contenteditable="true">Re‑Inspection Survey</td><td contenteditable="true">FE form to submit the re‑inspection result, always routed to GM regardless of outcome.</td><td contenteditable="true">FE</td></tr>
+        <tr id="FR-FH-07"><td class="idcol" contenteditable="true">FR‑FH‑07</td><td contenteditable="true">GM Decision</td><td contenteditable="true">GM screen with full activity timeline and a terminal Accept‑and‑close or Reject‑and‑loop decision.</td><td contenteditable="true">GM</td></tr>
+        <tr id="FR-FH-08"><td class="idcol" contenteditable="true">FR‑FH‑08</td><td contenteditable="true">RFI Tracking Dashboard</td><td contenteditable="true">Register/list view of all Parinam FHTC cases with KPI summary, assigned FE, status and loop_iteration column.</td><td contenteditable="true">All roles</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div><!-- /panel-req -->
+
+<footer>Jal Rekha · Madhya Pradesh Jal Nigam · Parinam FHTC Module — Dynamic Wireframe · Editable click‑through prototype</footer>
+
+<script>
+function setPanel(p){
+  ['wf','sc','req'].forEach(k=>{
+    document.getElementById('panel-'+k).classList.toggle('active', k===p);
+    document.getElementById('tab-'+k).classList.toggle('active', k===p);
+  });
+}
+function jumpToRef(anchor){
+  setPanel('req');
+  setTimeout(()=>{ const el=document.getElementById(anchor); if(el) el.scrollIntoView({behavior:'smooth'}); }, 60);
+}
+function setScreen(s){
+  document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
+  document.getElementById('scr-'+s).classList.add('active');
+  document.querySelectorAll('.screenpills button').forEach(b=>b.classList.toggle('active', b.dataset.s===s));
+}
+
+let activeNode = null;
+function select(el, text) {
+  if (activeNode) activeNode.classList.remove('active');
+  el.classList.add('active');
+  activeNode = el;
+  const titleEl = el.querySelector('.node-title, .decision-title, .loop-back-title, .stop-title');
+  const roleEl  = el.querySelector('.node-role');
+  document.getElementById('info-title').textContent = (roleEl ? roleEl.textContent + ' — ' : '') + (titleEl ? titleEl.textContent : 'Step details');
+  document.getElementById('info-body').textContent = text;
+}
+
+function setView(v) {
+  ['full','initial','loop','fe-change'].forEach(k => {
+    document.getElementById('btn-'+k).classList.remove('active-btn');
+  });
+  document.getElementById('btn-'+v).classList.add('active-btn');
+
+  const allNodes = document.querySelectorAll('.node, .decision, .loop-back, .stop-node');
+  const initial = ['n-fe-survey','n-fe-decision','n-gm-final','n-closed-approved','n-reject-direct'];
+  const loop = ['n-con-raise','n-gm-review-assign','n-sqc-assign','n-fe-reinspect','n-gm-decision','n-reject-loop','n-completed'];
+  const feChange = ['n-fe-change','n-fe-resume'];
+
+  allNodes.forEach(n => {
+    n.style.opacity = '1';
+    n.style.outline = 'none';
+  });
+
+  if (v === 'initial') {
+    allNodes.forEach(n => {
+      if (!initial.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid #2e7d32';
+    });
+  } else if (v === 'loop') {
+    allNodes.forEach(n => {
+      if (!loop.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid #2e75b6';
+    });
+  } else if (v === 'fe-change') {
+    allNodes.forEach(n => {
+      if (!feChange.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid #2e7d32';
+    });
+  }
+}
+</script>
+</body>
+</html>
