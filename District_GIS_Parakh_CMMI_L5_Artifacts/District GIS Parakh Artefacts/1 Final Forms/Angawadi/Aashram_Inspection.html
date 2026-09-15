@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>वृद्धाश्रम निरीक्षण प्रपत्र</title>
+<style>
+body{font-family:"Noto Sans Devanagari",Mangal,Arial,sans-serif;background:#f5f6f8;margin:0;padding:20px;color:#222}
+.container{max-width:900px;margin:auto;background:#fff;padding:28px;border-radius:10px;box-shadow:0 2px 10px #0001}
+h1{text-align:center;margin:0 0 8px;font-size:26px}
+h2{font-size:18px;border-bottom:1px solid #ddd;padding-bottom:7px;margin-top:28px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.full{grid-column:1/-1}
+label{font-weight:600}
+input,select,textarea{padding:9px;border:1px solid #bbb;border-radius:5px;font-size:14px}
+textarea{min-height:80px;resize:vertical}
+.row{display:flex;gap:18px;flex-wrap:wrap}
+.actions{text-align:center;margin-top:25px}
+button{padding:10px 22px;border:0;border-radius:5px;cursor:pointer;font-size:15px}
+.primary{background:#333;color:#fff}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+@media print{body{background:#fff;padding:0}.container{box-shadow:none;max-width:none}button{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>वृद्धाश्रम निरीक्षण प्रपत्र</h1>
+<div class="field">
+<label>निरीक्षण दिनांक</label><input type="date">
+</div>
+
+<h2>1. सामान्य जानकारी</h2>
+<div class="grid">
+<div class="field"><label>जिले का नाम</label><input></div>
+<div class="field"><label>वृद्धाश्रम का नाम</label><input></div>
+<div class="field"><label>संचालक संस्था का नाम</label><input></div>
+<div class="field"><label>अध्यक्ष/सचिव का नाम एवं मोबाइल नंबर</label><input></div>
+<div class="field"><label>निरीक्षणकर्ता का नाम</label><input></div>
+<div class="field"><label>निरीक्षणकर्ता का पदनाम</label><input></div>
+<div class="field"><label>निरीक्षणकर्ता का मोबाइल नंबर</label><input type="tel"></div>
+</div>
+
+<h2>2. भवन एवं आधारभूत सुविधाएँ</h2>
+<div class="grid">
+<div class="field"><label>भवन का प्रकार</label><select><option></option><option>शासकीय</option><option>अशासकीय</option><option>किराये का</option></select></div>
+<div class="field"><label>कुल क्षेत्रफल</label><input type="number"></div>
+<div class="field"><label>कुल कमरे/हॉल की संख्या</label><input type="number"></div>
+<div class="field"><label>भवन की स्थिति</label><select><option></option><option>कच्चा</option><option>पक्का</option></select></div>
+<div class="field"><label>छत का प्रकार</label><select><option></option><option>टीन</option><option>RCC</option><option>अन्य</option></select></div>
+<div class="field"><label>छत से पानी रिसता है?</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>फर्श की स्थिति</label><select><option></option><option>कच्चा</option><option>सीमेंट</option><option>टाइल्स</option><option>कोटा</option><option>अन्य</option></select></div>
+<div class="field"><label>खिड़की एवं दरवाजों की स्थिति</label><select><option></option><option>अच्छी</option><option>सामान्य</option><option>खराब</option></select></div>
+<div class="field"><label>पंखों की संख्या</label><input type="number" min="0"></div>
+<div class="field"><label>कूलर की संख्या</label><input type="number" min="0"></div>
+<div class="field"><label>फ्रिज उपलब्ध</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>पुताई की स्थिति</label><select><option></option><option>अच्छी</option><option>सामान्य</option><option>खराब</option></select></div>
+<div class="field"><label>शौचालयों की संख्या</label><input type="number" min="0"></div>
+<div class="field"><label>स्नानघरों की संख्या</label><input type="number" min="0"></div>
+</div>
+
+<h2>3. निवासियों की सुविधाएँ</h2>
+<div class="grid">
+<div class="field"><label>कुल पलंग</label><input type="number" min="0"></div>
+<div class="field"><label>पलंग की स्थिति</label><select><option></option><option>अच्छी</option><option>सामान्य</option><option>खराब</option></select></div>
+<div class="field"><label>बिस्तर/चादर/तकिया/कंबल पर्याप्त</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>मच्छरदानी की संख्या</label><input type="number" min="0"></div>
+<div class="field"><label>स्वेटर/गर्म कपड़ों की व्यवस्था</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>मनोरंजन के साधन उपलब्ध</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+</div>
+
+<h2>4. स्वच्छता एवं शौचालय</h2>
+<div class="grid">
+<div class="field"><label>साफ-सफाई की स्थिति</label><select><option></option><option>अच्छी</option><option>सामान्य</option><option>खराब</option></select></div>
+<div class="field"><label>बाथरूम की सफाई</label><select><option></option><option>प्रतिदिन</option><option>दिन में एक से अधिक बार</option><option>अन्य</option></select></div>
+<div class="field"><label>शौचालय का फ्लश कार्यरत</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>शौचालय के फर्श की स्थिति</label><select><option></option><option>सामान्य</option><option>चिकना</option></select></div>
+<div class="field"><label>शौचालय हेतु चप्पल उपलब्ध</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>साबुन, डिटर्जेंट, तेल, कंघी, ब्रश एवं टूथपेस्ट उपलब्ध</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>नल की टोंटी की स्थिति</label><select><option></option><option>अच्छी</option><option>खराब</option></select></div>
+<div class="field"><label>स्वच्छ पेयजल हेतु वाटर फिल्टर</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+</div>
+
+<h2>5. भोजन एवं स्वास्थ्य</h2>
+<div class="grid">
+<div class="field"><label>संतुलित भोजन समय पर दिया जा रहा है</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>नियमित स्वास्थ्य जांच हो रही है</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>आवश्यक दवाइयाँ पर्याप्त उपलब्ध हैं</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+</div>
+
+<h2>6. निवासी एवं कर्मचारी</h2>
+<div class="grid">
+<div class="field"><label>पुरुष वृद्धजन</label><input id="male" type="number" min="0" value="0"></div>
+<div class="field"><label>महिला वृद्धजन</label><input id="female" type="number" min="0" value="0"></div>
+<div class="field"><label>कुल वृद्धजन (स्वतः)</label><input id="total" type="number" readonly value="0"></div>
+<div class="field"><label>कुल कार्यरत कर्मचारी</label><input type="number" min="0"></div>
+<div class="field full"><label>कर्मचारी का नाम एवं पदनाम</label><textarea></textarea></div>
+</div>
+
+<h2>7. वित्तीय एवं विभागीय स्थिति</h2>
+<div class="grid">
+<div class="field"><label>वर्ष 2025-26 में प्राप्त अनुदान राशि</label><input type="number" min="0"></div>
+<div class="field"><label>वर्ष 2026-27 में प्राप्त अनुदान राशि</label><input type="number" min="0"></div>
+<div class="field"><label>जन सहयोग से प्राप्त राशि</label><input type="number" min="0"></div>
+<div class="field"><label>अनुदान का स्रोत</label><select><option></option><option>केन्द्रीय</option><option>निर्धारित निधि</option><option>अन्य</option></select></div>
+<div class="field"><label>विभागीय मान्यता प्राप्त है</label><select><option></option><option>हाँ</option><option>नहीं</option></select></div>
+<div class="field"><label>मान्यता/नवीनीकरण की तिथि</label><input type="date"></div>
+<div class="field full"><label>मान्यता/नवीनीकरण का विवरण (पोर्टल अनुसार)</label><textarea></textarea></div>
+</div>
+
+<h2>8. निरीक्षण निष्कर्ष</h2>
+<div class="grid">
+<div class="field full"><label>प्रमुख कमी/समस्या</label><textarea></textarea></div>
+<div class="field full"><label>सुधार हेतु सुझाव</label><textarea></textarea></div>
+<div class="field"><label>निरीक्षणकर्ता का नाम एवं पदनाम</label><input></div>
+<div class="field"><label>हस्ताक्षर</label><input></div>
+</div>
+
+<div class="actions">
+<button class="primary" onclick="window.print()">प्रिंट करें</button>
+</div>
+</div>
+<script>
+function total(){document.getElementById('total').value=(+document.getElementById('male').value||0)+(+document.getElementById('female').value||0)}
+document.getElementById('male').addEventListener('input',total);
+document.getElementById('female').addEventListener('input',total);
+</script>
+</body>
+</html>
