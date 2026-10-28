@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jal Rekha — Material Testing Module — Dynamic Wireframe</title>
+<style>
+  :root{
+    --navy:#1f3864; --blue:#2e75b6; --blue-light:#dce6f1; --sky:#eaf3fb;
+    --green:#2e7d32; --green-bg:#e8f5e9; --amber:#b36b00; --amber-bg:#fff3e0;
+    --red:#c0392b; --red-bg:#fdeaea; --purple:#5b4fc4; --purple-bg:#eeecfb;
+    --grey:#f2f2f2; --border:#c9d6e3; --text:#22303f; --muted:#647082;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#eef2f6;color:var(--text);}
+  [contenteditable="true"]{outline:none;border-radius:4px;transition:background .15s;}
+  [contenteditable="true"]:hover{background:#fffde7;box-shadow:0 0 0 1px #f0d060;}
+  [contenteditable="true"]:focus{background:#fffde7;box-shadow:0 0 0 2px #f0b400;}
+
+  .topbar{background:linear-gradient(90deg,var(--navy),var(--blue));color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px;}
+  .topbar .logo{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);font-size:18px;flex-shrink:0;}
+  .topbar h1{font-size:19px;margin:0;}
+  .topbar p{margin:0;font-size:12px;opacity:.85;}
+  .badge-doc{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);padding:6px 12px;border-radius:20px;font-size:11.5px;text-align:right;line-height:1.5;}
+
+  .subnav{display:flex;gap:0;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:30;box-shadow:0 2px 6px rgba(0,0,0,.05);flex-wrap:wrap;}
+  .subnav button{flex:none;padding:14px 20px;background:none;border:none;cursor:pointer;font-size:14px;color:#5c6b7a;border-bottom:3px solid transparent;font-weight:700;}
+  .subnav button.active{color:var(--navy);border-bottom:3px solid var(--blue);background:var(--sky);}
+  .subnav button:hover{background:var(--sky);}
+
+  .screenpills{display:flex;gap:8px;flex-wrap:wrap;padding:14px 24px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:49px;z-index:25;}
+  .screenpills button{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:#fbfcfe;font-size:12px;font-weight:700;cursor:pointer;color:#5c6b7a;white-space:nowrap;}
+  .screenpills button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .screenpills button .num{opacity:.6;margin-right:4px;}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:26px 24px 70px;}
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .2s ease;}
+  .screen{display:none;}
+  .screen.active{display:block;animation:fade .2s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  .section-title{font-size:20px;color:var(--navy);font-weight:800;margin:0 0 4px;}
+  .section-sub{color:#5c6b7a;font-size:13px;margin:0 0 18px;}
+  .edit-note{background:#fffaf1;border:1px dashed var(--amber);color:var(--amber);font-size:12px;font-weight:600;border-radius:8px;padding:8px 14px;margin-bottom:18px;}
+
+  .card{background:#fff;border:1px solid var(--border);border-radius:10px;box-shadow:0 2px 10px rgba(20,40,70,.06);margin-bottom:22px;overflow:hidden;}
+  .card-head{background:linear-gradient(90deg,var(--blue-light),#fff);padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .card-head h3{margin:0;font-size:15px;color:var(--navy);}
+  .card-body{padding:18px;}
+  .tag{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:12px;letter-spacing:.3px;white-space:nowrap;}
+  .tag-new{background:#e6f4ea;color:var(--green);border:1px solid #b6e2c0;}
+  .tag-c1{background:#e6f4ea;color:var(--green);border:1px solid #b6e2c0;}
+  .tag-c2{background:var(--blue-light);color:var(--blue);border:1px solid #a9c8e6;}
+  .tag-fix{background:#fdeaea;color:var(--red);border:1px solid #f3c1c1;}
+  .tag-req{background:#fdeaea;color:var(--red);border:1px solid #f3c1c1;}
+  .tag-opt{background:#fff3e0;color:var(--amber);border:1px solid #ffdca8;}
+  .tag-purple{background:var(--purple-bg);color:var(--purple);border:1px solid #cfc9f2;}
+
+  /* ---- workflow diagram ---- */
+  .edit-bar{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+  .edit-bar button{padding:7px 14px;border-radius:6px;border:1px solid var(--border);background:#fff;color:var(--text);font-size:12.5px;font-weight:700;cursor:pointer;}
+  .edit-bar button:hover{background:var(--sky);}
+  .edit-bar button.active-btn{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .cycle-header{display:flex;align-items:center;gap:10px;margin:16px 0 10px;font-size:12.5px;font-weight:700;color:var(--muted);}
+  .cycle-pill{border-radius:20px;padding:4px 12px;font-size:11.5px;font-weight:800;}
+  .c1-pill{background:#e6f4ea;color:var(--green);}
+  .c2-pill{background:var(--blue-light);color:var(--blue);}
+  .row{display:flex;gap:10px;align-items:stretch;margin-bottom:8px;flex-wrap:wrap;}
+  .node{border-radius:9px;border:1px solid var(--border);background:#fff;padding:12px 14px;cursor:pointer;transition:box-shadow .15s,border-color .15s;flex:1;min-width:180px;position:relative;}
+  .node:hover{box-shadow:0 0 0 2px var(--blue-light);}
+  .node.active{border-color:var(--blue)!important;box-shadow:0 0 0 3px var(--blue-light);}
+  .node-role{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  .node-title{font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px;line-height:1.3;}
+  .node-sub{font-size:11.5px;color:var(--muted);line-height:1.4;}
+  .badge{display:inline-flex;align-items:center;gap:3px;border-radius:20px;padding:2px 8px;font-size:10.5px;font-weight:700;margin-top:6px;margin-right:4px;}
+  .arrow-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-width:26px;flex-shrink:0;}
+  .arrow-line{width:1.5px;background:#b7c1cc;flex:1;min-height:20px;position:relative;}
+  .arrow-line::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid #8798a8;}
+  .arrow-label{font-size:10px;color:var(--muted);text-align:center;line-height:1.2;padding:0 2px;white-space:nowrap;font-weight:600;}
+  .divider{height:1px;background:var(--border);margin:16px 0;position:relative;}
+  .divider-label{position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#eef2f6;padding:0 10px;font-size:10.5px;font-weight:800;color:var(--muted);white-space:nowrap;}
+  .decision{border-radius:9px;border:2px solid var(--red);background:var(--red-bg);padding:12px 14px;text-align:center;flex:1;min-width:170px;cursor:pointer;}
+  .decision:hover{box-shadow:0 0 0 2px #f3c1c1;}
+  .decision.active{box-shadow:0 0 0 3px var(--red);}
+  .decision-title{font-size:13.5px;font-weight:800;color:var(--red);}
+  .decision-sub{font-size:11px;color:var(--red);margin-top:2px;opacity:.85;}
+  .stop-node{border-radius:9px;border:2px solid var(--navy);background:var(--navy);color:#fff;padding:12px 14px;text-align:center;flex:1;min-width:170px;cursor:pointer;}
+  .stop-node:hover{box-shadow:0 0 0 2px var(--blue-light);}
+  .stop-title{font-size:13.5px;font-weight:800;color:#fff;}
+  .stop-sub{font-size:11px;color:#dce6f1;margin-top:2px;}
+  .loop-back{border:1.5px dashed var(--green);border-radius:10px;padding:12px 14px;background:#f3fbf4;flex:1;min-width:180px;cursor:pointer;}
+  .loop-back:hover{box-shadow:0 0 0 2px #b6e2c0;}
+  .loop-back-title{font-size:13.5px;font-weight:700;color:var(--green);margin-bottom:3px;}
+  .loop-back-sub{font-size:11.5px;color:var(--green);opacity:.9;line-height:1.4;}
+  .info-panel{border-radius:9px;border:1px solid var(--border);background:#fbfcfe;padding:14px 16px;margin-top:14px;min-height:70px;}
+  .info-panel-title{font-size:12.5px;font-weight:800;color:var(--navy);margin-bottom:5px;}
+  .info-panel-body{font-size:12.5px;color:var(--muted);line-height:1.6;white-space:pre-line;}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:11.5px;color:var(--muted);}
+  .leg-item{display:flex;align-items:center;gap:6px;}
+  .leg-dot{width:11px;height:11px;border-radius:3px;flex-shrink:0;}
+  .flag{display:inline-flex;align-items:center;gap:3px;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:700;border:1px solid;margin-right:4px;margin-top:4px;}
+  .flag-req{background:var(--red-bg);color:var(--red);border-color:#f3c1c1;}
+  .flag-opt{background:var(--amber-bg);color:var(--amber);border-color:#ffdca8;}
+  .note-box{border-left:4px solid var(--blue);background:var(--sky);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:12.5px;color:#1f3864;line-height:1.6;}
+  .warn-box{border-left:4px solid var(--amber);background:var(--amber-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0;font-size:12.5px;color:var(--amber);line-height:1.6;}
+  .fix-box{border-left:4px solid var(--red);background:var(--red-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0;font-size:12.5px;color:var(--red);line-height:1.6;font-weight:600;}
+
+  /* ---- form mock ---- */
+  .form-mock{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+  .form-header{background:linear-gradient(90deg,var(--blue),#4a90d9);color:#fff;padding:14px 18px;}
+  .form-header .app{font-size:15px;font-weight:800;}
+  .form-header .dept{font-size:11px;opacity:.9;}
+  .form-title{background:var(--sky);padding:10px 18px;font-weight:700;color:var(--navy);font-size:14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+  .form-grid{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;}
+  .field label{display:block;font-size:12px;font-weight:700;color:#3a4757;margin-bottom:5px;}
+  .field label .req{color:var(--red);}
+  .field select, .field input, .field textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;background:#fff;color:var(--text);font-family:inherit;}
+  .field select:disabled, .field input:disabled{background:#f2f4f7;color:#9aa7b4;}
+  .field.full{grid-column:1/-1;}
+  .hint{font-size:11px;color:#8798a8;margin-top:5px;}
+  .hint.rule{color:var(--blue);font-weight:600;}
+  .hint.fix{color:var(--red);font-weight:600;}
+  .form-actions{padding:14px 18px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;align-items:center;background:#fbfcfe;flex-wrap:wrap;}
+  .btn{padding:9px 20px;border-radius:5px;border:none;font-size:13px;font-weight:700;cursor:pointer;}
+  .btn-save{background:#2e7d32;color:#fff;}
+  .btn-cancel{background:#e15b64;color:#fff;}
+  .btn-primary{background:var(--blue);color:#fff;}
+  .btn-outline{background:#fff;color:var(--blue);border:1px solid var(--blue);}
+  .save-toast{display:none;font-size:12.5px;font-weight:700;color:var(--green);margin-right:auto;}
+  .save-toast.show{display:block;}
+
+  .photo-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+  .photo-box{width:92px;height:70px;border:1.5px dashed var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#b7c1cc;background:#fbfcfe;}
+  .photo-box.filled{border-style:solid;border-color:var(--blue);color:var(--blue);background:var(--sky);font-size:11px;font-weight:700;}
+
+  table.grid{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.grid th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;}
+  table.grid td{padding:8px 10px;border-bottom:1px solid var(--border);}
+  table.grid tr:nth-child(even) td{background:#f7f9fc;}
+  .status-pill{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;}
+  .st-pending{background:#fff3e0;color:var(--amber);}
+  .st-accept{background:#e6f4ea;color:var(--green);}
+  .st-reject{background:#fdeaea;color:var(--red);}
+  .st-progress{background:var(--blue-light);color:var(--blue);}
+
+  .stepper{display:flex;gap:0;margin-bottom:20px;overflow-x:auto;padding-bottom:4px;}
+  .stepper .sp{display:flex;align-items:center;gap:8px;padding:8px 16px;border-bottom:3px solid var(--border);cursor:pointer;white-space:nowrap;font-size:12.5px;font-weight:700;color:#8798a8;}
+  .stepper .sp .dot{width:20px;height:20px;border-radius:50%;background:var(--border);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;}
+  .stepper .sp.done{color:var(--green);border-color:var(--green);}
+  .stepper .sp.done .dot{background:var(--green);}
+  .stepper .sp.now{color:var(--navy);border-color:var(--blue);}
+  .stepper .sp.now .dot{background:var(--blue);}
+
+  .timeline{border-left:2px solid var(--border);margin-left:10px;padding-left:20px;}
+  .t-item{position:relative;padding-bottom:18px;}
+  .t-item::before{content:'';position:absolute;left:-26px;top:2px;width:10px;height:10px;border-radius:50%;background:var(--blue);}
+  .t-item.rej::before{background:var(--red);}
+  .t-item.acc::before{background:var(--green);}
+  .t-item .role{font-size:10.5px;font-weight:800;color:var(--muted);text-transform:uppercase;}
+  .t-item .desc{font-size:13px;font-weight:700;margin:2px 0;}
+  .t-item .meta{font-size:11.5px;color:var(--muted);}
+
+  .kpi-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px;}
+  .kpi{flex:1;min-width:140px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+  .kpi .v{font-size:22px;font-weight:800;color:var(--navy);}
+  .kpi .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  footer{text-align:center;padding:24px;color:#8798a8;font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">JR</div>
+  <div>
+    <h1>JAL REKHA — Material Testing Module</h1>
+    <p>Madhya Pradesh Jal Nigam Department · Dynamic wireframe &amp; corrected process workflow (click‑through, editable)</p>
+  </div>
+  <div class="badge-doc">Cycle‑2 loop corrected — 24‑Jul‑2026<br>Contractor → GM PIU → SQC/TPIA → FE, loop does not repeat</div>
+</div>
+
+<div class="subnav">
+  <button class="active" onclick="setPanel('wf')" id="tab-wf">Process Workflow</button>
+  <button onclick="setPanel('sc')" id="tab-sc">Wireframe Screens</button>
+</div>
+
+<!-- ============ WORKFLOW PANEL ============ -->
+<div class="panel active" id="panel-wf">
+<div class="wrap">
+  <div class="section-title">Material Testing — Corrected Process Workflow</div>
+  <div class="section-sub">Click any step to see its business rule. Every label below is editable — click text to type over it.</div>
+  <div class="edit-note">✎ This is a live wireframe: click on any title, description or badge text to edit it directly in the browser. Use the buttons below to isolate a cycle.</div>
+
+  <div class="edit-bar">
+    <button onclick="setView('full')" id="btn-full" class="active-btn">Full workflow</button>
+    <button onclick="setView('cycle1')" id="btn-cycle1">Cycle 1 only</button>
+    <button onclick="setView('cycle2')" id="btn-cycle2">Cycle 2 (re‑inspection — corrected)</button>
+    <button onclick="setView('fe-change')" id="btn-fe">FE change scenario</button>
+  </div>
+
+  <!-- CYCLE 1 -->
+  <div class="cycle-header"><span class="cycle-pill c1-pill">Cycle 1 — First inspection</span><span>Image upload mandatory</span></div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'Contractor submits the material testing request — selects Component, Sub‑Component, Structural Location and Grade of Concrete/material, and uploads mandatory geo‑tagged photos. System generates the RFI ID. Image upload is MANDATORY in Cycle 1.')" id="n-con-submit">
+      <div class="node-role" style="color:#0F6E56" contenteditable="true">CONTRACTOR</div>
+      <div class="node-title" contenteditable="true">Submit RFI request</div>
+      <div class="node-sub" contenteditable="true">Component, sub‑component, location, material details</div>
+      <span class="badge flag-req" contenteditable="true">📷 Image mandatory</span>
+      <span class="badge tag-c1" contenteditable="true">Cycle 1</span>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">RFI raised</div></div>
+    <div class="node" onclick="select(this,'GM PIU receives the RFI and assigns it to a Field Engineer (FE). GM selects the FE from the pool and sets the inspection date. A notification is sent to the assigned FE.')" id="n-gm-assign">
+      <div class="node-role" style="color:#185FA5" contenteditable="true">GM PIU</div>
+      <div class="node-title" contenteditable="true">Assign FE for inspection</div>
+      <div class="node-sub" contenteditable="true">Select FE, set date, send notification</div>
+      <span class="badge tag-c1" contenteditable="true">Cycle 1</span>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Assigned</div></div>
+    <div class="node" onclick="select(this,'FE performs the on‑site material inspection: captures geo‑tagged photos, records test results (gradation, AIV, compressive strength, etc.) and adds a survey remark. Photo upload is mandatory in Cycle 1. Result is submitted to GM PIU for review.')" id="n-fe-inspect">
+      <div class="node-role" style="color:#993C1D" contenteditable="true">FE</div>
+      <div class="node-title" contenteditable="true">Conduct inspection &amp; submit</div>
+      <div class="node-sub" contenteditable="true">Geo‑tagged photos, test results, remark</div>
+      <span class="badge flag-req" contenteditable="true">📷 Image mandatory</span>
+      <span class="badge tag-c1" contenteditable="true">Cycle 1</span>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content:flex-end">
+    <div style="flex:2.3;min-width:0"></div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Result submitted</div></div>
+    <div class="node" onclick="select(this,'GM PIU reviews the FE inspection result.\n\nACCEPT — all parameters satisfied; GM approves and RFI closes as Accepted.\n\nREJECT — parameters not satisfied; GM rejects with a mandatory remark and triggers the Cycle‑2 re‑inspection loop.')" id="n-gm-review" style="border-color:#8798a8;flex:1.1">
+      <div class="node-role" style="color:#185FA5" contenteditable="true">GM PIU</div>
+      <div class="node-title" contenteditable="true">Review &amp; decide</div>
+      <div class="node-sub" contenteditable="true">Accept or Reject with remark</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:5px">
+        <span class="badge" style="background:#e6f4ea;color:#2e7d32" contenteditable="true">✓ Accept</span>
+        <span class="badge" style="background:#fdeaea;color:#c0392b" contenteditable="true">✕ Reject → Cycle 2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"><span class="divider-label" contenteditable="true">↓ GM PIU rejects — Cycle 2 loop triggered</span></div>
+
+  <!-- CYCLE 2 CORRECTED -->
+  <div class="cycle-header"><span class="cycle-pill c2-pill">Cycle 2 — Re‑inspection loop (CORRECTED)</span><span>Image upload optional · same RFI ID · runs once, does not repeat</span></div>
+
+  <div class="fix-box">🛠 <strong>Correction applied (24‑Jul‑2026):</strong> Cycle‑2 sequencing is now <strong>Contractor → GM PIU → SQC/TPIA → FE</strong> for the physical re‑inspection. After this single re‑inspection loop, the process <strong>stops — it does not repeat into a Cycle 3</strong>. GM PIU's final decision after Cycle 2 is terminal (Accept &amp; close, or Reject &amp; escalate offline).</div>
+
+  <div class="note-box">ⓘ The same RFI ID is retained across Cycle 2. A DB flag (<code>loop_iteration = 2</code>) marks this as the re‑inspection cycle. Image/photo upload is <strong>optional</strong> for this cycle. The loop reuses the same RFI structure but carries new inspection data entered by the FE.</div>
+
+  <div class="row">
+    <div class="decision" onclick="select(this,'GM PIU rejects the FE inspection result and enters a mandatory rejection remark. System sets loop_iteration = 2. Contractor is notified to take corrective action before re‑inspection.')" id="n-gm-reject">
+      <div class="decision-title" contenteditable="true">⚠ GM PIU rejects result</div>
+      <div class="decision-sub" contenteditable="true">Rejection remark mandatory · Loop 2 triggered</div>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">1 · Notified</div></div>
+    <div class="node" onclick="select(this,'Contractor receives the rejection notification, takes corrective action on the material/workmanship and confirms the site is ready for re‑inspection. This does NOT raise a new RFI — the same RFI continues with loop_iteration = 2. Forwarded next to GM PIU (corrected sequence).')" id="n-con-correct">
+      <div class="node-role" style="color:#0F6E56" contenteditable="true">CONTRACTOR</div>
+      <div class="node-title" contenteditable="true">Corrective action</div>
+      <div class="node-sub" contenteditable="true">Fix material/work, confirm ready for re‑inspection</div>
+      <span class="badge tag-c2" contenteditable="true">Cycle 2 · Step 1</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'GM PIU reviews the Contractor confirmation of corrective action. GM PIU may reassign the FE if the original FE has left (see FE change scenario), then forwards the case to SQC/TPIA for independent pre‑verification — corrected sequence, GM PIU now acts BEFORE SQC/TPIA, not after.')" id="n-gm-forward-sqc">
+      <div class="node-role" style="color:#185FA5" contenteditable="true">GM PIU</div>
+      <div class="node-title" contenteditable="true">Review &amp; forward to SQC/TPIA</div>
+      <div class="node-sub" contenteditable="true">Reassign FE if needed, forward case for independent check</div>
+      <span class="flag flag-req" style="background:#e6f4ea;color:#2e7d32;border-color:#b6e2c0" contenteditable="true">👤 FE change possible</span>
+      <span class="badge tag-c2" contenteditable="true">Cycle 2 · Step 2</span>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">2 · Forwarded</div></div>
+    <div class="node" onclick="select(this,'SQC (Site Quality Consultant) / TPIA (Third Party Inspection Agency) independently verify the corrective action taken and the case file, add their remark, and route the case to the FE for the physical re‑inspection visit — corrected sequence, SQC/TPIA now acts BEFORE the FE re‑inspection.')" id="n-sqc-review">
+      <div class="node-role" style="color:#5b4fc4" contenteditable="true">SQC / TPIA</div>
+      <div class="node-title" contenteditable="true">Independent review</div>
+      <div class="node-sub" contenteditable="true">Verify corrective action, add remark, route to FE</div>
+      <span class="badge tag-c2" contenteditable="true">Cycle 2 · Step 3</span>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">3 · Routed</div></div>
+    <div class="node" onclick="select(this,'The FE (same FE, or a new FE if the original has left — see FE change scenario) conducts the physical re‑inspection. Image upload is OPTIONAL in Cycle 2 — the FE may submit without photos. New test results and a re‑inspection remark are recorded and submitted to GM PIU as the FINAL step of Cycle 2.')" id="n-fe-reinspect">
+      <div class="node-role" style="color:#993C1D" contenteditable="true">FE (same or new)</div>
+      <div class="node-title" contenteditable="true">Re‑inspect &amp; submit (final)</div>
+      <div class="node-sub" contenteditable="true">New test results, re‑inspection remark</div>
+      <span class="badge flag-opt" contenteditable="true">📷 Image optional</span>
+      <span class="badge tag-c2" contenteditable="true">Cycle 2 · Step 4</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div style="flex:2;min-width:0"></div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Submitted</div></div>
+    <div class="stop-node" onclick="select(this,'GM PIU makes the FINAL decision on the RFI after the Cycle‑2 re‑inspection.\n\nACCEPT — RFI is closed as Accepted.\n\nREJECT — RFI is closed as Rejected and escalated for offline resolution (e.g. structural review, work stoppage).\n\nEither way, the loop TERMINATES here — the system does NOT trigger a Cycle 3 / repeat re‑inspection loop.')" id="n-gm-final" style="flex:1.4">
+      <div class="stop-title" contenteditable="true">🛑 GM PIU final decision — loop ends</div>
+      <div class="stop-sub" contenteditable="true">Accept &amp; close, or Reject &amp; escalate — Cycle 2 does not repeat</div>
+    </div>
+  </div>
+
+  <!-- FE CHANGE CALLOUT -->
+  <div class="divider"><span class="divider-label" contenteditable="true">FE change scenario (applies within Cycle 2)</span></div>
+
+  <div class="row">
+    <div class="node" onclick="select(this,'If the original FE who performed the Cycle‑1 inspection has left the project or is unavailable, GM PIU assigns a completely new FE during the “Review &amp; forward to SQC/TPIA” step of Cycle 2.\n\nThe new FE can see the full Cycle‑1 inspection data, the GM rejection remark, contractor description and all previously uploaded photos.')" id="n-fe-change" style="border-color:#2e7d32;background:#f3fbf4">
+      <div class="node-role" style="color:#2e7d32" contenteditable="true">FE CHANGE</div>
+      <div class="node-title" style="color:#2e7d32" contenteditable="true">Original FE left — new FE added</div>
+      <div class="node-sub" style="color:#2e7d32" contenteditable="true">GM PIU reassigns. New FE sees Cycle‑1 data, GM remark, photos</div>
+      <span class="badge" style="background:#e6f4ea;color:#2e7d32" contenteditable="true">👤 New FE onboarded</span>
+    </div>
+    <div class="arrow-wrap"><div class="arrow-line"></div><div class="arrow-label" contenteditable="true">Assigned</div></div>
+    <div class="loop-back" onclick="select(this,'After SQC/TPIA routes the case, the new FE performs the re‑inspection visit and submits new inspection data. Cycle‑1 data is visible read‑only for reference. Image upload optional. This is still the single, non‑repeating Cycle‑2 loop.')" id="n-fe-resume">
+      <div class="loop-back-title" contenteditable="true">↩ New FE performs re‑inspection</div>
+      <div class="loop-back-sub" contenteditable="true">Picks up after SQC/TPIA routing. Cycle‑1 data read‑only. Image optional. Loop does not repeat.</div>
+    </div>
+  </div>
+
+  <!-- DB FLAG NOTE -->
+  <div class="warn-box">🗄 <strong>DB flag logic:</strong> <code style="background:#fff;border-radius:3px;padding:1px 5px">loop_iteration</code> increments once per RFI (max value = 2 for Material Testing). Image mandatory only when <code style="background:#fff;border-radius:3px;padding:1px 5px">loop_iteration = 1</code>. When <code style="background:#fff;border-radius:3px;padding:1px 5px">loop_iteration = 2</code>, image upload is optional and does not block submission. <code style="background:#fff;border-radius:3px;padding:1px 5px">loop_iteration</code> is capped at 2 — the workflow engine does not re‑trigger the rejection branch a second time; the RFI status is force‑closed as Accepted/Rejected‑Escalated after the Step‑4 GM PIU decision.</div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#e6f4ea"></div>Contractor</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#dce6f1"></div>GM PIU</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#fdeaea"></div>Rejection / decision point</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#eeecfb"></div>SQC / TPIA</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#fff3e0;border:1px solid #ffdca8"></div>FE — Cycle 2 (re‑inspection)</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#1f3864"></div>Terminal decision — loop ends</div>
+  </div>
+
+  <!-- INFO PANEL -->
+  <div class="info-panel" id="info-panel">
+    <div class="info-panel-title" id="info-title">Click any step to see details</div>
+    <div class="info-panel-body" id="info-body">Select a node above to read the business rule, DB behaviour and acceptance criteria for that step.</div>
+  </div>
+
+</div>
+</div><!-- /panel-wf -->
+
+<!-- ============ SCREENS PANEL ============ -->
+<div class="panel" id="panel-sc">
+<div class="screenpills">
+  <button class="active" data-s="s1" onclick="setScreen('s1')"><span class="num">1</span>Submit RFI</button>
+  <button data-s="s2" onclick="setScreen('s2')"><span class="num">2</span>Assign FE</button>
+  <button data-s="s3" onclick="setScreen('s3')"><span class="num">3</span>FE Inspection</button>
+  <button data-s="s4" onclick="setScreen('s4')"><span class="num">4</span>GM Review</button>
+  <button data-s="s5" onclick="setScreen('s5')"><span class="num">5</span>Corrective Action</button>
+  <button data-s="s6" onclick="setScreen('s6')"><span class="num">6</span>GM → SQC/TPIA</button>
+  <button data-s="s7" onclick="setScreen('s7')"><span class="num">7</span>SQC/TPIA Review</button>
+  <button data-s="s8" onclick="setScreen('s8')"><span class="num">8</span>FE Re‑inspection</button>
+  <button data-s="s9" onclick="setScreen('s9')"><span class="num">9</span>Final Decision</button>
+  <button data-s="s10" onclick="setScreen('s10')"><span class="num">10</span>RFI Dashboard</button>
+</div>
+
+<div class="wrap">
+
+  <!-- SCREEN 1 -->
+  <div class="screen active" id="scr-s1">
+    <div class="section-title" contenteditable="true">Screen 1 · Contractor — Submit Material Testing RFI</div>
+    <div class="section-sub">Cycle 1 · first inspection request</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — Request for Inspection (RFI)</div></div>
+      <div class="form-title"><span contenteditable="true">New RFI — Material Testing</span><span class="tag tag-c1">Cycle 1</span></div>
+      <div class="form-grid">
+        <div class="field"><label>PIU <span class="req">*</span></label><select><option>Bhopal PIU</option><option>Chhindwara PIU</option></select></div>
+        <div class="field"><label>Scheme / MVS <span class="req">*</span></label><select><option>Machaghora MVS</option></select></div>
+        <div class="field"><label>Component <span class="req">*</span></label><select><option>Overhead Tank</option><option>Pipeline</option><option>Intake Well</option></select></div>
+        <div class="field"><label>Sub‑Component <span class="req">*</span></label><select><option>Foundation Concrete</option><option>Wall Panel</option></select></div>
+        <div class="field"><label>Structural Location <span class="req">*</span></label><input value="Chainage 2+400, Village Nekan" contenteditable="true"></div>
+        <div class="field"><label>Grade of Concrete / Material <span class="req">*</span></label><select><option>M25</option><option>M20</option><option>Aggregate — 20mm</option></select></div>
+        <div class="field"><label>Preferred Inspection Date</label><input type="date" value="2026-07-28"></div>
+        <div class="field"><label>Contractor Remark</label><input value="Ready for slump &amp; compressive strength test" contenteditable="true"></div>
+        <div class="field full">
+          <label>Geo‑tagged Photos <span class="req">*</span> <span class="tag tag-req" style="margin-left:6px">Mandatory — Cycle 1</span></label>
+          <div class="photo-strip">
+            <div class="photo-box filled">IMG_01</div>
+            <div class="photo-box filled">IMG_02</div>
+            <div class="photo-box">＋ Add</div>
+          </div>
+          <div class="hint rule">BR‑MT‑01: Submission is blocked until at least 1 geo‑tagged photo is attached (loop_iteration = 1).</div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <span class="save-toast">✓ Draft saved</span>
+        <button class="btn btn-outline">Save Draft</button>
+        <button class="btn btn-primary">Submit RFI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen" id="scr-s2">
+    <div class="section-title" contenteditable="true">Screen 2 · GM PIU — Assign Field Engineer</div>
+    <div class="section-sub">Cycle 1 · RFI queued for FE assignment</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — Assign FE</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417</span><span class="tag tag-c1">Cycle 1</span></div>
+      <div class="form-grid">
+        <div class="field full"><label>RFI Summary</label><input value="Overhead Tank — Foundation Concrete — M25 — Chainage 2+400, Village Nekan" disabled></div>
+        <div class="field"><label>Assign FE <span class="req">*</span></label><select><option>Rakesh Sharma (FE)</option><option>Anita Verma (FE)</option><option>Suresh Patel (FE)</option></select></div>
+        <div class="field"><label>Inspection Date <span class="req">*</span></label><input type="date" value="2026-07-28"></div>
+        <div class="field full"><label>Notes to FE</label><textarea rows="2" contenteditable="true">Please verify slump test on site prior to pour.</textarea></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-outline">Save</button>
+        <button class="btn btn-primary">Assign &amp; Notify FE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen" id="scr-s3">
+    <div class="section-title" contenteditable="true">Screen 3 · FE — Conduct Inspection &amp; Submit</div>
+    <div class="section-sub">Cycle 1 · on‑site inspection, image upload mandatory</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — Site Inspection</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417</span><span class="tag tag-c1">Cycle 1</span></div>
+      <div class="form-grid">
+        <div class="field"><label>Test Parameter <span class="req">*</span></label><select><option>Compressive Strength</option><option>Slump Test</option><option>Aggregate Impact Value</option></select></div>
+        <div class="field"><label>Observed Value <span class="req">*</span></label><input value="27.4 MPa"></div>
+        <div class="field"><label>Standard Range</label><input value="25 – 30 MPa" disabled></div>
+        <div class="field"><label>Result</label><select><option>Within Range</option><option>Out of Range</option></select></div>
+        <div class="field full"><label>FE Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Sample cured for 28 days, tested at site lab. Within acceptable range.</textarea></div>
+        <div class="field full">
+          <label>Geo‑tagged Photos <span class="req">*</span> <span class="tag tag-req" style="margin-left:6px">Mandatory — Cycle 1</span></label>
+          <div class="photo-strip">
+            <div class="photo-box filled">SITE_01</div>
+            <div class="photo-box filled">SITE_02</div>
+            <div class="photo-box filled">SITE_03</div>
+            <div class="photo-box">＋ Add</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-outline">Save Draft</button>
+        <button class="btn btn-primary">Submit to GM PIU</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 -->
+  <div class="screen" id="scr-s4">
+    <div class="section-title" contenteditable="true">Screen 4 · GM PIU — Review &amp; Decide</div>
+    <div class="section-sub">Cycle 1 · Accept closes the RFI · Reject triggers the corrected Cycle‑2 loop</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — Review Inspection Result</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417</span><span class="tag tag-c1">Cycle 1</span></div>
+      <div class="card-body" style="padding:0 18px 12px">
+        <table class="grid">
+          <tr><th>Parameter</th><th>Observed</th><th>Standard</th><th>Result</th></tr>
+          <tr><td>Compressive Strength</td><td>27.4 MPa</td><td>25–30 MPa</td><td><span class="status-pill st-accept">Within Range</span></td></tr>
+        </table>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>GM PIU Decision Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Type Accept remark, or Reject remark if re‑inspection required…</textarea></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-cancel">✕ Reject → starts Cycle 2</button>
+        <button class="btn btn-save">✓ Accept — close RFI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 5 -->
+  <div class="screen" id="scr-s5">
+    <div class="section-title" contenteditable="true">Screen 5 · Contractor — Corrective Action <span class="tag tag-c2" style="margin-left:8px">Cycle 2 · Step 1</span></div>
+    <div class="section-sub">Same RFI ID · loop_iteration = 2 · runs once</div>
+    <div class="stepper">
+      <div class="sp now"><div class="dot">1</div>Contractor</div>
+      <div class="sp"><div class="dot">2</div>GM PIU</div>
+      <div class="sp"><div class="dot">3</div>SQC/TPIA</div>
+      <div class="sp"><div class="dot">4</div>FE</div>
+      <div class="sp"><div class="dot">✓</div>GM Final</div>
+    </div>
+    <div class="fix-box" style="margin-bottom:16px">🛠 Corrected sequence: Contractor confirmation now routes to <strong>GM PIU</strong> next (previously routed directly to FE reassignment).</div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — Corrective Action</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417 · Re‑inspection</span><span class="tag tag-c2">Cycle 2</span></div>
+      <div class="card-body" style="padding:0 18px 8px">
+        <div class="note-box">GM PIU rejection remark: “Compressive strength borderline — recommend re‑cure and retest before acceptance.”</div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>Corrective Action Taken <span class="req">*</span></label><textarea rows="2" contenteditable="true">Additional 7‑day curing completed. Ready for re‑inspection.</textarea></div>
+        <div class="field"><label>Ready for Re‑inspection From <span class="req">*</span></label><input type="date" value="2026-08-04"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Confirm &amp; Forward to GM PIU →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 6 -->
+  <div class="screen" id="scr-s6">
+    <div class="section-title" contenteditable="true">Screen 6 · GM PIU — Review &amp; Forward to SQC/TPIA <span class="tag tag-c2" style="margin-left:8px">Cycle 2 · Step 2</span></div>
+    <div class="section-sub">GM PIU may reassign FE here if the original FE is unavailable</div>
+    <div class="stepper">
+      <div class="sp done"><div class="dot">✓</div>Contractor</div>
+      <div class="sp now"><div class="dot">2</div>GM PIU</div>
+      <div class="sp"><div class="dot">3</div>SQC/TPIA</div>
+      <div class="sp"><div class="dot">4</div>FE</div>
+      <div class="sp"><div class="dot">✓</div>GM Final</div>
+    </div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — GM PIU Forwarding</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417 · Re‑inspection</span><span class="tag tag-c2">Cycle 2</span></div>
+      <div class="form-grid">
+        <div class="field"><label>Assigned FE</label><select><option>Rakesh Sharma (FE) — original</option><option>Anita Verma (FE) — new</option></select></div>
+        <div class="field"><label class="req">FE Changed?</label><select><option>No — same FE continues</option><option>Yes — new FE (original left)</option></select></div>
+        <div class="field full"><label>GM PIU Note to SQC/TPIA</label><textarea rows="2" contenteditable="true">Contractor completed additional curing. Please independently verify before FE re‑inspection.</textarea></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Forward to SQC / TPIA →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 7 -->
+  <div class="screen" id="scr-s7">
+    <div class="section-title" contenteditable="true">Screen 7 · SQC/TPIA — Independent Review <span class="tag tag-c2" style="margin-left:8px">Cycle 2 · Step 3</span></div>
+    <div class="section-sub">Independent verification before the FE's physical re‑inspection</div>
+    <div class="stepper">
+      <div class="sp done"><div class="dot">✓</div>Contractor</div>
+      <div class="sp done"><div class="dot">✓</div>GM PIU</div>
+      <div class="sp now"><div class="dot">3</div>SQC/TPIA</div>
+      <div class="sp"><div class="dot">4</div>FE</div>
+      <div class="sp"><div class="dot">✓</div>GM Final</div>
+    </div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — SQC / TPIA Review</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417 · Re‑inspection</span><span class="tag tag-purple">SQC / TPIA</span></div>
+      <div class="form-grid">
+        <div class="field full"><label>Documents Verified</label>
+          <div class="photo-strip">
+            <div class="photo-box filled">IMG_01</div><div class="photo-box filled">IMG_02</div><div class="photo-box filled">Report.pdf</div>
+          </div>
+        </div>
+        <div class="field full"><label>SQC / TPIA Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Corrective action documentation appears adequate. Recommend FE proceed with physical re‑inspection.</textarea></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Route to FE for Re‑inspection →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 8 -->
+  <div class="screen" id="scr-s8">
+    <div class="section-title" contenteditable="true">Screen 8 · FE — Re‑inspection &amp; Final Submission <span class="tag tag-c2" style="margin-left:8px">Cycle 2 · Step 4 (final)</span></div>
+    <div class="section-sub">Same FE, or new FE if original left the project · image upload optional</div>
+    <div class="stepper">
+      <div class="sp done"><div class="dot">✓</div>Contractor</div>
+      <div class="sp done"><div class="dot">✓</div>GM PIU</div>
+      <div class="sp done"><div class="dot">✓</div>SQC/TPIA</div>
+      <div class="sp now"><div class="dot">4</div>FE</div>
+      <div class="sp"><div class="dot">✓</div>GM Final</div>
+    </div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — FE Re‑inspection</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417 · Re‑inspection</span><span class="tag tag-c2">Cycle 2 — final step</span></div>
+      <div class="card-body" style="padding:0 18px 8px">
+        <div class="note-box">👤 If original FE (Rakesh Sharma) has left the project, GM PIU on Screen 6 assigns a new FE. New FE sees Cycle‑1 data, GM remark and photos read‑only here.</div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field"><label>Test Parameter</label><input value="Compressive Strength" disabled></div>
+        <div class="field"><label>New Observed Value <span class="req">*</span></label><input value="28.9 MPa"></div>
+        <div class="field full"><label>Re‑inspection Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Re‑tested after additional curing period. Result now within acceptable range.</textarea></div>
+        <div class="field full">
+          <label>Geo‑tagged Photos <span class="tag tag-opt" style="margin-left:6px">Optional — Cycle 2</span></label>
+          <div class="photo-strip"><div class="photo-box">＋ Add (optional)</div></div>
+          <div class="hint rule">BR‑MT‑02: When loop_iteration = 2, submission is NOT blocked by missing photos.</div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary">Submit Final Result to GM PIU →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 9 -->
+  <div class="screen" id="scr-s9">
+    <div class="section-title" contenteditable="true">Screen 9 · GM PIU — Final Decision <span class="tag tag-c2" style="margin-left:8px">Loop terminates here</span></div>
+    <div class="section-sub">Terminal step — the system does not re‑trigger a Cycle 3</div>
+    <div class="stepper">
+      <div class="sp done"><div class="dot">✓</div>Contractor</div>
+      <div class="sp done"><div class="dot">✓</div>GM PIU</div>
+      <div class="sp done"><div class="dot">✓</div>SQC/TPIA</div>
+      <div class="sp done"><div class="dot">✓</div>FE</div>
+      <div class="sp now"><div class="dot">✓</div>GM Final</div>
+    </div>
+    <div class="form-mock">
+      <div class="form-header"><div class="app">JAL REKHA</div><div class="dept">Material Testing — Final Decision</div></div>
+      <div class="form-title"><span>RFI‑MT‑2026‑00417</span><span class="tag" style="background:#1f3864;color:#fff">Cycle 2 — Final</span></div>
+      <div class="card-body" style="padding:14px 18px 4px">
+        <div class="timeline">
+          <div class="t-item"><div class="role">Contractor</div><div class="desc">RFI submitted with mandatory photos</div><div class="meta">24‑Jul‑2026 · loop_iteration = 1</div></div>
+          <div class="t-item"><div class="role">FE — Rakesh Sharma</div><div class="desc">Cycle‑1 inspection submitted — 27.4 MPa</div><div class="meta">28‑Jul‑2026</div></div>
+          <div class="t-item rej"><div class="role">GM PIU</div><div class="desc">Rejected — borderline strength, recommend retest</div><div class="meta">29‑Jul‑2026 · loop_iteration → 2</div></div>
+          <div class="t-item"><div class="role">Contractor</div><div class="desc">Corrective action — additional curing confirmed</div><div class="meta">02‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">GM PIU</div><div class="desc">Reviewed, forwarded to SQC/TPIA</div><div class="meta">03‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">SQC / TPIA</div><div class="desc">Independent review complete, routed to FE</div><div class="meta">04‑Aug‑2026</div></div>
+          <div class="t-item"><div class="role">FE — Rakesh Sharma</div><div class="desc">Re‑inspection submitted (no photos) — 28.9 MPa</div><div class="meta">05‑Aug‑2026</div></div>
+        </div>
+      </div>
+      <div class="form-grid" style="padding-top:0">
+        <div class="field full"><label>GM PIU Final Remark <span class="req">*</span></label><textarea rows="2" contenteditable="true">Re‑test result within acceptable range. RFI closed as Accepted.</textarea></div>
+      </div>
+      <div class="form-actions">
+        <span class="save-toast show">Loop does not repeat — this decision is terminal</span>
+        <button class="btn btn-cancel">✕ Reject &amp; Escalate (offline)</button>
+        <button class="btn btn-save">✓ Accept — Close RFI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 10 -->
+  <div class="screen" id="scr-s10">
+    <div class="section-title" contenteditable="true">Screen 10 · RFI Tracking Dashboard</div>
+    <div class="section-sub">All Material Testing requests · filter by PIU, status, cycle</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="v">128</div><div class="l">Total RFIs — Material Testing</div></div>
+      <div class="kpi"><div class="v">94</div><div class="l">Closed — Accepted (Cycle 1)</div></div>
+      <div class="kpi"><div class="v">21</div><div class="l">In Cycle‑2 re‑inspection</div></div>
+      <div class="kpi"><div class="v">13</div><div class="l">Closed — Rejected &amp; Escalated</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>RFI Register</h3><span class="tag tag-c2">Live view</span></div>
+      <div class="card-body" style="padding:0">
+        <table class="grid">
+          <tr><th>RFI ID</th><th>Component</th><th>PIU</th><th>Cycle</th><th>loop_iteration</th><th>Current Step</th><th>Status</th></tr>
+          <tr><td>RFI‑MT‑2026‑00417</td><td>Overhead Tank — Foundation</td><td>Bhopal</td><td>Cycle 2</td><td>2</td><td>GM PIU Final Decision</td><td><span class="status-pill st-accept">Accepted</span></td></tr>
+          <tr><td>RFI‑MT‑2026‑00418</td><td>Pipeline — Bedding Concrete</td><td>Bhopal</td><td>Cycle 1</td><td>1</td><td>FE Inspection</td><td><span class="status-pill st-pending">Pending FE</span></td></tr>
+          <tr><td>RFI‑MT‑2026‑00420</td><td>Intake Well — Wall Panel</td><td>Chhindwara</td><td>Cycle 2</td><td>2</td><td>SQC/TPIA Review</td><td><span class="status-pill st-progress">In re‑inspection</span></td></tr>
+          <tr><td>RFI‑MT‑2026‑00422</td><td>Overhead Tank — Roof Slab</td><td>Guna</td><td>Cycle 2</td><td>2</td><td>Closed</td><td><span class="status-pill st-reject">Rejected — Escalated</span></td></tr>
+          <tr><td>RFI‑MT‑2026‑00425</td><td>Pipeline — Thrust Block</td><td>Bhopal</td><td>Cycle 1</td><td>1</td><td>Closed</td><td><span class="status-pill st-accept">Accepted</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="note-box">ⓘ <code>loop_iteration</code> is capped at 2 for Material Testing — the register shows no RFI can exceed Cycle 2, consistent with the corrected non‑repeating loop.</div>
+  </div>
+
+</div>
+</div><!-- /panel-sc -->
+
+<footer>Jal Rekha · Madhya Pradesh Jal Nigam · Material Testing Module — Dynamic Wireframe · Editable click‑through prototype</footer>
+
+<script>
+function setPanel(p){
+  ['wf','sc'].forEach(k=>{
+    document.getElementById('panel-'+k).classList.toggle('active', k===p);
+    document.getElementById('tab-'+k).classList.toggle('active', k===p);
+  });
+}
+function setScreen(s){
+  document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
+  document.getElementById('scr-'+s).classList.add('active');
+  document.querySelectorAll('.screenpills button').forEach(b=>b.classList.toggle('active', b.dataset.s===s));
+}
+
+let activeNode = null;
+function select(el, text) {
+  if (activeNode) activeNode.classList.remove('active');
+  el.classList.add('active');
+  activeNode = el;
+  const titleEl = el.querySelector('.node-title, .decision-title, .loop-back-title, .stop-title');
+  const roleEl  = el.querySelector('.node-role');
+  document.getElementById('info-title').textContent = (roleEl ? roleEl.textContent + ' — ' : '') + (titleEl ? titleEl.textContent : 'Step details');
+  document.getElementById('info-body').textContent = text;
+}
+
+function setView(v) {
+  ['full','cycle1','cycle2','fe-change'].forEach(k => {
+    document.getElementById('btn-'+k).classList.remove('active-btn');
+  });
+  document.getElementById('btn-'+v).classList.add('active-btn');
+
+  const allNodes = document.querySelectorAll('.node, .decision, .loop-back, .stop-node');
+  const cycle1 = ['n-con-submit','n-gm-assign','n-fe-inspect','n-gm-review'];
+  const cycle2 = ['n-gm-reject','n-con-correct','n-gm-forward-sqc','n-sqc-review','n-fe-reinspect','n-gm-final'];
+  const feChange = ['n-fe-change','n-fe-resume'];
+
+  allNodes.forEach(n => {
+    n.style.opacity = '1';
+    n.style.outline = 'none';
+  });
+
+  if (v === 'cycle1') {
+    allNodes.forEach(n => {
+      if (!cycle1.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid #2e7d32';
+    });
+  } else if (v === 'cycle2') {
+    allNodes.forEach(n => {
+      if (!cycle2.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid #2e75b6';
+    });
+  } else if (v === 'fe-change') {
+    allNodes.forEach(n => {
+      if (!feChange.includes(n.id)) n.style.opacity = '.25';
+      else n.style.outline = '2px solid #2e7d32';
+    });
+  }
+}
+</script>
+</body>
+</html>

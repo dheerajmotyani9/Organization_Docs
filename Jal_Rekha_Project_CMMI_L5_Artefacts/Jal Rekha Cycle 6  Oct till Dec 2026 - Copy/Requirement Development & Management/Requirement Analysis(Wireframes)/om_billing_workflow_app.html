@@ -1,0 +1,446 @@
+<h2 class="sr-only">Jal Rekha O&M Billing — interactive multi-screen app simulating all 13 approval stages from Firm bill submission through MD final approval, with page transitions, document uploads, and role-specific views</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.app{font-family:var(--font-sans);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.topbar{background:#002060;color:#fff;display:flex;align-items:center;padding:0 16px;height:42px;gap:10px}
+.topbar-logo{font-size:13px;font-weight:500;display:flex;align-items:center;gap:7px}
+.topbar-role{font-size:11px;opacity:.65;margin-left:auto;display:flex;align-items:center;gap:6px}
+.topbar-role span{background:rgba(255,255,255,.15);border-radius:20px;padding:2px 10px;font-size:10px}
+.stage-bar{display:flex;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary);overflow-x:auto;scrollbar-width:none}
+.stage-bar::-webkit-scrollbar{display:none}
+.st{flex-shrink:0;padding:7px 10px;font-size:10px;color:var(--color-text-tertiary);border-right:0.5px solid var(--color-border-tertiary);cursor:pointer;transition:.12s;text-align:center;line-height:1.3;min-width:52px;border-bottom:2.5px solid transparent}
+.st.done{color:#0F6E56;background:#F0FAF6;border-bottom-color:#1D9E75}
+.st.active{color:#fff;background:#002060;border-bottom-color:#C9A227;font-weight:500}
+.st.locked{opacity:.35;cursor:not-allowed}
+.layout{display:flex;min-height:460px}
+.sidebar{width:144px;background:var(--color-background-secondary);border-right:0.5px solid var(--color-border-tertiary);flex-shrink:0;padding:8px 0}
+.nav{padding:7px 13px;font-size:12px;color:var(--color-text-secondary);cursor:pointer;display:flex;align-items:center;gap:7px}
+.nav.active{background:var(--color-background-info);color:var(--color-text-info);font-weight:500;border-left:2.5px solid var(--color-border-info)}
+.nav.sub{padding-left:20px;font-size:11px}
+.sep{height:0.5px;background:var(--color-border-tertiary);margin:4px 0}
+.screen{flex:1;padding:14px 16px;overflow-y:auto;background:var(--color-background-primary)}
+.stitle{font-size:12px;font-weight:500;color:var(--color-text-primary);padding-bottom:7px;margin-bottom:10px;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between}
+.trail{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:7px 10px;font-size:10px;color:var(--color-text-secondary);margin-bottom:10px;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.trail-step{display:inline-flex;align-items:center;gap:4px}
+.trail-done{color:#0F6E56;font-weight:500}
+.trail-active{color:#002060;font-weight:500}
+.trail-arrow{color:var(--color-border-secondary)}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.fg3{grid-template-columns:1fr 1fr 1fr}
+.fl{font-size:10px;color:var(--color-text-secondary);margin-bottom:3px}
+.fi{height:27px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-secondary);padding:0 8px;font-size:11px;color:var(--color-text-primary);width:100%;display:flex;align-items:center}
+.fi.ed{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-primary)}
+.btns{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.btn{padding:6px 13px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:11px;font-weight:500;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-primary)}
+.btn:hover{background:var(--color-background-secondary)}
+.btn.p{background:#002060;color:#fff;border-color:#002060}
+.btn.p:hover{background:#001540}
+.btn.g{background:#C9A227;color:#fff;border-color:#C9A227}
+.btn.d{background:var(--color-background-danger);color:var(--color-text-danger);border-color:var(--color-border-danger)}
+.doc-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:11px}
+.doc-ico{width:18px;height:18px;border:0.5px solid var(--color-border-tertiary);border-radius:3px;display:flex;align-items:center;justify-content:center;color:var(--color-text-tertiary);flex-shrink:0;font-size:11px}
+.doc-name{flex:1;color:var(--color-text-primary)}
+.req{font-size:9px;color:var(--color-text-danger);margin-left:3px}
+.dac{display:flex;gap:4px}
+.db{padding:2px 7px;font-size:10px;border:0.5px solid var(--color-border-secondary);border-radius:4px;background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer}
+.db.up{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info)}
+.db.done{background:#E1F5EE;color:#0F6E56;border-color:#9FE1CB}
+.kcard{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.kv{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.kl{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+.tbl{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed}
+.tbl th{padding:5px 7px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);font-weight:500;font-size:10px;color:var(--color-text-secondary);text-align:left}
+.tbl td{padding:5px 7px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500}
+.b-warn{background:#FAEEDA;color:#633806}
+.b-info{background:#E6F1FB;color:#0C447C}
+.b-succ{background:#EAF3DE;color:#27500A}
+.b-act{background:#002060;color:#fff}
+.toast{background:#EAF3DE;border:0.5px solid #9FE1CB;border-radius:var(--border-radius-md);padding:8px 12px;font-size:11px;color:#0F6E56;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.page{display:none}
+.page.on{display:block}
+.success-box{background:#EAF3DE;border:0.5px solid #9FE1CB;border-radius:var(--border-radius-lg);padding:20px;text-align:center;margin-top:12px}
+.success-icon{font-size:32px;color:#27500A}
+.success-h{font-size:15px;font-weight:500;color:#175C0A;margin-top:8px}
+.success-sub{font-size:12px;color:#3B6D11;margin-top:4px}
+.fade-in{animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+</style>
+
+<div class="app">
+
+<div class="topbar">
+  <div class="topbar-logo"><i class="ti ti-droplet" aria-hidden="true"></i> Jal Rekha — O&M Billing</div>
+  <div class="topbar-role" id="topbar-role"><i class="ti ti-user-circle" aria-hidden="true"></i> <span id="role-badge">Firm: ABC Water Infra</span></div>
+</div>
+
+<div class="stage-bar" id="stage-bar"></div>
+
+<div class="layout">
+  <div class="sidebar" id="sidebar-nav">
+    <div class="nav active"><i class="ti ti-layout-dashboard" aria-hidden="true" style="font-size:14px"></i> Dashboard</div>
+    <div class="sep"></div>
+    <div class="nav active" style="font-weight:500"><i class="ti ti-file-invoice" aria-hidden="true" style="font-size:14px"></i> O&M billing</div>
+    <div class="nav sub active" id="nav-pending">View pending bills</div>
+    <div class="nav sub" id="nav-manage">Manage bill</div>
+    <div class="nav sub" id="nav-docs" style="display:none">Documents</div>
+    <div class="sep"></div>
+    <div class="nav" style="color:var(--color-text-tertiary)"><i class="ti ti-chart-bar" aria-hidden="true" style="font-size:14px"></i> Reports</div>
+    <div class="nav" style="color:var(--color-text-tertiary)"><i class="ti ti-settings" aria-hidden="true" style="font-size:14px"></i> Settings</div>
+  </div>
+  <div class="screen" id="screen-area"></div>
+</div>
+
+</div>
+
+<div style="display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap">
+  <button class="btn" onclick="prevStage()" id="btn-back" style="display:none"><i class="ti ti-arrow-left" aria-hidden="true"></i> Previous stage</button>
+  <span style="font-size:11px;color:var(--color-text-secondary)" id="stage-info"></span>
+  <button class="btn" style="margin-left:auto" onclick="sendPrompt('Explain the document requirements for O&M billing workflow in Jal Rekha')">Ask about this step ↗</button>
+</div>
+
+<script>
+const STAGES=[
+ {id:'firm',   short:'Firm',        role:'Firm: ABC Water Infra Pvt. Ltd.'},
+ {id:'gmpiu1', short:'GM PIU →',    role:'GM (PIU): Indore'},
+ {id:'tlcsc',  short:'TL CSC',      role:'TL (CSC / SQC): Indore Zone'},
+ {id:'gmpiu2', short:'GM PIU ✓',    role:'GM (PIU): Indore — Upload'},
+ {id:'gmo1',   short:'GM O&M',      role:'GM (O&M): Bhopal HO'},
+ {id:'tlpmc',  short:'TL PMC',      role:'TL (PMC): Bhopal HO'},
+ {id:'dgmo',   short:'DGM O&M',     role:'DGM (O&M): Bhopal HO'},
+ {id:'gmo2',   short:'GM O&M ✓',    role:'GM (O&M): Pass order'},
+ {id:'cgm',    short:'CGM',         role:'CGM: Indore Region'},
+ {id:'ca',     short:'CA',          role:'CA: Finance — Bhopal HO'},
+ {id:'cfo',    short:'CFO',         role:'CFO: Finance — Bhopal HO'},
+ {id:'pd',     short:'P.D.',        role:'P.D.: Head Office'},
+ {id:'md',     short:'MD ✓',        role:'MD: Jal Nigam Head Office'},
+];
+let cur=0;
+let docs={};
+
+function paint(){
+  const s=document.getElementById('stage-bar');
+  s.innerHTML=STAGES.map((st,i)=>`<div class="st ${i<cur?'done':i===cur?'active':'locked'}" onclick="${i<=cur?'goTo('+i+')':''}" title="${st.role}">${i<cur?'<i class="ti ti-check" aria-hidden="true" style="font-size:9px"></i> ':''}${st.short}</div>`).join('');
+  document.getElementById('topbar-role').innerHTML=`<i class="ti ti-user-circle" aria-hidden="true"></i> <span class="badge" style="background:rgba(255,255,255,.15);color:#fff;border-radius:20px;padding:2px 10px;font-size:10px">${STAGES[cur].role}</span>`;
+  document.getElementById('btn-back').style.display=cur>0?'':'none';
+  document.getElementById('stage-info').textContent=`Stage ${cur+1} of ${STAGES.length}: ${STAGES[cur].role}`;
+  document.getElementById('nav-docs').style.display=cur>=1?'':'none';
+  render();
+}
+function goTo(i){if(i<=cur){cur=i;paint();}}
+function next(){if(cur<STAGES.length-1){cur++;paint();}}
+function prevStage(){if(cur>0){cur--;paint();}}
+function upload(k){docs[k]=true;paint();}
+function allUp(keys){return keys.every(k=>docs[k]);}
+
+function docRow(k,label,req,readonly){
+  const u=docs[k]||readonly;
+  return `<div class="doc-row">
+    <div class="doc-ico"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+    <div class="doc-name">${label}${req?'<span class="req">*required</span>':''}</div>
+    <div class="dac">
+      ${u?`<span class="db done"><i class="ti ti-check" aria-hidden="true"></i> Uploaded</span><span class="db">View PDF</span>`
+         :`<span class="db up" onclick="upload('${k}')"><i class="ti ti-upload" aria-hidden="true"></i> Upload</span>`}
+    </div>
+  </div>`;
+}
+
+function trailHtml(items){
+  return `<div class="trail">${items.map((it,i)=>`<span class="trail-step"><span class="${it.done?'trail-done':it.active?'trail-active':''}">${it.done?'<i class="ti ti-check" aria-hidden="true"></i> ':it.active?'▸ ':''}${it.label}</span></span>${i<items.length-1?'<span class="trail-arrow">›</span>':''}`).join('')}</div>`;
+}
+
+function mkTrail(curIdx){
+  const labels=['Firm','GM PIU','TL CSC','GM PIU ✓','GM O&M','TL PMC','DGM O&M','GM O&M ✓','CGM','CA','CFO','P.D.','MD'];
+  const show=labels.slice(0,Math.min(curIdx+2,labels.length));
+  return trailHtml(show.map((l,i)=>({label:l,done:i<curIdx,active:i===curIdx})));
+}
+
+function toast(msg){return `<div class="toast"><i class="ti ti-info-circle" aria-hidden="true"></i> ${msg}</div>`;}
+
+const pages={
+  firm:()=>`
+    <div class="fade-in">
+    ${toast('Bill submission open for Bagh MVS — April 2026 billing cycle.')}
+    <div class="stitle">Bills — overview <span style="font-size:10px;color:var(--color-text-secondary)">April 2026</span></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">
+      <div class="kcard"><div class="kv">3</div><div class="kl">Bills generated</div></div>
+      <div class="kcard"><div class="kv">1</div><div class="kl">Pending forward</div></div>
+      <div class="kcard"><div class="kv">2</div><div class="kl">Under review</div></div>
+    </div>
+    <table class="tbl" style="margin-bottom:14px">
+      <colgroup><col width="108"><col width="90"><col width="64"><col width="64"><col width="76"><col width="120"></colgroup>
+      <thead><tr><th>Bill no.</th><th>Scheme</th><th>Month</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>OM/2026/041</td><td>Bagh MVS</td><td>Apr 2026</td><td>₹14.2L</td><td><span class="badge b-warn">Draft</span></td><td><button class="btn g" style="font-size:10px;padding:3px 10px" onclick="next()">Forward to GM (PIU) ↗</button></td></tr>
+        <tr><td>OM/2026/033</td><td>Rajond MVS</td><td>Mar 2026</td><td>₹11.8L</td><td><span class="badge b-info">At TL (CSC)</span></td><td><button class="btn" style="font-size:10px;padding:3px 10px">View</button></td></tr>
+        <tr><td>OM/2026/021</td><td>Punjapura</td><td>Feb 2026</td><td>₹9.4L</td><td><span class="badge b-succ">Approved</span></td><td><button class="btn" style="font-size:10px;padding:3px 10px">View</button></td></tr>
+      </tbody>
+    </table>
+    <div class="stitle">Bill entry — OM/2026/041</div>
+    <div class="fg">
+      <div><div class="fl">Scheme</div><div class="fi">Bagh MVS</div></div>
+      <div><div class="fl">Billing month</div><div class="fi">April 2026</div></div>
+      <div><div class="fl">RA Bill no. (auto)</div><div class="fi">RA-09</div></div>
+      <div><div class="fl">Total amount (₹)</div><div class="fi">14,20,000</div></div>
+    </div>
+    <div class="stitle">Upload documents</div>
+    ${docRow('firm_sub','Firm submission letter',true,false)}
+    ${docRow('tax_inv','Tax invoice',true,false)}
+    ${docRow('elec','Electricity bill',false,false)}
+    ${docRow('phe','PHE test report',false,false)}
+    ${docRow('firm_oth','Any other documents',false,false)}
+    <div class="btns">
+      <button class="btn">Save draft</button>
+      <button class="btn g" onclick="next()">Submit &amp; forward to GM (PIU) ↗</button>
+    </div>
+    </div>`,
+
+  gmpiu1:()=>`
+    <div class="fade-in">
+    ${toast('Bill OM/2026/041 received from ABC Water Infra — pending your forward action.')}
+    ${mkTrail(1)}
+    <div class="stitle">Pending bills — GM (PIU) review</div>
+    <table class="tbl" style="margin-bottom:12px">
+      <colgroup><col width="108"><col width="90"><col width="90"><col width="60"><col width="50"><col width="120"></colgroup>
+      <thead><tr><th>Bill no.</th><th>Scheme</th><th>Firm</th><th>Amount</th><th>Days</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>OM/2026/041</td><td>Bagh MVS</td><td>ABC Water</td><td>₹14.2L</td><td>1</td>
+          <td><button class="btn p" style="font-size:10px;padding:3px 9px" onclick="next()">Forward to TL (CSC) ↗</button></td></tr>
+      </tbody>
+    </table>
+    <div class="stitle">Uploaded by firm — view only</div>
+    ${docRow('firm_sub','Firm submission letter',false,true)}
+    ${docRow('tax_inv','Tax invoice',false,true)}
+    <div class="btns">
+      <button class="btn d">Hold with remark</button>
+      <button class="btn p" onclick="next()">Forward to TL (CSC) ↗</button>
+    </div>
+    </div>`,
+
+  tlcsc:()=>{
+    const ready=docs['tlcsc_rec'];
+    return `<div class="fade-in">
+    ${toast('Bill forwarded by GM (PIU) Indore — add data and recommendation letter.')}
+    ${mkTrail(2)}
+    <div class="stitle">TL (CSC) — add / edit bill data</div>
+    <div class="fg fg3">
+      <div><div class="fl">Base O&M amount (₹)</div><div class="fi ed">12,80,000</div></div>
+      <div><div class="fl">CPWI adjustment (₹)</div><div class="fi ed">1,40,000</div></div>
+      <div><div class="fl">Penalty / deduction (₹)</div><div class="fi ed">0</div></div>
+      <div><div class="fl">Yearly factor (%)</div><div class="fi ed">5.2</div></div>
+      <div><div class="fl">Net payable (₹)</div><div class="fi">14,20,000</div></div>
+      <div><div class="fl">TL CSC verdict</div><div class="fi ed">Recommended</div></div>
+    </div>
+    <div class="stitle">Upload recommendation</div>
+    ${docRow('tlcsc_rec','SQC / TL recommendation letter',true,false)}
+    ${docRow('tpwq','Third party water quality test report',false,false)}
+    ${docRow('tlcsc_oth','Any other documents',false,false)}
+    <div class="btns">
+      <button class="btn d">Hold — needs correction</button>
+      <button class="btn ${ready?'p':'g'}" onclick="${ready?'next()':'upload(\"tlcsc_rec\")'}">${ready?'Forward to GM (PIU) ↗':'Upload recommendation &amp; forward ↗'}</button>
+    </div>
+    </div>`;},
+
+  gmpiu2:()=>{
+    const keys=['signed_mb','signed_abs','bill_sheet','form27a'];
+    const ready=allUp(keys);
+    return `<div class="fade-in">
+    ${toast('TL (CSC) recommendation received — upload signed documents to lock and forward.')}
+    ${mkTrail(3)}
+    <div class="stitle">Final data entry &amp; signed document upload</div>
+    <div class="fg">
+      <div><div class="fl">Net payable confirmed (₹)</div><div class="fi">14,20,000</div></div>
+      <div><div class="fl">GM PIU remarks</div><div class="fi ed">Approved for forwarding</div></div>
+    </div>
+    <div class="stitle">Signed documents — all mandatory</div>
+    ${docRow('signed_mb','Signed MB (measurement book)',true,false)}
+    ${docRow('signed_abs','Signed abstract',true,false)}
+    ${docRow('bill_sheet','Signed monthly bill sheet (duly signed by GM PIU)',true,false)}
+    ${docRow('form27a','Signed Form 27A',true,false)}
+    ${docRow('relax','Relaxation letter (if applicable)',false,false)}
+    ${docRow('gmpiu_oth','Any other documents',false,false)}
+    <div class="btns">
+      <button class="btn d">Hold</button>
+      <button class="btn ${ready?'p':'g'}" onclick="${ready?'next()':'(function(){'+keys.map(k=>'docs[\"'+k+'\"]=true;').join('')+'paint();})()'}">${ready?'Lock details &amp; forward to GM (O&M) ↗':'Upload all &amp; lock ↗'}</button>
+    </div>
+    </div>`;},
+
+  gmo1:()=>`
+    <div class="fade-in">
+    ${toast('Bill OM/2026/041 received from GM (PIU) Indore — all signed documents attached.')}
+    ${mkTrail(4)}
+    <div class="stitle">GM (O&M) — review &amp; route to TL (PMC)</div>
+    <div class="fg">
+      <div><div class="fl">Scheme</div><div class="fi">Bagh MVS</div></div>
+      <div><div class="fl">Net payable (₹)</div><div class="fi">14,20,000</div></div>
+      <div><div class="fl">Days at GM (O&M)</div><div class="fi">0</div></div>
+      <div><div class="fl">GM (O&M) remarks</div><div class="fi ed">Verified — forwarding to PMC</div></div>
+    </div>
+    <div class="stitle">Upstream documents — view only</div>
+    ${docRow('firm_sub','Firm submission letter',false,true)}
+    ${docRow('tlcsc_rec','SQC / TL recommendation letter',false,true)}
+    ${docRow('signed_mb','Signed MB',false,true)}
+    ${docRow('signed_abs','Signed abstract',false,true)}
+    ${docRow('bill_sheet','Signed monthly bill sheet',false,true)}
+    ${docRow('form27a','Signed Form 27A',false,true)}
+    <div class="btns">
+      <button class="btn d">Hold with remarks</button>
+      <button class="btn p" onclick="next()">Forward to TL (PMC) ↗</button>
+    </div>
+    </div>`,
+
+  tlpmc:()=>{
+    const ready=docs['pmc_rec'];
+    return `<div class="fade-in">
+    ${toast('Bill received from GM (O&M) for PMC technical recommendation.')}
+    ${mkTrail(5)}
+    <div class="stitle">TL (PMC) — recommendation &amp; supporting documents</div>
+    <div class="fg">
+      <div><div class="fl">PMC review outcome</div><div class="fi ed">Technically verified</div></div>
+      <div><div class="fl">Recommendation date</div><div class="fi ed">19-Jun-2026</div></div>
+    </div>
+    ${docRow('pmc_rec','TL (PMC) recommendation letter',true,false)}
+    ${docRow('pmc_sup','Supporting documents',false,false)}
+    <div class="btns">
+      <button class="btn d">Return to GM (O&M)</button>
+      <button class="btn ${ready?'p':'g'}" onclick="${ready?'next()':'upload(\"pmc_rec\")'}">${ready?'Forward to DGM (O&M) ↗':'Upload letter &amp; forward ↗'}</button>
+    </div>
+    </div>`;},
+
+  dgmo:()=>`
+    <div class="fade-in">
+    ${toast('Bill recommended by TL (PMC) — pending DGM approval.')}
+    ${mkTrail(6)}
+    <div class="stitle">DGM (O&M) — approve or hold</div>
+    <div class="fg fg3">
+      <div><div class="fl">Scheme</div><div class="fi">Bagh MVS</div></div>
+      <div><div class="fl">Net payable (₹)</div><div class="fi">14,20,000</div></div>
+      <div><div class="fl">DGM decision</div><div class="fi ed">Approved</div></div>
+    </div>
+    ${docRow('dgm_note','DGM approval note (optional)',false,false)}
+    <div class="btns">
+      <button class="btn d">Hold — return to TL (PMC)</button>
+      <button class="btn p" onclick="next()">Approve &amp; issue pass order ↗</button>
+    </div>
+    </div>`,
+
+  gmo2:()=>{
+    const keys2=['pass_order','ho_letter'];
+    const ready=allUp(keys2);
+    return `<div class="fade-in">
+    ${toast('DGM (O&M) approved — upload pass order and HO letter to forward to CGM.')}
+    ${mkTrail(7)}
+    <div class="stitle">GM (O&M) — pass order &amp; HO letter upload</div>
+    ${docRow('pass_order','Pass order copy (signed by DGM O&M)',true,false)}
+    ${docRow('ho_letter','Signed letter from Head Office (HO)',true,false)}
+    <div class="btns">
+      <button class="btn ${ready?'p':'g'}" onclick="${ready?'next()':'(function(){docs[\"pass_order\"]=true;docs[\"ho_letter\"]=true;paint();})()'}">${ready?'Forward to CGM ↗':'Upload both &amp; forward ↗'}</button>
+    </div>
+    </div>`;},
+
+  cgm:()=>`
+    <div class="fade-in">
+    ${toast('Bill forwarded to CGM Indore region from GM (O&M).')}
+    ${mkTrail(8)}
+    <div class="stitle">CGM — regional office review</div>
+    <div class="fg">
+      <div><div class="fl">CGM region</div><div class="fi">Indore</div></div>
+      <div><div class="fl">CGM decision</div><div class="fi ed">Approved</div></div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;font-size:10px;color:var(--color-text-secondary);margin-bottom:10px">
+      CGM offices covered: <strong style="color:var(--color-text-primary)">Bhopal · Gwalior · Jabalpur · Rewa · Sagar · Indore · Ujjain</strong>
+    </div>
+    ${docRow('cgm_note','CGM review note (optional)',false,false)}
+    <div class="btns">
+      <button class="btn d">Return to GM (O&M)</button>
+      <button class="btn p" onclick="next()">Forward to CA ↗</button>
+    </div>
+    </div>`,
+
+  ca:()=>{
+    const ready=docs['ca_note'];
+    return `<div class="fade-in">
+    ${toast('Bill received from CGM Indore — financial verification required.')}
+    ${mkTrail(9)}
+    <div class="stitle">CA — financial review</div>
+    <div class="fg fg3">
+      <div><div class="fl">Base O&M (₹)</div><div class="fi">12,80,000</div></div>
+      <div><div class="fl">CPWI adj. (₹)</div><div class="fi">1,40,000</div></div>
+      <div><div class="fl">Net payable (₹)</div><div class="fi">14,20,000</div></div>
+      <div><div class="fl">GST 18% (₹)</div><div class="fi">2,55,600</div></div>
+      <div><div class="fl">Total incl. GST (₹)</div><div class="fi">16,75,600</div></div>
+      <div><div class="fl">CA verdict</div><div class="fi ed">Figures verified</div></div>
+    </div>
+    ${docRow('ca_note','CA verification note',true,false)}
+    <div class="btns">
+      <button class="btn d">Flag discrepancy — return to CGM</button>
+      <button class="btn ${ready?'p':'g'}" onclick="${ready?'next()':'upload(\"ca_note\")'}">${ready?'Forward to CFO ↗':'Add note &amp; forward ↗'}</button>
+    </div>
+    </div>`;},
+
+  cfo:()=>`
+    <div class="fade-in">
+    ${toast('CA-verified bill pending CFO financial sign-off.')}
+    ${mkTrail(10)}
+    <div class="stitle">CFO — financial sign-off</div>
+    <div class="fg">
+      <div><div class="fl">Total incl. GST (₹)</div><div class="fi">16,75,600</div></div>
+      <div><div class="fl">CFO sign-off date</div><div class="fi ed">19-Jun-2026</div></div>
+      <div><div class="fl">CFO remarks</div><div class="fi ed">Financials cleared</div></div>
+    </div>
+    ${docRow('cfo_note','CFO sign-off note (optional)',false,false)}
+    <div class="btns">
+      <button class="btn d">Hold — return to CA</button>
+      <button class="btn p" onclick="next()">Sign off &amp; forward to P.D. ↗</button>
+    </div>
+    </div>`,
+
+  pd:()=>`
+    <div class="fade-in">
+    ${toast('CFO signed off — bill pending P.D. endorsement before MD.')}
+    ${mkTrail(11)}
+    <div class="stitle">P.D. — endorsement</div>
+    <div class="fg">
+      <div><div class="fl">Total incl. GST (₹)</div><div class="fi">16,75,600</div></div>
+      <div><div class="fl">P.D. remarks</div><div class="fi ed">Endorsed for MD approval</div></div>
+      <div><div class="fl">Endorsement date</div><div class="fi ed">19-Jun-2026</div></div>
+    </div>
+    ${docRow('pd_note','P.D. endorsement note (optional)',false,false)}
+    <div class="btns">
+      <button class="btn d">Hold — return to CFO</button>
+      <button class="btn p" onclick="next()">Endorse &amp; forward to MD ↗</button>
+    </div>
+    </div>`,
+
+  md:()=>`
+    <div class="fade-in">
+    ${toast('All 12 stages cleared — pending MD final approval.')}
+    ${mkTrail(12)}
+    <div class="stitle">MD — final approval</div>
+    <div class="fg fg3">
+      <div><div class="fl">Bill no.</div><div class="fi">OM/2026/041</div></div>
+      <div><div class="fl">Scheme</div><div class="fi">Bagh MVS</div></div>
+      <div><div class="fl">Total incl. GST (₹)</div><div class="fi">16,75,600</div></div>
+      <div><div class="fl">Documents attached</div><div class="fi">18 documents</div></div>
+      <div><div class="fl">MD remarks</div><div class="fi ed">Approved for payment</div></div>
+      <div><div class="fl">Approval date</div><div class="fi ed">19-Jun-2026</div></div>
+    </div>
+    <div id="final-box" style="display:none" class="success-box">
+      <i class="ti ti-circle-check success-icon" aria-hidden="true"></i>
+      <div class="success-h">Bill OM/2026/041 — finally approved!</div>
+      <div class="success-sub">₹16,75,600 cleared for payment processing · Bagh MVS · April 2026</div>
+    </div>
+    <div class="btns">
+      <button class="btn d">Reject — return to P.D.</button>
+      <button class="btn g" id="md-btn" onclick="document.getElementById('final-box').style.display='block';document.getElementById('md-btn').disabled=true;document.getElementById('md-btn').textContent='✓ Finally approved'">MD final approve ✓</button>
+    </div>
+    </div>`,
+};
+
+function render(){
+  const id=STAGES[cur].id;
+  document.getElementById('screen-area').innerHTML=pages[id]();
+}
+
+paint();
+</script>

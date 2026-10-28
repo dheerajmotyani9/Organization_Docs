@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jal Rekha – SVS Village Water Supply Dashboard</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#EEF2F7;color:#212121;min-height:100vh;padding:20px}
+.dash{max-width:1400px;margin:0 auto}
+.hdr{background:#003d6b;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:12px;margin-bottom:14px}
+.hdr-left{display:flex;align-items:center;gap:12px}
+.hdr-emblem{width:50px;height:50px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:#003d6b;text-align:center;line-height:1.2;padding:4px;border:2px solid #c8a900}
+.hdr-titles{color:#fff}
+.hdr-titles h1{font-size:17px;font-weight:700}
+.hdr-titles p{font-size:11px;opacity:.75;margin-top:2px}
+.hdr-right{text-align:right;color:#fff;font-size:11px;opacity:.8}
+.refresh{font-size:10px;margin-top:3px;opacity:.6}
+.filters{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;background:#fff;padding:14px 16px;border-radius:10px;border:1px solid #E0E0E0}
+.filt-group label{display:block;font-size:11px;color:#616161;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+select,input[type=text]{width:100%;padding:8px 10px;border:1.5px solid #E0E0E0;border-radius:7px;font-size:13px;background:#fff;font-family:inherit}
+select:focus,input:focus{outline:none;border-color:#1565C0;box-shadow:0 0 0 3px rgba(21,101,192,.1)}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:10px;padding:14px 16px;border:1px solid #E0E0E0}
+.kpi-val{font-size:32px;font-weight:700;line-height:1;margin-bottom:4px}
+.kpi-lbl{font-size:12px;color:#616161}
+.kpi-yes .kpi-val{color:#2E7D32}
+.kpi-no .kpi-val{color:#C62828}
+.kpi-part .kpi-val{color:#E65100}
+.kpi-tot .kpi-val{color:#0F2A4A}
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.chart-card{background:#fff;border-radius:10px;padding:16px;border:1px solid #E0E0E0}
+.card-title{font-size:13px;font-weight:600;color:#0F2A4A;margin-bottom:10px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#616161}
+.leg-swatch{width:11px;height:11px;border-radius:2px;flex-shrink:0}
+.table-card{background:#fff;border-radius:10px;border:1px solid #E0E0E0;overflow:hidden}
+.table-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #E0E0E0}
+.search-wrap{display:flex;align-items:center;gap:8px}
+.search-wrap input{width:220px}
+.export-btn{padding:7px 14px;font-size:12px;background:#1565C0;color:#fff;border:none;border-radius:7px;cursor:pointer;display:flex;align-items:center;gap:5px;font-weight:600}
+.export-btn:hover{background:#0D47A1}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#003d6b;color:#fff;padding:9px 10px;text-align:left;font-weight:600;font-size:11px;position:sticky;top:0}
+td{padding:8px 10px;border-bottom:1px solid #F0F0F0;color:#212121;vertical-align:middle}
+tr:hover td{background:#F5F9FF}
+.tbl-wrap{max-height:320px;overflow-y:auto}
+.s-yes{background:#E8F5E9;color:#1B5E20;padding:2px 9px;border-radius:12px;font-size:11px;font-weight:600;display:inline-block}
+.s-no{background:#FFEBEE;color:#B71C1C;padding:2px 9px;border-radius:12px;font-size:11px;font-weight:600;display:inline-block}
+.s-partial{background:#FFF8E1;color:#E65100;padding:2px 9px;border-radius:12px;font-size:11px;font-weight:600;display:inline-block}
+.reason-tag{font-size:10px;color:#9E9E9E}
+.pg{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid #E0E0E0;font-size:12px;color:#616161}
+.pg button{padding:5px 12px;font-size:11px;border:1px solid #E0E0E0;background:#fff;border-radius:6px;cursor:pointer}
+.pg button:hover{background:#F5F5F5}
+.cnt-badge{background:#E3F2FD;color:#1565C0;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="dash">
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="hdr-emblem">MP<br>SEAL</div>
+    <div class="hdr-titles">
+      <h1>Jal Rekha — Har Ghar Jal</h1>
+      <p>SVS Report Dashboard &nbsp;·&nbsp; Village Water Supply Status &nbsp;·&nbsp; Madhya Pradesh Jal Nigam &amp; MP PHE &nbsp;·&nbsp; Govt. of Madhya Pradesh</p>
+    </div>
+  </div>
+  <div class="hdr-right">
+    PHE – HGJ Reports &nbsp;|&nbsp; SVS DWSR
+    <div class="refresh">Last refresh: 28-Jul-2026 09:07 AM</div>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="filt-group"><label>District</label><select id="fDistrict" onchange="cascadeFilters('district')"><option value="">All</option></select></div>
+  <div class="filt-group"><label>Block</label><select id="fBlock" onchange="cascadeFilters('block')"><option value="">All</option></select></div>
+  <div class="filt-group"><label>Gram Panchayat</label><select id="fGP" onchange="cascadeFilters('gp')"><option value="">All</option></select></div>
+  <div class="filt-group"><label>Village</label><select id="fVillage" onchange="applyFilters()"><option value="">All</option></select></div>
+  <div class="filt-group"><label>Water supply status</label><select id="fStatus" onchange="applyFilters()"><option value="">All</option><option>Yes</option><option>No</option><option>Partial</option></select></div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi kpi-tot"><div class="kpi-val" id="kTotal">0</div><div class="kpi-lbl">Total villages</div></div>
+  <div class="kpi kpi-yes"><div class="kpi-val" id="kYes">0</div><div class="kpi-lbl">Supply completed (Yes)</div></div>
+  <div class="kpi kpi-no"><div class="kpi-val" id="kNo">0</div><div class="kpi-lbl">No supply</div></div>
+  <div class="kpi kpi-part"><div class="kpi-val" id="kPartial">0</div><div class="kpi-lbl">Partial supply</div></div>
+</div>
+
+<div class="charts-row">
+  <div class="chart-card">
+    <div class="card-title">Water supply status — pie chart</div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-swatch" style="background:#2E7D32"></div>Yes — completed</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:#C62828"></div>No — not supplied</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:#E65100"></div>Partial</div>
+    </div>
+    <div style="position:relative;width:100%;height:220px"><canvas id="pieChart" role="img" aria-label="Doughnut chart showing Yes, No and Partial water supply village counts.">Village water supply status chart.</canvas></div>
+  </div>
+  <div class="chart-card">
+    <div class="card-title">District-wise village count — bar chart</div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-swatch" style="background:#2a78d6"></div>Yes</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:#d03b3b"></div>No</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:#eda100"></div>Partial</div>
+    </div>
+    <div style="position:relative;width:100%;height:220px"><canvas id="barChart" role="img" aria-label="Stacked bar chart showing village water supply breakdown by district.">District-wise supply bar chart.</canvas></div>
+  </div>
+</div>
+
+<div class="table-card">
+  <div class="table-header">
+    <div style="font-size:14px;font-weight:600;color:#0F2A4A">Detailed village report &nbsp;<span class="cnt-badge" id="countBadge"></span></div>
+    <div class="search-wrap">
+      <input type="text" id="searchBox" placeholder="Search village, GP, block, district..." oninput="applyFilters()">
+      <button class="export-btn" onclick="exportCSV()">⬇ Export to Excel (CSV)</button>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>S.No</th><th>District</th><th>Block</th><th>Gram Panchayat</th><th>Village</th>
+        <th>JJM Village ID</th><th>Village Status</th><th>Handed Over to Community</th>
+        <th>No. of HSC (DWS)</th><th>Is DWS Completed?</th><th>Reason (if No)</th><th>Reason Remark</th>
+      </tr></thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+  <div class="pg">
+    <span id="pgInfo"></span>
+    <div style="margin-left:auto;display:flex;gap:6px">
+      <button onclick="changePage(-1)">&#8592; Prev</button>
+      <button onclick="changePage(1)">Next &#8594;</button>
+    </div>
+    <span style="margin-left:8px">Show <select id="pgSize" onchange="applyFilters()" style="width:65px;padding:4px"><option>10</option><option>25</option><option>50</option></select> entries</span>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const REASONS=['Source (failure/tubewell)','Meter pump not working','Electricity supply problem','Pipeline damage','Valve/pump operator problem','Any other'];
+const DISTRICTS=['Shahdol','Umaria','Sidhi','Singrauli','Satna','Anuppur','Dindori'];
+const BLOCKS={Shahdol:['Gohparu','Budhpur','Jaisingnagar','Beohari'],Umaria:['Manpur','Nowrozabad','Pali','Chandia'],Sidhi:['Rampur Naikin','Majhauli','Churhat','Kusmi'],Singrauli:['Waidhan','Chitrangi','Devsar'],Satna:['Maihar','Amarpatan','Ramnagar','Nagod'],Anuppur:['Pushprajgarh','Kotma','Anuppur'],Dindori:['Dindori','Shahpura','Amarpur']};
+const GPs={Gohparu:['Kathoutiya GP','Baidhan GP','Semra GP'],Budhpur:['Budhpur Khurd GP','Amoli GP'],Jaisingnagar:['Jaisingnagar GP','Simariya GP'],Beohari:['Beohari GP'],Manpur:['Manpur Bari GP','Devpur GP'],Nowrozabad:['Niwari GP','Belha GP'],Pali:['Patna GP'],Chandia:['Chandia GP'],['Rampur Naikin']:['Rampur GP','Karki GP'],Majhauli:['Majhauli GP'],Churhat:['Chunni GP','Ranipur GP'],Kusmi:['Kusmi GP'],Waidhan:['Waidhan GP'],Chitrangi:['Chitrangi GP','Jhingurdaha GP'],Devsar:['Devsar GP'],Maihar:['Maihar Dehat GP','Maihar Nagar GP'],Amarpatan:['Amarpatan GP'],Ramnagar:['Ramnagar GP'],Nagod:['Nagod GP','Unchehra GP'],Pushprajgarh:['Pushprajgarh GP'],Kotma:['Kotma GP','Bhanwar GP'],Anuppur:['Anuppur GP'],Dindori:['Dindori GP','Simariya GP'],Shahpura:['Shahpura GP'],Amarpur:['Amarpur GP']};
+const STATUSES=['Yes','No','Partial'];
+function rnd(n){return Math.floor(Math.random()*n)}
+function pick(arr){return arr[rnd(arr.length)]}
+
+const allData=[];let uid=194480;
+DISTRICTS.forEach(d=>{
+  (BLOCKS[d]||[]).forEach(b=>{
+    const gps=GPs[b]||[b+' GP'];
+    gps.forEach(gp=>{
+      const vc=4+rnd(6);
+      for(let v=0;v<vc;v++){
+        const st=pick(STATUSES);
+        const reason=st!=='Yes'?pick(REASONS):'';
+        allData.push({district:d,block:b,gp,village:`${gp.replace(' GP','')} Village ${v+1}`,jjmId:uid++,vilStatus:'SVS',handedOver:Math.random()>0.4?'Yes':'No',hsc:10+rnd(80),dws:st,reason,remark:st==='No'?'Reported — '+reason.toLowerCase():''});
+      }
+    });
+  });
+});
+
+let filtered=[...allData];let page=0;
+
+function populateSelects(){
+  const fd=document.getElementById('fDistrict');
+  [...new Set(allData.map(r=>r.district))].sort().forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;fd.appendChild(o);});
+}
+
+function cascadeFilters(level){
+  const d=document.getElementById('fDistrict').value;
+  const b=document.getElementById('fBlock').value;
+  const g=document.getElementById('fGP').value;
+  if(level==='district'){
+    const fb=document.getElementById('fBlock');fb.innerHTML='<option value="">All</option>';
+    document.getElementById('fGP').innerHTML='<option value="">All</option>';
+    document.getElementById('fVillage').innerHTML='<option value="">All</option>';
+    if(d)(BLOCKS[d]||[]).sort().forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;fb.appendChild(o);});
+  }
+  if(level==='block'){
+    const fg=document.getElementById('fGP');fg.innerHTML='<option value="">All</option>';
+    document.getElementById('fVillage').innerHTML='<option value="">All</option>';
+    if(b)(GPs[b]||[]).sort().forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;fg.appendChild(o);});
+  }
+  if(level==='gp'){
+    const fv=document.getElementById('fVillage');fv.innerHTML='<option value="">All</option>';
+    if(g){const villages=[...new Set(allData.filter(r=>r.gp===g).map(r=>r.village))].sort();villages.forEach(x=>{const o=document.createElement('option');o.value=x;o.textContent=x;fv.appendChild(o);});}
+  }
+  applyFilters();
+}
+
+function applyFilters(){
+  const d=document.getElementById('fDistrict').value;
+  const b=document.getElementById('fBlock').value;
+  const g=document.getElementById('fGP').value;
+  const v=document.getElementById('fVillage').value;
+  const st=document.getElementById('fStatus').value;
+  const q=document.getElementById('searchBox').value.toLowerCase();
+  filtered=allData.filter(r=>{
+    if(d&&r.district!==d)return false;if(b&&r.block!==b)return false;if(g&&r.gp!==g)return false;if(v&&r.village!==v)return false;if(st&&r.dws!==st)return false;
+    if(q&&![r.district,r.block,r.gp,r.village].join(' ').toLowerCase().includes(q))return false;return true;
+  });
+  page=0;renderKPIs();renderCharts();renderTable();
+}
+
+function renderKPIs(){
+  const yes=filtered.filter(r=>r.dws==='Yes').length;
+  const no=filtered.filter(r=>r.dws==='No').length;
+  const part=filtered.filter(r=>r.dws==='Partial').length;
+  document.getElementById('kTotal').textContent=filtered.length;
+  document.getElementById('kYes').textContent=yes;
+  document.getElementById('kNo').textContent=no;
+  document.getElementById('kPartial').textContent=part;
+}
+
+let pieInst=null,barInst=null;
+function renderCharts(){
+  const yes=filtered.filter(r=>r.dws==='Yes').length;
+  const no=filtered.filter(r=>r.dws==='No').length;
+  const part=filtered.filter(r=>r.dws==='Partial').length;
+  if(pieInst)pieInst.destroy();
+  pieInst=new Chart(document.getElementById('pieChart'),{type:'doughnut',data:{labels:['Yes','No','Partial'],datasets:[{data:[yes,no,part],backgroundColor:['#2E7D32','#C62828','#E65100'],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.label}: ${c.raw} villages (${filtered.length?Math.round(c.raw/filtered.length*100):0}%)`}}}}});
+  const dists=[...new Set(filtered.map(r=>r.district))];
+  if(barInst)barInst.destroy();
+  barInst=new Chart(document.getElementById('barChart'),{type:'bar',data:{labels:dists,datasets:[{label:'Yes',data:dists.map(d=>filtered.filter(r=>r.district===d&&r.dws==='Yes').length),backgroundColor:'#2a78d6'},{label:'No',data:dists.map(d=>filtered.filter(r=>r.district===d&&r.dws==='No').length),backgroundColor:'#d03b3b'},{label:'Partial',data:dists.map(d=>filtered.filter(r=>r.district===d&&r.dws==='Partial').length),backgroundColor:'#eda100'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{stacked:true,ticks:{font:{size:10},autoSkip:false,maxRotation:35}},y:{stacked:true,ticks:{font:{size:10}}}}}});
+}
+
+function renderTable(){
+  const pgSz=parseInt(document.getElementById('pgSize').value)||10;
+  const start=page*pgSz;
+  const slice=filtered.slice(start,start+pgSz);
+  document.getElementById('tableBody').innerHTML=slice.map((r,i)=>`<tr><td>${start+i+1}</td><td>${r.district}</td><td>${r.block}</td><td>${r.gp}</td><td>${r.village}</td><td style="font-family:monospace;font-size:11px">${r.jjmId}</td><td><span style="font-size:10px;background:#E8F5E9;color:#1B5E20;padding:2px 7px;border-radius:10px;font-weight:600">${r.vilStatus}</span></td><td>${r.handedOver}</td><td>${r.hsc}</td><td><span class="${r.dws==='Yes'?'s-yes':r.dws==='No'?'s-no':'s-partial'}">${r.dws}</span></td><td class="reason-tag">${r.reason}</td><td class="reason-tag">${r.remark}</td></tr>`).join('');
+  document.getElementById('pgInfo').textContent=`Showing ${start+1}–${Math.min(start+pgSz,filtered.length)} of ${filtered.length}`;
+  document.getElementById('countBadge').textContent=`${filtered.length} villages`;
+}
+
+function changePage(dir){
+  const pgSz=parseInt(document.getElementById('pgSize').value)||10;
+  const maxPg=Math.ceil(filtered.length/pgSz)-1;
+  page=Math.max(0,Math.min(maxPg,page+dir));renderTable();
+}
+
+function exportCSV(){
+  const h=['S.No','District','Block','Gram Panchayat','Village','JJM Village ID','Village Status','Handed Over','HSC (DWS)','DWS Completed?','Reason','Remark'];
+  const rows=filtered.map((r,i)=>[i+1,r.district,r.block,r.gp,r.village,r.jjmId,r.vilStatus,r.handedOver,r.hsc,r.dws,r.reason,r.remark]);
+  const csv=[h,...rows].map(r=>r.join(',')).join('\n');
+  const a=document.createElement('a');a.href='data:text/csv,'+encodeURIComponent(csv);a.download='SVS_DWSR_Village_Water_Supply_Report.csv';a.click();
+}
+
+populateSelects();applyFilters();
+</script>
+</body>
+</html>
