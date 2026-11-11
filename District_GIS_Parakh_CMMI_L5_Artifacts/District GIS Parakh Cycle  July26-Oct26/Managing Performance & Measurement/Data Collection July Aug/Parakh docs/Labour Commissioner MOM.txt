@@ -1,0 +1,31 @@
+Labour Commissioner Change 
+
+1. Assets should be named as Establishment.
+2. New  Establishment are get registered on labour.mponline from where we get data via API.-- department will provide.
+3. Random allocation within the district .
+4. on summited forms Inspection date and Status should be there.
+5. New form-> New Inspection
+6. Time limit to perform inspection after being allocated.-- department will decide and provide us 
+7. Form should have image.
+8. digitally signed the inspection.
+9. admin can have inspection pdf with  inspector name and designation .
+10. another department for factory and Shram
+11. users will be created by backend
+12. There should be Provisions for inspection for unregistered establishment. Admin can see and have information of unregistered assets as well. 
+13. There will be dashboard and report. (like kitne baal shramik paye gaye , kis factory and kis district mei)-- department will provide these specification.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- on mobile in welcome show name not user name.
+
