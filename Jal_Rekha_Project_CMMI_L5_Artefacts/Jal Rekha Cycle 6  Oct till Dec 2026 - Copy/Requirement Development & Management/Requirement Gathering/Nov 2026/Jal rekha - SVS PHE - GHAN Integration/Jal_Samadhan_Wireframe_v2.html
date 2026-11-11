@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jal Samadhan – Interactive Wireframe v2 (MP PHE Jal Rekha)</title>
+<style>
+:root{--b1:#45c0ea;--b2:#03a9f4;--bd:#0b5f8a;--or:#ff9c27;--ok:#1fbf6a;--bg:#e8edf3}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#1d1d1f;display:flex;height:100vh}
+#side{width:280px;background:#fff;border-right:1px solid #cfd8e3;padding:12px;overflow:auto;flex:none}
+#side h1{font-size:15px;color:var(--bd);margin:0}#side small{color:#6b7a8a}
+#side h2{font-size:11px;letter-spacing:1px;color:var(--bd);margin:12px 0 3px;text-transform:uppercase}
+#side a{display:block;padding:5px 8px;border-radius:6px;cursor:pointer;font-size:13px;color:#234}
+#side a:hover{background:#e3f4fb}#side a.on{background:var(--b2);color:#fff}
+#side button{width:100%;margin-top:6px;padding:8px;border:0;border-radius:6px;background:var(--b2);color:#fff;cursor:pointer;font-size:13px}
+#side button.alt{background:#7b8ea3}#side button.ed{background:var(--or)}
+#stage{flex:1;display:flex;flex-direction:column;align-items:center;overflow:auto;padding:14px}
+#note{color:#456;font-size:12px;margin-bottom:8px;text-align:center;max-width:760px}
+.phone{width:370px;height:730px;background:#f4f7fb;border:8px solid #cfd8e3;border-radius:26px;position:relative;overflow:hidden;display:flex;flex-direction:column;flex:none}
+.phone.web{width:100%;max-width:1020px;border-radius:10px}
+.top{background:var(--b1);color:#fff;display:flex;align-items:center;gap:10px;padding:8px 10px;flex:none}
+.logo{width:46px;height:46px;background:#fff;border-radius:6px;color:#0288d1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:18px}.logo small{font-size:7px;font-weight:700}
+.tt{flex:1}.tt b{font-size:16px;display:block}.tt small{font-size:10px}
+.pill{background:#fff;color:#2aa7d8;border:1px solid #888;border-radius:18px;padding:6px 10px;font-size:11px;cursor:pointer}
+.sub{background:var(--b2);color:#fff;padding:8px 10px;display:flex;align-items:center;gap:10px;flex:none}
+.sub i{font-style:normal;background:#fff;color:#000;border-radius:4px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.body{flex:1;overflow:auto;padding:12px}.ft{text-align:center;font-size:9px;color:#667;margin-top:14px}
+.card{background:#fff;border-radius:8px;padding:10px;margin-bottom:10px;box-shadow:0 1px 3px #0002}
+.btn{display:block;text-align:center;padding:10px;border-radius:20px;background:var(--b2);color:#fff;margin:8px 0;cursor:pointer;border:0;font-size:13px}
+.btn.g{background:var(--ok)}.btn.o{background:var(--or)}.btn.r{background:#e5484d}.btn.s{display:inline-block;padding:6px 12px;margin:3px 3px 3px 0;font-size:12px}
+input,select,textarea{width:100%;padding:9px;border:1px solid #aab;border-radius:6px;font-size:13px;margin:3px 0 9px;background:#fff;font-family:inherit}
+label{font-size:12px;font-weight:600}label b{color:#d00}
+.in{background:#fff;border:1px dashed #89a;border-radius:8px;padding:12px;text-align:center;font-size:13px;margin:4px 0 9px;cursor:pointer}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{background:var(--b2);color:#fff;border-radius:6px;padding:14px 8px;text-align:center;font-size:13px;cursor:pointer;font-weight:600}.tile .ic{font-size:32px}.tile.w{background:#fff;color:#123;box-shadow:0 1px 3px #0003}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.st.w5{grid-template-columns:repeat(5,1fr)}
+.st .lb{background:var(--or);color:#fff;font-size:11px;text-align:center;padding:6px 2px;font-weight:600;border:1px solid #888}
+.st .nm{background:#fff;text-align:center;font-size:24px;padding:9px;box-shadow:2px 3px 5px #0003;border:1px solid #999;margin-top:6px}
+.row{background:#fff;border-radius:8px;padding:9px;margin-bottom:8px;font-size:13px;position:relative;cursor:pointer;box-shadow:0 1px 2px #0002}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;background:#e6e9ee;margin:3px 3px 0 0}
+.tag.y{background:#fff3b0}.tag.gr{background:#c8f5dc}.tag.r{background:#ffd3d3}.tag.bl{background:#d6eefb}
+.tabs{display:flex;gap:5px;margin:6px 0 10px;flex-wrap:wrap}.tab{flex:1;text-align:center;padding:7px 6px;border-radius:7px;background:#d9e3ec;font-size:12px;cursor:pointer;min-width:70px}.tab.on{background:var(--b2);color:#fff}
+.map{height:170px;border-radius:8px;background:#e1ece5;position:relative;overflow:hidden;font-size:11px;margin-bottom:8px}.map svg{position:absolute;inset:0;width:100%;height:100%}.map span{position:absolute;left:6px;bottom:5px;background:#fffc;padding:2px 6px;border-radius:4px}
+.modal{position:absolute;inset:0;background:#0006;display:flex;align-items:center;justify-content:center;z-index:5}.modal>div{background:#fff;border-radius:12px;padding:16px;width:86%;max-width:420px;max-height:90%;overflow:auto}.modal h3{margin:0 0 8px;color:var(--bd)}
+.toast{position:absolute;left:10%;right:10%;bottom:16px;background:#14354a;color:#fff;padding:9px;border-radius:8px;font-size:12px;text-align:center;z-index:6}
+.note{font-size:12px;color:#7a5a00;background:#fff6dd;border-left:3px solid var(--or);padding:6px 8px;margin:6px 0;border-radius:4px}
+.bar{display:flex;align-items:center;gap:6px;font-size:12px;margin:5px 0}.bar span{width:72px}.bar i{height:14px;background:var(--b2);border-radius:3px;display:block}
+table{width:100%;border-collapse:collapse;font-size:12px;background:#fff}th{background:var(--bd);color:#fff;padding:7px;text-align:left}td{padding:7px;border-bottom:1px solid #eee}tr[data-go]{cursor:pointer}tr[data-go]:hover{background:#eaf6fc}
+.acts{margin:-4px 0 8px}.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin:6px 0}.flow div{background:#fff;border:1px solid var(--b2);border-radius:6px;padding:6px 9px}.flow .hl{background:var(--b2);color:#fff}
+.del{position:absolute;right:4px;top:4px;background:#e33;color:#fff;border-radius:50%;width:18px;height:18px;text-align:center;line-height:18px;font-size:12px;cursor:pointer;display:none}
+.add{display:none}body.edit .del{display:block}body.edit .add{display:inline-block}
+body.edit [contenteditable]{outline:1px dashed #0288d1;outline-offset:1px}
+@media print{#side,#note{display:none}body{display:block;height:auto}.phone{break-inside:avoid;margin:6px}}
+</style></head><body>
+<div id="side">
+ <h1>Jal Samadhan – Wireframe v2</h1><small>MP PHE Jal Rekha · Water pipeline asset</small>
+ <div id="nav"></div><h2>Tools</h2>
+ <button class="ed" id="bEdit">✎ Edit mode: OFF</button>
+ <button id="bSim">⏩ Simulate 7 working days (escalate)</button>
+ <button class="alt" id="bRst">↺ Reset demo data</button>
+ <button class="alt" id="bScr">↺ Reset this screen's edits</button>
+ <button id="bSave">⬇ Save edited copy (.html)</button>
+ <button class="alt" id="bPrint">Print / PDF all screens</button>
+ <p><small>Demo contractor mobiles: 9876543210, 9827260601, 9755012345</small></p>
+</div>
+<div id="stage"><div id="note"></div><div id="view"></div></div>
+<script id="ov" type="application/json">{}</script>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const DIR={'9876543210':['Ramesh Patil','M/s RP Constructions'],'9827260601':['Sunil Verma','M/s Verma Pipeline Works'],'9755012345':['Anil Joshi','M/s Joshi Infra']};
+const DS=['Bhopal','Indore','Tikamgarh','Sagar','Rewa'];
+const seed=()=>[
+{id:'JS-1001',d:'Leakage & Damage',p:'Ajnour–Dunda Rising Main',dist:'Tikamgarh',lvl:'L1',st:'New',age:0},
+{id:'JS-1002',d:'Low pressure',p:'Aparwal Distribution Line',dist:'Bhopal',lvl:'L1',st:'New',age:2},
+{id:'JS-1003',d:'Contamination',p:'Arora WTP Feeder Main',dist:'Sagar',lvl:'L1',st:'Assigned',by:'Ramesh Patil',age:3},
+{id:'JS-1004',d:'Burst pipe',p:'Bagaaj OHT Supply Line',dist:'Bhopal',lvl:'L1',st:'Resolved by L0',by:'Sunil Verma',age:5},
+{id:'JS-0987',d:'No supply',p:'Baisa Pahuch Line',dist:'Indore',lvl:'L2',st:'New',age:3},
+{id:'JS-0950',d:'Leakage',p:'Baldevgarh Nowgong Main',dist:'Rewa',lvl:'L3',st:'New',age:2},
+{id:'JS-0930',d:'Low pressure',p:'Mansapur Line',dist:'Bhopal',lvl:'L1',st:'Closed',by:'Ramesh Patil',age:4},
+{id:'JS-0921',d:'Leakage',p:'Dunda Branch Line',dist:'Tikamgarh',lvl:'L2',st:'Closed',by:'L2',age:6,v:1}];
+let C=seed(),role='',sel='JS-1001',me='Ramesh Patil',cur='p_dash',back='p_dash',edit=false,ov={},meOk=true;
+try{ov=JSON.parse($('#ov').textContent||'{}')}catch(e){}
+const open=c=>!['Closed','Force closed'].includes(c.st);
+const cls=s=>({'New':'y','Reopened':'r','Assigned':'bl','Resolved by L0':'bl','Closed':'gr','Force closed':'r'}[s]||'');
+const NEW=c=>open(c)&&['New','Reopened'].includes(c.st);
+const FL={tot:()=>1,res:c=>!open(c),pen:open,esc:c=>open(c)&&c.lvl!=='L1',ver:c=>c.v,l3open:c=>open(c)&&c.lvl==='L3',done:c=>c.st==='Closed',
+ l0a:c=>c.st==='Assigned'&&c.by===me,l0d:c=>c.by===me&&['Resolved by L0','Closed'].includes(c.st),rej:c=>c.st==='Force closed',cres:c=>c.st==='Closed'};
+[1,2].forEach(n=>{const L='L'+n;FL[n+'new']=c=>c.lvl===L&&NEW(c);FL[n+'asg']=c=>c.lvl===L&&c.st==='Assigned';FL[n+'ver']=c=>c.lvl===L&&c.st==='Resolved by L0';FL[n+'cls']=c=>c.lvl===L&&c.st==='Closed'});
+const R=c=>`<div class="row" data-go="det" data-sel="${c.id}"><span class="del">×</span><b>${c.id}</b> · ${c.d}<br><small>${c.p} · ${c.dist}</small><br><span class="tag ${cls(c.st)}">${c.st}</span><span class="tag">${c.lvl}</span>${open(c)?`<span class="tag y">Day ${c.age}/7</span>`:''}${c.v?'<span class="tag gr">✔ Verified by L3</span>':''}${c.by&&c.st!=='New'?`<span class="tag">👷 ${c.by}</span>`:''}</div>`;
+const empty='<div class="note">No complaints in this tab</div>';
+function live(k){const[t,f]=k.split(':'),fl=FL[f]||(()=>1);
+ if(t==='n')return C.filter(fl).length;
+ if(t==='r')return C.filter(fl).map(R).join('')||empty;
+ if(t==='a')return C.filter(fl).map(c=>R(c)+`<div class="acts">${c.st==='Closed'&&!c.v?`<span class="btn s g" data-do="ver:${c.id}">✔ Verify</span>`:''}${c.st==='Closed'?`<span class="btn s o" data-do="reo:${c.id}">↺ Reopen</span>`:`<span class="btn s r" data-do="frc:${c.id}">⛔ Force close via L1</span>`}</div>`).join('')||empty;
+ if(t==='t')return C.map(c=>`<tr data-go="det" data-sel="${c.id}"><td>${c.id}</td><td>${c.dist}</td><td>${c.d}</td><td>${c.p}</td><td>${c.lvl}</td><td>${c.st}${c.v?' ✔':''}</td><td>${open(c)?c.age:'-'}</td></tr>`).join('');
+ if(k==='pub')return C.filter(c=>!open(c)).map(c=>`<tr><td>${c.id}</td><td>${c.dist}</td><td>${c.d}</td><td>${c.st}</td></tr>`).join('');
+ if(k==='bars'){const m=Math.max(1,...DS.map(d=>C.filter(c=>c.dist===d).length));return DS.map(d=>{const n=C.filter(c=>c.dist===d).length;return`<div class="bar"><span>${d}</span><i style="width:${n/m*70}%"></i><b>${n}</b></div>`}).join('')}
+ if(k==='lv')return['L1','L2','L3'].map(l=>`<div class="bar"><span>Pending at ${l}</span><b>${C.filter(c=>open(c)&&c.lvl===l).length}</b></div>`).join('');
+ if(k==='dist'){const mx=Math.max(...DS.map(d=>C.filter(c=>c.dist===d).length));return DS.map(d=>{const a=C.filter(c=>c.dist===d),r=a.filter(c=>!open(c)).length,p=a.length?Math.round(r/a.length*100):0;return`<tr><td>${d}${a.length===mx&&mx?' 🔺 max':''}</td><td>${a.length}</td><td>${r}</td><td>${a.length-r}</td><td><div class="bar"><i style="width:${p}px"></i> ${p}%</div></td></tr>`}).join('')}
+ if(k==='me')return me;
+ if(k==='det')return det();
+ return''}
+const H=(sub,bk,out,lb)=>`<div class="top"><div class="logo">💧<small>JAL Rekha</small></div><div class="tt"><b>MP PHE Jal Rekha</b><small>Government of Madhya Pradesh</small></div>${out?`<span class="pill" data-go="${out}">${lb||'LOGOUT'}</span>`:''}</div><div class="sub">${bk?`<i data-go="${bk}">←</i>`:'<i>⚖</i>'}<b>${sub}</b></div>`;
+const B=h=>`<div class="body">${h}<div class="ft">Jal Rekha v6.7 · Designed, Developed and maintained by MPSSDI, MPSeDC</div></div>`;
+const ST=a=>`<div class="st${a.length>3?' w5':''}">${a.map(x=>`<div><div class="lb">${x[0]}</div><div class="nm" data-live="n:${x[1]}"></div></div>`).join('')}</div>`;
+const TP=(g,a)=>`<div class="tabs" data-g="${g}">${a.map((x,i)=>`<div class="tab${i?'':' on'}" data-p="${g}_${i}">${x[0]}</div>`).join('')}</div>${a.map((x,i)=>`<div class="pn ${g}" id="${g}_${i}"${i?' style="display:none"':''}>${x[1]}</div>`).join('')}`;
+const LS=k=>`<div data-live="r:${k}"></div>`;
+const MP=t=>`<div class="map"><svg viewBox="0 0 300 170" preserveAspectRatio="none"><path d="M0 120 L300 60 M60 0 L120 170 M180 0 L220 170" stroke="#fff" stroke-width="6"/><path d="M10 150 C80 60 120 140 180 80 S260 40 290 20" stroke="#45c0ea66" stroke-width="22" fill="none"/><path d="M10 150 C80 60 120 140 180 80 S260 40 290 20" stroke="#0288d1" stroke-width="4" fill="none"/><circle cx="170" cy="86" r="6" fill="#e33"/><circle cx="90" cy="115" r="5" fill="#f90"/><circle cx="240" cy="45" r="5" fill="#2c6"/></svg><span>${t}</span></div>`;
+const opts=a=>a.map(x=>`<option>${x}</option>`).join('');
+const deptTabs=n=>TP('d'+n,[['New',LS(n+'new')],['With Contractor',LS(n+'asg')],['To Verify',LS(n+'ver')],['Closed',LS(n+'cls')]]);
+const deptDash=(n,t)=>H(t,0,'d_login')+B(`${ST([['New / Reopened',n+'new'],['With Contractor',n+'asg'],['Closed',n+'cls']])}<div class="g2"><div class="tile w" data-go="c_pipes">🚰<br>Water Pipeline List</div><div class="tile w" data-go="c_pmap">🗺<br>Pipeline Map / Buffer</div></div><br>${deptTabs(n)}<div class="note">Not resolved by L${n} in 7 working days → auto-moves to L${n+1}. Tap any complaint to open.</div>`);
+function det(){const c=C.find(x=>x.id===sel)||C[0];let a='';const dep=(role==='L1'||role==='L2')&&c.lvl===role;
+ if(dep&&open(c)){if(NEW(c))a=`<span class="btn s" data-do="ass:${c.id}">👷 Assign to Contractor</span><span class="btn s g" data-do="res:${c.id}:self">✔ Resolve myself</span>`;
+  if(c.st==='Assigned')a=`<span class="btn s" data-do="ass:${c.id}">👷 Re-assign</span><span class="btn s g" data-do="res:${c.id}:self">✔ Resolve myself</span>`;
+  if(c.st==='Resolved by L0')a=`<span class="btn s g" data-do="vclose:${c.id}">✔ Verify &amp; Close</span><span class="btn s r" data-do="rej:${c.id}">✖ Not resolved – send back</span>`}
+ if(role==='L0'&&c.by===me&&c.st==='Assigned')a=`<span class="btn s g" data-do="res:${c.id}:l0">✔ Resolve (photo + remark)</span>`;
+ if(role==='L3'){a=c.st==='Closed'?`${c.v?'':`<span class="btn s g" data-do="ver:${c.id}">✔ Verify</span>`}<span class="btn s o" data-do="reo:${c.id}">↺ Reopen</span>`:open(c)?`<span class="btn s r" data-do="frc:${c.id}">⛔ Direct L1 to Force Close</span>`:''}
+ const path=['Citizen','L1 SE','L2 AE','L3 EE'].map((x,i)=>`<div class="${(i===0||c.lvl==='L'+i||(!open(c)&&i===+c.lvl[1]))?'hl':''}">${x}</div>`).join('→');
+ return `<div class="card"><b>Actions</b><br>${a||'<small>No action available for your role / this status</small>'}</div><div class="card"><b>${c.id}</b> · ${c.d}<br>Pipeline: ${c.p}<br>District: ${c.dist}<br><span class="tag ${cls(c.st)}">${c.st}</span><span class="tag">${c.lvl}</span>${open(c)?`<span class="tag y">Day ${c.age} of 7 working days</span>`:''}${c.v?'<span class="tag gr">✔ Verified by L3</span>':''}${c.by&&c.st!=='New'?`<br>Handled by: ${c.by}`:''}${c.rem?`<br>Remark: ${c.rem}`:''}</div>${MP('Complaint location + photo (geo-tagged)')}<div class="card"><b>Escalation path</b><div class="flow">${path}</div></div>`}
+const S=[
+{g:'Public',id:'p_dash',t:'Public Dashboard (web)',n:'No login. Shows only aggregate, non-personal data.',r:'',w:1,h:()=>H('Jal Samadhan – Public Dashboard',0,'d_login','DEPARTMENT LOGIN')+B(`${ST([['Total complaints','tot'],['Resolved / Closed','res'],['Pending','pen'],['Escalated (L2/L3)','esc'],['Verified by EE','ver']])}${TP('pd',[['Overview',`<div class="g2"><div class="card"><b>District-wise complaints</b><div data-live="bars"></div></div><div class="card"><b>Level-wise pending</b><div data-live="lv"></div><b>Avg. resolution time:</b> 4.2 days</div></div>`],['Resolved complaints',`<table><tr><th>ID</th><th>District</th><th>Type</th><th>Status</th></tr><tbody data-live="pub"></tbody></table>`],['Pipeline map',MP('Water pipelines + complaint density (public)')]])}<div class="g2"><div class="btn" data-go="c_login">Citizen: Register / Raise Complaint</div><div class="btn o" data-go="d_login">Department Login</div></div>`)},
+{g:'Citizen (mobile)',id:'c_login',t:'Register / Login Citizen',n:'Mobile + OTP. First-time users register.',r:'C',h:()=>H('Register Citizen','p_dash')+B(`${TP('cl',[['Register',`<label>Name <b>*</b></label><input placeholder="Full name"><label>Mobile <b>*</b></label><input placeholder="+91 mobile number"><label>District</label><select>${opts(DS)}</select><label>OTP</label><input placeholder="6-digit OTP"><div class="btn" data-go="c_home">Send OTP &amp; Register</div>`],['Login',`<label>Mobile <b>*</b></label><input placeholder="+91 mobile number"><label>OTP</label><input placeholder="6-digit OTP"><div class="btn" data-go="c_home">Verify &amp; Login</div>`]])}`)},
+{g:'Citizen (mobile)',id:'c_home',t:'Citizen Home',n:'Register new complaint / status of previous complaints.',r:'C',h:()=>H('Jal Samadhan',0,'c_login')+B(`${ST([['Total','tot'],['In progress','pen'],['Resolved','res']])}<div class="g2"><div class="tile" data-go="c_reg" style="padding:40px 8px">Register New Complaint</div><div class="tile w" style="font-size:40px;padding-top:30px">📋</div><div class="tile w" style="font-size:40px;padding-top:30px">📱</div><div class="tile" data-go="c_my" style="font-size:12px">Status of Previous Complaints<br>1) In progress<br>2) Resolved / approved / rejected<br>3) Force closed if not related to the asset</div></div><br><div class="g2"><div class="tile w" data-go="c_pipes">🚰<br>List of Water Pipelines</div><div class="tile w" data-go="c_sos">⭐ Feedback<br>🚨 SOS calling</div></div>`)},
+{g:'Citizen (mobile)',id:'c_reg',t:'Register New Complaint',n:'Submit really adds a complaint to L1 dashboard (live demo).',r:'C',h:()=>H('Register Complaint','c_home','c_login')+B(`<div class="g2"><div><label>District</label><select id="fd">${opts(DS)}</select></div><div><label>Block</label><select><option>Berasia</option><option>Huzur</option></select></div><div><label>Gram Panchayat</label><select><option>Ankia</option></select></div><div><label>Village</label><select><option>Ankia Village</option></select></div></div><label>Water pipeline asset <b>*</b></label><select id="fp"><option>Ajnour–Dunda Rising Main</option><option>Aparwal Distribution Line</option><option>Arora WTP Feeder Main</option></select><label>Complaint type</label><select id="ft"><option>Leakage &amp; Damage</option><option>Low pressure</option><option>No supply</option><option>Contamination</option><option>Burst pipe</option></select>${MP('Your location – buffer check on pipeline')}<div class="note">✔ Location is within the registered pipeline buffer, complaint can be raised.</div><div class="g2"><div class="in" data-do="photo">📷 Add Photos</div><div class="in" data-do="photo">🎥 Add Video</div></div><label>Remark 🎤</label><textarea id="fr" rows="3"></textarea><div class="g2"><div class="btn alt" style="background:#7b8ea3" data-do="draft">Save as Draft</div><div class="btn" data-do="submitC">Submit</div></div>`)},
+{g:'Citizen (mobile)',id:'c_my',t:'My Complaints / Status',n:'Tabs filter live data. Tap a complaint for detail.',r:'C',h:()=>H('Status of Complaints','c_home','c_login')+B(TP('cm',[['In progress',LS('pen')],['Resolved',LS('cres')],['Force closed',LS('rej')],['All',LS('tot')]]))},
+{g:'Citizen (mobile)',id:'c_pipes',t:'List of Water Pipelines Asset',n:'Replaces road list. Filter by department + district.',r:'C',h:()=>H('Water Pipeline List','c_home','c_login')+B(`<div class="g2"><select><option>PHE</option></select><select>${opts(DS)}</select></div><input placeholder="🔍 Search pipeline…"><div>${[['Ajnour–Dunda Rising Main','11.40 KM','DI 150mm'],['Aparwal Distribution Line','900 M','PVC 110mm'],['Arora WTP Feeder Main','490 M','DI 200mm'],['Bagaaj OHT Supply Line','1.33 KM','HDPE 90mm']].map((r,i)=>`<div class="row"><span class="del">×</span><b>${i+1}. ${r[0]}</b><br><span class="tag bl" data-go="c_pmap">📍 VIEW ON MAP</span><span class="tag">PHE</span><span class="tag y">${r[1]}</span><span class="tag">${r[2]}</span></div>`).join('')}</div><span class="btn s g add" data-add>+ Add row</span>`)},
+{g:'Citizen (mobile)',id:'c_pmap',t:'Pipeline Route + Buffer Map',n:'Route polyline with buffer used to validate complaint location.',r:'C',h:()=>H('Pipeline Map','c_pipes')+B(`${MP('Route + 10 m buffer (light-blue band)')}<div class="card">Ajnour–Dunda Rising Main<br>Length 11.40 KM · Buffer 10 m · DI 150 mm</div><div class="btn" data-go="c_reg">Raise complaint on this pipeline</div>`)},
+{g:'Citizen (mobile)',id:'c_sos',t:'Feedback & SOS',n:'',r:'C',h:()=>H('Feedback / SOS','c_home')+B(TP('fs',[['Feedback',`<div style="font-size:30px;text-align:center">⭐⭐⭐⭐☆</div><textarea rows="4" id="fb" placeholder="Your suggestion…"></textarea><div class="btn" data-do="fb">Submit Feedback</div>`],['SOS',`<div class="card">🚨 PHE emergency helpline: <b>1800-XXX-XXXX</b></div><div class="card">🚑 Ambulance / 📞 District control room: <b>XXXX</b></div><div class="btn r">📞 Call SOS</div>`]]))},
+{g:'Department login',id:'d_login',t:'Department Login',n:'Jump to any role using the demo buttons.',r:'',h:()=>H('Department Login','p_dash')+B(`<label>Mobile number or username <b>*</b></label><input value="L1 user"><label>Password <b>*</b></label><input type="password" value="password"><label>OTP <b>*</b></label><input placeholder="OTP"><div class="g2"><div class="in" style="letter-spacing:3px">852930</div><input placeholder="Enter captcha"></div><div class="note">Demo: choose role</div><span class="btn s" data-go="l0_login">L0 Contractor</span><span class="btn s" data-go="l1_dash">L1 SE</span><span class="btn s" data-go="l2_dash">L2 AE</span><span class="btn s" data-go="l3_mob">L3 EE (mobile)</span><span class="btn s o" data-go="l3_web">L3 EE (web)</span>`)},
+{g:'L0 Contractor (mobile)',id:'l0_login',t:'L0 Contractor – Verify mobile + name',n:'Contractor is verified by mobile number; name shown for confirmation.',r:'L0',h:()=>H('Contractor Login','d_login')+B(`<label>Registered mobile number <b>*</b></label><input id="lm" value="9876543210" maxlength="10"><span class="btn s" data-do="vl0">Verify</span><div class="note" id="lr">Verify to see your registered name</div><label>OTP</label><input placeholder="OTP"><div class="btn" data-do="l0in">Login</div>`)},
+{g:'L0 Contractor (mobile)',id:'l0_dash',t:'L0 Dashboard',n:'Complaints assigned by L1/L2; resolve with photo + remark.',r:'L0',h:()=>H('Contractor Dashboard','l0_login','d_login')+B(`<div class="card">Welcome, <b data-live="me"></b></div>${ST([['Assigned to me','l0a'],['Resolved by me','l0d'],['Total','tot']])}${TP('l0',[['Assigned',LS('l0a')],['Resolved',LS('l0d')]])}<div class="note">Resolve → status “Resolved by L0” → L1 verifies &amp; closes.</div>`)},
+{g:'L1 SE (mobile)',id:'l1_dash',t:'L1 – SE Dashboard',n:'New complaints, assign to contractor or resolve himself; verify contractor work and close.',r:'L1',h:()=>deptDash(1,'Dashboard – L1 (SE)')},
+{g:'L2 AE (mobile)',id:'l2_dash',t:'L2 – AE Dashboard',n:'Complaints not resolved by L1 in 7 days land here (same actions as L1).',r:'L2',h:()=>deptDash(2,'Dashboard – L2 (AE)')},
+{g:'L3 EE',id:'l3_web',t:'L3 – EE Dashboard (web)',n:'Monitor, verify, reopen, force-close via L1.',r:'L3',w:1,h:()=>H('L3 (EE) – Monitoring Dashboard',0,'d_login')+B(`${TP('lw',[['Dashboard',`${ST([['Total','tot'],['Pending','pen'],['Escalated','esc'],['Resolved','res'],['Verified','ver']])}<div class="g2"><div class="card"><b>District-wise complaints</b><div data-live="bars"></div></div><div class="card"><b>Level-wise pending</b><div data-live="lv"></div></div></div>`],['All complaints',`<table><tr><th>ID</th><th>District</th><th>Type</th><th>Pipeline</th><th>Level</th><th>Status</th><th>Days</th></tr><tbody data-live="t:all"></tbody></table>`],['Completed – verify / reopen',`<div data-live="a:done"></div>`],['Pending at L3',`<div data-live="a:l3open"></div>`],['District progress',`<table><tr><th>District</th><th>Total</th><th>Resolved</th><th>Pending</th><th>Progress</th></tr><tbody data-live="dist"></tbody></table>`],['Pipeline map',MP('Pipelines + complaint heat-map')]])}`)},
+{g:'L3 EE',id:'l3_mob',t:'L3 – EE Dashboard (mobile)',n:'Mobile version of L3 for quick verify/reopen.',r:'L3',h:()=>H('Dashboard – L3 (EE)',0,'d_login')+B(`${ST([['Pending at L3','l3open'],['Completed','done'],['Verified','ver']])}${TP('lm',[['At L3',`<div data-live="a:l3open"></div>`],['Completed',`<div data-live="a:done"></div>`],['Districts',`<table><tr><th>District</th><th>Tot</th><th>Res</th><th>Pen</th><th>%</th></tr><tbody data-live="dist"></tbody></table>`],['Map',MP('Pipelines + complaints')]])}`)},
+{g:'Shared',id:'det',t:'Complaint Detail (role based)',n:'Actions appear at the top according to role and status.',h:()=>H('Complaint Details','back')+B(`<div data-live="det"></div>`)},
+{g:'Shared',id:'flow',t:'Workflow summary',n:'Editable summary of escalation rules.',r:'',w:1,h:()=>H('Jal Samadhan – Complaint workflow',0)+B(`<div class="card"><b>Main flow</b><div class="flow"><div>Citizen raises complaint</div>→<div class="hl">L1 (SE)</div>→<div>Assign to L0 (mobile verify)</div>→<div>L0 resolves (photo + remark)</div>→<div>L1 verifies &amp; closes</div>→<div class="hl">L3 dashboard</div></div><div class="flow"><div class="hl">L1 (SE)</div>→<div>L1 resolves himself (photo + remark)</div>→<div>Closed</div>→<div class="hl">L3 dashboard</div></div></div><div class="card"><b>Escalation</b><div class="flow"><div>L1 not done in 7 days</div>→<div class="hl">L2 (AE)</div>→<div>not done in 7 days</div>→<div class="hl">L3 (EE)</div></div></div><div class="card"><b>L3 actions</b><div class="flow"><div>Verify</div><div>Reopen → back to L1</div><div>Direct L1 to force close (not a proper complaint)</div></div></div>`)}];
+const SC=Object.fromEntries(S.map(s=>[s.id,s]));
+function nav(){let h='',g='';S.forEach(s=>{if(s.g!==g){g=s.g;h+=`<h2>${g}</h2>`}h+=`<a data-id="${s.id}" class="${s.id===cur?'on':''}">${s.t}</a>`});$('#nav').innerHTML=h;$$('#nav a').forEach(a=>a.onclick=()=>{if(a.dataset.id==='det')back=cur;go(a.dataset.id)})}
+const refresh=r=>$$('[data-live]',r).forEach(e=>e.innerHTML=live(e.dataset.live));
+function ed(r){$$('*',r).forEach(e=>{if(e.closest('[data-live],.modal')||['INPUT','SELECT','TEXTAREA','OPTION','SCRIPT','svg','path','circle'].includes(e.tagName)||e.classList.contains('del'))return;if([...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim()))e.contentEditable='true'})}
+function snap(){const p=$('.phone').cloneNode(true);$$('.modal,.toast',p).forEach(x=>x.remove());$$('[contenteditable]',p).forEach(x=>x.removeAttribute('contenteditable'));$$('[data-live]',p).forEach(x=>x.innerHTML='');return p.innerHTML}
+const dirty=()=>{ov[cur]=snap()};
+function go(id){cur=id;const s=SC[id];if(s.r!==undefined)role=s.r;$('#view').innerHTML=`<div class="phone${s.w?' web':''}">${ov[id]||s.h()}</div>`;refresh($('#view'));if(edit)ed($('.phone'));$('#note').textContent=s.t+(s.n?' — '+s.n:'');nav()}
+function dlg(h){const p=$('.phone');$('.modal',p)?.remove();const m=document.createElement('div');m.className='modal';m.innerHTML='<div>'+h+'</div>';p.appendChild(m)}
+function toast(t){const p=$('.phone');$('.toast',p)?.remove();const m=document.createElement('div');m.className='toast';m.textContent=t;p.appendChild(m);setTimeout(()=>m.remove(),2600)}
+const X='<span class="btn s o" data-do="x">Cancel</span>';
+function act(cmd){const[a,id,m]=cmd.split(':'),c=C.find(x=>x.id===id);const done=t=>{go(cur);toast(t)};
+ switch(a){
+ case'x':$('.modal')?.remove();break;
+ case'photo':{const e=event.target.closest('[data-do]');e.textContent='✔ Photo / video added';e.dataset.ok=1;break}
+ case'ass':dlg(`<h3>Assign to Contractor (L0)</h3><label>Contractor mobile number</label><input id="am" value="9876543210" maxlength="10"><span class="btn s" data-do="vc">Verify</span><div class="note" id="ar">Verify the mobile number to see the contractor name</div><span class="btn s g" id="ab" data-do="assign:${id}">Assign complaint</span>${X}<hr><small>Or resolve it yourself – both ways are allowed.</small><br><span class="btn s" data-do="res:${id}:self">Resolve myself instead</span>`);break;
+ case'vc':{const d=DIR[$('#am').value];$('#ar').textContent=d?`✔ Verified: ${d[0]} – ${d[1]}`:'✖ Mobile number not registered as contractor';$('#ab').dataset.n=d?d[0]:'';break}
+ case'assign':{const n=$('#ab').dataset.n;if(!n){toast('Verify contractor mobile first');break}c.st='Assigned';c.by=n;done(`Assigned to ${n}`);break}
+ case'res':dlg(`<h3>Resolve complaint ${id}</h3><div class="in" data-do="photo">📷 Add after-repair photo (required)</div><label>Remark <b>*</b></label><textarea id="rk" rows="3"></textarea><span class="btn s g" data-do="${m==='l0'?'l0done':'self'}:${id}">Submit</span>${X}`);break;
+ case'self':case'l0done':{if(!$('.modal [data-ok]')||!$('#rk').value.trim()){toast('Photo and remark are required');break}c.rem=$('#rk').value;if(a==='self'){c.st='Closed';c.by=role}else c.st='Resolved by L0';done(a==='self'?'Resolved & closed':'Resolved – sent to L1 for verification');break}
+ case'vclose':c.st='Closed';done('Verified and closed by '+role);break;
+ case'rej':c.st='Assigned';done('Sent back to contractor');break;
+ case'ver':c.v=1;done('Verified by L3');break;
+ case'reo':c.st='Reopened';c.v=0;c.lvl='L1';c.age=0;done('Reopened – sent to L1');break;
+ case'frc':dlg(`<h3>Direct L1 to Force Close</h3><label>Reason</label><textarea id="rk" rows="3">Complaint not related to the asset / not proper</textarea><span class="btn s r" data-do="force:${id}">Send to L1</span>${X}`);break;
+ case'force':c.st='Force closed';c.lvl='L1';c.rem=$('#rk').value;done('L1 directed to force close');break;
+ case'vl0':{const d=DIR[$('#lm').value];$('#lr').textContent=d?`✔ ${d[0]} – ${d[1]}`:'✖ Not registered';meOk=!!d;if(d)me=d[0];break}
+ case'l0in':if(!meOk){toast('Verify mobile first');break}go('l0_dash');break;
+ case'submitC':{const n=1005+C.length;C.push({id:'JS-'+n,d:$('#ft').value,p:$('#fp').value,dist:$('#fd').value,lvl:'L1',st:'New',age:0,rem:$('#fr').value});dlg(`<h3>Success</h3>Complaint JS-${n} registered and forwarded to L-1 Officer successfully.<br><br><span class="btn s o" data-go="c_my">OK</span>`);break}
+ case'draft':toast('Saved as draft');break;
+ case'fb':toast('Thank you for your feedback');break}}
+$('#view').addEventListener('click',e=>{const t=e.target;
+ const tab=t.closest('.tab');if(tab){const ph=t.closest('.phone'),g=tab.parentElement.dataset.g;$$('.tab',tab.parentElement).forEach(x=>x.classList.remove('on'));tab.classList.add('on');$$('.pn.'+g,ph).forEach(p=>p.style.display='none');$('#'+tab.dataset.p,ph).style.display='';return}
+ const d=t.closest('.del');if(d){if(edit){const r=d.parentElement;if(r.dataset.sel)C=C.filter(x=>x.id!==r.dataset.sel);r.remove();dirty()}return}
+ const ad=t.closest('[data-add]');if(ad){if(edit){const l=ad.previousElementSibling,k=l.lastElementChild;if(k){const n=k.cloneNode(true);l.appendChild(n);ed(n);dirty()}}return}
+ if(edit)return;
+ const dd=t.closest('[data-do]');if(dd){act(dd.dataset.do);return}
+ const g=t.closest('[data-go]');if(g){if(g.dataset.sel)sel=g.dataset.sel;let to=g.dataset.go;if(to==='det')back=cur;if(to==='back')to=back;go(to)}});
+$('#view').addEventListener('input',()=>{if(edit)dirty()});
+$('#bEdit').onclick=()=>{edit=!edit;document.body.classList.toggle('edit',edit);$('#bEdit').textContent='✎ Edit mode: '+(edit?'ON – click any text':'OFF');$$('#view [contenteditable]').forEach(x=>x.removeAttribute('contenteditable'));$('.modal')?.remove();if(edit)ed($('.phone'))};
+$('#bSim').onclick=()=>{C.forEach(c=>{if(open(c)){if(c.lvl==='L1')c.lvl='L2';else if(c.lvl==='L2')c.lvl='L3';c.age=0}});go(cur);toast('7 working days passed – open complaints escalated one level')};
+$('#bRst').onclick=()=>{C=seed();go(cur)};
+$('#bScr').onclick=()=>{delete ov[cur];go(cur)};
+$('#bSave').onclick=()=>{if(edit)$('#bEdit').click();$('#ov').textContent=JSON.stringify(ov).replace(/</g,'\\u003c');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['<!DOCTYPE html>\n'+document.documentElement.outerHTML],{type:'text/html'}));a.download='Jal_Samadhan_Wireframe_edited.html';a.click()};
+$('#bPrint').onclick=()=>{$('#view').innerHTML=S.map(s=>`<div style="margin:8px"><b>${s.t}</b><div class="phone${s.w?' web':''}">${ov[s.id]||s.h()}</div></div>`).join('');refresh($('#view'));$('#stage').style.display='block';setTimeout(()=>window.print(),300)};
+go('p_dash');
+</script></body></html>

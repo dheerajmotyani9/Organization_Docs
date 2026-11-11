@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jal Samadhan – Editable Wireframe, Flow, Workflow & BR/FR/CR</title>
+<style>
+:root{--bg:#eef2f7;--ink:#0f172a;--mut:#64748b;--line:#cbd5e1;--brand:#03a9f4;--brand2:#0277bd;--card:#fff;--warn:#b91c1c}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font:13px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+button,select,input,textarea{font:inherit}
+.bar{height:48px;display:flex;align-items:center;gap:6px;padding:0 10px;background:#0b3a53;color:#fff;overflow-x:auto;white-space:nowrap}
+.bar h1{font-size:14px;margin:0 10px 0 0;font-weight:700}
+.bar button,.bar select{background:#164e6e;color:#fff;border:1px solid #2a6f94;border-radius:6px;padding:5px 9px;cursor:pointer}
+.bar button:hover{background:#1d6a93}
+.bar button.on{background:#f59e0b;border-color:#f59e0b;color:#1c1917}
+.bar .sp{flex:1}
+.bar label{font-size:12px;opacity:.85}
+main{display:flex;height:calc(100% - 48px - 28px)}
+#vp{flex:1;overflow:auto;position:relative;background-color:var(--bg);background-image:radial-gradient(#c5cfdc 1px,transparent 1px);background-size:20px 20px}
+#stage{position:relative;width:2750px;height:2000px;transform-origin:0 0}
+#edges{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#edges path{fill:none;stroke:#475569;stroke-width:2;pointer-events:stroke;cursor:pointer}
+#edges path.sel{stroke:#f59e0b;stroke-width:3.5}
+#edges path.fail{stroke:#dc2626;stroke-dasharray:7 5}
+#edges path.hot{stroke:#16a34a;stroke-width:4}
+#edges g.lbl{pointer-events:all;cursor:text}
+#edges g.lbl rect{fill:#fff;stroke:#94a3b8;rx:4}
+#edges g.lbl text{font:600 11px system-ui,Arial;fill:#334155}
+.scene{position:absolute;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 2px 8px #0f172a22}
+.scene.sel{outline:3px solid #f59e0b}
+.scene.hot{outline:4px solid #16a34a}
+.sh{display:flex;align-items:center;gap:6px;padding:4px 8px;background:#f1f5f9;border-radius:9px 9px 0 0;cursor:grab;user-select:none;font-weight:600;font-size:11px}
+.sh .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sh button{border:0;background:transparent;cursor:pointer;color:#475569;font-size:13px;padding:0 3px}
+.badge{font-size:9px;padding:1px 6px;border-radius:9px;font-weight:700}
+.badge.axure{background:#dbeafe;color:#1e40af}.badge.new{background:#fef3c7;color:#92400e}
+.vp{position:relative;overflow:hidden;background:#fff;border-radius:0 0 9px 9px}
+.screen{position:absolute;left:0;top:0;transform-origin:0 0;background:#fff;font:14px Arial,sans-serif;color:#222}
+.screen [contenteditable]:focus{outline:2px dashed #f59e0b;outline-offset:1px;background:#fffbe6}
+.note{position:absolute;width:190px;min-height:70px;background:#fde68a;border-radius:4px;box-shadow:0 2px 6px #0003;padding:6px 8px;font-size:12px}
+.note .nh{cursor:grab;font-size:10px;color:#92400e;display:flex;justify-content:space-between;margin-bottom:3px}
+.note .nb{outline:0;min-height:44px}
+aside{width:400px;background:#fff;border-left:1px solid var(--line);display:flex;flex-direction:column}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;border:0;background:#f8fafc;padding:9px 4px;cursor:pointer;font-weight:600;color:var(--mut);border-bottom:3px solid transparent}
+.tabs button.on{color:var(--brand2);border-bottom-color:var(--brand);background:#fff}
+.pane{display:none;padding:10px 12px;overflow:auto;flex:1}
+.pane.on{display:block}
+.pane h3{margin:12px 0 6px;font-size:13px}
+.pane h3:first-child{margin-top:0}
+.pane input[type=text],.pane textarea,.pane select{width:100%;border:1px solid var(--line);border-radius:6px;padding:6px 8px;background:#fff;color:var(--ink)}
+.pane textarea{resize:vertical;min-height:70px}
+.chip{display:inline-block;background:#e0f2fe;color:#075985;border-radius:10px;padding:1px 8px;margin:2px 3px 2px 0;font-size:11px;font-weight:600}
+.chip.cr{background:#fee2e2;color:#991b1b}.chip.fr{background:#dcfce7;color:#166534}.chip.br{background:#ede9fe;color:#5b21b6}
+.small{font-size:11px;color:var(--mut)}
+table.rq{width:100%;border-collapse:collapse;font-size:11.5px;margin-bottom:6px}
+table.rq th{background:#f1f5f9;text-align:left;padding:4px;border:1px solid var(--line);position:sticky;top:-10px}
+table.rq td{border:1px solid var(--line);padding:3px 4px;vertical-align:top}
+table.rq td[contenteditable]:focus{outline:2px dashed #f59e0b;background:#fffbe6}
+.x{cursor:pointer;color:#b91c1c;font-weight:700;text-align:center}
+.addb{border:1px dashed #94a3b8;background:#f8fafc;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:12px}
+ol.flow{padding-left:20px;margin:4px 0}
+ol.flow li{margin:3px 0}
+.flag{color:#b45309;font-weight:700}
+#cap{height:28px;background:#0b3a53;color:#cfe8f5;padding:5px 12px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* wireframe elements */
+.hdr{height:58px;background:#03a9f4;color:#fff;display:flex;align-items:center;gap:14px;padding:0 14px;font-size:19px}
+.logo{width:48px;height:48px;background:#fff;color:#0277bd;display:grid;place-items:center;font-size:30px}
+.body{padding:20px 22px}
+.row{display:flex;align-items:center;margin:16px 0}
+.row label{width:130px;font-size:13px;color:#222}
+.inp{flex:1;border:1px solid #666;height:26px;padding:3px 5px;font-size:12px;background:#fff;overflow:hidden}
+.inp.sel::after{content:"▾";float:right;color:#555}
+.inp.tall{height:48px;position:relative}
+.inp.tall::after{content:"🎤";position:absolute;right:4px;bottom:3px;font-size:14px}
+.chk{margin:12px 0 4px;font-size:13px}
+.btns{position:absolute;left:0;right:0;bottom:34px;display:flex;justify-content:space-around;padding:0 20px}
+.btn{background:#1b9ee0;color:#fff;text-align:center;border-radius:4px;padding:6px 0;min-width:116px;font-size:13px;font-weight:600}
+.btn.big{background:#03a9f4;padding:11px 0;display:block;margin:12px 0;font-size:15px}
+.btn.ghost{background:#e2e8f0;color:#334155}
+.btn.dis{background:#b6c7d3}
+.foot{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-size:10px;line-height:1.25}
+.popup{position:absolute;left:61px;top:250px;width:300px;padding:14px 12px;background:#03a9f4;color:#fff;border-radius:12px;text-align:center;font-size:14px;line-height:1.35;box-shadow:0 4px 12px #0005}
+.popup .warn{color:#e11d1d;font-size:30px;line-height:1}
+.map{background:#7b6b57;position:relative;overflow:hidden}
+.red{color:#c00018;font-weight:700;font-size:11.5px;width:112px;margin-right:6px}
+.tile{width:180px;height:132px;background:#03a9f4;color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;text-align:center;padding:6px}
+.ill{font-size:56px;opacity:.8}
+.pill{display:inline-block;border-radius:10px;padding:1px 8px;font-size:11px;font-weight:700;color:#fff}
+.card{border:1px solid #ccc;border-radius:8px;padding:10px;margin:10px 0}
+.tl{margin:6px 0 6px 6px;border-left:3px solid #03a9f4;padding-left:12px}
+.tl div{margin:9px 0;font-size:13px}
+.kpi{display:inline-block;width:150px;margin:5px;padding:10px;border:1px solid #bbb;border-radius:8px;text-align:center}
+.kpi b{display:block;font-size:26px}
+.web{font-size:14px}
+.web .nav{position:absolute;left:0;top:58px;bottom:0;width:170px;background:#0b3a53;color:#cfe8f5;padding:12px;font-size:13px;line-height:2}
+.web .main{position:absolute;left:170px;top:58px;right:0;bottom:0;padding:14px;overflow:hidden}
+table.t{border-collapse:collapse;width:100%;font-size:12px}
+table.t th{background:#03a9f4;color:#fff;padding:5px;text-align:left}
+table.t td{border:1px solid #ddd;padding:5px}
+.bar2{display:inline-block;width:34px;background:#03a9f4;margin-right:8px;vertical-align:bottom}
+@keyframes sl{from{transform:translateX(60px);opacity:0}to{transform:none;opacity:1}}
+@keyframes su{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@keyframes pp{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+@keyframes sk{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>Jal Samadhan – Wireframe Studio</h1>
+  <button id="bZoomOut" title="Zoom out">−</button><label id="zl">100%</label><button id="bZoomIn" title="Zoom in">+</button><button id="bFit">Fit</button>
+  <span style="width:8px"></span>
+  <select id="pathSel"></select><button id="bPlay">▶ Play flow</button><button id="bStop">■</button>
+  <span style="width:8px"></span>
+  <button id="bAdd">＋ Scene</button><button id="bNote">＋ Note</button><button id="bConn">⤳ Connect</button><button id="bDel">🗑 Delete selected</button>
+  <span class="sp"></span>
+  <button id="bJson">⬇ Save JSON</button><button id="bImp">⬆ Load JSON</button><button id="bCsv">⬇ BR/FR/CR CSV</button><button id="bHtml">⬇ Save HTML snapshot</button><button id="bReset">Reset</button>
+  <input type="file" id="fi" accept=".json" hidden>
+</div>
+<main>
+  <div id="vp"><div id="stage"><svg id="edges"></svg><div id="scenes"></div></div></div>
+  <aside>
+    <div class="tabs"><button data-t="scene" class="on">Scene</button><button data-t="flow">Workflow</button><button data-t="req">BR · FR · CR</button><button data-t="mot">Motion</button></div>
+    <div class="pane on" id="p-scene"></div>
+    <div class="pane" id="p-flow"></div>
+    <div class="pane" id="p-req"></div>
+    <div class="pane" id="p-mot"></div>
+  </aside>
+</main>
+<div id="cap">Drag scenes by their grey title bar · click a scene to edit its notes and motion prompt · double-click any wireframe text to edit it · double-click an arrow label to rename it</div>
+<script id="seed" type="application/json">null</script>
+<script>
+"use strict";
+/* ============================================================ DEFAULT DATA */
+const E = t => `<span contenteditable="true" spellcheck="false">${t}</span>`;
+const hdr = t => `<div class="hdr"><div class="logo">⚖</div><b contenteditable="true" spellcheck="false">${t||"Jal Samadhan"}</b></div>`;
+const foot = `<div class="foot"><div style="font-size:16px;color:#6b7280">◈</div><b contenteditable="true" spellcheck="false">Jal Rekha v6.7</b><br>${E("Designed, Developed and maintained by MPSSDI, MPSeDC")}</div>`;
+const row = (l, v, cls) => `<div class="row"><label>${l}</label><div class="inp ${cls||""}" contenteditable="true" spellcheck="false">${v||""}</div></div>`;
+const mapSvg = kind => kind === "pipe"
+  ? `<div class="map" style="width:100%;height:100%"><svg viewBox="0 0 200 260" width="100%" height="100%"><rect width="200" height="260" fill="#7a6a58"/><g fill="#9b8b78"><rect x="8" y="10" width="46" height="34"/><rect x="62" y="22" width="40" height="30"/><rect x="14" y="60" width="52" height="40"/><rect x="80" y="70" width="38" height="36"/><rect x="26" y="120" width="44" height="36"/><rect x="100" y="130" width="46" height="34"/></g><path d="M120 55 L132 150 L190 245" stroke="#1e3cff" stroke-width="3" fill="none"/><circle cx="132" cy="150" r="5" fill="#f43f5e"/></svg></div>`
+  : `<div class="map" style="width:100%;height:100%"><svg viewBox="0 0 200 240" width="100%" height="100%"><rect width="200" height="240" fill="#6b4f3c"/><g fill="#3b3b3b"><rect x="30" y="150" width="60" height="50"/><rect x="110" y="170" width="50" height="40"/></g><circle cx="100" cy="100" r="18" fill="#ffffffaa" stroke="#fff"/><circle cx="100" cy="100" r="4" fill="#f43f5e"/><text x="82" y="136" font-size="9" fill="#fff">Panchayat bhawan</text></svg></div>`;
+function form(o) {
+  o = o || {};
+  const mediaRows = `<div class="row"><label>Add Photos :</label><span style="font-size:22px;color:#03a9f4">📷</span></div><div class="row"><label>Add Video :</label><span style="font-size:22px;color:#03a9f4">🎥</span></div>`;
+  let mid = "";
+  if (o.map) {
+    mid = `<div class="row" style="align-items:flex-start;margin:6px 0"><div style="width:130px;font-size:12px">${o.red ? `<div class="red" contenteditable="true" spellcheck="false">${o.red}</div>` : `Scheme Name:<br>${E("xxxxxxxxxxxxxxx")}<br><br>Component:<br>${E("xxxxxxxxxxxxxxx")}`}</div><div style="width:200px;height:240px">${mapSvg(o.map)}</div></div>`;
+  }
+  return hdr() + `<div class="body">
+    ${row("District", o.filled ? "xxxxxxxxxxxxx" : "")}${row("Block", o.filled ? "xxxxxxxxxxxxx" : "")}
+    ${row("Gram Panchayat", o.filled ? "xxxxxxxxxxxxx" : "", "sel")}${row("Village", o.filled ? "xxxxxxxxxxxxx" : "", "sel")}
+    <div class="chk">${o.checked ? "☑" : "☐"} ${E("Click here to change village")}</div>
+    <div class="row" style="margin-top:22px"><label>Please Select the Issue</label><div class="inp sel" contenteditable="true" spellcheck="false">${o.issue || "Select"}</div></div>
+    ${mid}${o.media ? mediaRows : ""}
+    <div class="row"><label>Remark</label><div class="inp tall" contenteditable="true" spellcheck="false"></div></div>
+  </div>
+  <div class="btns"><div class="btn">Save</div><div class="btn ${o.dis ? "dis" : ""}">Submit</div></div>
+  ${o.popup ? `<div class="popup"><div class="warn">⚠</div><b contenteditable="true" spellcheck="false">${o.popup}</b></div>` : ""}`;
+}
+const TPL = {
+  login: () => `<div style="text-align:center;padding-top:20px"><div style="font-size:64px;color:#03a9f4;line-height:1">💧</div><b style="font-size:26px;color:#0288d1;font-style:italic">${E("JAL Rekha")}</b><br><i style="font-size:13px">${E("Jal jeevan mission")}</i></div>
+    <div style="text-align:center;margin-top:58px;font:700 24px Arial;color:#03a9f4">${E("Login")}</div>
+    <div style="display:flex;margin:44px 14px 0;font-size:12px;background:#eee"><div style="padding:9px 8px">${E("F.E. / C.M.")}</div><div style="padding:9px 8px">${E("F.E. / Sarthak")}</div><div style="padding:9px 8px">${E("Contractor")}</div><div style="padding:9px 8px;background:#03a9f4;color:#fff">${E("Jal Samadhan")}</div></div>
+    <div style="padding:10px 18px"><div style="font-size:12px;margin:8px 0 3px">Mobile Number</div><div class="inp" style="height:44px" contenteditable="true"></div><div style="font-size:12px;margin:12px 0 3px">OTP</div><div class="inp" style="height:44px" contenteditable="true"></div>
+    <div class="btn big" style="margin-top:6px;background:#4fc3f7">${E("LOGIN")}</div><div style="text-align:center;color:#03a9f4;text-decoration:underline;font-size:13px">${E("Register new account")}</div><div style="text-align:center;color:#03a9f4;font-weight:700;margin-top:24px;font-size:12px">${E("Resend OTP")}</div></div>${foot}`,
+  regacct: () => hdr("Jal Samadhan – Register") + `<div class="body">${row("Full Name", "")}${row("Mobile Number", "")}<div class="btn" style="width:130px;margin:6px 0 4px 130px">${E("Get OTP")}</div>${row("OTP", "")}${row("District", "", "sel")}
+    <div class="chk">☐ ${E("I agree to the Terms &amp; Conditions")}</div></div><div class="btns"><div class="btn ghost">${E("Back to Login")}</div><div class="btn">${E("Register")}</div></div>${foot}`,
+  landing: () => hdr() + `<div style="position:absolute;left:14px;top:190px"><div class="tile" style="width:182px">${E("Register New Complaint")}</div></div><div style="position:absolute;right:14px;top:190px;text-align:center" class="ill">🧑‍💻</div>
+    <div style="position:absolute;left:30px;top:420px" class="ill">📱</div><div style="position:absolute;right:14px;top:420px"><div class="tile" style="width:182px">${E("Status Of Previous Complaints")}</div></div>
+    <div style="position:absolute;left:0;right:0;top:640px;text-align:center;color:#1d1dff;font-weight:700">${E("Logout")}</div>${foot}`,
+  register: () => form({}),
+  changevillage: () => form({ filled: true, checked: true }),
+  notom: () => form({ filled: true, checked: true, popup: "Development work in selected Village is not Completed !" }),
+  notjn: () => form({ filled: true, checked: true, media: true, popup: "Jal Nigam don't supply water in selected village !" }),
+  leakage: () => form({ filled: true, checked: true, issue: "Leakage &amp; Damage", map: "pipe", media: true }),
+  nonet: () => form({ filled: true, checked: true, issue: "Leakage &amp; Damage", map: "panchayat", media: true, red: "No Network found near you. Please be at location ( 50 meter)", dis: true }),
+  ack: () => hdr() + `<div class="body" style="text-align:center"><div style="font-size:70px;color:#16a34a;margin-top:30px">✔</div><b style="font-size:20px">${E("Complaint Submitted")}</b><div style="margin:10px 0;color:#555">${E("Ticket ID")}: <b>${E("JS-2026-000123")}</b></div>
+    <div class="card" style="text-align:left;font-size:13px;line-height:1.9">Issue: ${E("Leakage &amp; Damage")}<br>Village: ${E("xxxxxxxx")}<br>Scheme / Component: ${E("xxxxxxxx / xxxxxxxx")}<br>Assigned to: ${E("AE – auto-assigned")}<br>Channel: ${E("Citizen App")}</div>
+    <div style="font-size:12px;color:#555">${E("SMS / WhatsApp confirmation sent to registered mobile")}</div><div class="btn big">${E("Track Status")}</div><div class="btn big ghost">${E("Home")}</div></div>${foot}`,
+  status: () => hdr("Jal Samadhan – My Complaints") + `<div class="body"><div style="font-size:12px;margin-bottom:8px">${E("[All]")} ${E("Open")} ${E("Resolved")} ${E("Escalated")}</div>
+    <div class="card">${E("JS-2026-000123")}<span class="pill" style="background:#f59e0b;float:right">${E("In Progress")}</span><br><b>${E("Leakage &amp; Damage")}</b><br><span style="font-size:12px;color:#555">${E("xxxxxxxx village · 03-11-2026")}</span></div>
+    <div class="card">${E("JS-2026-000101")}<span class="pill" style="background:#16a34a;float:right">${E("Resolved")}</span><br><b>${E("Leakage &amp; Damage")}</b><br><span style="font-size:12px;color:#555">${E("xxxxxxxx village · 28-10-2026")}</span></div>
+    <div class="card">${E("JS-2026-000087")}<span class="pill" style="background:#dc2626;float:right">${E("Escalated")}</span><br><b>${E("No water supply")}</b><br><span style="font-size:12px;color:#555">${E("xxxxxxxx village · 20-10-2026")}</span></div></div>${foot}`,
+  detail: () => hdr("Complaint JS-2026-000101") + `<div class="body"><b>${E("Status timeline")}</b><div class="tl"><div>● ${E("Registered – 28-10 10:12")}</div><div>● ${E("Auto-assigned to AE – 28-10 10:12")}</div><div>● ${E("In progress – 28-10 15:40")}</div><div>● ${E("Resolved (geofenced) – 29-10 11:05")}</div></div>
+    <div class="card" style="height:90px;display:grid;place-items:center;color:#777">${E("Resolution photo")}</div><b>${E("Your feedback")}</b><div style="font-size:26px;color:#f59e0b;margin:6px 0">★★★★☆</div><div class="inp tall" contenteditable="true"></div>
+    <div class="btn big" style="margin-top:20px">${E("Satisfied – Close")}</div><div class="btn big ghost">${E("Not resolved – Reopen")}</div></div>${foot}`,
+  resolve: () => hdr("Resolve Complaint") + `<div class="body"><div class="card" style="font-size:13px;line-height:1.8">${E("JS-2026-000123")} · ${E("Leakage &amp; Damage")}<br>${E("Scheme / Component: xxxxxxxx")}</div>
+    <div style="height:210px">${mapSvg("pipe")}</div><div style="margin:8px 0;font-size:13px"><span class="pill" style="background:#16a34a">${E("12 m from location – within 50 m")}</span> <span style="color:#2563eb;font-weight:700">${E("▶ Route")}</span></div>
+    <div class="row" style="margin:8px 0"><label>Add Photos :</label><span style="font-size:22px;color:#03a9f4">📷</span></div><div class="row" style="margin:8px 0"><label>Remark</label><div class="inp tall" contenteditable="true"></div></div></div>
+    <div class="btns"><div class="btn ghost">${E("Back")}</div><div class="btn">${E("Mark Resolved")}</div></div>`,
+  officer: () => `<div class="web"><div class="hdr"><div class="logo">⚖</div><b contenteditable="true" spellcheck="false">Jal Samadhan – Officer Console (AE / EE / SE)</b></div>
+    <div class="nav">${E("Worklist")}<br>${E("Map &amp; Routing")}<br>${E("Escalations")}<br>${E("Reports")}<br>${E("Dashboard")}</div>
+    <div class="main"><div style="margin-bottom:8px">${E("District ▾")} ${E("Scheme ▾")} ${E("Status ▾")} ${E("Asset type ▾")}</div>
+    <table class="t"><tr><th>Ticket</th><th>Village</th><th>Issue</th><th>Age / SLA</th><th>Status</th><th>Action</th></tr>
+    <tr><td>${E("JS-2026-000123")}</td><td>${E("xxxxxx")}</td><td>${E("Leakage")}</td><td>${E("4 h / T1 = TBC")}</td><td>${E("Assigned")}</td><td>${E("Reassign · Route")}</td></tr>
+    <tr><td>${E("JS-2026-000087")}</td><td>${E("xxxxxx")}</td><td>${E("No supply")}</td><td style="color:#c00">${E("Breached")}</td><td>${E("Escalated L1")}</td><td>${E("Open")}</td></tr>
+    <tr><td>${E("JS-2026-000140")}</td><td>${E("xxxxxx")}</td><td>${E("Handpump")}</td><td>${E("1 h")}</td><td>${E("New (181)")}</td><td>${E("Assign")}</td></tr></table>
+    <div style="margin-top:12px;height:150px">${mapSvg("pipe")}</div></div></div>`,
+  dash: () => `<div class="web"><div class="hdr"><div class="logo">⚖</div><b contenteditable="true" spellcheck="false">Jal Samadhan – Dashboard (ACS · MPJN · E-in-C · SE · EE · AE)</b></div>
+    <div class="nav">${E("Dashboard")}<br>${E("Complaints")}<br>${E("Escalations")}<br>${E("Reports")}</div>
+    <div class="main"><div class="kpi">${E("Received")}<b>${E("0")}</b></div><div class="kpi">${E("Pending")}<b>${E("0")}</b></div><div class="kpi">${E("Resolved")}<b>${E("0")}</b></div><div class="kpi">${E("Escalated")}<b>${E("0")}</b></div><div class="kpi" style="color:#c00">${E("Breaching SLA")}<b>${E("0")}</b></div>
+    <div style="margin:10px 0">${E("District ▾")} ${E("Scheme ▾")} ${E("Asset type ▾")} ${E("Channel ▾")} ${E("Category ▾")} ${E("Officer ▾")}</div>
+    <div style="height:110px"><span class="bar2" style="height:50px"></span><span class="bar2" style="height:90px"></span><span class="bar2" style="height:70px"></span><span class="bar2" style="height:30px"></span><span class="bar2" style="height:100px"></span></div>
+    <div class="btn" style="display:inline-block;padding:6px 14px;margin-top:8px">${E("Export Excel")}</div> <div class="btn" style="display:inline-block;padding:6px 14px">${E("Export PDF")}</div></div></div>`,
+  blank: t => hdr(t) + `<div class="body"><div class="inp tall" contenteditable="true" style="height:200px"></div></div>${foot}`
+};
+
+const MO = (type, dur, prompt) => ({ type, dur, prompt });
+const DEF = {
+  scenes: [
+    { id: "N1", tpl: "regacct", title: "Register New Account (OTP)", kind: "new", x: 40, y: 40, s: .58, mot: MO("slide-left", 300, "Screen slides in from the right (300 ms, ease-out) when 'Register new account' is tapped. 'Get OTP' button shows a 30-second countdown on press. Wrong OTP: field shakes 250 ms and shows an inline red message. Success: shared-axis slide to Landing."), notes: "Citizen self-registration with mobile OTP. After registering, the citizen returns to Login.", reqs: "BR-02, FR-08.06, FR-W01" },
+    { id: "S1", tpl: "login", title: "Login Page", kind: "axure", x: 460, y: 40, s: .58, mot: MO("fade", 300, "Logo drop fades in (300 ms). Tab underline slides to 'Jal Samadhan' (200 ms). On LOGIN: button shows a spinner for the OTP check; invalid OTP triggers a 250 ms horizontal shake on the OTP field; valid OTP transitions with slide-left to Landing."), notes: "Existing Axure screen. Jal Samadhan tab uses Mobile Number + OTP (citizens); other tabs are staff logins.", reqs: "FR-08.06, FR-W01" },
+    { id: "S2", tpl: "landing", title: "Landing Page", kind: "axure", x: 880, y: 40, s: .58, mot: MO("slide-left", 300, "Tiles rise in with a 60 ms stagger (fade + 12 px translate-Y). Tile press: 95% scale for 100 ms then shared-axis slide to the target screen. Logout: confirm sheet slides up from the bottom."), notes: "Two actions: Register New Complaint, Status Of Previous Complaints. Logout link.", reqs: "FR-W02, FR-08.03" },
+    { id: "S3", tpl: "register", title: "Register New Complaint", kind: "axure", x: 1300, y: 40, s: .58, mot: MO("slide-left", 300, "Form fields fade in top-to-bottom with 40 ms stagger. District and Block are pre-filled from profile or GPS. Ticking 'Click here to change village' unlocks the Gram Panchayat and Village dropdowns with a 200 ms opacity change. Issue dropdown opens as a bottom sheet."), notes: "District/Block auto-filled; GP/Village default to the citizen's village. Issue dropdown drives the next screen.", reqs: "BR-02, FR-08.01, FR-W03" },
+    { id: "S4", tpl: "changevillage", title: "Change Village Option", kind: "axure", x: 1720, y: 40, s: .58, mot: MO("fade", 250, "GP and Village dropdowns become active with a 200 ms colour fade. After a village is chosen, a 400 ms eligibility spinner runs, then either the next fields appear or a warning popup pops in (scale .7 to 1, 250 ms)."), notes: "Village change triggers the two eligibility gates (Jal Nigam supply, development complete).", reqs: "BR-06, FR-W03, FR-W04" },
+    { id: "S5", tpl: "notom", title: "If Selected Village is not O&M", kind: "axure", x: 2140, y: 40, s: .58, mot: MO("pop", 250, "Blue warning popup pops in centred (scale .7 to 1.06 to 1, 250 ms) with a dimmed backdrop. Auto-dismiss is off; user taps outside to close. Submit stays disabled."), notes: "Blocking message: 'Development work in selected Village is not Completed !'", reqs: "BR-06, FR-W04" },
+    { id: "N4", tpl: "detail", title: "Complaint Detail, Feedback & Reopen", kind: "new", x: 40, y: 700, s: .58, mot: MO("slide-left", 300, "Timeline dots fill sequentially (80 ms each). Star rating scales 1.2x on tap. 'Reopen' opens a bottom sheet that requires a reason before confirming."), notes: "Citizen can close with feedback or reopen; reopen re-enters assignment and counts for escalation.", reqs: "FR-08.08, FR-08.09, BR-05" },
+    { id: "N3", tpl: "status", title: "Status of Previous Complaints", kind: "new", x: 460, y: 700, s: .58, mot: MO("slide-left", 300, "Cards slide up with 50 ms stagger. Filter chips switch list with a 150 ms cross-fade. Pull-to-refresh shows the standard spinner; status pills update with a brief colour pulse."), notes: "List with ticket, issue, status pill. Opens detail.", reqs: "FR-08.03, FR-08.08" },
+    { id: "N2", tpl: "ack", title: "Complaint Submitted – Ticket ID", kind: "new", x: 880, y: 700, s: .58, mot: MO("pop", 400, "Green tick draws itself (stroke animation, 400 ms) then the card slides up. Ticket ID gets a one-time highlight pulse. SMS/WhatsApp line fades in after 600 ms."), notes: "Shows ticket ID, auto-assignee, and confirms SMS/WhatsApp notification (registration event).", reqs: "FR-08.07, FR-08.08" },
+    { id: "S7", tpl: "leakage", title: "Leakage & Damage", kind: "axure", x: 1300, y: 700, s: .58, mot: MO("su", 300, "Map card slides up with the scheme and component captions fading in. Pipeline polyline draws itself (500 ms). Camera and video icons pulse once. Submit button enables with a colour fade when location is within 50 m."), notes: "Scheme name and component derived from the village; pipeline shown on the map; photos, video and remark (voice input).", reqs: "FR-08.01, FR-W05, FR-W06" },
+    { id: "S8", tpl: "nonet", title: "No Network Found (50 m geofence)", kind: "axure", x: 1720, y: 700, s: .58, mot: MO("shake", 250, "Red message appears with a 250 ms shake and the user marker pulses (1 s loop). Submit is greyed. Message clears automatically when GPS reports within 50 m."), notes: "The red text reads like a connectivity error but is a geofence rule. See CR-05.", reqs: "BR-07, FR-W06, CR-05" },
+    { id: "S6", tpl: "notjn", title: "Not Jal Nigam Village", kind: "axure", x: 2140, y: 700, s: .58, mot: MO("pop", 250, "Blue warning popup pops in (scale .7 to 1.06 to 1, 250 ms). Photo, video and remark fields dim to 40% and lock. Submit stays disabled."), notes: "Blocking message: 'Jal Nigam don't supply water in selected village !'. Wireframe still shows photo/video fields (see CR-02).", reqs: "BR-06, FR-W04, CR-02" },
+    { id: "N6", tpl: "resolve", title: "Officer: Geofenced Resolution + Routing", kind: "new", x: 40, y: 1360, s: .58, mot: MO("slide-left", 300, "Route line draws from officer to site (600 ms). Distance chip flips grey to green on entering 50 m. 'Mark Resolved' enables with a 200 ms colour fade."), notes: "Officer navigates to site; resolution allowed only within 50 m (same geofence rule as lodging).", reqs: "FR-08.02, FR-08.04" },
+    { id: "N5", tpl: "officer", title: "Officer Console: Worklist + Map", kind: "new", x: 460, y: 1360, s: .5, web: true, mot: MO("fade", 300, "Worklist rows fade in with 30 ms stagger. Breached rows pulse red once. Selecting a row pans the map to the site and draws the route (500 ms)."), notes: "AE/EE/SE worklist with SLA age, reassign, route and open actions. SLA timers are TBC.", reqs: "FR-08.04, FR-08.07, FR-08.10" },
+    { id: "N7", tpl: "dash", title: "Dashboards & Reports (ACS … AE)", kind: "new", x: 1300, y: 1360, s: .5, web: true, mot: MO("fade", 300, "KPI numbers count up (600 ms). Charts grow from the baseline (400 ms). Applying a filter cross-fades the data (200 ms). Export shows a 'preparing file' toast."), notes: "Received, pending, resolved, escalated, breaching timeline; filters by district, scheme, asset type, channel, category, officer; export Excel and PDF.", reqs: "BR-08, FR-08.11, FR-08.12" }
+  ],
+  edges: [
+    { f: "S1", t: "N1", l: "Register new account" },
+    { f: "S1", t: "S2", l: "OTP valid ✔" }, { f: "S2", t: "S3", l: "Register New Complaint" }, { f: "S2", t: "N3", l: "Status Of Previous Complaints" },
+    { f: "S3", t: "S4", l: "Tick 'change village'" }, { f: "S4", t: "S5", l: "Dev. work not completed ✖", fail: 1 }, { f: "S3", t: "S6", l: "Not a Jal Nigam village ✖", fail: 1 },
+    { f: "S3", t: "S7", l: "Issue = Leakage & Damage ✔" }, { f: "S7", t: "S8", l: "Outside 50 m ✖", fail: 1 }, { f: "S7", t: "N2", l: "Submit (within 50 m) ✔" },
+    { f: "N2", t: "N3", l: "Track Status" }, { f: "N3", t: "N4", l: "Open ticket" },
+    { f: "N2", t: "N5", l: "Auto-assign + notify" }, { f: "N5", t: "N6", l: "Go to site (routing)" }, { f: "N6", t: "N4", l: "Resolved → citizen notified" },
+    { f: "N5", t: "N7", l: "SLA / escalation feeds dashboards" }, { f: "N4", t: "N5", l: "Reopen → re-assign" }
+  ],
+  paths: [
+    { name: "Citizen – happy path", ids: ["S1", "S2", "S3", "S7", "N2", "N3", "N4"] },
+    { name: "Blocked: not a Jal Nigam village", ids: ["S1", "S2", "S3", "S6"] },
+    { name: "Blocked: development not completed", ids: ["S3", "S4", "S5"] },
+    { name: "Blocked: outside 50 m geofence", ids: ["S3", "S7", "S8"] },
+    { name: "Officer resolution & reopen", ids: ["N2", "N5", "N6", "N4", "N5", "N7"] }
+  ],
+  notes: [{ id: "T1", x: 2460, y: 60, text: "Yellow badge = proposed scene added from FRS FR-08 (not in the Axure file). Blue badge = existing Axure screen." },
+          { id: "T2", x: 2460, y: 240, text: "SLA times (T1, T2, T3) and the escalation matrix are pending from the Department (FRS section 10). Placeholders only." }],
+  br: [
+    ["BR-01", "One integrated digital platform covering Handpumps, SVS and MVS, with Jal Rekha as the single point of access (incorporating Jal Samadhan and GHAN 2.0).", "PHE MoM 12.10.2026, dir. 1 and 3", "High", "S1, S2", "Proposed"],
+    ["BR-02", "Citizens can raise and track complaints on Handpumps, SVS and MVS through a dedicated Jal Samadhan module.", "PHE MoM dir. 2; FRS FR-08", "High", "N1, S3, N3", "Proposed"],
+    ["BR-03", "Complaints on O&M of Handpumps, SVS and MVS received via the State Call Centre (181) / CM Helpline are routed to the designated team for action.", "PHE MoM dir. 4; FRS FR-08", "High", "N5", "Proposed"],
+    ["BR-04", "Avoid confusion over which portal to use. GHAN 2.0 (Flutter) is reached by redirection from Jal Rekha (native Android) until modules are live there.", "PHE MoM dir. 3; FRS 3.2, FR-09", "Medium", "S2", "Proposed"],
+    ["BR-05", "Time-bound, level-wise escalation so every complaint has a closing owner and a visible clock.", "FRS FR-08", "High", "N4, N5", "Proposed"],
+    ["BR-06", "Complaints are accepted only for villages where Jal Nigam supplies water and development work is complete.", "Axure wireframe (two popups)", "High", "S4, S5, S6", "Wireframe"],
+    ["BR-07", "A complaint is lodged only from the site (within 50 m) to prevent false or remote complaints.", "Axure wireframe (No Network Found)", "High", "S7, S8", "Wireframe"],
+    ["BR-08", "ACS, MPJN, Engineers-in-Chief, SE, EE and AE can see received, pending, resolved, escalated and SLA-breaching complaints.", "FRS FR-08", "Medium", "N7", "Proposed"],
+    ["BR-09", "Escalation matrix and timelines are to be provided by the Department before SLA logic is built.", "FRS section 10", "High", "N5", "Open dependency"]
+  ],
+  fr: [
+    ["FR-08.01", "Geofenced complaint lodging by citizens through a smart mobile phone.", "FRS FR-08", "High", "S3, S7", "Proposed"],
+    ["FR-08.02", "Geofenced complaint resolution by officers.", "FRS FR-08", "High", "N6", "Proposed"],
+    ["FR-08.03", "Complaint status view for the citizen.", "FRS FR-08", "High", "S2, N3", "Proposed"],
+    ["FR-08.04", "Map and routing for officers to reach the location.", "FRS FR-08", "Medium", "N5, N6", "Proposed"],
+    ["FR-08.05", "Integration with CM Helpline, other Jal Rekha modules and the GHAN app.", "FRS FR-08", "High", "N5", "Proposed"],
+    ["FR-08.06", "OTP-based login for citizens.", "FRS FR-08", "High", "N1, S1", "Proposed"],
+    ["FR-08.07", "Auto-assign of complaints to the responsible officer.", "FRS FR-08", "High", "N2, N5", "Proposed"],
+    ["FR-08.08", "Real-time status tracking with SMS or WhatsApp notification at registration, assignment and closure.", "FRS FR-08", "High", "N2, N3, N4", "Proposed"],
+    ["FR-08.09", "Citizen feedback on closure, with option to reopen the complaint.", "FRS FR-08", "Medium", "N4", "Proposed"],
+    ["FR-08.10", "Time-bound, level-wise escalation.", "FRS FR-08", "High", "N5", "Proposed"],
+    ["FR-08.11", "Dashboards for ACS, MPJN, E-in-C, SE, EE and AE: received, pending, resolved, escalated, breaching timeline.", "FRS FR-08", "Medium", "N7", "Proposed"],
+    ["FR-08.12", "Reports by district, scheme, asset type, channel, category and officer; export to Excel and PDF.", "FRS FR-08", "Medium", "N7", "Proposed"],
+    ["FR-09", "GHAN 2.0 integration: redirection from the Jal Rekha app to GHAN.", "FRS FR-09", "Medium", "S2", "Proposed"],
+    ["FR-W01", "Login tab 'Jal Samadhan' with Mobile Number, OTP, LOGIN, Register new account and Resend OTP.", "Axure Login Page", "High", "S1, N1", "Wireframe"],
+    ["FR-W02", "Landing page with Register New Complaint, Status Of Previous Complaints and Logout.", "Axure Landing Page", "High", "S2", "Wireframe"],
+    ["FR-W03", "Complaint form: District, Block, Gram Panchayat, Village, 'Click here to change village', issue dropdown, remark with voice input, Save and Submit.", "Axure Register / Change Village", "High", "S3, S4", "Wireframe"],
+    ["FR-W04", "Eligibility messages: 'Development work in selected Village is not Completed !' and 'Jal Nigam don't supply water in selected village !'.", "Axure popups", "High", "S5, S6", "Wireframe"],
+    ["FR-W05", "For Leakage & Damage show scheme name, component and a map with the pipeline; allow photos, video and remark.", "Axure Leakage & Damage", "High", "S7", "Wireframe"],
+    ["FR-W06", "Geofence check of 50 m with a clear message when the user is away from the location.", "Axure No Network Found", "High", "S7, S8", "Wireframe"],
+    ["FR-W07", "Footer shows application version (v6.7) and 'Designed, Developed and maintained by MPSSDI, MPSeDC'.", "Axure footer", "Low", "S1, S2", "Wireframe"]
+  ],
+  cr: [
+    ["CR-01", "Issue dropdown shows only 'Leakage & Damage'. Define the full issue master (category list) and the screen variant for each issue.", "Wireframe vs FRS reports by category", "Medium", "S3, S7", "Proposed"],
+    ["CR-02", "Blocked state (Not Jal Nigam Village) still shows Add Photos and Add Video. Hide or lock media fields once the popup shows.", "Axure screen 'Not Jal Nigam Village'", "Low", "S6", "Proposed"],
+    ["CR-03", "Remark has voice input. Confirm Hindi and English language support for the module.", "Wireframe (mic icon); to be confirmed", "Low", "S3", "To confirm"],
+    ["CR-04", "District and Block look like plain text boxes. Make them read-only and auto-filled so only GP and Village change.", "Axure Register New Complaint", "Low", "S3, S4", "Proposed"],
+    ["CR-05", "'No Network found near you' reads like a connectivity error. Reword as a geofence message (for example: 'You are not within 50 m of the location') and keep a separate offline message.", "Axure No Network Found", "Medium", "S8", "Proposed"],
+    ["CR-06", "FRS table of contents shows Jal Samadhan as 30 days but FR-08 and the timeline say 90 days (total 252). Confirm the correct figure.", "FRS document", "Medium", "N5, N7", "To confirm"],
+    ["CR-07", "Screens missing in the Axure file: acknowledgement, status list, detail with feedback and reopen, officer console and map routing, geofenced resolution, dashboards and reports. Added here as proposed scenes N1 to N7.", "FRS FR-08 vs Axure pages", "High", "N1–N7", "Added"],
+    ["CR-08", "SLA times (T1, T2, T3) and escalation levels are placeholders until the Department shares the escalation matrix and timelines.", "FRS section 10", "High", "N5", "Open dependency"],
+    ["CR-09", "Wireframe is scheme and component based (SVS/MVS). Handpump complaints need an asset type and handpump ID (GHAN geotag) option on the form.", "PHE MoM (Handpump geotags on GHAN)", "High", "S3, S7", "Proposed"],
+    ["CR-10", "SMS, WhatsApp, SSL and security audit costs are excluded from the proposal cost and billed as per actuals. Confirm approvals before build.", "FRS section 8 note", "Medium", "N2", "To confirm"],
+    ["CR-11", "Duplicate-complaint check (same asset, same issue, open ticket) is not specified. Decide whether to block or merge.", "Not in source documents", "Low", "S3, S7", "To confirm"]
+  ],
+  flow: {
+    states: ["Draft", "Submitted", "Auto-assigned", "In progress", "Resolved", "Closed", "Reopened", "Escalated L1", "Escalated L2", "Escalated L3"],
+    steps: [
+      ["Citizen", "Opens the app, picks the 'Jal Samadhan' tab, enters Mobile Number and OTP (new users register first)."],
+      ["Citizen", "Taps 'Register New Complaint'. District and Block are pre-filled; GP and Village default to the citizen's village. Ticks 'Click here to change village' if needed."],
+      ["System", "Gate G1: does Jal Nigam supply water in the selected village? If not, show the warning popup and stop."],
+      ["System", "Gate G2: is development work in the village complete (O&M stage)? If not, show the warning popup and stop."],
+      ["Citizen", "Selects the issue (for example Leakage & Damage). The app shows scheme name, component and the pipeline on the map."],
+      ["System", "Gate G4: is the citizen within 50 m of the location? If not, show the geofence message and keep Submit disabled."],
+      ["Citizen", "Adds photos, video and a remark (voice input available). Can Save as draft or Submit."],
+      ["System", "On Submit: creates the ticket, sends SMS/WhatsApp confirmation (registration event) and auto-assigns to the responsible officer."],
+      ["AE ⚑", "Receives the ticket in the Officer Console, sees the map and route, and goes to the site."],
+      ["AE ⚑", "At the site (within 50 m) adds a resolution photo and remark and marks the complaint Resolved. Citizen gets a closure notification."],
+      ["Citizen", "Gives feedback. Satisfied: Closed. Not satisfied: Reopen with a reason, which returns the ticket to assignment."],
+      ["System", "If a ticket stays open beyond its level time (T1, T2, T3: TBC), it escalates to the next level and notifies that officer."],
+      ["Call centre 181", "Complaints received through 181 or CM Helpline are created as tickets with channel 'CM Helpline' and follow the same assignment and escalation."],
+      ["ACS / MPJN / E-in-C", "View dashboards and reports; no field action unless the ticket reaches their level."]
+    ],
+    gates: [
+      ["G1", "Village is supplied by Jal Nigam", "Continue", "Popup: Jal Nigam don't supply water in selected village !", "Axure"],
+      ["G2", "Development work in the village is complete", "Continue", "Popup: Development work in selected Village is not Completed !", "Axure"],
+      ["G3", "Issue type selected", "Show issue-specific fields", "Submit disabled (message TBC)", "Assumed"],
+      ["G4", "User within 50 m of the location", "Enable Submit", "Red geofence message; Submit disabled", "Axure"],
+      ["G5", "Photo / video mandatory?", "TBC", "TBC", "To confirm"],
+      ["G6", "SLA time (T) crossed without resolution", "Stay at level", "Escalate to next level and notify", "FRS; times TBC"]
+    ],
+    ladder: "AE (L0) → EE (L1) → SE (L2) → Engineer-in-Chief (L3) → ACS / MPJN (monitoring). ⚑ Order is inferred from the dashboard list in FRS FR-08; confirm with the escalation matrix."
+  }
+};
+
+/* ============================================================ STATE */
+const KEY = "jal-samadhan-wf-v1";
+let S;
+try { const sd = JSON.parse(document.getElementById("seed").textContent); if (sd) S = sd; } catch (e) {}
+if (!S) { try { const ls = localStorage.getItem(KEY); if (ls) S = JSON.parse(ls); } catch (e) {} }
+if (!S) S = JSON.parse(JSON.stringify(DEF));
+S.zoom = S.zoom || 1;
+let sel = null, selEdge = null, connMode = false, connFrom = null, playTimer = null;
+const $ = (q, r) => (r || document).querySelector(q), $$ = (q, r) => [...(r || document).querySelectorAll(q)];
+const save = (() => { let t; return () => { clearTimeout(t); t = setTimeout(() => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }, 300); }; })();
+const sc = id => S.scenes.find(s => s.id === id);
+
+/* ============================================================ CANVAS */
+const dims = s => s.web ? { w: 960, h: 560 } : { w: 414, h: 896 };
+function renderScenes() {
+  const host = $("#scenes"); host.innerHTML = "";
+  S.scenes.forEach(s => {
+    const d = dims(s), el = document.createElement("div");
+    el.className = "scene" + (sel === s.id ? " sel" : ""); el.dataset.id = s.id;
+    el.style.left = s.x + "px"; el.style.top = s.y + "px"; el.style.width = d.w * s.s + "px";
+    el.innerHTML = `<div class="sh"><span class="badge ${s.kind}">${s.kind === "axure" ? "AXURE" : "PROPOSED"}</span><span class="t">${s.id} · ${esc(s.title)}</span><button data-a="big" title="Toggle size">⤢</button><button data-a="dup" title="Duplicate">⧉</button></div>
+      <div class="vp" style="width:${d.w * s.s}px;height:${d.h * s.s}px"><div class="screen" style="width:${d.w}px;height:${d.h}px;transform:scale(${s.s})">${s.custom || (TPL[s.tpl] || TPL.blank)(s.title)}</div></div>`;
+    host.appendChild(el);
+    const sh = $(".sh", el);
+    sh.addEventListener("pointerdown", e => { if (e.target.dataset.a) return; startDrag(e, s, el, "scene"); });
+    el.addEventListener("pointerdown", e => { if (connMode) { e.preventDefault(); connect(s.id); } else select(s.id); });
+    $(".screen", el).addEventListener("input", () => { s.custom = $(".screen", el).innerHTML; save(); });
+    $$("button", sh).forEach(b => b.addEventListener("click", ev => {
+      ev.stopPropagation();
+      if (b.dataset.a === "big") { s.s = s.s < .8 ? 1 : (s.web ? .5 : .58); renderAll(); }
+      if (b.dataset.a === "dup") dupScene(s);
+    }));
+  });
+  $$(".note").forEach(n => n.remove());
+  (S.notes || []).forEach(n => {
+    const el = document.createElement("div"); el.className = "note"; el.style.left = n.x + "px"; el.style.top = n.y + "px"; el.dataset.id = n.id;
+    el.innerHTML = `<div class="nh"><span>📝 note</span><span class="x" data-a="x">×</span></div><div class="nb" contenteditable="true" spellcheck="false">${esc(n.text)}</div>`;
+    $("#stage").appendChild(el);
+    $(".nh", el).addEventListener("pointerdown", e => { if (e.target.dataset.a) return; startDrag(e, n, el, "note"); });
+    $(".nb", el).addEventListener("input", e => { n.text = e.target.innerText; save(); });
+    $('[data-a="x"]', el).addEventListener("click", () => { S.notes = S.notes.filter(x => x !== n); renderAll(); });
+  });
+}
+const esc = t => String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function box(id) { const s = sc(id), d = dims(s), el = $(`.scene[data-id="${id}"]`); return { x: s.x, y: s.y, w: d.w * s.s, h: d.h * s.s + (el ? $(".sh", el).offsetHeight : 24) }; }
+function renderEdges() {
+  const svg = $("#edges"); svg.innerHTML = `<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs>`;
+  S.edges.forEach((e, i) => {
+    if (!sc(e.f) || !sc(e.t)) return;
+    const a = box(e.f), b = box(e.t), ac = { x: a.x + a.w / 2, y: a.y + a.h / 2 }, bc = { x: b.x + b.w / 2, y: b.y + b.h / 2 };
+    const dx = bc.x - ac.x, dy = bc.y - ac.y; let p1, p2, c1, c2;
+    if (Math.abs(dy) > Math.abs(dx) * 1.1) {
+      const dn = dy > 0; p1 = { x: ac.x, y: dn ? a.y + a.h : a.y }; p2 = { x: bc.x, y: dn ? b.y : b.y + b.h };
+      c1 = { x: p1.x, y: p1.y + (dn ? 1 : -1) * Math.max(40, Math.abs(dy) / 3) }; c2 = { x: p2.x, y: p2.y - (dn ? 1 : -1) * Math.max(40, Math.abs(dy) / 3) };
+    } else {
+      const rt = dx > 0; p1 = { x: rt ? a.x + a.w : a.x, y: ac.y }; p2 = { x: rt ? b.x : b.x + b.w, y: bc.y };
+      c1 = { x: p1.x + (rt ? 1 : -1) * Math.max(30, Math.abs(dx) / 3), y: p1.y }; c2 = { x: p2.x - (rt ? 1 : -1) * Math.max(30, Math.abs(dx) / 3), y: p2.y };
+    }
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    g.setAttribute("d", `M${p1.x} ${p1.y} C${c1.x} ${c1.y} ${c2.x} ${c2.y} ${p2.x} ${p2.y}`); g.setAttribute("marker-end", "url(#ar)");
+    g.setAttribute("class", (e.fail ? "fail " : "") + (selEdge === i ? "sel " : "") + (e.hot ? "hot" : "")); g.dataset.i = i;
+    g.addEventListener("click", ev => { ev.stopPropagation(); selEdge = i; sel = null; renderAll(); });
+    svg.appendChild(g);
+    if (e.l) {
+      const mx = (p1.x + 3 * c1.x + 3 * c2.x + p2.x) / 8, my = (p1.y + 3 * c1.y + 3 * c2.y + p2.y) / 8, w = e.l.length * 6 + 12;
+      const gl = document.createElementNS("http://www.w3.org/2000/svg", "g"); gl.setAttribute("class", "lbl");
+      gl.innerHTML = `<rect x="${mx - w / 2}" y="${my - 9}" width="${w}" height="18"/><text x="${mx}" y="${my + 4}" text-anchor="middle">${esc(e.l)}</text>`;
+      gl.addEventListener("dblclick", () => { const v = prompt("Arrow label", e.l); if (v !== null) { e.l = v; renderEdges(); save(); } });
+      svg.appendChild(gl);
+    }
+  });
+}
+function startDrag(e, obj, el, kind) {
+  e.preventDefault(); if (kind === "scene") select(obj.id);
+  const sx = e.clientX, sy = e.clientY, ox = obj.x, oy = obj.y; el.setPointerCapture && el.setPointerCapture(e.pointerId);
+  const mv = ev => { obj.x = Math.max(0, Math.round(ox + (ev.clientX - sx) / S.zoom)); obj.y = Math.max(0, Math.round(oy + (ev.clientY - sy) / S.zoom)); el.style.left = obj.x + "px"; el.style.top = obj.y + "px"; renderEdges(); };
+  const up = () => { window.removeEventListener("pointermove", mv); window.removeEventListener("pointerup", up); save(); };
+  window.addEventListener("pointermove", mv); window.addEventListener("pointerup", up);
+}
+function select(id) { if (sel === id && selEdge === null) return; sel = id; selEdge = null; $$(".scene").forEach(e => e.classList.toggle("sel", e.dataset.id === id)); renderEdges(); renderScenePane(); }
+function applyZoom() { $("#stage").style.transform = `scale(${S.zoom})`; $("#zl").textContent = Math.round(S.zoom * 100) + "%"; }
+function fit() { const vp = $("#vp"); let mx = 0, my = 0; S.scenes.forEach(s => { const b = box(s.id); mx = Math.max(mx, b.x + b.w); my = Math.max(my, b.y + b.h); }); (S.notes || []).forEach(n => { mx = Math.max(mx, n.x + 200); }); S.zoom = Math.min(1.2, Math.max(.3, Math.min((vp.clientWidth - 30) / (mx + 40), (vp.clientHeight - 30) / (my + 40)))); applyZoom(); vp.scrollTo(0, 0); }
+function dupScene(s) { const n = JSON.parse(JSON.stringify(s)); n.id = "X" + Date.now().toString(36).slice(-4).toUpperCase(); n.title = s.title + " (copy)"; n.x += 40; n.y += 40; n.kind = "new"; S.scenes.push(n); renderAll(); select(n.id); }
+function connect(id) { if (!connFrom) { connFrom = id; cap("Connect: now click the target scene"); return; } if (connFrom !== id) { const l = prompt("Arrow label (optional)", ""); S.edges.push({ f: connFrom, t: id, l: l || "" }); } connFrom = null; connMode = false; $("#bConn").classList.remove("on"); renderAll(); save(); cap("Arrow added"); }
+const cap = t => $("#cap").textContent = t;
+
+/* ============================================================ PANELS */
+function renderScenePane() {
+  const p = $("#p-scene"), s = sc(sel);
+  if (!s) { p.innerHTML = `<p class="small">Click a scene on the canvas to edit its title, notes, linked requirements and motion prompt.</p>`; return; }
+  const linked = [...S.br.map(r => ["br", r]), ...S.fr.map(r => ["fr", r]), ...S.cr.map(r => ["cr", r])].filter(([, r]) => r[4].split(/[,\s–]+/).includes(s.id) || (s.reqs || "").includes(r[0]));
+  p.innerHTML = `<h3>Scene ${s.id} <span class="badge ${s.kind}">${s.kind === "axure" ? "AXURE" : "PROPOSED"}</span></h3>
+    <label class="small">Title</label><input type="text" id="sTitle" value="${esc(s.title)}">
+    <h3>Linked requirements</h3><div>${linked.map(([k, r]) => `<span class="chip ${k}" title="${esc(r[1])}">${r[0]}</span>`).join("") || '<span class="small">None linked. Add this scene id in the BR/FR/CR table.</span>'}</div>
+    <h3>Notes / business logic</h3><textarea id="sNotes">${esc(s.notes || "")}</textarea>
+    <h3>Motion prompt</h3><textarea id="sMot" style="min-height:120px">${esc(s.mot.prompt)}</textarea>
+    <div style="display:flex;gap:8px;margin-top:6px"><div style="flex:1"><label class="small">Transition</label><select id="sType">${["slide-left", "su", "fade", "pop", "shake"].map(t => `<option ${t === s.mot.type ? "selected" : ""}>${t}</option>`).join("")}</select></div><div style="width:110px"><label class="small">Duration ms</label><input type="text" id="sDur" value="${s.mot.dur}"></div></div>
+    <p><button class="addb" id="cpMot">Copy motion prompt</button> <button class="addb" id="pvMot">▶ Preview</button></p>
+    <p class="small">Edit text directly on the wireframe: double-click any label, field or button text.</p>`;
+  $("#sTitle").oninput = e => { s.title = e.target.value; const t = $(`.scene[data-id="${s.id}"] .t`); if (t) t.textContent = s.id + " · " + s.title; save(); };
+  $("#sNotes").oninput = e => { s.notes = e.target.value; save(); };
+  $("#sMot").oninput = e => { s.mot.prompt = e.target.value; renderMotionPane(); save(); };
+  $("#sType").onchange = e => { s.mot.type = e.target.value; save(); };
+  $("#sDur").oninput = e => { s.mot.dur = +e.target.value || 300; save(); };
+  $("#cpMot").onclick = () => { navigator.clipboard && navigator.clipboard.writeText(s.mot.prompt).then(() => cap("Motion prompt copied")); };
+  $("#pvMot").onclick = () => animate(s.id);
+}
+function table(kind, head) {
+  const rows = S[kind]; return `<table class="rq" data-k="${kind}"><tr>${head.map(h => `<th>${h}</th>`).join("")}<th></th></tr>${rows.map((r, i) => `<tr data-i="${i}">${r.map((c, j) => `<td contenteditable="true" spellcheck="false" data-j="${j}">${esc(c)}</td>`).join("")}<td class="x" data-del="1">×</td></tr>`).join("")}</table><button class="addb" data-add="${kind}">＋ Add row</button>`;
+}
+function renderReqPane() {
+  const p = $("#p-req");
+  p.innerHTML = `<p class="small">Click any cell to edit. 'Scenes' links a requirement to wireframe scene ids (for example S3, N2).</p><h3>Business Requirements (BR)</h3>${table("br", ["ID", "Requirement", "Source", "Pri", "Scenes", "Status"])}
+    <h3>Functional Requirements (FR)</h3>${table("fr", ["ID", "Requirement", "Source", "Pri", "Scenes", "Status"])}<h3>Change Requests / Observations (CR)</h3>${table("cr", ["ID", "Change", "Source", "Pri", "Scenes", "Status"])}`;
+  $$("table.rq", p).forEach(t => {
+    t.addEventListener("input", e => { const td = e.target.closest("td[data-j]"); if (!td) return; const i = +td.parentNode.dataset.i; S[t.dataset.k][i][+td.dataset.j] = td.innerText.trim(); save(); });
+    t.addEventListener("click", e => { if (e.target.dataset.del) { S[t.dataset.k].splice(+e.target.parentNode.dataset.i, 1); renderReqPane(); renderScenePane(); save(); } });
+  });
+  $$("[data-add]", p).forEach(b => b.onclick = () => { const k = b.dataset.add; S[k].push([k.toUpperCase() + "-NEW", "", "", "Medium", "", "Proposed"]); renderReqPane(); save(); });
+}
+function renderFlowPane() {
+  const f = S.flow, p = $("#p-flow");
+  p.innerHTML = `<h3>Ticket lifecycle</h3><div>${f.states.map((s, i) => `<span class="chip">${esc(s)}</span>${i < 5 ? "→" : ""}`).join("")}</div>
+    <p class="small">Draft → Submitted → Auto-assigned → In progress → Resolved → Closed. Resolved → Reopened → Auto-assigned. Any open state → Escalated L1/L2/L3 when its level time is crossed (times TBC).</p>
+    <h3>Complete flow logic (step by step)</h3><ol class="flow">${f.steps.map((s, i) => `<li><b contenteditable="true" spellcheck="false" data-s="${i}" data-c="0">${esc(s[0])}</b>: <span contenteditable="true" spellcheck="false" data-s="${i}" data-c="1">${esc(s[1])}</span></li>`).join("")}</ol>
+    <h3>Decision gates</h3><table class="rq" data-k="gates"><tr><th>Gate</th><th>Condition</th><th>If yes</th><th>If no</th><th>Basis</th><th></th></tr>${f.gates.map((r, i) => `<tr data-i="${i}">${r.map((c, j) => `<td contenteditable="true" data-j="${j}">${esc(c)}</td>`).join("")}<td class="x" data-del="1">×</td></tr>`).join("")}</table><button class="addb" data-addg="1">＋ Add gate</button>
+    <h3>Escalation ladder</h3><div contenteditable="true" id="ladder" style="border:1px solid var(--line);border-radius:6px;padding:6px 8px">${esc(f.ladder)}</div>
+    <p class="small"><span class="flag">⚑</span> marks an assumption. SLA times T1, T2, T3 are not available until the Department shares the escalation matrix (FRS section 10).</p>`;
+  $$("[data-s]", p).forEach(el => el.addEventListener("input", () => { f.steps[+el.dataset.s][+el.dataset.c] = el.innerText.trim(); save(); }));
+  const t = $('table[data-k="gates"]', p);
+  t.addEventListener("input", e => { const td = e.target.closest("td[data-j]"); if (td) { f.gates[+td.parentNode.dataset.i][+td.dataset.j] = td.innerText.trim(); save(); } });
+  t.addEventListener("click", e => { if (e.target.dataset.del) { f.gates.splice(+e.target.parentNode.dataset.i, 1); renderFlowPane(); save(); } });
+  $("[data-addg]", p).onclick = () => { f.gates.push(["G" + (f.gates.length + 1), "", "", "", "Assumed"]); renderFlowPane(); save(); };
+  $("#ladder").oninput = e => { f.ladder = e.target.innerText; save(); };
+}
+function renderMotionPane() {
+  const p = $("#p-mot"), active = document.activeElement && p.contains(document.activeElement) ? document.activeElement.dataset.id : null;
+  p.innerHTML = `<h3>Global motion principles</h3><p class="small">Screen change: shared-axis slide, 300 ms, ease-out. Popups: scale .7 → 1.06 → 1, 250 ms. Validation errors: 250 ms shake. Respect 'reduce motion' (replace slides with 150 ms fades). Loading: skeleton or spinner after 400 ms.</p>
+    <h3>Motion prompt per scene (editable)</h3>${S.scenes.map(s => `<div style="margin-bottom:8px"><b>${s.id} · ${esc(s.title)}</b> <span class="small">${s.mot.type}, ${s.mot.dur} ms</span><textarea data-id="${s.id}" style="min-height:64px">${esc(s.mot.prompt)}</textarea></div>`).join("")}`;
+  $$("textarea", p).forEach(t => t.oninput = () => { sc(t.dataset.id).mot.prompt = t.value; save(); });
+}
+
+/* ============================================================ MOTION / PLAY */
+function animate(id) {
+  const s = sc(id), el = $(`.scene[data-id="${id}"] .vp`); if (!el) return;
+  const m = { "slide-left": "sl", su: "su", fade: "fd", pop: "pp", shake: "sk" }[s.mot.type] || "fd";
+  el.style.animation = "none"; void el.offsetWidth; el.style.animation = `${m} ${s.mot.dur}ms ease-out both`;
+}
+function stopPlay() { clearTimeout(playTimer); playTimer = null; $$(".scene.hot").forEach(e => e.classList.remove("hot")); S.edges.forEach(e => delete e.hot); renderEdges(); }
+function play() {
+  stopPlay(); const path = S.paths[+$("#pathSel").value]; if (!path) return; let i = 0;
+  const step = () => {
+    $$(".scene.hot").forEach(e => e.classList.remove("hot")); S.edges.forEach(e => delete e.hot);
+    if (i >= path.ids.length) { stopPlay(); cap("Flow finished"); return; }
+    const id = path.ids[i], s = sc(id), el = $(`.scene[data-id="${id}"]`);
+    if (i > 0) { const ed = S.edges.find(e => e.f === path.ids[i - 1] && e.t === id); if (ed) ed.hot = 1; }
+    if (el) { el.classList.add("hot"); const b = box(id), vp = $("#vp"); vp.scrollTo({ left: Math.max(0, (b.x + b.w / 2) * S.zoom - vp.clientWidth / 2), top: Math.max(0, (b.y + b.h / 2) * S.zoom - vp.clientHeight / 2), behavior: "smooth" }); }
+    renderEdges(); animate(id); cap(`Step ${i + 1}/${path.ids.length} – ${s.id} ${s.title}: ${s.mot.prompt.split(". ")[0]}`);
+    i++; playTimer = setTimeout(step, s.mot.dur + 1500);
+  };
+  step();
+}
+
+/* ============================================================ IO */
+function download(name, text, type) { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([text], { type: type || "text/plain" })); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); }
+const csvCell = v => '"' + String(v).replace(/"/g, '""') + '"';
+function exportCsv() { let out = "Type,ID,Requirement / Change,Source,Priority,Scenes,Status\n"; [["BR", "br"], ["FR", "fr"], ["CR", "cr"]].forEach(([n, k]) => S[k].forEach(r => out += [n, ...r].map(csvCell).join(",") + "\n")); download("Jal_Samadhan_BR_FR_CR.csv", "\ufeff" + out, "text/csv"); }
+function snapshot() {
+  S.zoom = S.zoom; const json = JSON.stringify(S).replace(/</g, "\\u003c");
+  const seed = document.getElementById("seed"); const old = seed.textContent; seed.textContent = json;
+  const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML; seed.textContent = old; download("Jal_Samadhan_Wireframe_Snapshot.html", html, "text/html");
+}
+
+/* ============================================================ INIT */
+function renderAll() { renderScenes(); renderEdges(); applyZoom(); renderScenePane(); }
+function boot() {
+  $("#pathSel").innerHTML = S.paths.map((p, i) => `<option value="${i}">${esc(p.name)}</option>`).join("");
+  renderAll(); renderReqPane(); renderFlowPane(); renderMotionPane();
+  $$(".tabs button").forEach(b => b.onclick = () => { $$(".tabs button").forEach(x => x.classList.toggle("on", x === b)); $$(".pane").forEach(x => x.classList.toggle("on", x.id === "p-" + b.dataset.t)); });
+  $("#bZoomIn").onclick = () => { S.zoom = Math.min(2, S.zoom + .1); applyZoom(); };
+  $("#bZoomOut").onclick = () => { S.zoom = Math.max(.25, S.zoom - .1); applyZoom(); };
+  $("#bFit").onclick = fit; $("#bPlay").onclick = play; $("#bStop").onclick = () => { stopPlay(); cap("Stopped"); };
+  $("#bAdd").onclick = () => { const t = prompt("Scene title", "New screen"); if (!t) return; const id = "X" + Date.now().toString(36).slice(-4).toUpperCase(); S.scenes.push({ id, tpl: "blank", title: t, kind: "new", x: 80, y: 80, s: .58, mot: MO("slide-left", 300, "Describe the motion for this screen."), notes: "", reqs: "" }); renderAll(); select(id); save(); };
+  $("#bNote").onclick = () => { S.notes = S.notes || []; S.notes.push({ id: "T" + Date.now(), x: 100 + S.notes.length * 20, y: 100, text: "Type a note…" }); renderAll(); save(); };
+  $("#bConn").onclick = () => { connMode = !connMode; connFrom = null; $("#bConn").classList.toggle("on", connMode); cap(connMode ? "Connect: click the source scene" : "Connect mode off"); };
+  $("#bDel").onclick = () => {
+    if (selEdge !== null) { S.edges.splice(selEdge, 1); selEdge = null; }
+    else if (sel && confirm("Delete scene " + sel + " and its arrows?")) { S.edges = S.edges.filter(e => e.f !== sel && e.t !== sel); S.scenes = S.scenes.filter(s => s.id !== sel); sel = null; }
+    renderAll(); renderMotionPane(); save();
+  };
+  $("#bJson").onclick = () => download("Jal_Samadhan_Wireframe.json", JSON.stringify(S, null, 1), "application/json");
+  $("#bImp").onclick = () => $("#fi").click();
+  $("#fi").onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(t => { try { S = JSON.parse(t); S.zoom = S.zoom || 1; sel = null; boot(); save(); } catch (er) { alert("Not a valid wireframe JSON file"); } }); };
+  $("#bCsv").onclick = exportCsv; $("#bHtml").onclick = snapshot;
+  $("#bReset").onclick = () => { if (confirm("Reset everything to the original wireframe? Your edits will be lost.")) { try { localStorage.removeItem(KEY); } catch (e) {} S = JSON.parse(JSON.stringify(DEF)); sel = null; boot(); } };
+  $("#vp").addEventListener("pointerdown", e => { if (e.target.id === "vp" || e.target.id === "stage") { sel = null; selEdge = null; renderAll(); } });
+  document.addEventListener("keydown", e => { if (e.key === "Delete" && selEdge !== null && !/INPUT|TEXTAREA/.test(document.activeElement.tagName) && !document.activeElement.isContentEditable) $("#bDel").click(); });
+  if (!window.__fitted) { window.__fitted = 1; fit(); }
+}
+boot();
+</script>
+</body>
+</html>

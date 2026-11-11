@@ -1,0 +1,71 @@
+citizen   user 
+
+register 
+complain raise 
+
+
+citizen dashboard
+
+assigned complaints, pending complaints, solved complaints
+
+Register Complaint/ Information
+
+List of Water Pipelines Asset
+
+View All Compliants 
+
+
+
+
+
+
+
+
+Department 
+
+
+dept dashboard
+
+
+L3 EE   web login & mobile  only to monitor complains status
+L2 AE   mobile user  
+L1 SE   mobile user  citizen raised complain are visible on L1 dashboard then he will assign it to - (Contractor who is L0 will resolve the complain   time limit within 7 working days)  resolved then shown on L1 dashboard and verified by L2 user  & if not resolved then it will move to next level which is L2 user if resolved then he can see on his dashboard and verify it and if not resolved then it will move to next level which is L3 user 
+
+while resolving complain add photo and remark also 
+
+L3 can see all number of complains on dashboard and monitor the all complain status and .. which district has max complain and progress
+
+
+buffer and route map of water pipeline on map
+
+
+
+L0 - contractor - mobile se verify with name number
+
+
+assign button move at top and dialog open .. mobile number of contractor to verify and assign him complain request else L1 can also resolve complain if he don't want to assign it to contractor L0 ( both ways flow can work) 
+
+now complain resolved by L0 contractor 
+and L1 verify that complain is resolved by contractor   and closed by L1 ( if L1 want to assign it to contractor or not or L1 has can resolve complain by himself as well)
+
+
+L1 completed complain shown to L3 dashboard 
+
+L1 not done in 7 days then move to L2 
+now if L2 not resolve in 7 days then move to L3 
+
+L3 can verify , reopen, L3 direct to L1 to force close if not proper complaint raised 
+
+
+
+L3  -  web & mobile screens EE
+
+L2 & L1 mobile screens
+
+create mobile and web screens where ever required
+
+
+
+
+
+

@@ -1,0 +1,1620 @@
+Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them.
+[9/1/26, 10:31:29 AM] Aman Mishra MPSeDC: <document omitted> by madhur nema
+[9/1/26, 10:57:32 AM] Manisha MPSeDC Testing Praveen Kumar: https://docs.google.com/spreadsheets/d/1Q0f_y2_0FmTjMKInQCzP9XgTSu4M35FY/edit?usp=sharing&ouid=105808836389879100997&rtpof=true&sd=true
+
+Testing Document
+[9/1/26, 6:12:47 PM] Bharat Mishra Intern MPSeDC: @Dheeraj sir, Damoh Janviswas reports merged at Production Environment please check and confirm.
+[9/1/26, 6:16:20 PM] Ajeet Singh MPSeDC: <image omitted> @Team, Please find the Sprint for this month..
+[9/1/26, 6:24:21 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar the OTP-based 2FA login flow has been deployed on the Dev server.
+
+Currently, it is available at:
+http://172.18.200.177/parakhweb/login2fa
+
+Once testing is completed, the routing will be changed back to the default login route.
+[9/1/26, 6:28:16 PM] Madhur Nema MPSeDC: @Dheeraj , kindly release the circular regarding 2FA implementation, so that all Parakh users can update and validate their registered mobile numbers in advance.
+
+We have already released a feature that allows users to validate their mobile number through OTP immediately after login. Kindly take reference from this existing feature and mention it in the circular as a guide for users to complete their mobile number validation before 2FA implementation.
+
+This will help ensure that all users are ready before 2FA is enabled.
+[9/2/26, 11:16:26 AM] You: <document omitted> 2FA_District_GIS_Parakh_Setup_Guide.docx
+[9/2/26, 11:46:41 AM] You: <image omitted>
+[9/2/26, 11:46:41 AM] You: [Forwarded] <image omitted>
+[9/2/26, 11:47:26 AM] You: In Damoh it is showing state wise submissions earlier it used to show submission for that district only
+[9/2/26, 1:26:22 PM] Madhur Nema MPSeDC: @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC district GIS reports are corrected and deployed on UAT, and 2FA is also deployed on uat kindly test it.
+[9/2/26, 1:33:47 PM] You: [Forwarded] The name of MP metro and its logo shall be added. Also, remove other irrelevant links (if there) so that it looks MPmetro specific.
+[9/2/26, 1:33:47 PM] You: [Forwarded] <image omitted>
+[9/2/26, 2:00:27 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok
+[9/2/26, 3:57:25 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> @Bharat Mishra Intern MPSeDC Please check this issue.
+[9/2/26, 4:30:54 PM] You: Sir, while conducting the School Monitoring Jan Vishwas survey through District GIS PARAKH, the form was filled successfully, but while submitting it, we encountered a “Something went wrong” error.
+
+Betul issue
+[9/2/26, 4:31:29 PM] Arindam Kumar MPSeDC Database: <document omitted> @Ajeet Singh MPSeDC Sir all inactive Form list, Now need to confirm unused form.
+[9/2/26, 4:39:19 PM] Manisha MPSeDC Testing Praveen Kumar: Already fixed by Jameel Sir in the latest UAT build, but it has not yet been deployed to Production
+[9/2/26, 4:49:12 PM] Ajeet Singh MPSeDC: Ok
+[9/2/26, 5:56:32 PM] You: <document omitted> Damoh new form under CM jan vishwas.
+[9/2/26, 6:08:37 PM] You: फील्ड भ्रमण (कृषक प्रक्षेत्र) – निरीक्षण प्रपत्र
+उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति (कृषि) – निरीक्षण प्रपत्र
+
+These are Chhindwara forms shared 
+
+khad vitran kendra inrikshan prapatra form in Damoh is partially mapped with - निजी विक्रेता / सहकारी समिति (कृषि)  
+
+so these are new forms
+[9/3/26, 11:31:58 AM] You: [Forwarded] <image omitted>
+[9/3/26, 11:31:58 AM] You: [Forwarded] <image omitted>
+[9/3/26, 11:32:38 AM] You: Betul issue while form made Save as draft. Few fields are not getting filled
+[9/3/26, 11:56:16 AM] Manisha MPSeDC Testing Praveen Kumar: Sir, Need business clarification
+[9/3/26, 12:13:21 PM] You: [Forwarded] <image omitted>
+[9/3/26, 12:13:28 PM] You: Betul form
+[9/3/26, 12:15:08 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC Sir, please check these issues
+[9/3/26, 12:16:00 PM] Jameel Khan MPSeDC: production or uat.
+share credential
+[9/3/26, 12:21:42 PM] You: Production
+[9/3/26, 12:22:28 PM] Jameel Khan MPSeDC: Please share credential
+[9/3/26, 12:23:29 PM] Manisha MPSeDC Testing Praveen Kumar: mayur@123
+[9/3/26, 12:44:02 PM] Jameel Khan MPSeDC: Form submission is functioning as expected. Please try again.
+[9/3/26, 12:56:37 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj, the department logo has been changed. What should the department name be?
+[9/3/26, 1:03:48 PM] You: MPMRCL (Madhya Pradesh Metro Rail Corporation Limited)
+[9/3/26, 1:17:26 PM] You: <image omitted>
+[9/3/26, 1:17:49 PM] You: Betul school monitoring form and now not getting submitted
+[9/3/26, 1:19:25 PM] You: <image omitted> Health form is in - Save as draft. These drop-downs are not getting opened
+[9/3/26, 1:19:42 PM] You: Both for Betul
+[9/3/26, 3:55:54 PM] You: You deleted this message
+[9/3/26, 3:55:55 PM] You: You deleted this message
+[9/3/26, 3:55:56 PM] You: You deleted this message
+[9/3/26, 3:56:09 PM] You: You deleted this message
+[9/7/26, 4:19:36 PM] Ajeet Singh MPSeDC: [Forwarded] Sir Esme 3 point or add Krna hai
+
+1.pdf attachament 
+2. Photo 
+3. Video
+[9/7/26, 4:19:36 PM] Ajeet Singh MPSeDC: @Madhur/Manisha, pls add these fields as well in the common Adhar form
+
+- Photos already there.
+- pdf document upload and video (pls add)
+[9/7/26, 4:53:49 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar test the aadhar inspection form of district gis , I've added drop-down list of addhar centre
+[9/7/26, 5:17:25 PM] Manisha MPSeDC Testing Praveen Kumar: Ok
+[9/7/26, 5:17:49 PM] Manisha MPSeDC Testing Praveen Kumar: Already added
+[9/7/26, 5:26:57 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted> @Jameel Khan MPSeDC Unable to submit form on UAT. Please check and verify
+[9/7/26, 5:31:08 PM] Jameel Khan MPSeDC: share credential
+[9/7/26, 5:37:04 PM] Jameel Khan MPSeDC: <image omitted>
+[9/7/26, 5:37:37 PM] Manisha MPSeDC Testing Praveen Kumar: districtgisinspector---username
+[9/7/26, 6:13:01 PM] Madhur Nema MPSeDC: fixed pls check
+[9/8/26, 10:34:50 AM] You: [Forwarded] <document omitted> सामाजिक न्याय विभाग इंदौर- संस्थाओं के निरीक्षण का प्रारूप.pdf
+[9/8/26, 10:34:50 AM] You: [Forwarded] <document omitted> जिला_निरीक्षण_चेकलिस्ट_उच्च_शिक्षा_विभाग.docx
+[9/8/26, 10:35:41 AM] You: Forms for Indore Division level Inspection
+[9/8/26, 11:58:42 AM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[9/8/26, 11:59:01 AM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC After clicking the "Save as Draft" button, the dropdown lists do not display any data. please check this issue
+[9/8/26, 12:01:16 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj "मछुआ कल्याण एवं मत्स्य विकास विभाग निरीक्षण प्रपत्र" for Jan Vishwas Abhiyan form has been created on UAT. Please check and verify
+[9/8/26, 12:01:41 PM] Jameel Khan MPSeDC: https://gisuat.mp.gov.in/parakhapi/api/Question/GetAnsweKyeDetails_new
+
+{token: 0de75666-5951-477f-aac4-13d25843edc6, ans_submissiom_id: 1000224105700005231, department_id: 241, form_id: 570}
+
+@Madhur Nema MPSeDC , @Aman Mishra MPSeDC
+[9/8/26, 12:02:44 PM] You: [Forwarded] <document omitted> मत्स्य_विभाग_निरीक्षण_प्रपत्र updated (6).docx
+[9/8/26, 12:03:01 PM] You: CM jan vishwas. Damoh shared
+[9/8/26, 12:07:45 PM] Manisha MPSeDC Testing Praveen Kumar: The same form has already been created under the DistrictGIS Department for Jan Vishwas Abhiyan
+[9/8/26, 12:08:19 PM] You: [Forwarded] <document omitted> ITI_College_Inspection.docx
+[9/8/26, 12:08:19 PM] You: [Forwarded] <document omitted> उर्वरकबीजपौ.सं.औ. विक्रेताओं के निरीक्षण.docx
+[9/8/26, 12:08:19 PM] You: [Forwarded] <document omitted> Aashram_Inspection.docx
+[9/8/26, 12:08:19 PM] You: [Forwarded] <document omitted> LSK_Inspection_Format.docx
+[9/8/26, 12:08:43 PM] You: 4 more forms shared by Dhar. For CM jan vishwas
+[9/8/26, 12:22:05 PM] You: <image omitted>
+[9/8/26, 12:22:22 PM] You: MP metro form not visible @Madhur Nema MPSeDC
+[9/8/26, 12:42:15 PM] Arindam Kumar MPSeDC Database: [Forwarded] Gas Agency
+cat - 1003
+subcat - 2093
+[9/8/26, 12:42:15 PM] Arindam Kumar MPSeDC Database: [Forwarded] CNG Station
+Cat - 1008
+Sub cat - 2376
+[9/8/26, 12:42:15 PM] Arindam Kumar MPSeDC Database: [Forwarded] Petrol Pump
+Cat - 1008
+Sub cat - 2167
+[9/8/26, 12:43:44 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC mp_gas_agency,mp_cng_station,mp_petrol_pump  table are created at prod  , when UAT available I will create
+[9/8/26, 12:56:04 PM] Madhur Nema MPSeDC: ok sir
+[9/8/26, 1:00:02 PM] Aman Mishra MPSeDC: @Ajeet Singh MPSeDC sir @Dheeraj sir
+Division district role login is ready on production with updated report.
+@Manisha MPSeDC Testing Praveen Kumar, @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC please test and validate
+[9/8/26, 1:06:04 PM] You: <document omitted> Ayush form
+[9/8/26, 1:33:32 PM] You: <document omitted> Final_additions_mining.docx
+[9/8/26, 1:33:54 PM] You: Betul mining form addition required
+[9/8/26, 1:34:13 PM] You: CM jan vishwas final form of ayush
+[9/8/26, 2:27:37 PM] Arindam Kumar MPSeDC Database: now it available at UAT
+[9/8/26, 2:28:30 PM] Manisha MPSeDC Testing Praveen Kumar: This message was deleted
+[9/8/26, 2:33:28 PM] Manisha MPSeDC Testing Praveen Kumar: This form is already live.
+[9/8/26, 2:45:18 PM] You: These requirements updates received from Mining Department from Betul district
+[9/8/26, 2:55:20 PM] Madhur Nema MPSeDC: api is fixed but problem persists in phone
+please checl
+[9/8/26, 3:07:04 PM] Manisha MPSeDC Testing Praveen Kumar: Sir, Need clarification
+[9/8/26, 3:07:31 PM] Jameel Khan MPSeDC: Ok
+[9/8/26, 3:40:58 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar I have added master data in petrol pump and gas agency  form kindly test them.
+[9/8/26, 3:44:46 PM] Manisha MPSeDC Testing Praveen Kumar: ok
+[9/8/26, 3:53:56 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[9/8/26, 3:54:17 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC, after changing the district, the block data does not refresh. please check this issue
+[9/8/26, 5:28:49 PM] You: @Madhur Nema MPSeDC फील्ड भ्रमण (कृषक प्रक्षेत्र) – निरीक्षण प्रपत्र
+उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति (कृषि) – निरीक्षण प्रपत्र
+Chhindwara forms 
+Please can you let me know status of these forms
+[9/8/26, 5:41:01 PM] Jameel Khan MPSeDC: <document omitted> Fixed. Please check
+[9/8/26, 5:41:19 PM] Manisha MPSeDC Testing Praveen Kumar: ok
+[9/8/26, 5:56:02 PM] Madhur Nema MPSeDC: please provide these forms.
+[9/8/26, 5:56:30 PM] You: [Forwarded] <document omitted> कृषि Agriculture Parakh form.docx
+[9/8/26, 5:59:05 PM] You: Chhindwara forms
+[9/8/26, 6:14:20 PM] Madhur Nema MPSeDC: this need to create for Jan viswash abhiyan ?
+[9/8/26, 6:14:34 PM] You: Guna - उद्यानिकी विभाग संरचना जानकारी फॉर्म Hoticulture  
+additions required in UAT
+[9/8/26, 6:15:16 PM] You: photos need to be added. block ,panchayt ,village list is not opening
+[9/9/26, 11:26:06 AM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir 553 (lpg gas agnecy ),570(aadhar),555 (petrol pump) kindly move these forms in prod for jan viswash abhiyan
+[9/9/26, 11:27:17 AM] Manisha MPSeDC Testing Praveen Kumar: The photo has been added, and everything is working correctly.
+[9/9/26, 11:27:20 AM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[9/9/26, 12:18:48 PM] You: <document omitted> Gas_data.xlsx
+[9/9/26, 12:18:59 PM] You: Chhindwara gas agency master data
+[9/9/26, 12:20:39 PM] Madhur Nema MPSeDC: @Dheeraj @Ajeet Singh MPSeDC sir, Aadhar , Petrol pump, and Gas agnecy Inspection are launched in  Jan viswash abhiyan.
+[9/9/26, 12:23:00 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar kindly verify on prod
+[9/9/26, 12:42:16 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC all deployed ,check and confirm
+[9/9/26, 2:27:43 PM] You: <document omitted> आयुष विभाग – संयुक्त निरीक्षण प्रपत्र.docx
+[9/9/26, 2:28:12 PM] You: Ayush complete consolidate form to be prepared under CM Jan vishwas
+[9/9/26, 2:28:24 PM] You: @Manisha MPSeDC Testing Praveen Kumar
+[9/9/26, 2:33:57 PM] Manisha MPSeDC Testing Praveen Kumar: ok sir
+[9/9/26, 2:49:42 PM] You: @Madhur Nema MPSeDC Please complete the Enhancement for MP Metro
+[9/9/26, 2:50:25 PM] Madhur Nema MPSeDC: provide the change list to me
+[9/9/26, 3:02:14 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj sir, Is this created under Chhindwara Collectorate??
+[9/9/26, 3:08:19 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC sir, same issue occurs in Production. Please check this issue
+[9/9/26, 3:14:36 PM] Manisha MPSeDC Testing Praveen Kumar: Sir, please provide the master data for "Sanstha Ka Naam.
+[9/9/26, 3:18:07 PM] You: It is at state level can we take it from geoportal else we have to take it from each district
+[9/9/26, 3:48:33 PM] You: @Madhur Nema MPSeDC LSK form  take it from SAPS -  for CM Jan vishwas
+[9/9/26, 3:48:44 PM] You: Yes
+[9/9/26, 4:04:05 PM] You: <album message>
+[9/9/26, 4:04:05 PM] You: <image omitted>
+[9/9/26, 4:04:05 PM] You: <image omitted>
+[9/9/26, 4:28:53 PM] Madhur Nema MPSeDC: fixed
+[9/9/26, 5:12:20 PM] You: Check email
+[9/9/26, 5:17:02 PM] Rahul Singh Parakh Mpsedc: This message was deleted
+[9/9/26, 5:56:53 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, need Master data for "जिला_निरीक्षण_चेकलिस्ट_उच्च_शिक्षा_विभाग" form(sanstha ka naam & Code) ,
+"मछुआ कल्याण एवं मत्स्य विकास विभाग" Form, ITI Form and Ayush Forms(sanstha ka nam). Please Provide
+[9/9/26, 5:59:35 PM] You: Take this from Geoportal 
+"मछुआ कल्याण एवं मत्स्य विकास विभाग" Form, ITI Form and Ayush Forms(sanstha ka nam).
+[9/9/26, 6:00:29 PM] You: Master data for "जिला_निरीक्षण_चेकलिस्ट_उच्च_शिक्षा_विभाग" form(sanstha ka naam & Code) - I will ask Nidhi to share this
+[9/9/26, 6:00:34 PM] Manisha MPSeDC Testing Praveen Kumar: @Madhur Nema MPSeDC
+[9/9/26, 6:20:02 PM] Madhur Nema MPSeDC: In the case of AYUSH forms, please clarify which data should be considered—Hospital, Clinic, Arogya Mandir, Dispensary, AYUSH Wing, etc.
+
+Also, the Geoportal does not have complete pond data.
+[9/9/26, 6:23:04 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar Jan Vishwas, Aadhaar, Petrol Pump, and Gas Agency reports have been created and deployed on UAT. Kindly verify them.
+   For Super Admin, a list of numbers added for 2FA.
+   In the Verify Survey List, a column has been added to display consolidated remarks.
+[9/9/26, 6:24:35 PM] Manisha MPSeDC Testing Praveen Kumar: ok
+[9/10/26, 10:25:34 AM] Madhur Nema MPSeDC: Asset page and Add asset fields needs to be updated according to their requirement (MP Metro). @Madhur
+
+@Dheeraj , with reference to the above point in the email, kindly provide the details of which fields need to be changed and what new fields are required on the Assets and Assignment pages,as per the MP Metro requirements.
+[9/10/26, 10:40:04 AM] You: <document omitted> @Madhur Nema MPSeDC @Manisha MPSeDC Testing Praveen Kumar MSME Form - for Indore
+[9/10/26, 10:40:54 AM] You: As earlier discussed, you suggested a few renaming updates of asset fields
+[9/10/26, 10:52:45 AM] Madhur Nema MPSeDC: That is what I am asking you to verify from your end. Kindly review the asset fields against the business requirements and confirm the latest required changes/renaming so that we can align the implementation accordingly.
+[9/10/26, 10:54:01 AM] Madhur Nema MPSeDC: 2) Take forward the fields -> city , locality work name agency and plant planted and their species planted From project entry form to survey form. @Madhur
+3) Same Plant Drop-Down details should populate in Survey form as done for first time data collection done in Project Entry form @Madhur
+@Dheeraj these changes are on mobile end so kindly assign to jameel sir
+[9/10/26, 11:02:46 AM] You: @Jameel Khan MPSeDC please check and if you require any clarification
+[9/10/26, 11:57:39 AM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar Saps form has been copied to लोक सेवा केंद्र निरीक्षण प्रपत्र (जनविश्वास अभियान)
+kindly verify
+[9/10/26, 12:01:10 PM] Manisha MPSeDC Testing Praveen Kumar: Ok
+[9/10/26, 12:05:12 PM] Madhur Nema MPSeDC: 1. Ayurvedic Dispensary,  Cat - 1011, subcat - 2012
+2. Ayush Wing, cat - 1011, subcat - 2271
+3. AYUSHMAN AROGYA MANDIR (Ayush),  cat -1011, subcat - 2272
+4. District Ayush Office, cat - 	1011, subcat - 	2273
+5. Divisional Ayush Office, cat - 1011, subcat - 2274
+6. District Hospital - Ayush, cat - 1011, subcat - 2274
+
+
+@Dheeraj kindly confirm , Do we need District Ayush Office , Divisional Ayush Office for ayush inspection form?
+above data is available in geoportal
+[9/10/26, 12:37:18 PM] Madhur Nema MPSeDC: Higher Education
+1. Government College, cat - 1005, subcat - 2097
+2. Private College, cat - 1005, subcat - 2183
+3. Private College(Granted), Cat - 1005, subcat - 2184
+4. Private University, Cat - 1005, subcat - 2185
+5. Government University, Cat - 1005, Subcat - 2098
+@Dheeraj fyi
+[9/10/26, 12:39:33 PM] Madhur Nema MPSeDC: Social Justice and Empowerment
+Cat - 1052, subcat - 2400
+
+
+1.  Up Lok Seva Kendra, cat - 	1008, subcat - 2392
+2.  Lok Seva Kendra, cat - 	1008, subcat - 2129
+@Arindam Kumar MPSeDC Database sir kindly copy this data for janviswash
+[9/10/26, 12:59:24 PM] Madhur Nema MPSeDC: Government University, Cat - 1005, Subcat - 2098
+
+Government College, cat - 1005, subcat - 2097
+
+@Arindam Kumar MPSeDC Database sir this data also
+[9/10/26, 1:55:23 PM] Ajeet Singh MPSeDC: <image omitted> @Arindam, for Tribal Dept. the General School is pulling data , with no inspection conducted.. (shows the user count, & School Count)
+Contrary to the two other repors, "Residential School" & Hoste, there we are only fetching records of inspections, which are conducted. could we also include records of all districts, where inspections are not conducted... to include school count etc  
+
+could you kindly check & fix
+[9/10/26, 1:55:23 PM] Ajeet Singh MPSeDC: <image omitted>
+[9/10/26, 3:05:58 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, Need master Data for Chhindwara Collectorate form "कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण प्रपत्र" (योजना का नाम) and form "बायो रिसोर्स सेंटर (BRC) भ्रमण – निरीक्षण प्रपत्र" (योजना का नाम & क्लस्टर का नाम )
+[9/10/26, 3:22:39 PM] You: [Forwarded] <document omitted> आयुष विभाग – संयुक्त निरीक्षण प्रपत्र.docx
+[9/10/26, 3:23:30 PM] You: अनुभाग 4 is common field for all 
+Please check and let me know if any changes required
+[9/10/26, 3:37:02 PM] Arindam Kumar MPSeDC Database: social_justice_and_empowerment
+up_lok_seva_kendra
+lok_seva_kendra
+government_university
+government_college
+ayurvedic_dispensary
+ayush_wing
+ayushman_arogya_mandir_ayush
+district_ayush_office
+divisional_ayush_office  10 table done at UAt
+[9/10/26, 4:11:05 PM] You: [Forwarded] <image omitted>
+[9/10/26, 4:11:24 PM] You: @Jameel Khan MPSeDC IOS app not getting downloaded
+[9/10/26, 4:32:10 PM] Madhur Nema MPSeDC: लोक सेवा केंद्र निरीक्षण प्रपत्र (जनविश्वास अभियान)
+वृद्ध आश्रम निरीक्षण प्रपत्र (जनविश्वास अभियान)
+
+in both the form the master data is getting populated kindly verify and confim 
+@Dheeraj @Manisha MPSeDC Testing Praveen Kumar
+[9/10/26, 5:28:11 PM] You: <document omitted> Anganwadi Common form @Madhur Nema MPSeDC Please check
+[9/10/26, 5:38:45 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar शिक्षा विभाग व्यापक निरीक्षण प्रपत्र for indore , college list is populating
+kindly verify
+[9/10/26, 5:40:27 PM] Madhur Nema MPSeDC: Do we need to develop this form for Jan Vishwas by replacing the current Anganwadi form?
+[9/10/26, 5:41:14 PM] Ajeet Singh MPSeDC: The current form of Aganwadi (jan viswas should be updated)
+this one: आंगनवाड़ी निरीक्षण प्रपत्र (जन विश्वास अभि
+[9/10/26, 5:44:21 PM] You: Damoh, Indore got confirmation from the Department to develop this new updated form, but Dhar is reluctant to develop this form for CM Jan Vishwas as they already have an existing form with old data of a count of 28 inspections done.
+[9/10/26, 5:44:27 PM] Madhur Nema MPSeDC: ok sir
+[9/10/26, 5:49:05 PM] Madhur Nema MPSeDC: <image omitted> @Dheeraj @Ajeet Singh MPSeDC sir , received this mail, Should we temporarily deactivate these forms under Bhopal Admin as requested?
+[9/10/26, 5:53:25 PM] Ajeet Singh MPSeDC: pls discuss
+[9/10/26, 5:56:51 PM] Ajeet Singh MPSeDC: It is more of educating the inpectors at their level, so dheeraj to gently inform them that deactiveting and later activating is not a right approach.
+[9/11/26, 10:17:59 AM] Madhur Nema MPSeDC: @Dheeraj मछुआ कल्याण एवं मत्स्य विकास विभाग data is not available on geoportal, kindly assist for this form.
+[9/11/26, 10:38:44 AM] You: Department said Master data is not available; it will be filled by the Gram Panchayat Office
+[9/11/26, 10:41:28 AM] You: <image omitted> Give Add more option here; for all items
+Also, 
+Add Sugar & Any Other option as well in the drop-down
+[9/11/26, 10:44:28 AM] Manisha MPSeDC Testing Praveen Kumar: This form is already live
+[9/11/26, 10:48:51 AM] Ajeet Singh MPSeDC: GM Madhur, Please load all the existing waterbodies data (Gram Panchayat wise) in the drop down.. and provide Others option also.. all waterbodies bigger / smaller then they wish, if not listed will be entered via 'Others'
+[9/11/26, 12:28:23 PM] Manisha MPSeDC Testing Praveen Kumar: The 2FA functionality is working as expected. No major issues were identified during UAT.
+[9/11/26, 12:40:42 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Jan Vishwas forms (Petrol / Diesel Pumps, Aadhaar Centre, LPG Dealers) tested and verified. All functionalities and Web reports are working fine.
+[9/11/26, 1:21:21 PM] Bharat Mishra Intern MPSeDC: @Dheeraj Sir, the MP Metro Survey and Asset Entry Form reports have been created, and the table headers for the Asset List and Assign Asset for Data Collection have been updated as discussed. Please check and verify.
+[9/11/26, 1:23:05 PM] You: @Madhur Nema MPSeDC Betul school monitoring form report not visible
+[9/11/26, 1:35:51 PM] You: Shared with Anshul from MP metro to cross check
+[9/11/26, 1:36:27 PM] You: And @Bharat Mishra Intern MPSeDC regarding samagra staging ids monika will share few IDs for testing
+[9/11/26, 2:02:08 PM] Bharat Mishra Intern MPSeDC: Ok sir
+[9/11/26, 2:25:06 PM] Madhur Nema MPSeDC: team is working on it
+[9/11/26, 2:25:56 PM] You: ekYC Verified
+171870346
+197505114
+323565340
+323565342
+
+Non eKYC
+323565341
+312603647
+192703646
+171848630
+[9/11/26, 2:36:40 PM] Ajeet Singh MPSeDC: <document omitted> @Dheeraj, Madhur, Aman for 16th Sep Session notification - Gwalior Division: 
+@Aman: lets pick Gwalior Division' Reports to publish.
+[9/11/26, 2:56:00 PM] Manisha MPSeDC Testing Praveen Kumar: ???
+[9/11/26, 2:57:50 PM] You: You deleted this message
+[9/11/26, 2:58:20 PM] You: I have asked Amitesh from Chhindwara to share
+[9/11/26, 2:58:23 PM] Manisha MPSeDC Testing Praveen Kumar: Sir As we discuss please provide the word file of this form .
+[9/11/26, 2:59:33 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj need Updated  ITI form for Jan Vishwas abhiyan
+[9/11/26, 2:59:35 PM] You: Nidhi will share
+[9/11/26, 3:03:49 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj "लोक सेवा केंद्र निरीक्षण प्रपत्र (जनविश्वास अभियान)" , "वृद्ध आश्रम निरीक्षण प्रपत्र (जनविश्वास अभियान)" and "शिक्षा विभाग व्यापक निरीक्षण प्रपत्र"(Indore Collectorate) form has been created on UAT. Please check and verify
+[9/11/26, 3:05:01 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Sir, I need clarification on a few points regarding the AYUSH form creation.
+[9/11/26, 3:14:23 PM] You: Will discuss
+[9/11/26, 3:16:01 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok sir
+[9/11/26, 3:45:33 PM] You: <image omitted>
+[9/11/26, 3:45:57 PM] You: <image omitted>
+[9/11/26, 3:46:20 PM] You: District GIS forms only visible on production 
+Why they are not visible on UAT ?
+[9/11/26, 4:05:17 PM] You: @Madhur Nema MPSeDC
+[9/11/26, 4:05:47 PM] You: <image omitted> For Damoh report not visible
+[9/11/26, 4:30:16 PM] Madhur Nema MPSeDC: You can see on super admin login. 
+On other logins it was not done intensionally
+[9/11/26, 4:59:34 PM] You: How Districts will verify on UAT then ?
+[9/11/26, 5:14:36 PM] Madhur Nema MPSeDC: <image omitted> No data has been submitted in Damoh hence not showing.
+[9/11/26, 5:14:55 PM] Madhur Nema MPSeDC: <image omitted> Refer this Screenshot
+[9/11/26, 5:18:58 PM] Madhur Nema MPSeDC: with this user, ( user name : districtgisinspector)
+they can verify forms on mobile
+[9/11/26, 5:34:37 PM] Madhur Nema MPSeDC: <image omitted> @Ajeet Singh MPSeDC sir 
+As discussed a mandatory question has been added in मछुआ कल्याण एवं मत्स्य विकास विभाग निरीक्षण प्रपत्र(जनविश्वास अभियान)
+
+@Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC @Dheeraj kindly verify
+[9/11/26, 6:03:52 PM] Madhur Nema MPSeDC: <image omitted> @Ajeet Singh MPSeDC Sir, as discussed, the login facility with both Password and 2FA authentication has been implemented for users.
+
+For users logging in with password, it is mandatory to verify their mobile number after login.
+
+This feature has been deployed to UAT.
+
+@Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC @Manisha MPSeDC Testing Praveen Kumar , kindly test the functionality and confirm.
+[9/15/26, 11:04:45 AM] Madhur Nema MPSeDC: PMPoshan remark field in verify survey list
+2FA With Warning Message 
+Jan Vishwas, Aadhaar, Petrol Pump, and Gas Agency reports
+
+
+
+Form For Pending for Uat sign off
+
+लोक सेवा केंद्र निरीक्षण प्रपत्र (जनविश्वास अभियान)
+वृद्ध आश्रम निरीक्षण प्रपत्र (जनविश्वास अभियान)
+शिक्षा विभाग व्यापक निरीक्षण प्रपत्र for indore
+मछुआ कल्याण एवं मत्स्य विकास विभाग निरीक्षण प्रपत्र(जनविश्वास अभियान)
+
+
+@Dheeraj Kindly provide UAT for these so that we can deploy on production.
+[9/15/26, 11:09:37 AM] You: Let me check with each and will update you
+[9/15/26, 11:14:51 AM] You: <document omitted> Nirikshan Formats 09.09.2026 Updated.docx
+[9/15/26, 11:14:51 AM] You: <document omitted> RCS Office Master.xlsx
+[9/15/26, 11:15:08 AM] You: MP Cooperative form and Master data
+[9/15/26, 11:28:14 AM] Manisha MPSeDC Testing Praveen Kumar: ??
+[9/15/26, 11:42:04 AM] You: No update from Chhindwara.
+[9/15/26, 11:56:04 AM] Manisha MPSeDC Testing Praveen Kumar: ok sir
+[9/15/26, 12:05:17 PM] You: <document omitted> Forms and Master data from Gwalior @Manisha MPSeDC Testing Praveen Kumar Let me know if any query
+[9/15/26, 12:05:17 PM] You: <document omitted> Jal Sanchay Form Format.docx
+[9/15/26, 12:05:18 PM] You: <document omitted> Water Harvesting Format.docx
+[9/15/26, 12:14:58 PM] Manisha MPSeDC Testing Praveen Kumar: This message was deleted
+[9/15/26, 12:17:15 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj "उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति का निरीक्षण प्रपत्र (जनविश्वास अभियान)" form has been created on UAT. If any master data is required for this form, please provide it.
+[9/15/26, 12:23:01 PM] Manisha MPSeDC Testing Praveen Kumar: Need clarification
+[9/15/26, 12:25:25 PM] You: Ok
+[9/15/26, 12:35:08 PM] You: Reports are not showing for
+पेट्रोल / डीजल पम्पों का निरीक्षण प्रपत्र (जनविश्वास अभियान)
+आधार केंद्र निरीक्षण प्रपत्र (जनविश्वास अभियान)
+एल.पी.जी. डीलर्स का निरीक्षण प्रपत्र(जनविश्वास अभियान)
+[9/15/26, 12:41:08 PM] Madhur Nema MPSeDC: [Forwarded] <image omitted>
+[9/15/26, 12:41:08 PM] Madhur Nema MPSeDC: [Forwarded] <image omitted>
+[9/15/26, 12:41:09 PM] Madhur Nema MPSeDC: [Forwarded] <image omitted>
+[9/15/26, 12:41:09 PM] Madhur Nema MPSeDC: [Forwarded] <image omitted>
+[9/15/26, 12:41:10 PM] Madhur Nema MPSeDC: @Dheeraj these reports are visible in district gis department, however as discussed a few days ago , these reports will not visible on dashboard at uat environment but will be visible on production.
+[9/15/26, 12:41:41 PM] You: Ok
+[9/15/26, 12:55:03 PM] You: <image omitted> @Madhur Nema MPSeDC Please check
+[9/15/26, 12:58:01 PM] Madhur Nema MPSeDC: The reports are not deployed on production. 
+That is what I am asking, UAT sign-off so that I can Deploy these reports on production
+[9/15/26, 12:59:28 PM] You: [Forwarded] <image omitted>
+[9/15/26, 12:59:45 PM] You: Gram drop down in this form @Madhur Nema MPSeDC
+[9/15/26, 1:00:17 PM] Madhur Nema MPSeDC: ok checking
+[9/15/26, 1:02:28 PM] You: [Forwarded] <image omitted>
+[9/15/26, 1:02:38 PM] You: LSK form issue
+[9/15/26, 1:04:12 PM] Madhur Nema MPSeDC: <image omitted> Villages are visible ,kindly re check
+[9/15/26, 1:06:01 PM] Madhur Nema MPSeDC: <image omitted> dropdowns are visible , kindly check
+[9/15/26, 1:06:13 PM] You: Ok
+[9/15/26, 6:56:35 PM] Madhur Nema MPSeDC: @Ajeet Singh MPSeDC sir all the suggested changes done and deployed on uat 
+@Manisha MPSeDC Testing Praveen Kumar kindly test and veriy
+[9/16/26, 11:02:09 AM] You: [Forwarded] <document omitted> जिला_निरीक्षण_चेकलिस्ट_उच्च_शिक्षा_विभाग.docx
+[9/16/26, 11:02:09 AM] You: [Forwarded] <document omitted> जिला_निरीक्षण_चेकलिस्ट_शिक्षा_विभाग.docx
+[9/16/26, 11:06:05 AM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar @Dheeraj , @Ajeet Singh MPSeDC sir
+
+PMPoshan remark field in verify survey list
+2FA With Warning Message 
+Jan Vishwas, Aadhaar, Petrol Pump, and Gas Agency reports
+
+Deployed on production.
+[9/16/26, 12:29:24 PM] You: @Madhur Nema MPSeDC please move indore division specific form  -  जिला_निरीक्षण_चेकलिस्ट_उच्च_शिक्षा_विभाग  to production received uat confirmation
+[9/16/26, 2:31:18 PM] You: <document omitted> @Manisha MPSeDC Testing Praveen Kumar  Please add this master in MPMetro form - Asset entry form
+[9/16/26, 2:37:12 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly move this form to production
+
+department_id: 168
+form_id :537
+[9/16/26, 2:48:36 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, Please confirm whether these forms are for the Gwalior Collectorate or Jan Vishwas abhiyan
+[9/16/26, 3:00:27 PM] You: Gwalior collectorate
+[9/16/26, 3:06:11 PM] Manisha MPSeDC Testing Praveen Kumar: OK sir
+[9/16/26, 5:44:39 PM] Madhur Nema MPSeDC: उच्च शिक्षा विभाग निरीक्षण प्रपत्र
+@Dheeraj above form has been deployed to production
+[9/17/26, 12:14:32 PM] You: [Forwarded] ​औसत जल हेक्टेयर की जगह तालाब जल हेक्टेयर
+[9/17/26, 12:14:32 PM] You: [Forwarded] <image omitted>
+[9/17/26, 12:14:32 PM] You: [Forwarded] <document omitted> मत्स्य_विभाग_निरीक्षण_प्रपत्र updated (6) (1).docx
+[9/17/26, 12:14:56 PM] You: [Forwarded] <image omitted> Ye dono remove Kara dijiye talab ka naam 2 bar aa rha hai aur gram Panchayat Sachiv ka naam nh chahiye hai to dono point remove Kar dijiye
+[9/17/26, 12:15:51 PM] You: तालाब जल ka photo
+[9/17/26, 12:31:36 PM] Madhur Nema MPSeDC: उच्च शिक्षा विभाग निरीक्षण प्रपत्र
+@Dheeraj we have launched this form for Indore only, 
+and not data has on prod submitted yet, if you suggest we can move it to all district.
+[9/17/26, 12:34:31 PM] Madhur Nema MPSeDC: @Jameel Khan MPSeDC user_id : mp_metro_inspector
+ with our existing workflow feature we can't link these forms
+[9/17/26, 12:34:53 PM] Jameel Khan MPSeDC: ok
+[9/17/26, 12:37:38 PM] You: [Forwarded] <document omitted> Fild visit Yojana.xls
+[9/17/26, 12:37:38 PM] You: for कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण
+[9/17/26, 12:39:10 PM] You: [Forwarded] <document omitted> BRC & CLUSTER LLIST Agri.xlsx
+[9/17/26, 12:39:10 PM] You: बायो रिसोर्स सेंटर (BRC) भ्रमण
+[9/17/26, 12:39:30 PM] You: Master data from Chhindwara
+[9/17/26, 12:58:57 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, Suggested all the changes are done for "मछुआ कल्याण एवं मत्स्य विकास विभाग निरीक्षण प्रपत्र(जनविश्वास अभियान)" form
+[9/17/26, 1:05:34 PM] You: <image omitted> @Madhur Nema MPSeDC For Damoh District GIS not visible in UAT
+[9/17/26, 1:08:59 PM] Madhur Nema MPSeDC: @Dheeraj as already discussed
+[9/17/26, 1:18:29 PM] You: You deleted this message
+[9/17/26, 2:43:30 PM] You: Madhur can we create report of this
+[9/17/26, 3:24:27 PM] You: <document omitted> Enhancement_User_Manual_Indore_Inspection_Forms_v2 (1).docx
+[9/17/26, 3:24:27 PM] You: <document omitted> Division-Level Inspection Monitoring through District GIS Parakh by MPSeDC (1).pptx
+[9/17/26, 3:24:28 PM] You: <document omitted> Inspection_Management_System_Implementation (1).pptx
+[9/17/26, 3:25:46 PM] Madhur Nema MPSeDC: we will
+[9/17/26, 4:11:50 PM] Jameel Khan MPSeDC: <document omitted> Asset Entry Form and Survey form: total plant count.
+[9/17/26, 4:41:02 PM] You: [Forwarded] <document omitted> Final forms.zip
+[9/17/26, 4:41:21 PM] You: Indore Division specific forms
+[9/17/26, 5:31:34 PM] Madhur Nema MPSeDC: उच्च शिक्षा विभाग निरीक्षण प्रपत्र
+form_id : 537
+
+@Arindam Kumar MPSeDC Database sir Kindly move this form to  District GIS : department 241
+
+And then show this form to 
+
+Alirajpur Collectorate 136 
+Barwani Collectorate   176
+Burhanpur Collectorate 163
+Dhar Collectorate      159
+Indore Collectorate    168
+Jhabua Collectorate    179
+Khandwa Collectorate   173
+Khargone Collectorate  180
+
+Above department's users
+[9/17/26, 5:39:08 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, all forms for the Chhindwara Collectorate have been created on UAT. Please check and verify them.
+[9/17/26, 6:24:49 PM] You: Got confirmation in UAT. Move it to production @Madhur Nema MPSeDC
+[9/18/26, 9:06:00 AM] Aman Mishra MPSeDC: @Dheeraj sir 
+@Ajeet Singh MPSeDC sir
+Administrative Dashboard for District and Division officer is on UAT please check and confirm to move it on Production.
+[9/18/26, 10:23:38 AM] You: @Madhur Nema MPSeDC move to prod
+[9/18/26, 10:24:44 AM] Madhur Nema MPSeDC: Ok
+[9/18/26, 10:24:54 AM] You: बायो रिसोर्स सेंटर (BRC) भ्रमण -and कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण in chindwara 
+
+उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति (कृषि) – निरीक्षण प्रपत्र in district gis 
+
+Release them in production
+[9/18/26, 10:57:40 AM] Madhur Nema MPSeDC: Departmenid : 138
+कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण प्रपत्र
+574
+
+बायो रिसोर्स सेंटर (BRC) भ्रमण - निरीक्षण प्रपत्र
+575
+
+@Arindam Kumar MPSeDC Database sir kindly move these form of Chhindwara collectorate to Production.
+[9/18/26, 11:00:00 AM] Madhur Nema MPSeDC: <image omitted> उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति (कृषि) – निरीक्षण प्रपत्र
+
+@Dheeraj  for this form we have attached data in geoportal, Should be populate this data as master data in the form ?
+[9/18/26, 11:11:30 AM] Ajeet Singh MPSeDC: Pls move to prod
+[9/18/26, 11:19:04 AM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly move this form to form_id : 569
+production in District GIS for cm jan viswash
+[9/18/26, 12:16:45 PM] Madhur Nema MPSeDC: <image omitted> sir Administrative Dashboard has been deployed to producation
+[9/18/26, 12:37:00 PM] You: <image omitted> It should be Asset
+[9/18/26, 12:38:46 PM] Manisha MPSeDC Testing Praveen Kumar: Corrected
+[9/18/26, 12:39:38 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, Gwalior Collectorate "Water Harvesting form" has been created on UAT. Please check and verify
+[9/18/26, 2:51:32 PM] Madhur Nema MPSeDC: उच्च शिक्षा विभाग निरीक्षण प्रपत्र
+@Dheeraj this form is launched for 
+Alirajpur Collectorate 136 
+Barwani Collectorate   176
+Burhanpur Collectorate 163
+Dhar Collectorate      159
+Indore Collectorate    168
+Jhabua Collectorate    179
+Khandwa Collectorate   173
+Khargone Collectorate  180
+[9/18/26, 3:13:59 PM] You: <image omitted>
+[9/18/26, 3:14:07 PM] Madhur Nema MPSeDC: @Dheeraj Chhindwara collectorate's 
+below forms have been deployed to production, 
+
+कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण प्रपत्र
+बायो रिसोर्स सेंटर (BRC) भ्रमण - निरीक्षण प्रपत्र
+[9/18/26, 3:14:27 PM] You: For MP metro. Can we change this Data collection title to Survey Details
+[9/18/26, 3:15:19 PM] You: <image omitted> @Jameel Khan MPSeDC in this forms time is coming as 12:00 am
+[9/18/26, 3:15:57 PM] You: <image omitted> @Jameel Khan MPSeDC after submitting asset entry form total plant names and counts are not coming
+[9/18/26, 3:16:01 PM] Madhur Nema MPSeDC: @Dheeraj मछुआ कल्याण एवं मत्स्य विकास विभाग निरीक्षण प्रपत्र(जनविश्वास अभियान)
+form has been deployed and given to all district
+[9/18/26, 3:17:23 PM] You: <image omitted> @Jameel Khan MPSeDC In this "Add more" button if we are adding only one plant can we show it as "Add" only
+[9/18/26, 3:17:41 PM] You: <image omitted>
+[9/18/26, 3:18:04 PM] You: @Madhur Nema MPSeDC please remove this Department general form section from MP metro login
+[9/18/26, 4:45:23 PM] Madhur Nema MPSeDC: <image omitted>
+[9/18/26, 4:45:31 PM] Madhur Nema MPSeDC: Removed please check
+[9/18/26, 5:51:48 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: @Dheeraj sir, आयुष विभाग (संयुक्त निरीक्षण प्रपत्र) Form has been created on UAT. Please check and verify.
+[9/18/26, 6:00:19 PM] Madhur Nema MPSeDC: curl -X 'POST' \
+  'https://gisuat.mp.gov.in/parakhapi/api/PropertyForSurvey/GetAnsIdByPropertyId' \
+  -H 'accept: /' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "token": "string1",
+  "property_Id": 6243
+}'
+
+
+
+
+{
+  "data": [
+    {
+      "property_user_mapping_id": 150,
+      "property_id": 6243,
+      "form_id": 232,
+      "surveyer_id": 380,
+      "surveyor_name": "mpssfdcsurveyor mpssfdcsurveyor - 6264041456"
+    }
+  ],
+  "message": "Get  Answer ID ",
+  "isSuccess": true,
+  "dataLength": 1,
+  "responseCode": 0
+}
+
+
+@Jameel Khan MPSeDC as discussed api for mp metro
+[9/21/26, 10:48:05 AM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Need clarification
+[9/21/26, 10:51:42 AM] You: <image omitted> मदिरा दुकानों निरीक्षण प्रपत्र (जनविश्वास अभियान), नलजल प्रदाय योजना निरीक्षण प्रपत्र (जन विश्वास अभियान), विद्यालय निरीक्षण प्रपत्र (जनविश्वास अभियान), आंगनवाड़ी निरीक्षण प्रपत्र (जन विश्वास अभियान), कार्यालय जिला पंचायत निरीक्षण प्रपत्र (जन विश्वास अभियान), LSK form, & Department of Health forms
+for Dhar under District GIS
+after Export to Excel - Records are not coming. It is downloading blank excel report. @Madhur Nema MPSeDC
+[9/21/26, 11:33:03 AM] You: @Jameel Khan MPSeDC please share updated apk with these changes
+[9/21/26, 11:49:45 AM] Madhur Nema MPSeDC: I am currently working on fixing this issue. Meanwhile, I have shared the Excel files for these forms, which you can use until the fix is deployed.
+[9/21/26, 12:00:40 PM] You: <image omitted>
+[9/21/26, 12:00:59 PM] You: Same report excel issue in these forms of dept health
+[9/21/26, 1:06:21 PM] Madhur Nema MPSeDC: these report issue has been fixed at uat kindly verify 
+@Dheeraj @Manisha MPSeDC Testing Praveen Kumar
+[9/21/26, 1:07:32 PM] Madhur Nema MPSeDC: उच्च शिक्षा विभाग निरीक्षण प्रपत्र
+
+report has been deployed to uat kindly verify.
+
+for this repory ATR work is in progress
+
+@Dheeraj @Manisha MPSeDC Testing Praveen Kumar
+[9/21/26, 2:34:44 PM] You: You deleted this message
+[9/21/26, 2:47:21 PM] You: In  Chhindwara District
+ "विद्यालय निरीक्षण प्रपत्र"  Is it possible to update name to "विद्यालय निरीक्षण प्रपत्र 1-12" ? 
+
+Photo option is available in UAT but photo option is missing in Production. 
+@Madhur Nema MPSeDC
+[9/21/26, 2:50:48 PM] You: <document omitted> Nirikshan Formats 21.09.2026 Updated.docx
+[9/21/26, 2:51:00 PM] You: [Forwarded] <image omitted>
+[9/21/26, 2:51:00 PM] You: [Forwarded] <image omitted>
+[9/21/26, 2:51:00 PM] You: [Forwarded] <image omitted>
+[9/21/26, 2:51:00 PM] You: [Forwarded] <image omitted>
+[9/21/26, 2:52:50 PM] You: 1) MP Cooperative Updated Nirikshan form
+2) and UI design templates screens
+3) Yellow marked sections will become separate tabs
+[9/21/26, 2:53:47 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar please do these change
+[9/21/26, 3:14:59 PM] You: [Forwarded] <image omitted> There is only one problem in the aayush department form
+[9/21/26, 3:14:59 PM] You: You deleted this message
+[9/21/26, 3:14:59 PM] You: You deleted this message
+[9/21/26, 3:15:28 PM] You: This is in चिकित्सालय selection 
+It should be 
+
+अच्छी 
+औसत
+खराब
+[9/21/26, 3:22:52 PM] Madhur Nema MPSeDC: ques_id 11743, 11742,11741,11740
+@Arindam Kumar MPSeDC Database sir kindly move these question from  UAT to prod for form_id 279
+[9/21/26, 3:23:42 PM] Madhur Nema MPSeDC: <document omitted> @Arindam Kumar MPSeDC Database sir
+[9/21/26, 3:25:02 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, "MSME Form" For Indore Division has been created on UAT. Please check and verify
+[9/21/26, 3:50:40 PM] You: [Forwarded] <image omitted>
+[9/21/26, 3:50:55 PM] You: Betul school form not getting submitted
+[9/21/26, 3:51:18 PM] You: [Forwarded] विद्यालय निरीक्षण प्रपत्र रिपोर्ट
+आंगनवाड़ी निरीक्षण प्रपत्र रिपोर्ट
+कार्यालय जिला पंचायत निरीक्षण प्रपत्र रिपोर्ट
+नलजल प्रदाय योजना निरीक्षण प्रपत्र रिपोर्ट
+[9/21/26, 3:51:29 PM] You: Betul reports not visible
+[9/21/26, 4:04:22 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Form submitted successfully without any errors. The issue may have been due to a poor internet connection.
+[9/21/26, 5:30:35 PM] Arindam Kumar MPSeDC Database: merged at prod
+[9/21/26, 5:32:19 PM] Madhur Nema MPSeDC: @Dheeraj done, kindly verify
+[9/21/26, 5:33:28 PM] Madhur Nema MPSeDC: Excel Download functionality has been fixed
+[9/21/26, 5:34:43 PM] Madhur Nema MPSeDC: fixed , kindly check
+[9/21/26, 5:35:03 PM] Madhur Nema MPSeDC: fixed kindly check
+[9/21/26, 5:40:55 PM] You: Is this done ?
+[9/21/26, 5:58:23 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar please do
+[9/21/26, 6:01:35 PM] Madhur Nema MPSeDC: @Dheeraj sir indore higher education report has been deployed to production
+[9/21/26, 6:05:08 PM] Manisha MPSeDC Testing Praveen Kumar: fixed
+[9/22/26, 10:34:03 AM] Arindam Kumar MPSeDC Database: <document omitted> Attached code need to implement in front end . coordinate with team
+[9/22/26, 10:34:18 AM] Arindam Kumar MPSeDC Database: [Forwarded] <document omitted> UserListTemplate_Updated_V_2.0.xlsx
+[9/22/26, 10:35:30 AM] Arindam Kumar MPSeDC Database: @Ajeet Singh MPSeDC Sir,@Dheeraj as we discuss bulk user creation sp  is ready .
+[9/22/26, 10:42:48 AM] Manisha MPSeDC Testing Praveen Kumar: <image omitted> @Dheeraj Sir, As we discuss any update about this
+[9/22/26, 10:46:43 AM] You: I have asked nidhi. She will discuss with department. She is unable to suggest anything from her side as well
+[9/22/26, 10:56:18 AM] You: @Aman Mishra MPSeDC Updated Nirikshan format, UI screens and Tabs shared by department
+[9/22/26, 11:31:57 AM] Ajeet Singh MPSeDC: Good Mate.., Should we also facilitate them on the User creation screen to download the Master Data (embeded in the sheet itself @Madhur, @Aman, as we spoke could you pls wire this up, in the user creation screen. Feature for State Admin to be able to upload the sheet.. )
+[9/22/26, 11:44:32 AM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj sir, 
+I need some clarification regarding the forms for the Indore Division.
+[9/22/26, 11:45:56 AM] You: Nidhi will email if there is any change in any form
+[9/22/26, 11:46:13 AM] Manisha MPSeDC Testing Praveen Kumar: ok sir
+[9/22/26, 12:27:50 PM] You: @Manisha MPSeDC Testing Praveen Kumar Please add Recommendation question and Text box for it  in each Indore division specific forms
+[9/22/26, 12:54:43 PM] You: [Forwarded] <image omitted>
+[9/22/26, 12:54:43 PM] You: [Forwarded] <image omitted> Yeh two data sir successfully submitted but show nhi kr rha hai...
+[9/22/26, 12:54:44 PM] You: @Madhur Nema MPSeDC please check
+[9/22/26, 12:59:51 PM] Madhur Nema MPSeDC: <image omitted>
+[9/22/26, 1:01:23 PM] Madhur Nema MPSeDC: <image omitted>
+[9/22/26, 1:11:56 PM] Madhur Nema MPSeDC: @Dheeraj , the data is already showing in the report.
+
+Kindly note that there are only two reasons why a report submitted from the mobile application may not be reflected on the web:
+
+Data is not synced – The data can be synced from the Admin login.
+User hierarchy mismatch – The user viewing the report and the user who submitted it do not belong to the same user hierarchy.
+
+Kindly ensure these two points if any submitted report is not appearing on the web.
+[9/22/26, 1:25:12 PM] You: @Madhur Nema MPSeDC please release ayush form in production  (jan vishwas)
+[9/22/26, 2:26:18 PM] Madhur Nema MPSeDC: in form institute name field is missing, and in this regarding Ive doubt , please clarify
+[9/22/26, 5:48:57 PM] You: [Forwarded] <document omitted> Aayush Department_POI_All_Master Excel.xlsx
+[9/22/26, 5:49:10 PM] You: @Madhur Nema MPSeDC please have a look
+[9/23/26, 11:38:22 AM] You: @Aman Mishra MPSeDC Mp cooperative details shared.
+[9/23/26, 11:39:57 AM] Aman Mishra MPSeDC: okay sir, I'm working on it
+[9/23/26, 12:23:13 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, where should we create the School Education form for the Indore Division? There is already a School Inspection form in Jan Vishwas, but all the questions in that form are different.please clarify
+[9/23/26, 1:21:30 PM] You: You deleted this message
+[9/23/26, 1:21:46 PM] You: You deleted this message
+[9/23/26, 1:26:16 PM] Madhur Nema MPSeDC: We already capture the location internally by default. Do you want to have a map view open on the mobile as well?
+[9/23/26, 1:28:17 PM] You: You deleted this message
+[9/23/26, 1:34:31 PM] You: [Forwarded] <document omitted> Copy of राजस्_व न्_यायालयों का निरीक्षण संपादित किए जाने हेतु मानक चेकलिस्_ट.pdf
+[9/23/26, 1:35:10 PM] You: <document omitted> सामाजिक न्याय एवं दिव्यांगजन सशक्तिकरण विभाग.docx
+[9/23/26, 1:35:17 PM] You: Indore division specific forms
+[9/23/26, 1:40:05 PM] You: @Madhur Nema MPSeDC Ayush form 
+you can concate both ayush department and institute type
+[9/23/26, 2:23:20 PM] Manisha MPSeDC Testing Praveen Kumar: For the Social Justice form, do we need to create three separate forms? They have been provided separately.please clarify
+[9/23/26, 2:26:12 PM] You: 3 forms
+[9/23/26, 2:29:04 PM] Manisha MPSeDC Testing Praveen Kumar: "वृद्ध आश्रम निरीक्षण प्रपत्र " Form has already been created in District GIS
+[9/23/26, 2:34:35 PM] You: Ok I will ask them to compare. Till then start with other 2 forms
+[9/23/26, 2:41:46 PM] You: Department confirmed this is ok.
+[9/23/26, 4:00:55 PM] Madhur Nema MPSeDC: master data is populating kindly verify and confirm
+[9/23/26, 4:01:56 PM] Madhur Nema MPSeDC: 1. Ayurvedic Dispensary,  Cat - 1011, subcat - 2012
+2. Ayush Wing, cat - 1011, subcat - 2271
+3. AYUSHMAN AROGYA MANDIR (Ayush),  cat -1011, subcat - 2272
+4. District Ayush Office, cat - 	1011, subcat - 	2273
+5. Divisional Ayush Office, cat - 1011, subcat - 2274
+6. District Hospital - Ayush, cat - 1011, subcat - 2274
+
+@Dheeraj these data is added in master of ayush form
+[9/23/26, 6:00:12 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj "आंगनवाड़ी निरीक्षण प्रपत्र (Indore Division)" Form has been created on UAT. please check and verify
+[9/24/26, 11:18:46 AM] You: <image omitted> @Madhur Nema MPSeDC release this common ayush form for all
+[9/24/26, 12:18:44 PM] You: <document omitted> @Madhur Nema MPSeDC @Aman Mishra MPSeDC MP Cooperative User list. Please have a look
+[9/24/26, 12:30:53 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: @Dheeraj Sir,
+   1. पंचायती राज एवं ग्रामीण विकास विभाग
+2. नशामुक्ति केन्द्र – संस्था निरीक्षण एवं सत्यापन फॉर्म
+3. दिव्यांगजन संस्था निरीक्षण एवं सत्यापन फॉर्म (Indore Division)
+Forms have been created on UAT. Please check and verify.
+[9/24/26, 12:36:53 PM] Jameel Khan MPSeDC: This message was deleted
+[9/24/26, 12:47:47 PM] You: <image omitted>
+[9/24/26, 12:48:05 PM] You: @Jameel Khan MPSeDC issue while opening the app
+[9/24/26, 12:49:01 PM] Jameel Khan MPSeDC: <document omitted> district_gis_uat142.apk
+[9/24/26, 2:48:36 PM] Madhur Nema MPSeDC: उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति का निरीक्षण प्रपत्र to be launched in Dhar and Chhindwara 
+आयुष विभाग – संयुक्त निरीक्षण प्रपत्र  to be launched in all district
+
+@Dheeraj kindly confirm ?
+[9/24/26, 2:51:16 PM] You: Yes
+[9/24/26, 2:52:15 PM] Madhur Nema MPSeDC: form_id: 576 उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति का निरीक्षण प्रपत्र to be launched in Dhar (department_id 159) and Chhindwara (department_id 138)
+
+form_id: 571 आयुष विभाग – संयुक्त निरीक्षण प्रपत्र  to be launched in all Collectorate
+
+
+14808 question to move to prod.
+
+@Arindam Kumar MPSeDC Database sir kindly move these form to production
+[9/24/26, 3:48:05 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC all code merged and assigned all dept , check and confirm
+[9/24/26, 3:53:43 PM] You: <image omitted>
+[9/24/26, 3:54:49 PM] You: <image omitted> @Madhur Nema MPSeDC have you removed these fields from form. In production it is coming this way and
+[9/24/26, 3:55:40 PM] You: And for Ayush health wellness and wing .. below form is not opening
+[9/24/26, 3:56:16 PM] Madhur Nema MPSeDC: Wait we are deploying
+[9/24/26, 4:23:13 PM] Madhur Nema MPSeDC: @Dheeraj deployment done, verify
+[9/24/26, 4:37:33 PM] You: You deleted this message
+[9/24/26, 4:38:01 PM] You: <image omitted> @Madhur Nema MPSeDC
+[9/24/26, 4:48:07 PM] Arindam Kumar MPSeDC Database: check now
+[9/24/26, 4:50:57 PM] You: Same issue
+[9/24/26, 5:07:50 PM] Madhur Nema MPSeDC: check now
+[9/24/26, 5:12:34 PM] You: Fine now
+[9/26/26, 5:31:28 PM] You: <document omitted> Plantation issues 24.09.2026.docx
+[9/28/26, 11:10:06 AM] You: <image omitted>
+[9/28/26, 11:35:20 AM] Bharat Mishra Intern MPSeDC: @Dheeraj  @Madhur Nema MPSeDC Pending Tasks Update
+
+जनविश्वास अभियान रिपोर्ट 
+- उर्वरक गोदाम / निजी विक्रेता / सहकारी समिति का निरीक्षण प्रपत्र
+- आयुष विभाग – संयुक्त निरीक्षण प्रपत्र
+- मछुआ कल्याण एवं मत्स्य विकास विभाग – निरीक्षण प्रपत्र
+
+Chhindwara Collectorate Report
+- बायो रिसोर्स सेंटर (BRC) भ्रमण – निरीक्षण प्रपत्र
+- कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण प्रपत्र
+
+Report Modification
+- MP Metro: Asset Entry Form
+[9/28/26, 11:47:18 AM] Jameel Khan MPSeDC: <document omitted> @Dheeraj
+[9/28/26, 12:08:12 PM] You: @Jameel Khan MPSeDC  For Add and add more option should be applicable for both 
+1) For Single Photo - Add and Add more for multiple photos 
+And 
+2) Below Plants type and total no plants planted questions - Add for single plant entry and add more for multiple plant entry
+[9/28/26, 12:55:12 PM] Aman Mishra MPSeDC: <image omitted> @Dheeraj 
+pls confirm tha autofilled value
+Are these fields supposed to be text fields, or will their values be automatically populated based on some specific parameter/source?
+[9/28/26, 12:56:29 PM] You: At top check questions no 1. That will be populated in below auto filled fields
+[9/28/26, 12:58:05 PM] Aman Mishra MPSeDC: <image omitted> which question?
+[9/28/26, 12:58:46 PM] You: <image omitted> @Aman Mishra MPSeDC
+[9/28/26, 2:08:45 PM] Madhur Nema MPSeDC: <image omitted> @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC @Dheeraj user bulk upload feature has been deployed to dev server , kindly test throughly.
+[9/28/26, 2:13:03 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok
+[9/28/26, 4:21:35 PM] You: @Madhur Nema MPSeDC take Old age form and ayush form under indore division specific as well for ATR
+[9/28/26, 4:24:32 PM] Madhur Nema MPSeDC: Noted
+[9/29/26, 10:58:43 AM] You: @Madhur Nema MPSeDC Please move asset entry form of MP Metro to production as asked by client
+[9/29/26, 10:59:41 AM] Madhur Nema MPSeDC: department_id :242
+
+form_id: 543
+
+
+@Arindam Kumar MPSeDC Database sir kindly move this form and department to production.
+for mp metro
+[9/29/26, 5:13:14 PM] You: [Forwarded] <image omitted>
+[9/29/26, 5:13:14 PM] You: [Forwarded] <document omitted> Property Survey Report (1).xlsx
+[9/29/26, 5:13:53 PM] You: @Madhur Nema MPSeDC Indore Property survey form report is viable but after downloading data is not visible - it is blank
+[9/29/26, 5:30:27 PM] Madhur Nema MPSeDC: A bug was introduced during the last deployment. I’m sharing the updated data in the Excel file.
+
+The issue will be resolved after tomorrow’s deployment, and the Excel file will be downloadable without any errors.
+[9/29/26, 5:30:41 PM] Madhur Nema MPSeDC: <document omitted> @Dheeraj
+[9/29/26, 6:24:58 PM] You: @Arindam Kumar MPSeDC Database is this form moved to prod?
+[9/29/26, 6:27:32 PM] Madhur Nema MPSeDC: Need to move
+[9/29/26, 7:23:53 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC code merged at prod
+[9/29/26, 7:24:43 PM] Arindam Kumar MPSeDC Database: @Dheeraj  plz check and confirm every thing working or not
+[9/30/26, 11:10:19 AM] Aman Mishra MPSeDC: @Ajeet Singh MPSeDC  sir
+@Dheeraj  sir  @Manisha MPSeDC Testing Praveen Kumar 
+Cooprative work flow and form with save & next option is on uat and is ready to test and validate.
+[9/30/26, 11:21:50 AM] You: I am unable to fill any details please check
+[9/30/26, 11:23:12 AM] You: And while clicking status overview .. it is not taking me to that section directly
+[9/30/26, 11:25:37 AM] Aman Mishra MPSeDC: sir please share login username
+[9/30/26, 11:25:52 AM] Ajeet Singh MPSeDC: Good Aman, Please fix the issue reported by Dheeraj..  @Manisha MPSeDC Testing Praveen Kumar Pls do first round of verification at your end and then issue for Dheeraj to check.. @Dheeraj once validated, pls send an email to the dept mail trail for UAT verification
+[9/30/26, 11:26:19 AM] You: Sure sir
+[9/30/26, 11:28:42 AM] You: Yes now It is fillable after refresh
+[9/30/26, 11:32:10 AM] You: @Aman Mishra MPSeDC those approx 70 users are also created
+[9/30/26, 11:34:06 AM] Aman Mishra MPSeDC: not yet
+currently there are only testing users on UAT
+[9/30/26, 11:34:38 AM] You: I have informed department as well to check
+[9/30/26, 12:11:56 PM] You: <image omitted> @Bharat Mishra Intern MPSeDC Please check this MP Metro form Icon not visible
+[9/30/26, 12:15:06 PM] You: <image omitted> @Bharat Mishra Intern MPSeDC IN Production - Please check MP metro inspectors created but after login - showing no data available
+[9/30/26, 12:54:15 PM] You: <image omitted> @Bharat Mishra Intern MPSeDC In Gwalior Rain water harvesting form - these 3 questions should go inside ongoing and should not come up for completed work status
+[9/30/26, 12:59:41 PM] Bharat Mishra Intern MPSeDC: @Dheeraj sir, Department and mobile icons have been added to the production . Please verify.
+[9/30/26, 1:01:19 PM] You: Yes visible now
+[9/30/26, 1:27:52 PM] You: Report are not showing for these forms in production 
+
+आयुष विभाग – संयुक्त निरीक्षण प्रपत्र
+उर्वरक गोदाम / निजी विक्रेता / सहका
+कृषि प्रक्षेत्र (फील्ड) भ्रमण – निरीक्षण प्रपत्र
+बायो रिसोर्स सेंटर (BRC) भ्रमण - निरीक्षण
+मछुआ कल्याण एवं मत्स्य विकास
+[9/30/26, 1:31:30 PM] Manisha MPSeDC Testing Praveen Kumar: Ok sir
+[9/30/26, 2:48:39 PM] Manisha MPSeDC Testing Praveen Kumar: <document omitted> @Aman Mishra MPSeDC Office Order icon redirects user to a blank UAT page
+[9/30/26, 2:49:09 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[9/30/26, 2:56:18 PM] Aman Mishra MPSeDC: This message was deleted
+[9/30/26, 2:56:28 PM] Aman Mishra MPSeDC: This message was deleted
+[9/30/26, 2:57:02 PM] Aman Mishra MPSeDC: okay
+[9/30/26, 3:08:09 PM] You: <image omitted>
+[9/30/26, 3:08:57 PM] You: @Bharat Mishra Intern MPSeDC In MP metro 
+Now the new forms, submitted options are shown but no form available inside it to fill
+[9/30/26, 3:37:56 PM] You: <document omitted> @Bharat Mishra Intern MPSeDC  Gwalior - Rain Water harvesting form changes
+[9/30/26, 3:38:42 PM] You: Rain water harvesting
+[9/30/26, 4:59:09 PM] You: <image omitted> Chhindwara form - photo option visible in form but in report this photo option column missing please check @Bharat Mishra Intern MPSeDC
+[9/30/26, 5:22:25 PM] Madhur Nema MPSeDC: this issue has been fixed @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC kindly test
+[9/30/26, 5:23:42 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok
+[9/30/26, 5:31:26 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Changes done. Please check and verify.
+[9/30/26, 5:37:16 PM] You: <image omitted>
+[9/30/26, 5:39:01 PM] You: @Arindam Kumar MPSeDC Database please remove this barwani record from report of uche shiksha vibhag form in indore collectorate 
+
+indorecollectorateadmin
+[9/30/26, 5:59:52 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> The form is not getting submitted.
+[9/30/26, 7:11:12 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC  Code deployed on prod
+[9/30/26, 7:12:15 PM] Arindam Kumar MPSeDC Database: @Dheeraj need transaction ID
+[10/1/26, 10:35:42 AM] You: @Bharat Mishra Intern MPSeDC this issue resolved?
+[10/1/26, 10:45:16 AM] Madhur Nema MPSeDC: Yes resolved
+[10/1/26, 10:45:24 AM] Madhur Nema MPSeDC: Resolved pls verify
+[10/1/26, 11:26:38 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> Issue not fixed yet.
+[10/1/26, 11:28:45 AM] Jameel Khan MPSeDC: Production or UAT
+[10/1/26, 11:29:07 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Production
+[10/1/26, 11:29:19 AM] Jameel Khan MPSeDC: share credential.
+[10/1/26, 11:32:18 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: mpm_anshul_agarwal
+[10/1/26, 11:34:04 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> @Jameel Khan MPSeDC Sir, The total number of plants is not being auto-calculated in the Total field.
+[10/1/26, 11:47:47 AM] Jameel Khan MPSeDC: <image omitted>
+[10/1/26, 11:48:03 AM] Jameel Khan MPSeDC: update new version 1.0.62.
+[10/1/26, 11:48:24 AM] Madhur Nema MPSeDC: @Dheeraj we have created the Bulk Upload feature on UAT. Kindly download the Excel template from UAT, as the previously provided Excel file has some issues.
+
+Please also verify the Bulk Upload feature from your end so that we can proceed with the production deployment.
+[10/1/26, 11:48:50 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok
+[10/1/26, 11:52:40 AM] Madhur Nema MPSeDC: verify now
+[10/1/26, 11:56:52 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Issue resolved and verified.
+[10/1/26, 11:58:57 AM] You: <image omitted> Bulk Upload - till Block level
+[10/1/26, 12:01:30 PM] You: <image omitted> Bulk Upload till District
+[10/1/26, 3:19:40 PM] You: [Forwarded] <image omitted>
+[10/1/26, 3:19:40 PM] You: [Forwarded] <image omitted>
+[10/1/26, 3:19:40 PM] You: [Forwarded] <image omitted>
+[10/1/26, 3:19:40 PM] You: [Forwarded] <image omitted>
+[10/1/26, 3:20:58 PM] You: @Aman Mishra MPSeDC MP cooperative Design of pages needs to be updated like MP cooperative pages and 
+Need to upload Designation Master data of Users.
+[10/1/26, 3:31:30 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, is there any update regarding the form creation? Also, have we received any updates from the respective departments for the forms that are still pending?
+[10/1/26, 3:36:45 PM] You: Right now please test validate MP cooperative  form and design creation and user upload
+[10/1/26, 3:56:51 PM] You: <image omitted> This highlighted field is not coming as auto filled
+[10/1/26, 4:10:30 PM] Aman Mishra MPSeDC: The highlighted field was already discussed with the department. After discussion with them, it was decided that this field would be kept as a text field instead of an auto-filled field, since there is no mapping data available for the Officer Head in the Office Master.
+[10/1/26, 4:25:40 PM] You: <image omitted>
+[10/1/26, 4:25:54 PM] You: [Forwarded] <document omitted> Nirikshan Formats 23.07.2026.docx
+[10/1/26, 4:26:10 PM] You: Fields names received for this table to be updated
+[10/1/26, 4:39:35 PM] You: <image omitted> @Aman Mishra MPSeDC Mail recieved -
+[10/1/26, 4:58:44 PM] You: You deleted this message
+[10/1/26, 4:58:45 PM] You: You deleted this message
+[10/1/26, 4:59:06 PM] You: You deleted this message
+[10/1/26, 5:01:30 PM] You: आयुष विभाग – संयुक्त निरीक्षण प्रपत्र -  In this Ayush form - Jan vishwas keyword is missing
+[10/1/26, 5:26:31 PM] You: Are these reports created ? @Bharat Mishra Intern MPSeDC
+[10/1/26, 5:31:25 PM] Bharat Mishra Intern MPSeDC: Sir, the UAT deployment is currently in progress.
+[10/1/26, 6:01:26 PM] You: Please deploy them to production once done
+[10/1/26, 6:13:16 PM] Madhur Nema MPSeDC: <image omitted> The UAT server is currently inaccessible, due to which the deployment cannot be completed on UAT. We will proceed with the deployment once the server is accessible.
+[10/1/26, 6:26:56 PM] You: @Madhur Nema MPSeDC please see this
+[10/1/26, 6:55:17 PM] You: <image omitted> In Nirikhan format itself it is auto written @Aman Mishra MPSeDC
+[10/1/26, 7:19:50 PM] Aman Mishra MPSeDC: This message was deleted
+[10/1/26, 7:20:29 PM] Madhur Nema MPSeDC: done pls verify and confirm
+[10/1/26, 7:24:27 PM] Aman Mishra MPSeDC: After discussion it was decided that this field will added as text field not as auto filled
+[10/1/26, 7:28:25 PM] Aman Mishra MPSeDC: If you require this field to be auto-populated, kindly provide the required master data and mapping details for the Officer Head. I will implement it accordingly as per your direction
+@Dheeraj
+[10/1/26, 7:36:25 PM] You: This is as per the department directions. I will ask Priya to share details
+[10/1/26, 7:37:30 PM] Aman Mishra MPSeDC: This has also already been discussed with Priya.
+[10/1/26, 7:39:37 PM] You: [Forwarded] <document omitted> Before UAT.docx
+[10/1/26, 7:39:46 PM] You: She has shared these changes to be done
+[10/2/26, 8:30:08 AM] Ajeet Singh MPSeDC: Karyalay Pramukh ka Naam, will be a text field.. (not auto populated, it was agreed with Priya & Jyoti Maam). Reason being, the HOD/Dept head's Name we are not storing in the DB table, & nor maintining any UI for its updated etc.
+[10/2/26, 8:39:49 AM] Ajeet Singh MPSeDC: [Forwarded] देवम् - देवस्थान विन्यास, कार्य एवं परिसंपत्ति प्रबंधन पोर्टल
+DEWAM- Devasthan, Endowments, Works and Assets Management Portal
+[10/2/26, 8:41:14 AM] Ajeet Singh MPSeDC: @Bharat Mishra Intern MPSeDC , @Aman Mishra MPSeDC : The name given by Shreyash sir for the DevSthal Application (the front login page and other references accordingly pls)
+[10/2/26, 8:46:20 AM] Bharat Mishra Intern MPSeDC: Okay sir
+[10/3/26, 12:02:56 PM] Madhur Nema MPSeDC: Method Name: InsertFormRespondJson
+
+10/3/2026 12:01:26 PM: Npgsql.NpgsqlException:
+syntax error at or near "S"
+Severity: ERROR
+Code: 42601
+   at Npgsql.NpgsqlState.<ProcessBackendResponses>d__0.MoveNext()
+   at Npgsql.ForwardsOnlyDataReader.GetNextResponseObject(Boolean cleanup)
+   at Npgsql.ForwardsOnlyDataReader.GetNextRow(Boolean clearPending)
+   at Npgsql.ForwardsOnlyDataReader.Read()
+   at Npgsql.NpgsqlCommand.GetReader(CommandBehavior cb)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior cb)
+   at System.Data.Common.DbCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at Dapper.SqlMapper.QueryRowAsync[T](IDbConnection cnn, Row row, Type effectiveType, CommandDefinition command) in /_/Dapper/SqlMapper.Async.cs:line 489
+[10/3/26, 12:05:06 PM] Madhur Nema MPSeDC: @Jameel Khan MPSeDC sir, apostrophe inside the json input causing this issue , can you validate and fix the input on mobile end before sending it to API
+[10/3/26, 3:13:23 PM] Madhur Nema MPSeDC: report deployment done on uat , @Dheeraj , @Manisha MPSeDC Testing Praveen Kumar verify
+[10/5/26, 10:18:31 AM] You: @Madhur Nema MPSeDC Report are ok and also verified by department.
+Please move it to production.
+[10/5/26, 2:10:37 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/5/26, 2:10:38 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/5/26, 2:10:38 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/5/26, 2:10:38 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/5/26, 2:10:39 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/5/26, 2:10:39 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/5/26, 2:10:39 PM] Ajeet Singh MPSeDC: [Forwarded] Sir..there are the fields which are in common member api reponse
+[10/5/26, 2:10:39 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Samagra Member Common API.pdf
+[10/5/26, 2:10:40 PM] Ajeet Singh MPSeDC: @Bharat Mishra Intern MPSeDC , Samagra API details
+[10/5/26, 2:19:26 PM] Madhur Nema MPSeDC: https://gisuat.mp.gov.in/parakhapiaudit/api/
+
+@Jameel Khan MPSeDC as discussed, please find the API Base URL.
+Kindly provide two APKs:
+One with encryption implemented.
+One without encryption.
+
+Both APKs should use the same API Base URL.
+[10/5/26, 2:41:07 PM] Jameel Khan MPSeDC: Ok
+[10/5/26, 3:18:57 PM] Jameel Khan MPSeDC: Waiting for this message. This may take a while.
+[10/5/26, 3:37:11 PM] Jameel Khan MPSeDC: <document omitted> district_gis_uat_encryption.apk
+[10/5/26, 4:08:56 PM] Madhur Nema MPSeDC: deployment done kindly confirm
+[10/5/26, 4:51:42 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> Sir, Icons are not showing on the districtgisinspector login.
+[10/6/26, 11:00:47 AM] You: [Forwarded] <image omitted> In this report: only one of the saved photos is shown. Also there shall be a field for total no. of plants
+[10/6/26, 11:01:17 AM] You: @Madhur Nema MPSeDC MP Metro  and also check report of Asset entry form
+[10/6/26, 11:17:29 AM] Bharat Mishra Intern MPSeDC: Sir, if only one photo has been uploaded for the inspection, the navigation arrows will not be visible and the navigation arrows only visible when multiple images are uploaded for the inspection.
+[10/6/26, 11:22:45 AM] You: <image omitted> @arrow are not properly visible
+[10/6/26, 11:25:48 AM] You: Priya Sharma invited you to a Microsoft Teams Meeting:
+
+Meeting Inspection of RCS Offices 
+Tuesday, October 6, 2026
+11:00 AM - 12:00 PM (IST)
+
+Meeting link: https://teams.live.com/meet/9326695254048?p=DJLd9TgRiz6FGE7lMS
+[10/6/26, 2:35:25 PM] Ajeet Singh MPSeDC: <image omitted> @Bharat, Madhur...Pls confirm
+[10/6/26, 2:48:38 PM] Bharat Mishra Intern MPSeDC: Sir, all reports are ready and have been deployed to production, except विद्यालय निरीक्षण प्रपत्र 1–12. I am currently working on it.
+[10/6/26, 5:48:12 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar, for the Bulk User Upload feature, a new menu has been created and deployed on the Dev server.
+
+Kindly test the feature for all user creation scenarios and verify that the bulk upload functionality is working as expected.
+[10/6/26, 5:56:42 PM] Manisha MPSeDC Testing Praveen Kumar: ok
+[10/7/26, 11:31:18 AM] Jameel Khan MPSeDC: <document omitted> @Madhur Nema MPSeDC
+[10/7/26, 11:33:49 AM] Madhur Nema MPSeDC: @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC as discussed kindly test this apk side by side with encryption.
+[10/7/26, 11:57:09 AM] You: [Forwarded] The following forms have been developed for the Indore Division and have been checked and verified on UAT. Kindly move the following forms to Production:
+
+1. PNRD – Panchayat and Rural Development Department Form
+2. Nasha Mukti Kendra & Divyangjan Sanstha Forms under the Social Justice Department
+3. Anganwadi Form under the Women and Child Development (WCD) Department
+4. MSME – Micro, Small and Medium Enterprises Form
+[10/7/26, 1:31:15 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Letter- 1352148 Dated- 05.10.2026 (FY 2026-27 MDM SA Nirdesh) .pdf
+[10/7/26, 1:31:15 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> VC List  -  .pdf
+[10/7/26, 1:33:10 PM] Ajeet Singh MPSeDC: @Dheeraj , @Madhur Nema MPSeDC : PnRD's Social Audit of the schools for this Year will again be conducted.. Enclosed is the letter for it. Also training sessions to their officials is planned, on 12th , 13th , 14th and 15th (approx 1 hrs each via google meet).  fyi please.
+[10/7/26, 3:29:04 PM] Madhur Nema MPSeDC: noted sir
+[10/7/26, 4:10:41 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Baseline Survey Formate.xlsx
+[10/7/26, 4:11:12 PM] Ajeet Singh MPSeDC: <document omitted> @Manisha, Pls find the Katni - DMF forms, as discussed
+[10/7/26, 4:11:12 PM] Ajeet Singh MPSeDC: <document omitted> व्यापक आधारभूत सर्वेक्षण - डेटा संग्रहण वर्कबुक.xlsx
+[10/7/26, 4:13:19 PM] Manisha MPSeDC Testing Praveen Kumar: ok sir
+[10/8/26, 11:07:00 AM] Madhur Nema MPSeDC: 1. PNRD – Panchayat and Rural Development Department Form 579 
+2. Nasha Mukti Kendra 581 
+3. Divyangjan Sanstha Forms under the Social Justice Department 580 
+4. MSME – Micro, Small and Medium Enterprises Form   578
+
+@Arindam Kumar MPSeDC Database sir kindly move these forms to production, and launched these forms for indore division
+[10/8/26, 11:13:52 AM] Aman Mishra MPSeDC: @Ajeet Singh MPSeDC  Sir, @Dheeraj Sir, and @Manisha MPSeDC Testing Praveen Kumar ,
+
+The Cooperative workflow, including the desired eSign functionality and required form changes, has been completed from my end and deployed on UAT.
+Please test and validate the changes. If anything is still pending or any further changes are required, please ping me.
+[10/8/26, 11:14:47 AM] Arindam Kumar MPSeDC Database: <document omitted> @Madhur Nema MPSeDC Script is run, check once .
+[10/8/26, 11:15:39 AM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar @Dheeraj above forms has been deployed on prod kindly verify
+[10/8/26, 4:56:28 PM] You: @Madhur Nema MPSeDC As Deepti from Damoh messaged for Crucial change in uchit mulya ki dukan form. As it was moved to production already. so should we make changes?
+[10/8/26, 5:07:12 PM] Ajeet Singh MPSeDC: [Forwarded] Respected Sir,
+This is a gentle reminder regarding my previous email sent on September 17th concerning the Inspection Form for Shashkiya Uchit Mulya Dukan on the District GIS PARAKH Production Portal (under the Damoh Collectorate Department for Jan Vishwas Abhiyan).
+As highlighted earlier, there is currently no "Add More" option available under the question:
+भौतिक सत्यापन का विवरण (खाद्यान्न/शक्कर/नमक मात्रा क्विंटल में):–
+
+This feature is crucial for submitting complete and accurate inspection details. Therefore, I kindly request you to either update this form with the required option or remove it from the Damoh Collectorate Department and add the revised version under the District GIS Department for Damoh District.
+
+I request you to please resolve this issue as soon as possible so that inspections can be conducted properly with all necessary information captured.
+
+Regards,
+Deepti Shukla
+Sr. GIS Executive
+Damoh, M.P.
+@Ajeet Singh MPSeDC @Dheeraj @Madhur Nema MPSeDC
+[10/8/26, 5:07:12 PM] Ajeet Singh MPSeDC: Team, pls check
+[10/8/26, 5:10:44 PM] You: @Madhur Nema MPSeDC Deepti has downloaded the old form report data. Department asking to deploy the Districtgisinspector uchit mulaya dukan form which has required correct question in form
+Please check
+[10/8/26, 5:17:04 PM] Ajeet Singh MPSeDC: could we just update the Damoh form itself, and republish the report.
+[10/8/26, 5:58:34 PM] Madhur Nema MPSeDC: Certainly, sir  I’ll check this thoroughly and confirm.
+[10/9/26, 11:10:27 AM] Madhur Nema MPSeDC: @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC kindly verify these
+[10/9/26, 11:10:52 AM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok
+[10/9/26, 1:02:07 PM] Jameel Khan MPSeDC: <document omitted> @Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC
+[10/9/26, 1:02:25 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Ok sir
+[10/9/26, 1:07:45 PM] You: <document omitted> @Manisha MPSeDC Testing Praveen Kumar, please use forms from Google Forms for Katni Mining DMF-related forms.
+@Madhur Nema MPSeDC, we can take our MPSeDC geoportal data and refer to the format PDF for adding drop-downs at the top of each form
+[10/9/26, 1:24:33 PM] You: @Madhur Nema MPSeDC issue in production login of mpmrcl metro login. After login either it is redirecting to same login page or to a blank page
+[10/9/26, 2:00:00 PM] You: [Forwarded] Sir In parasia block there is issue in Anganwadi form 
+Anganwadi name repeated showing
+[10/9/26, 2:00:00 PM] You: [Forwarded] <image omitted>
+[10/9/26, 2:00:08 PM] You: In Chhindwara
+[10/9/26, 2:19:14 PM] Madhur Nema MPSeDC: @Dheeraj Damoh Fair price shop form has been updated, Kindly verify it thoroughly.
+[10/9/26, 2:27:25 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly map the menus in department_id : 242 to be copied from department_id: 158
+[10/9/26, 2:32:14 PM] Madhur Nema MPSeDC: need the updated list of aganwadi block wise.
+[10/9/26, 2:34:26 PM] Madhur Nema MPSeDC: verify in UAT and confirm so that we can deploy on production
+[10/9/26, 2:36:24 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> @Jameel Khan MPSeDC Sir, the total number of plants is not being auto-calculated in the Total field of the Asset Entry Form.
+[10/9/26, 2:43:48 PM] You: <image omitted> now, complete question is not visible in production
+[10/9/26, 2:44:09 PM] You: @Madhur Nema MPSeDC
+[10/9/26, 2:45:45 PM] Madhur Nema MPSeDC: changes are done on UAT. After verification we will move to production.
+[10/9/26, 2:45:55 PM] Madhur Nema MPSeDC: .
+[10/9/26, 3:00:36 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> @Jameel Khan MPSeDC Sir, the District dropdown list does not open when the Aadhaar Centre Inspection Form is saved as a draft.
+[10/9/26, 3:47:32 PM] Manisha MPSeDC Testing Praveen Kumar: This message was deleted
+[10/9/26, 3:50:36 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Katni Collectorate forms "डीएमएफ बेसलाइन सर्वे - पर्यावरण संरक्षण एवं प्रदूषण नियंत्रण", "डीएमएफ बेसलाइन सर्वे - आवास", "डीएमएफ बेसलाइन सर्वे - पशुपालन" and "डीएमएफ बेसलाइन सर्वे - स्वास्थ्य देखभाल" forms has been created on UAT. Please check and verify
+[10/9/26, 4:33:25 PM] You: Ok let me check
+[10/9/26, 4:41:19 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC Done check once
+[10/9/26, 5:03:01 PM] Madhur Nema MPSeDC: fixed kindly re- login and confirm
+[10/9/26, 5:07:00 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: Tested and verified.
+[10/9/26, 6:09:28 PM] Neetu Malviya B Shivmandir Wala Road Samrat Colony MPSeDC: <image omitted> @Madhur Nema MPSeDC Bulk User Upload does not follow the user hierarchy. An RO assigned to Bhopal can create users in any district by entering a different district name in the District column of the Excel file.
+[10/12/26, 11:38:05 AM] Ajeet Singh MPSeDC: @Dheeraj, Pls call Richa Ma'am(PnRD) she is trying to reach you
+[10/12/26, 11:38:17 AM] You: Discussed
+[10/12/26, 11:40:04 AM] Madhur Nema MPSeDC: @Dheeraj is it verified on UAT ?
+[10/12/26, 12:25:05 PM] You: <image omitted>
+[10/12/26, 12:25:51 PM] You: @Madhur Nema MPSeDC @Manisha MPSeDC Testing Praveen Kumar please can we take district name at top
+[10/12/26, 12:38:53 PM] Madhur Nema MPSeDC: Yes, Manisha is working on it
+[10/12/26, 12:54:42 PM] Manisha MPSeDC Testing Praveen Kumar: changes done please check
+[10/12/26, 12:55:38 PM] Madhur Nema MPSeDC: fixed and deployed on dev server
+[10/12/26, 5:53:37 PM] You: <image omitted>
+[10/12/26, 5:54:55 PM] You: Damoh uchit mulaya ki dukan fair shop.
+
+Update datatype of  fields integer of difference and total
+[10/12/26, 6:07:18 PM] Aman Mishra MPSeDC: @Ajeet Singh MPSeDC sir, I have updated the UI code for cooperative departments on UAT
+[10/12/26, 6:12:03 PM] Aman Mishra MPSeDC: https://gisuat.mp.gov.in/parakhweb/cooperativelogin
+[10/12/26, 7:21:08 PM] Ajeet Singh MPSeDC: @Dheeraj, Pls send an email to Priya/Dept, informing the changes has been deployed in UAT for their verification.  Same, I have informed in ICMIS support group fyi.
+[10/13/26, 10:58:14 AM] You: [Forwarded] <image omitted>
+[10/13/26, 10:59:12 AM] You: @Madhur Nema MPSeDC uchit mulya ki dukan fair price change pdf to jpg format
+[10/13/26, 11:59:41 AM] - Madhur Nema MPSeDC added +91 92013 57403, Shimrah Ahmed BA Mpsedc, and +91 78040 95737
+[10/13/26, 12:13:35 PM] Asif Jaquar Mpsedc Sarthak: <document omitted> @Jameel Khan MPSeDC @Madhur Nema MPSeDC 
+As discussed, please find the CR.
+Form/Dept:  MPRRDA
+
+@Ajeet Singh MPSeDC FYI
+[10/13/26, 12:40:09 PM] Manisha MPSeDC Testing Praveen Kumar: Updated on UAT Please check
+[10/13/26, 1:10:01 PM] You: Ok and verified please move it to production
+[10/13/26, 1:20:15 PM] Madhur Nema MPSeDC: Along with the changes we have done earlier??
+[10/13/26, 1:20:47 PM] Madhur Nema MPSeDC: ..
+[10/13/26, 1:20:57 PM] You: Add more change and this jpg change
+[10/13/26, 1:21:07 PM] Madhur Nema MPSeDC: Ok
+[10/13/26, 2:30:47 PM] Madhur Nema MPSeDC: remark added in all unsatisfactory cases 
+@Manisha MPSeDC Testing Praveen Kumar @Asif Jaquar Mpsedc Sarthak
+[10/13/26, 2:49:30 PM] Jameel Khan MPSeDC: <document omitted> district_gis_uat_144.apk
+[10/13/26, 3:13:48 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly move these in production
+TO Be Insert
+
+
+SELECT id, user_id, form_id, department_id, input_control_key, ques_id, ques_options_value, qus_ordering, is_applicable, ques_parent_id, question_captions, is_mandatory, field_length, error_masg, tool_trip, validation_pattern, input_datatype, is_answer_base, answer_values, submitted_on, font_family, font_size, font_color, font_weight_b, add_hr_before, add_hr_after, hr_thickness, hr_color, question_caption_hindi, font_weight_u, font_weight_i, is_page_break, asset_label, api_curl, api_model
+FROM public.questionl_details where form_id =542 and is_applicable =1 and ques_id in (15003,
+15004,
+15005,
+15027,
+15011,
+15029,
+15030,
+15031,
+15032,
+15033,
+15034,
+15035,
+15036,
+15037)
+order by qus_ordering 
+
+
+
+
+
+
+-------------- to be updated 
+SELECT id, user_id, form_id, department_id, input_control_key, ques_id, ques_options_value, qus_ordering, is_applicable, ques_parent_id, question_captions, is_mandatory, field_length, error_masg, tool_trip, validation_pattern, input_datatype, is_answer_base, answer_values, submitted_on, font_family, font_size, font_color, font_weight_b, add_hr_before, add_hr_after, hr_thickness, hr_color, question_caption_hindi, font_weight_u, font_weight_i, is_page_break, asset_label, api_curl, api_model
+FROM public.questionl_details where form_id =542 and ques_id in ( 12806,12848,
+12849,
+12897,
+12898,
+12899,
+12900,
+12916,
+12901,
+12902,
+12903,
+12912)
+order by qus_ordering
+[10/13/26, 4:12:02 PM] Arindam Kumar MPSeDC Database: merged in prod server
+[10/13/26, 4:21:04 PM] Madhur Nema MPSeDC: @Dheeraj @Manisha MPSeDC Testing Praveen Kumar kindly verify uchhit mulaya changes deployed on prod
+[10/13/26, 5:25:16 PM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj sir, The forms listed below have been created on UAT under the Katni Collectorate
+1. डीएमएफ बेसलाइन सर्वे - स्वच्छता
+2. डीएमएफ बेसलाइन सर्वे - वृद्ध एवं दिव्यांगजन कल्याण
+3. डीएमएफ बेसलाइन सर्वे - कृषि, उद्यानिकी एवं वानिकी
+4. डीएमएफ बेसलाइन सर्वे - ऊर्जा एवं वाटरशेड विकास 
+5. डीएमएफ बेसलाइन सर्वे - महिला एवं बाल कल्याण
+    Please check and verify all the forms.
+[10/13/26, 5:30:35 PM] You: Sure, I will discuss, check with them, and get their inputs
+[10/13/26, 5:34:43 PM] You: <image omitted>
+[10/13/26, 5:34:59 PM] You: Fair price shop view list header
+[10/13/26, 5:36:14 PM] You: <image omitted>
+[10/14/26, 12:24:59 PM] Asif Jaquar Mpsedc Sarthak: <image omitted> @Madhur Nema MPSeDC as discussed
+[10/14/26, 12:39:27 PM] Madhur Nema MPSeDC: noted
+[10/14/26, 12:48:50 PM] Asif Jaquar Mpsedc Sarthak: <image omitted> @Jameel Khan MPSeDC @Madhur Nema MPSeDC In the MPRRDA Road Maintenance Inspection Module, please incorporate the following changes:
+
+Submitted Forms List: Display the Road Name and Road ID for each submitted inspection record on the Submitted Forms screen.
+
+Inspection Details: When a user opens a submitted inspection form, the respective Road Name and Road ID should also be displayed within the inspection details.
+
+Also in web report.
+[10/14/26, 12:48:51 PM] Asif Jaquar Mpsedc Sarthak: <image omitted>
+[10/14/26, 12:49:07 PM] Asif Jaquar Mpsedc Sarthak: Draft me bhi
+[10/14/26, 2:13:32 PM] You: <image omitted> Please delete these test entries
+[10/14/26, 3:27:12 PM] You: @Madhur Nema MPSeDC is it done ?
+[10/14/26, 3:43:03 PM] Madhur Nema MPSeDC: <document omitted> total 5 submissions all need to be deleted ?? kindly confirm
+[10/14/26, 3:50:50 PM] You: Out of 5 entries please delete 4 entries  with work name as 'Test'
+[10/14/26, 5:28:40 PM] You: [Forwarded] <image omitted>
+[10/14/26, 5:29:59 PM] You: As requested the entry no.2 is not to be deleted.
+Also, the issue of total not reflecting against this entry. 
+@Madhur Nema MPSeDC
+[10/14/26, 5:31:15 PM] Madhur Nema MPSeDC: <document omitted> @Arindam Kumar MPSeDC Database  sir kindly delete these response attached in excel sheet .
+also delete entries from asset table
+[10/14/26, 5:31:35 PM] Madhur Nema MPSeDC: <image omitted>
+[10/14/26, 5:31:42 PM] Madhur Nema MPSeDC: Ans IDs
+[10/14/26, 5:59:00 PM] Arindam Kumar MPSeDC Database: deleted check once
+[10/14/26, 6:03:20 PM] Madhur Nema MPSeDC: <image omitted>
+[10/15/26, 10:35:23 AM] You: <document omitted> Received Transformer Inspection form and Master data from Damoh
+[10/15/26, 10:35:23 AM] You: <document omitted> DTR Damoh (1).xlsx
+[10/15/26, 10:35:24 AM] You: <document omitted> Transformer Survey Form Regarding Letter.pdf
+[10/15/26, 11:24:03 AM] Ajeet Singh MPSeDC: @Dheeraj, Shimra, pls discuss
+[10/15/26, 11:24:46 AM] Shimrah Ahmed BA Mpsedc: Okay sir
+[10/15/26, 11:51:24 AM] You: <document omitted> पर्यावरणीय गुणवत्ता उपाय.xlsx
+[10/15/26, 11:58:30 AM] You: Remaining form to be developed under Katni 
+
+They have provided UAT confirmation for other 14 forms developed. Please move these 14 forms to production
+[10/15/26, 11:59:36 AM] You: [Forwarded] <document omitted> transforme new form.docx
+[10/15/26, 11:59:36 AM] You: [Forwarded] <document omitted> DTR Damoh (2).xlsx
+[10/15/26, 12:02:06 PM] You: Updated form and Master data with lat long
+[10/15/26, 12:07:59 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar add  road name field in MPRRDA form
+and add tooltip "Please mention defects observed with chainages" in case of Unsatisfactory remark
+[10/15/26, 12:09:04 PM] Manisha MPSeDC Testing Praveen Kumar: ok
+[10/15/26, 12:17:36 PM] Jameel Khan MPSeDC: <document omitted> @Madhur Nema MPSeDC
+[10/15/26, 12:20:10 PM] Madhur Nema MPSeDC: @Manisha MPSeDC Testing Praveen Kumar
+[10/15/26, 12:33:02 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC Sir,  road name field added in MPRRDA Form
+@Asif Jaquar Mpsedc Sarthak Sir, In case of Unsatisfactory tool tip "Please mention defects observed with chainages" added
+[10/15/26, 12:47:45 PM] Manisha MPSeDC Testing Praveen Kumar: <album message>
+[10/15/26, 12:47:46 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted> Condition-based questions have been created for all checkbox options. However, when multiple options are selected, only the condition question for the last selected option is displayed.
+[10/15/26, 12:47:47 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[10/15/26, 12:47:47 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[10/15/26, 12:47:55 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC sir please check this issue
+[10/15/26, 12:49:28 PM] Manisha MPSeDC Testing Praveen Kumar: In katni collectorate DMF forms
+[10/15/26, 1:00:15 PM] Manisha MPSeDC Testing Praveen Kumar: <album message>
+[10/15/26, 1:00:15 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted> @Jameel Khan MPSeDC user unable to select distric, Block, GP, Village inside the "Save as draft"
+[10/15/26, 1:00:16 PM] Manisha MPSeDC Testing Praveen Kumar: <image omitted>
+[10/15/26, 2:37:40 PM] Shimrah Ahmed BA Mpsedc: @Dheeraj I have created the Damoh Collectorate form for transformers survey.
+[10/15/26, 2:38:38 PM] Shimrah Ahmed BA Mpsedc: Asset details Excel file is pending as we are waiting for some additional data to be given by them
+[10/15/26, 2:46:32 PM] You: I have asked the Damoh to share them
+[10/15/26, 2:52:38 PM] You: [Forwarded] <document omitted> Distribution Transfomer (DTR).xlsx
+[10/15/26, 2:52:54 PM] You: Block Tehsil added
+[10/15/26, 3:47:24 PM] You: [Forwarded] <image omitted> Extra page पशुपालन
+[10/15/26, 3:47:32 PM] You: Katni DMF form
+[10/15/26, 3:53:27 PM] You: [Forwarded] <image omitted> महिला बाल विकास में 1 लाख से कम की राशि शो लिखी नहीं जा रही
+[10/15/26, 3:53:35 PM] You: Katni DMF form
+[10/15/26, 4:25:31 PM] You: [Forwarded] <image omitted> no bulk upload option is here
+[10/15/26, 4:25:43 PM] You: @Madhur Nema MPSeDC
+[10/15/26, 4:30:45 PM] Madhur Nema MPSeDC: logout first and then re-login
+[10/15/26, 5:16:10 PM] Madhur Nema MPSeDC: form_id :291
+ques_id :3486
+
+form_id: 462
+ques_id : 15787
+
+@Arindam Kumar MPSeDC Database sir as discussed , to show name as legal_nm
+fn_get_general_multipurpose(UserMappingForPropertySurvey)
+[10/15/26, 6:07:53 PM] Arindam Kumar MPSeDC Database: busines_nm
+[10/15/26, 6:10:03 PM] Bharat Mishra Intern MPSeDC: @Manisha MPSeDC Testing Praveen Kumar Ma'am @Dheeraj Sir , MPRRDA, and District GIS Higher Education form reports, including the Action Taken functionality, along with the 2FA implementation on the Labour and Amrit login pages, have been deployed to the UAT environment. Kindly verify.
+[10/15/26, 6:29:33 PM] Arindam Kumar MPSeDC Database: <document omitted> Road or Property name displayed
+[10/15/26, 8:49:38 PM] You: [Forwarded] <image omitted> FRONT page has not changed
+[10/15/26, 8:49:51 PM] You: For MP cooperative. Only Department login should be there
+[10/15/26, 9:12:45 PM] Aman Mishra MPSeDC: Please use the correct login url
+[10/15/26, 9:13:01 PM] Aman Mishra MPSeDC: @Dheeraj sir
+[10/15/26, 9:13:45 PM] You: Sure
+[10/15/26, 9:14:06 PM] You: Let me ask Priya to check
+[10/16/26, 11:05:54 AM] You: @Madhur Nema MPSeDC उद्यानिकी विभाग संरचना जानकारी फॉर्म Horticulture move form to production
+[10/16/26, 11:08:12 AM] You: [Forwarded] <document omitted> ITI Inspection Format.docx
+[10/16/26, 11:08:12 AM] You: [Forwarded] <document omitted> parakh portal.pdf
+[10/16/26, 11:08:23 AM] You: For Guna
+[10/16/26, 11:12:47 AM] Madhur Nema MPSeDC: which department ??
+[10/16/26, 11:13:00 AM] You: Guna
+[10/16/26, 11:13:44 AM] Ajeet Singh MPSeDC: List of equipment - Narmadapuram
+[10/16/26, 11:13:47 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> सिवनीमालवा नरवाई प्रबंधन लिस्‍ट.pdf
+[10/16/26, 12:11:55 PM] Ajeet Singh MPSeDC: <image omitted> Details of Agriculture Equipment Mapping
+[10/16/26, 12:30:13 PM] You: [Forwarded] <document omitted> Agriculture Equipment Mapping.xlsx
+[10/16/26, 12:47:27 PM] Ajeet Singh MPSeDC: <image omitted> Form 2
+[10/16/26, 12:48:19 PM] Ajeet Singh MPSeDC: <image omitted> Dashboard
+[10/16/26, 12:50:54 PM] Ajeet Singh MPSeDC: @Dheeraj , please prepare a user manual / guide for these form submission
+[10/16/26, 12:55:01 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly deploy this form to prod.
+form_id :546
+[10/16/26, 1:07:07 PM] Madhur Nema MPSeDC: [Forwarded] <video omitted>
+[10/16/26, 1:07:07 PM] Madhur Nema MPSeDC: [Forwarded] उचित मूल्य दुकान पर janpad select नहीं हो रही है
+[10/16/26, 1:07:46 PM] Madhur Nema MPSeDC: [Forwarded] <video omitted>
+[10/16/26, 1:07:47 PM] Madhur Nema MPSeDC: [Forwarded] उचित मूल्य दुकान पर janpad select नहीं हो रही है
+[10/16/26, 1:08:18 PM] Arindam Kumar MPSeDC Database: merged
+[10/16/26, 1:08:43 PM] Madhur Nema MPSeDC: @Jameel Khan MPSeDC sir please check, as these are api control based question
+[10/16/26, 1:13:42 PM] Madhur Nema MPSeDC: @Dheeraj उद्यानिकी विभाग संरचना जानकारी फॉर्म has been deployed to Production
+[10/16/26, 1:30:55 PM] Manisha MPSeDC Testing Praveen Kumar: @Aman Mishra MPSeDC @Ajeet Singh MPSeDC sir, 1st form has been created on UAT
+[10/16/26, 1:42:06 PM] Ajeet Singh MPSeDC: Pls test it and confirm.. accordingly @Arindam Kumar MPSeDC Database to publish on Prod
+[10/16/26, 2:24:28 PM] You: <image omitted>
+[10/16/26, 2:24:50 PM] You: Page break on each  section
+[10/16/26, 2:26:01 PM] You: <image omitted>
+[10/16/26, 2:26:17 PM] You: We are giving 2 photos or single photo
+[10/16/26, 2:26:39 PM] You: 2nd is moving to another page
+[10/16/26, 2:50:11 PM] Aman Mishra MPSeDC: @Manisha MPSeDC Testing Praveen Kumar Please provide atlest 10-20 submission 
+as it will be easy for me to get a analysis view for dashboard.
+[10/16/26, 2:56:50 PM] You: <image omitted> @Madhur Nema MPSeDC @Aman Mishra MPSeDC
+[10/16/26, 3:26:01 PM] Jameel Khan MPSeDC: <document omitted> KATNI DMF FORM
+
+Fixed the conditional question display issue.
+Fixed the issue preventing users from selecting District, Block, Gram Panchayat (GP), and Village in the Save as Draft section
+
+MPRRDA form 
+automatic prefill of the road name in the text field. @Manisha MPSeDC Testing Praveen Kumar
+[10/16/26, 3:32:58 PM] Manisha MPSeDC Testing Praveen Kumar: ok sir
+[10/16/26, 3:35:56 PM] Shimrah Ahmed BA Mpsedc: @Dheeraj we have created the Narmadapuram Form on the UAT and generated its report as well.
+[10/16/26, 3:38:02 PM] You: Email sent to Sandeep to verify it
+[10/16/26, 3:53:12 PM] You: वृद्ध एवं दिव्यांगजन कल्याण
+महिला एवं बाल कल्याण
+स्वास्थ्य एवं देखभाल (कल ड्राफ्ट में था आज सबमिट किए है)
+पशुपालन
+आवास
+स्वच्छता
+शिक्षा
+
+Forms filled and final by katni district shubhendra @Madhur Nema MPSeDC
+[10/16/26, 3:53:33 PM] You: After deleting records still unable to upload the file
+[10/16/26, 3:54:19 PM] You: <document omitted> BulkUserUpload_MPCooperation.xlsx
+[10/16/26, 4:01:34 PM] Manisha MPSeDC Testing Praveen Kumar: More than 10 record submitted successfully
+[10/16/26, 4:51:34 PM] You: [Forwarded] <document omitted> New Microsoft Word Document.docx
+[10/16/26, 4:52:07 PM] You: Form 2 to be developed for narmadapuram agriculture equipment
+[10/16/26, 4:52:15 PM] You: @Madhur Nema MPSeDC
+[10/16/26, 5:25:26 PM] You: Activity date can be current date and past date if he has not filled it  yesterday. 
+ 
+It is not a future date
+[10/16/26, 5:41:58 PM] You: As Client Narmadapuram Ajay GIS tested and suggested change -
+
+ Please ensure that the Father’s Name field in Form 1 is not marked as mandatory.
+[10/16/26, 5:50:53 PM] Ajeet Singh MPSeDC: Bhaiyo, pls publish the first form of Equipments, Narmadapuram onto Prod environment, alongwith the report
+[10/16/26, 5:57:59 PM] Manisha MPSeDC Testing Praveen Kumar: changes done
+[10/16/26, 6:11:51 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly deploy form_id:600 and 601 on production for Narmadapuram.
+make to replace https://gisuat.mp.gov.in/parakhapi to https://geoportal.mp.gov.in/borewellapi
+[10/16/26, 6:12:13 PM] Madhur Nema MPSeDC: <document omitted> also deploy reports
+[10/16/26, 6:12:13 PM] Madhur Nema MPSeDC: <document omitted> narmadapuram_form_one_report.txt
+[10/16/26, 6:15:32 PM] Madhur Nema MPSeDC: IF (querytype = 'GetEquipmentDetailNarmadapuram')
+THEN
+    OPEN ref1 FOR
+
+SELECT
+    _resopnce_text(column_15802) as id,
+    _resopnce_text(column_15802) ||  '( ' ||
+    _resopnce_text(column_15804) || ' ' ||
+    CASE
+        WHEN _resopnce_text(column_15806) IS NOT NULL
+             AND _resopnce_text(column_15806) <> ''
+        THEN 'S/o ' || _resopnce_text(column_15806) || ' '
+        ELSE ''
+    END ||
+    _resopnce_text(column_15805) || ')' AS owner_details
+FROM public.form_600
+
+WHERE _resopnce_number(column_15800) = param_array[1];
+
+    RETURN NEXT ref1;
+END IF;
+[10/16/26, 6:15:44 PM] Madhur Nema MPSeDC: fn_get_general_dropdown_fill
+[10/16/26, 6:17:10 PM] Madhur Nema MPSeDC: <document omitted> @JitendraSingh Sir Mpsedc Rajput sir kindly deploy
+[10/16/26, 7:10:56 PM] Madhur Nema MPSeDC: department_id: 174
+form_id: 590,593,582,586,584,585,598
+
+@Arindam Kumar MPSeDC Database sir kindly deploy these forms for katni district
+[10/17/26, 9:44:59 AM] Arindam Kumar MPSeDC Database: Code merged check once and confirmed
+[10/17/26, 9:45:16 AM] Arindam Kumar MPSeDC Database: merged  ,Check once and confirmed
+[10/17/26, 10:11:47 AM] Madhur Nema MPSeDC: @Dheeraj @Ajeet Singh MPSeDC sir Narmadapuram  form and report has been deployed to production
+[10/17/26, 10:12:28 AM] Madhur Nema MPSeDC: @Dheeraj these forma has been deployed to production, kindly verify
+[10/17/26, 10:47:24 AM] Ajeet Singh MPSeDC: @Dheeraj , please issue an email to Sandeep for both the forms availability on Production Environment. I am informing Sandeep directly.
+[10/17/26, 11:07:12 AM] You: Done
+[10/17/26, 12:22:05 PM] You: ऊर्जा एवं वाटरशेड विकास
+कृषि,उद्यानिकी एवं वानिकी
+कौशल विकास एवं आजीविका
+पेयजल आपूर्ति
+भौतिक अवसंरचना
+सिंचाई
+स्वास्थ्य देखभाल
+
+Forms filled and verified by katni shubendra @Madhur Nema MPSeDC
+[10/18/26, 3:11:25 PM] Madhur Nema MPSeDC: 590,593,586,584,585,598
+
+@Arindam Kumar MPSeDC Database sir kindly deploy these forms to prod for katni district.
+[10/18/26, 10:12:24 PM] Madhur Nema MPSeDC: @Dheeraj these forms has been deployed on prod.
+[10/18/26, 10:12:50 PM] You: And Reports
+[10/19/26, 12:22:46 PM] Madhur Nema MPSeDC: WIP
+[10/21/26, 10:47:31 AM] Manisha MPSeDC Testing Praveen Kumar: Sir, Need clarification
+[10/21/26, 10:51:22 AM] You: Ok
+[10/21/26, 11:07:45 AM] You: <image omitted> @Madhur Nema MPSeDC issue in bulk upload
+[10/21/26, 11:07:54 AM] You: <document omitted> BulkUserUpload_MPCooperation.xlsx
+[10/21/26, 11:15:05 AM] Madhur Nema MPSeDC: spelling of Barwani is incorrect, Kindly update according to the district list sheet attached in template excel
+[10/21/26, 11:19:50 AM] You: <document omitted> this issue is coming after uploading
+[10/21/26, 11:21:49 AM] You: 1.पर्यावरण संरक्षण और प्रदूषण नियंत्रण उपाय- पोलुशन कंट्रोल बोर्ड
+2.पर्यावरणीय गुणवत्ता प्रदूषण नियंत्रण उपाय- ग्रामीण विकास/शहरी
+These forms of Katni DMF need to be created
+[10/21/26, 11:22:21 AM] You: <image omitted> Katni Reports
+[10/21/26, 11:23:00 AM] You: <image omitted> and in Katni state admin id - left menus are coming in double
+[10/21/26, 11:23:30 AM] Madhur Nema MPSeDC: <image omitted> This is the response excel, clearly showing the error
+[10/21/26, 11:26:12 AM] You: Email id
+[10/21/26, 11:26:27 AM] You: I have asked them to add email id as well
+[10/21/26, 11:32:29 AM] Manisha MPSeDC Testing Praveen Kumar: This forms were not mentioned in Google Forms list. Please provide
+[10/21/26, 11:40:30 AM] Manisha MPSeDC Testing Praveen Kumar: All the reported issues has been fixed please update the status on promot
+[10/21/26, 11:49:15 AM] Madhur Nema MPSeDC: fixed
+[10/21/26, 12:07:36 PM] You: You deleted this message
+[10/21/26, 12:28:39 PM] You: [Forwarded] <document omitted> पर्यावरणीय गुणवत्ता बढ़ाने के  उपाय.xlsx
+[10/21/26, 12:28:39 PM] You: [Forwarded] <document omitted> डीएमएफ बेसलाइन सर्वे - पर्यावरण संरक्षण एवं प्रदूषण नियंत्रण.pdf
+[10/21/26, 12:28:39 PM] You: [Forwarded] <image omitted>
+[10/21/26, 12:28:39 PM] You: [Forwarded] Plz create a separate tab for DMF base line survey
+[10/21/26, 1:21:21 PM] Ajeet Singh MPSeDC: [Forwarded] Contact: BEGIN:VCARD
+VERSION:3.0
+N:;Varun Security Audit;;;
+FN:Varun Security Audit
+TEL;waid=919782462207:+91 97824 62207
+END:VCARD
+[10/21/26, 1:22:08 PM] Ajeet Singh MPSeDC: @Aman/Madhur: Please add this user's phone no to receive OTP on UAT server.. he belogs to the Security Team and conducting Parakh Audit
+[10/21/26, 1:24:13 PM] You: @Aman Mishra MPSeDC what is default password before otp for MP cooperative bulk upload users
+[10/21/26, 1:50:43 PM] Asif Jaquar Mpsedc Sarthak: @Madhur Nema MPSeDC @Jameel Khan MPSeDC, if the mentioned changes are completed, please deploy to PROD and confirm.
+[10/21/26, 4:31:21 PM] You: [Forwarded] <document omitted> Damoh  Dcs Feeder wise DTR wise list  .xlsx
+[10/21/26, 4:31:46 PM] You: @Madhur Nema MPSeDC  DTR pole and DTR name concatenate
+[10/21/26, 4:50:26 PM] You: @Aman Mishra MPSeDC add photo option but keep it non mandatory in agriculture equipment form 2 of narmadapuram
+[10/21/26, 5:05:03 PM] Madhur Nema MPSeDC: done sir
+[10/21/26, 5:08:09 PM] Aman Mishra MPSeDC: @Manisha MPSeDC Testing Praveen Kumar
+[10/21/26, 5:17:00 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir kindly update the form  form_id : 462
+ for MPRRDA road inspection on prod
+[10/21/26, 5:20:51 PM] Madhur Nema MPSeDC: latitude longitude and block column are missing in this table, kindly provide updated sheet
+[10/21/26, 5:22:01 PM] Manisha MPSeDC Testing Praveen Kumar: How many photos need to be added?
+[10/21/26, 5:47:31 PM] You: 2
+[10/21/26, 5:47:55 PM] You: <document omitted> Distribution Transformer Damoh Master data.xlsx
+[10/21/26, 5:49:31 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC  check once
+[10/21/26, 5:57:12 PM] Manisha MPSeDC Testing Praveen Kumar: [Forwarded] <image omitted>
+[10/21/26, 5:57:12 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC In case of an unsatisfactory status, the remarks field does not open in production. please check
+[10/22/26, 10:11:38 AM] Manisha MPSeDC Testing Praveen Kumar: Photo Added please check
+[10/22/26, 10:21:35 AM] You: It's Ok
+[10/22/26, 10:22:52 AM] Manisha MPSeDC Testing Praveen Kumar: Already Created on UAT
+[10/22/26, 10:24:18 AM] Jameel Khan MPSeDC: "is_answer_base": 0, in production @Madhur Nema MPSeDC
+[10/22/26, 10:24:22 AM] You: User name is gov_sagar_division
+
+On this User name dashboard, Damoh records  counts of District gis forms  are coming but Damoh collectorate admin records count is not coming. @Madhur Nema MPSeDC please check
+[10/22/26, 10:25:44 AM] You: Then this is missing. We have to create this form of environment as well.
+[10/22/26, 11:05:58 AM] Asif Jaquar Mpsedc Sarthak: @team, please resolve and confirm.
+[10/22/26, 11:07:02 AM] Shimrah Ahmed BA Mpsedc: Yes sir, we'll look into this
+[10/22/26, 11:33:50 AM] Madhur Nema MPSeDC: fixed kindly verify
+[10/22/26, 11:46:48 AM] Manisha MPSeDC Testing Praveen Kumar: [Forwarded] <image omitted>
+[10/22/26, 11:47:37 AM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC @Asif Jaquar Mpsedc Sarthak sir, when the user clicks on the "Save as Draft" button, the tooltip is not displayed on both the environment
+[10/22/26, 11:49:48 AM] Manisha MPSeDC Testing Praveen Kumar: Except for this error, the form is working properly
+[10/22/26, 12:00:15 PM] Asif Jaquar Mpsedc Sarthak: Please resolve.
+Also, fix the focus
+[10/22/26, 12:14:48 PM] Madhur Nema MPSeDC: user_id : 23724
+change its role to reporting officer : role_id 6
+
+as requested by Naramdapuram Degm
+[10/22/26, 1:00:36 PM] Jameel Khan MPSeDC: <document omitted> *Fixed:*
+1. Tooltip issue in *Save as Draft*.
+2. Focus issue in the *TextField*.
+3. Search by road name in *Draft* and *Submitted Forms*.
+[10/22/26, 1:04:15 PM] You: Team We are receiving constant issue of Signal/Network. 
+In District GIS PARAKH App, Forms are not getting filled and also save as draft option do not work.
+[10/22/26, 1:15:15 PM] Asif Jaquar Mpsedc Sarthak: @Madhur Nema MPSeDC, the task is still pending. Kindly share the expected timeline for its completion.
+[10/22/26, 1:35:02 PM] Madhur Nema MPSeDC: Updated report will be deployed eod, 
+And summary report will be deployed tomorrow
+[10/22/26, 2:11:32 PM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir
+[10/22/26, 2:33:06 PM] Bharat Mishra Intern MPSeDC: @Arindam Kumar MPSeDC Database sir, kindly add the District and Block columns to the report query for Form ID 462 MPRRDA Road Inspection Form.
+[10/22/26, 4:44:04 PM] You: @Madhur Nema MPSeDC are katni DMF forms report moved to production!!
+[10/22/26, 4:46:04 PM] Arindam Kumar MPSeDC Database: done ,check once
+[10/22/26, 5:15:44 PM] Arindam Kumar MPSeDC Database: done ,check once
+[10/22/26, 5:19:25 PM] You: <image omitted>
+[10/22/26, 5:19:25 PM] You: <image omitted> @Madhur Nema MPSeDC Please check
+[10/22/26, 5:23:28 PM] Madhur Nema MPSeDC: kya check karna hai ?
+[10/22/26, 5:24:21 PM] You: Sagar collectorate .. sagar division 
+
+And department name drop down mein district collectorate names
+[10/22/26, 5:27:33 PM] Asif Jaquar Mpsedc Sarthak: @Manisha MPSeDC Testing Praveen Kumar please test and confirm
+[10/22/26, 5:30:16 PM] Manisha MPSeDC Testing Praveen Kumar: Tested All the reported issues has been fixed
+[10/22/26, 5:30:50 PM] Aman Mishra MPSeDC: <image omitted> @Dheeraj sir
+You can map district departments through super admin login
+From governing body department access
+[10/22/26, 5:31:40 PM] Manisha MPSeDC Testing Praveen Kumar: @Jameel Khan MPSeDC please update the status of bug on promot
+[10/22/26, 5:32:17 PM] Aman Mishra MPSeDC: Click grant new access choose the desire user to be mapped with departments
+[10/22/26, 5:32:31 PM] Asif Jaquar Mpsedc Sarthak: @Jameel Khan MPSeDC, Kindly do the needful and confirm once the updated version is available on the App Store and Play Store.
+[10/22/26, 6:13:15 PM] Madhur Nema MPSeDC: @Asif Jaquar Mpsedc Sarthak sir @Manisha MPSeDC Testing Praveen Kumar  MPRRDA updated report has been deployed to UAT with Action Take Feature, kindly verify and confirm
+[10/23/26, 10:23:17 AM] Ajeet Singh MPSeDC: [Forwarded] @Ajeet Singh MPSeDC : When I activate or deactivate a user, the user list refreshes and returns to a blank state. I have to search for the users again each time, which makes the process repetitive and time-consuming—especially when updating several users.
+
+Please consider these two improvements:
+
+Make the user list sortable, so users can be sorted by activation status and inactive users can be found quickly.
+
+Add a checkbox for each user, allowing me to select multiple users and activate or deactivate them together.
+
+For example, if I need to activate users at S. No. 252, 301, and 356, I currently have to search for each one and repeat the process. With multi-select and a bulk action, this could be completed in just a few steps.
+[10/23/26, 10:23:47 AM] Ajeet Singh MPSeDC: @Dev team: please incorporate these valid points.
+[10/23/26, 10:31:41 AM] You: [Forwarded] <image omitted> In the report 'Data of Survey and inspection form', only one record is shown against the 8 saved records. Kindly check
+[10/23/26, 10:31:54 AM] You: @Madhur Nema MPSeDC please check
+[10/23/26, 10:38:35 AM] Madhur Nema MPSeDC: Check the sync screen on Dashboard
+If after sync the records will  not get  refreshed then feel free to ping.
+[10/23/26, 11:43:06 AM] Shimrah Ahmed BA Mpsedc: @Dheeraj Katni Form: डीएमएफ बेसलाइन सर्वे - पर्यावरणीय गुणवत्ता बढ़ाने के उपाय has been successfully created on the UAT
+[10/23/26, 12:42:31 PM] Madhur Nema MPSeDC: @Dheeraj @Shimrah Ahmed BA Mpsedc request from the pmposhan department please do needful.
+[10/23/26, 12:42:31 PM] Madhur Nema MPSeDC: [Forwarded] <document omitted> Mail info reg. Mobile no. change.pdf
+[10/23/26, 12:48:31 PM] Shimrah Ahmed BA Mpsedc: Okay sir
+[10/23/26, 12:48:59 PM] You: Sure will update
+[10/23/26, 1:12:38 PM] You: Updated on UAT and prod
+[10/23/26, 1:20:37 PM] You: Block and block id and village are not displayed
+[10/23/26, 1:20:37 PM] You: [Forwarded] <image omitted>
+[10/23/26, 1:20:58 PM] You: And check question number 20 in fair price shop
+[10/23/26, 1:21:09 PM] You: [Forwarded] <image omitted> sir ye shashkiya uchit mulya Dukan ka master data jo apko diya tha usme ye asset ID aur Naam correct teh ID and Block ID ke sath listed hai but Parakh Application me Ptharia block ke andar Aslana- 1104060 and Kishangunj- 1104050   show nh ho rahe hai plz find the Iisue
+[10/23/26, 1:21:09 PM] You: [Forwarded] <image omitted>
+[10/23/26, 1:21:09 PM] You: [Forwarded] <image omitted>
+[10/23/26, 1:24:29 PM] You: [Forwarded] <image omitted>
+[10/23/26, 1:24:53 PM] You: And also report issue appearing in Damoh fair price shop
+[10/23/26, 3:00:56 PM] Madhur Nema MPSeDC: these data was pulled from the Geoportal. so it may possible that at the time of syncing this data  was not available on geoportal.
+[10/23/26, 3:06:51 PM] You: <image omitted> This Sync is failing for MP Metro forms @Madhur Nema MPSeDC
+[10/23/26, 3:08:21 PM] You: Ok so how to sync them as well
+[10/23/26, 3:14:38 PM] Madhur Nema MPSeDC: syncing feature only works on production, in uat record get autosync
+[10/23/26, 3:15:30 PM] Madhur Nema MPSeDC: with the help of arindham sir
+[10/23/26, 6:47:34 PM] Aman Mishra MPSeDC: @Asif Jaquar Mpsedc Sarthak sir
+@Bharat Mishra Intern MPSeDC  mprrda reports deployed on prod.
+Please check
+[10/26/26, 9:44:20 PM] You: <document omitted> Plantation Master data (23.10.2026).xlsx
+[10/26/26, 9:44:40 PM] You: Additional master data to be uploaded for MP metro forms
+[10/27/26, 10:17:39 AM] You: In Division specific - user creation part is updated @Aman Mishra MPSeDC as discussed about sagar division
+[10/27/26, 10:17:48 AM] You: @Madhur Nema MPSeDC please check
+[10/27/26, 10:21:21 AM] Manisha MPSeDC Testing Praveen Kumar: @Dheeraj Sir, Any update of ITI Form for Guna COllectorate
+[10/27/26, 10:24:34 AM] You: They haven't replied back. I will follow up again
+[10/27/26, 10:26:50 AM] You: Please complete Damoh Transformer Survey Form @Madhur Nema MPSeDC  as discussed
+[10/27/26, 10:55:52 AM] Shimrah Ahmed BA Mpsedc: Done adding this data
+[10/27/26, 10:57:01 AM] Ajeet Singh MPSeDC: @Madhur, Aman, Dheeraj, Manisha,  lets have a standup meet for 15 mins at my desk...
+[10/27/26, 11:01:43 AM] Aman Mishra MPSeDC: Okay sir
+[10/27/26, 11:03:18 AM] Aman Mishra MPSeDC: As discussed, the Parakh Internal Team will create the Division/District role through the Super Admin login under the Governing Body department.
+A new District Division role will be made available to the Super Admin under the Governing Body department for user creation.
+[10/27/26, 11:03:55 AM] Aman Mishra MPSeDC: Also please do not create any users under the General Departments, Assets Survey, or District GIS departments, just like previously, as these departments are not intended for user creation.
+[10/27/26, 11:04:31 AM] Asif Jaquar Mpsedc Sarthak: @Bharat Mishra Intern MPSeDC @Madhur Nema MPSeDC ,  summary report?
+[10/27/26, 12:55:16 PM] Arindam Kumar MPSeDC Database: @Team as we know our Uat server migrate to another server. So stop new development .we should take DB backup and code back up at toady's evening .
+[10/27/26, 2:19:30 PM] You: <document omitted> @Aman Mishra MPSeDC only one id shared & to be created for sagar
+[10/27/26, 6:07:42 PM] Madhur Nema MPSeDC: <image omitted> @Asif Jaquar Mpsedc Sarthak sir summary report has been created and deployed to uat , kindly verify and confirm
+[10/27/26, 6:14:06 PM] Bharat Mishra Intern MPSeDC: @Dheeraj Sir, @Manisha MPSeDC Testing Praveen Kumar Ma'am,
+All 14 reports for the Katni Collectorate have been created and deployed to the UAT environment. Kindly check and verify the reports.
+[10/28/26, 11:29:48 AM] Manisha MPSeDC Testing Praveen Kumar: <image omitted> @Bharat Mishra Intern MPSeDC "Inspection data not showing in the report" please check this issue and resolve it also update the status on Promot
+[10/28/26, 11:34:17 AM] Bharat Mishra Intern MPSeDC: okay
+[10/28/26, 11:56:17 AM] Manisha MPSeDC Testing Praveen Kumar: <image omitted> @Bharat Mishra Intern MPSeDC "In case of rural report continuously loading" please check this issue"
+[10/28/26, 12:03:37 PM] Ajeet Singh MPSeDC: @Team, pls stop by for the discussion around the pole mapping
+[10/28/26, 12:39:31 PM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/28/26, 12:39:32 PM] Ajeet Singh MPSeDC: @Madhur, @Aman, Pls validate the NIC SMS service, and report.
+[10/28/26, 1:59:58 PM] You: Report not visible of PayaJal form of Katni DMF .
+[10/28/26, 2:49:32 PM] Bharat Mishra Intern MPSeDC: This task has been completed from my side. However, due to UAT connectivity issues, the updated code has not yet been deployed to the server.
+[10/28/26, 3:56:49 PM] Asif Jaquar Mpsedc Sarthak: <image omitted> @Bharat Mishra Intern MPSeDC Status ?
+[10/28/26, 4:02:09 PM] You: Please check 2 reports of environment forms
+[10/28/26, 5:18:08 PM] Bharat Mishra Intern MPSeDC: @Dheeraj sir, @Manisha MPSeDC Testing Praveen Kumar ma'am, the report issues have been fixed. Kindly verify and confirm.
+[10/28/26, 5:23:36 PM] Manisha MPSeDC Testing Praveen Kumar: @Bharat Mishra Intern MPSeDC All the reported issue has been fixed on UAT.
+[10/28/26, 6:47:21 PM] Madhur Nema MPSeDC: Katni reports has been deployed to production.
+@Dheeraj
+[10/28/26, 6:48:15 PM] Madhur Nema MPSeDC: @Asif Jaquar Mpsedc Sarthak mprrda summary report has been deployed to production @Manisha MPSeDC Testing Praveen Kumar map the menu for it
+[10/29/26, 11:11:50 AM] Manisha MPSeDC Testing Praveen Kumar: Menu mapped for all user roles on prod please check
+[10/29/26, 1:42:29 PM] You: You deleted this message
+[10/29/26, 1:42:38 PM] You: You deleted this message
+[10/29/26, 3:16:24 PM] Aman Mishra MPSeDC: https://geoportal.mp.gov.in/parakhweb/cooperativelogin
+
+@Dheeraj sir above is the live url for cooperative department
+please share the department admin details to create state admin.
+[10/29/26, 3:25:37 PM] You: Yes, I have informed the department to share the standard production username convention which they  want to use. They will tell us
+[10/29/26, 3:32:28 PM] Madhur Nema MPSeDC: distribution_transformer_damoh_master_data
+@Arindam Kumar MPSeDC Database sir I have created table for transformer data , as discussed kindly create a query to fetch transformer list based on location and buffer
+[10/29/26, 3:33:54 PM] Madhur Nema MPSeDC: [Forwarded] <document omitted> SIPRI –Angnwadi & School buliding repir work.html
+[10/29/26, 3:33:55 PM] Madhur Nema MPSeDC: [Forwarded] <document omitted> 16644 Major Repair Work (1).xlsx
+[10/29/26, 3:33:55 PM] Madhur Nema MPSeDC: [Forwarded] <document omitted> VB Ram Ji Yojna Boundary Wall Prastav.xlsx
+[10/29/26, 3:35:25 PM] Madhur Nema MPSeDC: @Dheeraj sir this requirement received from Pnrd (mnrega ) department for inspection of school and aganwadi via ashok sir .
+FYI
+[10/29/26, 3:37:02 PM] You: Ok
+[10/29/26, 3:45:22 PM] Shimrah Ahmed BA Mpsedc: @Jameel Khan MPSeDC sir, we created this ट्रांसफार्मर सर्वेक्षण फॉर्म in Damoh collectorate but it is not getting open in the UAT app
+[10/29/26, 3:45:48 PM] Shimrah Ahmed BA Mpsedc: <image omitted>
+[10/29/26, 3:46:31 PM] Jameel Khan MPSeDC: share username/pwd
+[10/29/26, 3:47:14 PM] Shimrah Ahmed BA Mpsedc: Username: gisdeepti
+P/w: Test@123
+[10/29/26, 3:52:22 PM] Jameel Khan MPSeDC: <image omitted> API response is returning an email address in the latitude field.
+[10/29/26, 3:54:16 PM] Shimrah Ahmed BA Mpsedc: @Madhur Nema MPSeDC please check
+[10/29/26, 3:58:33 PM] Madhur Nema MPSeDC: fixed pls check
+[10/29/26, 3:59:04 PM] Shimrah Ahmed BA Mpsedc: yes sir it's working now, thank you
+[10/29/26, 4:29:34 PM] You: [Forwarded] <image omitted>
+[10/29/26, 4:33:04 PM] You: Check Remark twice.opening together @Shimrah Ahmed BA Mpsedc
+[10/29/26, 4:40:01 PM] Shimrah Ahmed BA Mpsedc: Sir remark 1 text field opens when the option is being selected as 'YES'
+[10/29/26, 4:40:03 PM] Shimrah Ahmed BA Mpsedc: And Remark 2 text field is overall remark, it opens irrespective of the option you choose from the above radio button
+[10/29/26, 4:51:49 PM] You: I know this as we have discussed but some naming convention needs to be provided to get the distinction between the two
+[10/29/26, 4:56:53 PM] Ajeet Singh MPSeDC: @Shimrah, pls put the text as: ट्रांसफॉर्मर/खंभे की स्थिति का विवरण लिखें।
+[10/30/26, 2:40:32 PM] You: <document omitted> Plantation Master data (23.10.2026).xlsx
+[10/30/26, 2:40:32 PM] You: This is related to mp metro
+[10/30/26, 2:40:32 PM] You: Where the master has to be seen in save as draft forms on production app 
+
+If agency and plant type master is not updated then we have to add them in the list so that seen in save as draft forms
+[10/30/26, 2:40:32 PM] You: I am not able to see the updated list in app prod
+[10/30/26, 2:41:33 PM] You: @Jameel Khan MPSeDC please check this mp metro asset entry form issue of updated master list to be shown in agency and plant type for save as draft forms
+[10/31/26, 11:41:23 AM] Ajeet Singh MPSeDC: [Forwarded] <album message>
+[10/31/26, 11:41:23 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> डीएमएफ बेसलाइन सर्वे - पर्यावरण संरक्षण एवं प्रदूषण नियंत्रण.pdf
+[10/31/26, 11:41:23 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> डीएमएफ बेसलाइन सर्वे - पर्यावरणीय गुणवत्ता बढ़ाने के उपाय.pdf
+[10/31/26, 11:41:24 AM] Ajeet Singh MPSeDC: @Madhur Nema MPSeDC , @Arindam Kumar MPSeDC Database , ye dono form n reports Prod par launch karney hai. Katni team has verified them on UAT. Pls check n confirm.
+[10/31/26, 11:41:24 AM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/31/26, 11:41:24 AM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/31/26, 11:41:25 AM] Ajeet Singh MPSeDC: [Forwarded] <image omitted>
+[10/31/26, 12:42:48 PM] Madhur Nema MPSeDC: 583, 602 @Arindam Kumar MPSeDC Database sir kindly deploy these forms to prod.
+[10/31/26, 1:53:54 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC  merged at prod check and confirm
+[10/31/26, 2:08:14 PM] Madhur Nema MPSeDC: Done sir
+[10/31/26, 9:54:36 PM] Ajeet Singh MPSeDC: @Team, a new form to create for Narmadapuram, will discuss tomorrow.
+[10/31/26, 9:54:37 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Road Restoration Survey Form Specification.docx
+[10/31/26, 9:54:37 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Road_List_Master_Data_Format.xlsx
+[11/1/26, 5:08:33 PM] Shimrah Ahmed BA Mpsedc: @Ajeet Singh MPSeDC good evening sir, road restoration survey form has been created on UAT
+[11/2/26, 10:26:32 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 30.xlsx
+[11/2/26, 10:26:33 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 06.xlsx
+[11/2/26, 10:26:33 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 25.xlsx
+[11/2/26, 10:26:34 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 19.xlsx
+[11/2/26, 10:26:34 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 26.xlsx
+[11/2/26, 10:26:35 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 27.xlsx
+[11/2/26, 10:26:35 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 28.xlsx
+[11/2/26, 10:26:36 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 09.xlsx
+[11/2/26, 10:26:37 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 32.xlsx
+[11/2/26, 10:26:38 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> वार्ड 17.xlsx
+[11/2/26, 10:26:39 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward no 28.xlsx
+[11/2/26, 10:26:40 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 03 .xlsx
+[11/2/26, 10:26:40 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> ward 1.xlsx
+[11/2/26, 10:26:41 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 16 y.xlsx
+[11/2/26, 11:05:09 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 30.xlsx
+[11/2/26, 2:37:27 PM] Madhur Nema MPSeDC: @Shimrah Ahmed BA Mpsedc @Manisha MPSeDC Testing Praveen Kumar road inspection form has been completed on UAT kindly verify it
+[11/2/26, 2:44:58 PM] Shimrah Ahmed BA Mpsedc: Sure sir
+[11/2/26, 3:29:38 PM] Shimrah Ahmed BA Mpsedc: @Ajeet Singh MPSeDC Sir road restoration survey form is completed and it's report has been generated on the UAT as well
+[11/2/26, 3:43:30 PM] Ajeet Singh MPSeDC: Good, pls get it published on the Prod environment
+[11/2/26, 4:33:15 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 31.xlsx
+[11/2/26, 4:33:15 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 10 .xlsx
+[11/2/26, 4:33:16 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> WARD NO 20 .xlsx
+[11/2/26, 5:01:58 PM] You: <image omitted>
+[11/2/26, 5:02:50 PM] You: @Madhur Nema MPSeDC can we add fields of Damoh transformer asset survey form in the report
+[11/2/26, 5:07:22 PM] Madhur Nema MPSeDC: Yes we can
+[11/2/26, 5:36:21 PM] Madhur Nema MPSeDC: done these data deployed on uat
+[11/2/26, 5:46:05 PM] Madhur Nema MPSeDC: <document omitted> @Arindam Kumar MPSeDC Database sir kindly deploy form_id :603 for narmadapuram road inspection
+also run attached script
+[11/2/26, 5:50:21 PM] Madhur Nema MPSeDC: <document omitted> @JitendraSingh Sir Mpsedc Rajput sir kindly deploy on prod
+[11/2/26, 6:53:29 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC code deployed at prod check and confirm
+[11/2/26, 10:05:26 PM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Compile Data.xlsx
+[11/2/26, 10:06:13 PM] Ajeet Singh MPSeDC: @Madhur Nema MPSeDC , consolidated data sheet. Narmadapuram Road Inspection Data.... Pls consider for delta records
+[11/3/26, 11:32:43 AM] Madhur Nema MPSeDC: Sir, this Excel sheet contains some data that differs from the earlier data provided by them. I have shared the data we previously loaded with them, and they will send the final consolidated data.
+[11/3/26, 11:34:41 AM] You: @Madhur Nema MPSeDC please move transformer and it's asset form to production.
+Mail received from department 
+Please check the report as well if it is corrected then move it also
+[11/3/26, 11:55:23 AM] You: [Forwarded] <image omitted>
+[11/3/26, 11:58:32 AM] You: In jd_edu_sagar ID 
+Sagar division 
+In this form  other districts are coming plz chk @Madhur Nema MPSeDC
+[11/3/26, 12:03:53 PM] Madhur Nema MPSeDC: pls share form name and its department
+[11/3/26, 12:13:29 PM] You: [Forwarded] <image omitted>
+[11/3/26, 12:14:09 PM] You: School inspection form
+[11/3/26, 12:51:09 PM] Jameel Khan MPSeDC: <document omitted> MPRRDA changes @Bharat Mishra Intern MPSeDC
+[11/3/26, 1:05:05 PM] Madhur Nema MPSeDC: @Aman Mishra MPSeDC as discussed kindly check
+[11/3/26, 1:18:19 PM] Madhur Nema MPSeDC: https://gisuat.mp.gov.in/parakhapi/api/Master/GetDamohTransformer
+
+department id : 141
+@Arindam Kumar MPSeDC Database sir onboard this api for POI for damoh
+@Jameel Khan MPSeDC sir as discussed for form_id : 599 will be like sudden inspection. pls bind
+[11/3/26, 1:33:38 PM] Jameel Khan MPSeDC: Ok
+[11/3/26, 1:46:09 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC Data and function created at prod also. check and confirm
+[11/3/26, 2:19:11 PM] Aman Mishra MPSeDC: ??
+[11/3/26, 2:22:51 PM] Madhur Nema MPSeDC: <image omitted>
+[11/3/26, 2:23:14 PM] Madhur Nema MPSeDC: In sagar div user login forms for other departments are also showing
+[11/3/26, 2:42:13 PM] Aman Mishra MPSeDC: Fixed please test and validate
+[11/3/26, 4:08:22 PM] You: You deleted this message
+[11/3/26, 4:08:23 PM] You: You deleted this message
+[11/3/26, 4:08:58 PM] You: <image omitted>
+[11/3/26, 4:09:09 PM] You: <image omitted>
+[11/3/26, 4:10:10 PM] You: In Dmf base line survey -पशुपालन 
+फॉर्म on 
+सर्वेक्षण स्थल  - add urban as well
+[11/3/26, 5:15:37 PM] Madhur Nema MPSeDC: done on UAT kindly verify and confirm
+[11/3/26, 6:03:25 PM] You: <document omitted>
+[11/3/26, 6:04:19 PM] You: <image omitted>
+[11/3/26, 6:05:02 PM] You: ward name and ward code not matching in katni pasupalan form @Madhur Nema MPSeDC
+[11/3/26, 6:44:25 PM] You: @Madhur Nema MPSeDC plz chk
+[11/3/26, 7:04:32 PM] Madhur Nema MPSeDC: This is uat data, kindly ask them to verify ward names on prod.
+In other forms
+[11/4/26, 10:02:35 AM] You: [Forwarded] <album message>
+[11/4/26, 10:02:36 AM] You: [Forwarded] <image omitted> प्रोडक्शन में अर्बन नहीं आ रहा है।
+[11/4/26, 10:02:37 AM] You: [Forwarded] <image omitted>
+[11/4/26, 10:02:37 AM] You: [Forwarded] <image omitted>
+[11/4/26, 10:02:38 AM] You: [Forwarded] <image omitted>
+[11/4/26, 10:02:38 AM] You: [Forwarded] <image omitted>
+[11/4/26, 10:03:01 AM] You: Issue in max all forms
+[11/4/26, 10:23:13 AM] Madhur Nema MPSeDC: @Arindam Kumar MPSeDC Database sir provide adminboundry ward data  if it has changed we need to update.
+[11/4/26, 10:24:47 AM] Madhur Nema MPSeDC: this update has not deployed on uat yet, pending for confirmation
+[11/4/26, 10:47:56 AM] You: Ok
+[11/4/26, 11:24:17 AM] Ajeet Singh MPSeDC: [Forwarded] <document omitted> Draft Inspection changes  After UAT 3 Nov.docx
+[11/4/26, 11:24:17 AM] Ajeet Singh MPSeDC: @Aman Mishra MPSeDC , @Dheeraj , changes suggested by cooperative dept, fya pls
+[11/4/26, 11:42:19 AM] Jameel Khan MPSeDC: In the Damoh Transformer Form, should the DTR Name be auto-filled and editable or non-editable?
+Should we apply a geofence restriction? @Dheeraj sir
+[11/4/26, 11:49:18 AM] You: as suggested by department - it should be auto filled and non editable after that
+& geo fence 200 m
+[11/4/26, 11:56:58 AM] Jameel Khan MPSeDC: <document omitted> ट्रांसफार्मर सर्वेक्षण फॉर्म. @Dheeraj sir , @Manisha MPSeDC Testing Praveen Kumar
+[11/4/26, 1:36:40 PM] You: <image omitted> Transformer Survey Form is not opening and unable to fill the form
+[11/4/26, 1:36:50 PM] You: @Jameel Khan MPSeDC
+[11/4/26, 1:37:38 PM] You: And transformers are also not visible on that
+[11/4/26, 5:19:20 PM] You: @Madhur Nema MPSeDC please live in production transformer survey  form as changes are finalized.
+[11/4/26, 5:35:45 PM] Aman Mishra MPSeDC: department_name : Damoh Collectorate 
+department_id : 141,
+form_id : 599
+
+@Arindam Kumar MPSeDC Database sir please move above form to PROD
+[11/4/26, 5:41:44 PM] Arindam Kumar MPSeDC Database: Send prod url
+[11/4/26, 5:56:26 PM] Arindam Kumar MPSeDC Database: @Dheeraj Sir Deployed at prod ,check and confirm
+[11/4/26, 5:57:50 PM] You: Asset survey form few added and edited questions are done. Form id 328.
+
+We have shared question ids to Aman. 
+
+Please move them also to production
+[11/4/26, 6:35:26 PM] Arindam Kumar MPSeDC Database: @Madhur Nema MPSeDC  Check the word issue ,it resolved
+[11/4/26, 7:43:26 PM] You: @Jameel Khan MPSeDC @Aman Mishra MPSeDC Damoh transformer form deployed in prod ?
+[11/4/26, 8:34:55 PM] You: [Forwarded] <image omitted>
+[11/4/26, 8:35:05 PM] You: Is the web server unavailable ?
+[11/4/26, 8:35:51 PM] You: [Forwarded] <image omitted>
+[11/5/26, 10:23:45 AM] You: <image omitted>
+[11/5/26, 10:24:14 AM] You: @Jameel Khan MPSeDC transformer is not visible in this asset list
+[11/5/26, 10:26:00 AM] Jameel Khan MPSeDC: app is currently under review on the Google Play Store
+[11/5/26, 11:27:05 AM] You: <document omitted> MP Cooperative Changes
+[11/5/26, 11:27:05 AM] You: <document omitted>
+[11/5/26, 12:03:32 PM] Aman Mishra MPSeDC: Please verify and validate the form from your end
+[11/5/26, 1:27:34 PM] You: Is it now done ?
+[11/5/26, 1:37:37 PM] Jameel Khan MPSeDC: Yes.
+[11/5/26, 2:38:18 PM] Jameel Khan MPSeDC: <image omitted> @Madhur Nema MPSeDC
+[11/5/26, 3:16:08 PM] You: @Aman Mishra MPSeDC Damoh transformer form and asset survey moved to production ?
+[11/5/26, 5:18:02 PM] You: Any update is it done
+[11/5/26, 5:20:27 PM] Aman Mishra MPSeDC: Currently pending at jitendra sir
+Please contact
+[11/5/26, 5:21:06 PM] You: @JitendraSingh Sir Mpsedc Rajput please check and get it release in production
+[11/5/26, 5:21:50 PM] JitendraSingh Sir Mpsedc Rajput: ok
+[11/5/26, 5:21:53 PM] JitendraSingh Sir Mpsedc Rajput: on it
+[11/5/26, 5:51:47 PM] Aman Mishra MPSeDC: Please test and validate
+[11/6/26, 10:57:03 AM] Ajeet Singh MPSeDC: @Bharat Mishra Intern MPSeDC , @Shimrah Ahmed BA Mpsedc : Good Morning,  all the uploaded ward data is loaded properly. But Sandeep reported that data for ward 32 and 33 is not visible. Pls check and confirm ?
+[11/6/26, 1:12:24 PM] Arindam Kumar MPSeDC Database: <document omitted> @Bharat Mishra Intern MPSeDC Final prod data of NarmadaPuram road survey data
+[11/6/26, 2:14:40 PM] You: [Forwarded] <album message>
+[11/6/26, 2:14:40 PM] You: [Forwarded] <image omitted>
+[11/6/26, 2:14:41 PM] You: [Forwarded] <image omitted>
+[11/6/26, 2:15:02 PM] You: @Madhur Nema MPSeDC please move this form of Katni DMF to production
+[11/6/26, 3:23:24 PM] Bharat Mishra Intern MPSeDC: @Arindam Kumar MPSeDC Database Sir,
+move these question to prod
+
+form_id: 586
+department_id:	174
+
+
+Insert
+(15058 ,15992 ,15991 ,15990)
+
+update
+(15059, 15060, 15061, 15062)
+[11/6/26, 3:55:18 PM] Arindam Kumar MPSeDC Database: merged plz check and confirm
+[11/10/26, 5:48:39 PM] Ajeet Singh MPSeDC: @Dheeraj , we have Parakh CMMI audit on 12th. Please collect the documents/readiness tomorrow.
+[11/10/26, 5:53:59 PM] You: [Forwarded] <document omitted> MPSEDC-Q2-Internal-Audit-Schedule.xlsx
+[11/10/26, 5:54:19 PM] You: For Parakh it is already done. It is scheduled for other projects.
+[11/11/26, 10:20:12 AM] You: @Aman Mishra MPSeDC please check
+[11/11/26, 10:36:10 AM] Ajeet Singh MPSeDC: GM, Pls be prepared, it is swaped with Parakh, the updated cmmi tracker is yet to issue.
